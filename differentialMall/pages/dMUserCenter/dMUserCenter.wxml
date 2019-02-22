@@ -1,0 +1,227 @@
+<view class="userCenter-main-wrap">
+  <!-- 用户信息和nav start -->
+  <view class="userCenter-info-nav-wrap">
+    <view class="userCenter-info-nav">
+      <view class="user-info" catchtap="turnToPage" data-url="../dMUserInfoMod/dMUserInfoMod" data-is-redirect="false">
+        <view class="user-avatar">
+          <image src="{{userCenterInfo.coverThumb}}" mode="aspectFill"></image>
+        </view>
+        <text class="user-name">{{userCenterInfo.nickName}}</text>
+      </view>
+      <view class="user-nav">
+        <view class="user-nav-item {{navIndex === 1 ? 'active' : ''}}" data-index="1" catchtap="navSwitchHander">
+          <text class="item-num">{{userCenterInfo.differentialNum}}</text>
+          <text class="item-txt">可用微分</text>
+        </view>
+        <view class="user-nav-item {{navIndex === 2 ? 'active' : ''}}" data-index="2" catchtap="navSwitchHander">
+          <text class="item-num">{{userCenterInfo.couponsNum}}</text>
+          <text class="item-txt">优惠券</text>
+        </view>
+        <view class="user-nav-item {{navIndex === 3 ? 'active' : ''}}" data-index="3" catchtap="navSwitchHander">
+          <text class="item-num">{{userCenterInfo.merchantsNum}}</text>
+          <text class="item-txt">收藏</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 用户信息和nav end -->
+
+  <!-- nav相应的内容 start -->
+  <view class="userCenter-nav-content">
+    <view class="nav-content-integrals" wx:if="{{navIndex === 1}}">
+      <view class="nav-big-line">
+        <view class="nav-small-line"></view>
+      </view>
+      <view class="integrals-data">
+        <view class="integrals-nav-wrap">
+          <view class="integrals-nav">
+            <view class="{{diffIndex === 1 ? 'active' : ''}}" bindtap="diffSwitchHander" data-index="1">收支（本月）</view>
+            <view class="{{diffIndex === 2 ? 'active' : ''}}" bindtap="diffSwitchHander" data-index="2">获取（本月）</view>
+          </view>
+        </view>
+        <view class="integrals-nav-content">
+          <!-- 收支（本月） -->
+          <view class="integrals-income-wrap {{diffIndex === 1 ? 'active' : ''}}">
+            <canvas canvas-id="ringCanvas" class="ring-canvas {{diffIndex === 1 ? 'active' : ''}}" style="width:{{diffIndex === 1 ? canvasWidth : 0}}px;height:{{diffIndex === 1 ? canvasHeight : 0}}px;"></canvas>
+          </view>
+          <!-- 获取（本月） -->
+          <view class="integrals-get-wrap {{diffIndex !== 1 ? 'active' : ''}}">
+            <view class="integrals-bar-content-wrap" style="max-height:{{barMaxHeight}}rpx;">
+              <view class="integrals-bar-wrap">
+                <view class="integrals-bar-wrap2">
+                  <block wx:for='{{diffCurrentMonthData.merchantReceiveDiff}}' wx:key="">
+                    <view class="bar-item">
+                      <text class="bar-name">{{item.name}}</text>
+                      <view class="bar-width" style="width:{{diffIndex !== 1 ? item.width : '0'}}rpx;"></view>
+                      <text class="bar-value">{{item.value}}</text>
+                    </view>
+                  </block>
+                </view>
+
+              </view>
+              <view class="more-item" bindtap="toggleMoreBar" wx:if="{{diffCurrentMonthData.merchantReceiveDiff && diffCurrentMonthData.merchantReceiveDiff.length > 6}}">
+                <text>更多</text>
+                <text class="ico-moon icon-{{barMaxHeight > 426 ? 'uparrow' : 'downarrow'}}"></text>
+              </view>
+              <view class="integrals-bar-content-null" wx:if="{{diffCurrentMonthData.merchantReceiveDiff && diffCurrentMonthData.merchantReceiveDiff.length == 0}}">
+                <image src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/icon_data_null.png"></image>
+                <text>本月暂无数据喔</text>
+              </view>
+            </view>
+            <view class="integrals-total">
+              <text>合计</text>
+              <text>{{diffCurrentMonthData.receiveDiffTotal}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="integrals-record-wrap">
+        <view class="interals-record-nav">
+          <text class="nav-title">微分记录</text>
+          <view class="nav-content" catchtap="toggleMoreType" data-name="isHideRecordNav">
+            <text class="active">{{recordsCurrentType.text}}</text>
+            <text class="ico-moon icon-downarrow"></text>
+            <view class="coupons-cate" style="height: {{isHideRecordNav ? '0' : '260rpx'}}">
+              <view class="cate-list">
+                <view class="cate-item thin-bd-b" data-index="0" catchtap="selectRecordType">全部</view>
+                <view class="cate-item thin-bd-b" data-index="1" catchtap="selectRecordType">获取</view>
+                <view class="cate-item thin-bd-b" data-index="2" catchtap="selectRecordType">使用</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="integrals-record-list">
+          <block wx:for="{{recordsList}}" wx:key="">
+          <view class="integrals-item">
+            <view class="record-month-total">
+              <text class="record-month">{{item.month}}</text>
+              <view class="record-total">
+                <view class="record-get" wx:if="{{recordsCurrentType.type === 0 || recordsCurrentType.type === 1}}">
+                  <text>获取：</text>
+                  <text>{{item.getDiff}}</text>
+                </view>
+                <view class="record-{{recordsCurrentType.type === 2 ? 'get' : 'use'}}" wx:if="{{recordsCurrentType.type === 0 || recordsCurrentType.type === 2}}">
+                  <text>使用：</text>
+                  <text>{{item.useDiff}}</text>
+                </view>
+              </view>
+            </view>
+            <block wx:for="{{item.recdList}}" wx:key="">
+            <view class="record-item thin-bd-t">
+              <view class="record-name-date">
+                <text class="record-name">{{item.integral_description}}</text>
+                <text class="record-date">{{item.add_time}}</text>
+              </view>
+              <text class="record-value income" wx:if="{{item.status==1}}">+{{item.integral_change}}</text>
+              <text class="record-value use" wx:if="{{item.status==2}}">{{item.integral_change}}</text>
+            </view>
+            </block>
+            <block  wx:if="{{item.recdList && item.recdList.length === 0}}">
+              <view class="record-name-date">
+               <view class="record-item thin-bd-t">
+                <view class="record-name-date no-data">
+                  <text class="record-name">{{item.month}}暂无数据~</text>
+                </view>
+              </view>
+              </view>
+            </block>
+          </view>
+          </block>
+          <view class="integral-record-tip" style="padding-bottom:{{isIpx ? '40rpx' : 0}};" wx:if="{{recordsLoadingData.listIndex === 12}}">~只显示近一年的数据喔~</view>
+        </view>
+      </view>
+    </view>
+    <!-- 优惠券列表 start -->
+    <view class="nav-content-coupons" style="padding-bottom:{{isIpx ? '40rpx' : 0}};"  wx:if="{{navIndex === 2}}">
+      <view class="coupons-nav">
+        <text class="nav-title">我的优惠券</text>
+        <view class="nav-content">
+          <text class="active" data-index="{{couponsCurrentType.type}}" data-name="isHideCouponNav" catchtap="toggleMoreType">{{couponsCurrentType.text}}</text>
+          <text class="ico-moon icon-downarrow"></text>
+          <view class="coupons-cate" style="height:{{isHideCouponNav ? '0' : '260rpx'}}">
+            <view class="cate-list">
+              <block wx:for="{{couponTypeArr}}" wx:key="">
+                <view wx:if="{{item.type != couponsCurrentType.type}}" class="cate-item thin-bd-b" data-index='{{index}}' bindtap="selectCouponType">{{item.text}}</view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+      <block wx:for="{{couponsList}}" wx:key="">
+        <view class="coupon-item" catchtap="turnToPage" data-url="../dMCouponDetail/dMCouponDetail?cId={{item.coupon_id}}&type=1&mId={{item.app_id}}&uId={{item.user_coupon_id}}&status={{couponsCurrentType.type}}" data-is-redirect="false">
+          <view class="coupon-info">
+            <image class="merchant-img" src="{{item.logo}}" mode="aspectFill"></image>
+            <view class="coupon-name-condition">
+              <text class="coupon-name">{{item.title}}</text>
+              <text class="use-condition" wx:if="{{item.type == 0}}">使用条件：满{{ item.condition }}元，减{{ item.value }}元</text>
+              <text class="use-condition" wx:if="{{item.type == 1}}">使用条件：打{{ item.value }}折</text>
+              <text class="use-condition" wx:if="{{item.type == 2}}">使用条件：可抵扣{{ item.value }}元</text>
+              <view class="use-condition" wx:if="{{item.type == 3 && item.extra_condition == '' }}">使用条件: 直接兑换{{ item.coupon_goods_info.title }} </view>
+              <view class="use-condition" wx:elif="{{item.type == 3 && item.extra_condition.price }}">使用条件: 消费满{{ item.extra_condition.price }}元可兑换{{ item.coupon_goods_info.title }}</view>
+              <view class="use-condition" wx:elif="{{item.type == 3 && item.extra_condition.goods_id }}">使用条件: 购买{{ item.condition_goods_info.title }}可兑换{{ item.coupon_goods_info.title }}</view>
+              <text class="use-condition" wx:if="{{item.type == 4}}">使用条件：储值金可充值{{ item.value }}元</text>
+              <text class="use-condition" wx:if="{{item.type == 5}}">使用条件：{{ item.extra_condition }}</text>
+              <text class="use-condition" wx:if="{{item.type == 6}}">使用条件：可使用{{ item.value }}次</text>
+            </view>
+            <image class="coupon-mark" wx:if="{{couponsCurrentType.type == 1}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_success_mark.svg"></image>
+            <image class="coupon-mark" wx:if="{{couponsCurrentType.type == 2}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_active_mark.svg"></image>
+            <image class="coupon-mark" wx:if="{{couponsCurrentType.type == 3}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_hasuse_mark.svg"></image>
+            <image class="coupon-mark" wx:if="{{couponsCurrentType.type == 4}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_expired_mark.svg"></image>
+          </view>
+          <view class="coupon-indate">有效期{{item.expire == '-1' ? (item.start_use_date + ' 至 ' + item.end_use_date) : item.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (item.react > 0 ? item.react + '天后' : '当天') + '生效，有效期'+ item.expire +'天')}} {{ item.exclude_holiday == 0 ? '':'除去法定节假日'}}{{item.exclude_weekend == 0 ? '':'周一至周五'}} {{ item.start_use_time }}-{{ item.end_use_time }}</view>
+        </view>
+      </block>
+      <view class="coupon-no-data-wrap" wx:if="{{couponsList && couponsList.length === 0}}">
+        <image src="{{couponsListNullTip.tipImg}}" wx:if="{{couponsListNullTip.tipImg != ''}}"></image>
+        <text>{{couponsListNullTip.tipTxt}}</text>
+      </view>
+    </view>
+    <!-- 优惠券列表 end -->
+
+    <!-- 收藏商家列表 start -->
+    <view class="nav-content-collects" wx:if="{{navIndex === 3}}">
+      <block wx:for="{{merchantsList}}" wx:key="">
+      <view class="merchant-item thin-bd-b" data-url="../dMMerchantDetail/dMMerchantDetail?id={{item.app_id}}" bindtap="turnToPage" data-is-redirect="false">
+        <view class="merchant-img-wrap">
+          <image class="merchant-img {{item.logo == 'http://cdn.jisuapp.cn/zhichi_frontend/static/invitation/images/logo.png' ? 'logo-img' : ''}}" src="{{item.logo}}" mode="{{item.logo == 'http://cdn.jisuapp.cn/zhichi_frontend/static/invitation/images/logo.png' ? 'aspectFit' : 'aspectFill'}}"></image>
+        </view>
+        <view class="merchant-detail">
+          <view class="merchant-detail-top">
+            <text class="merchant-name">{{item.app_name}}</text>
+            <text class="ico-moon icon-dmstar" catchtap="cancleFavoriteMerchant" data-id="{{item.app_id}}"></text>
+          </view>
+          <view class="merchant-detail-bottom" wx:if="{{item.industry_name}}">
+            <text class="merchant-type">{{item.industry_name}}</text>
+          </view>
+        </view>
+      </view>
+      </block>
+      <view class="merchant-no-data-wrap" wx:if="{{merchantsList && merchantsList.length === 0}}">
+        <image src="{{merchantsListNullTip.tipImg}}" wx:if="{{merchantsListNullTip.tipImg != ''}}"></image>
+        <text>{{merchantsListNullTip.tipTxt}}</text>
+      </view>
+    </view>
+    <!-- 收藏商家列表 end -->
+  </view>
+  <!-- nav相应的内容 end -->
+
+</view>
+
+<!-- 底部tabbar start -->
+<view class="differentialMall-tabbar-wrap" style="height:{{isIpx ? 140 : 80}}rpx;">
+  <view class="tabbar" catchtap="turnToPage" data-url="../dMCouponsMall/dMCouponsMall" data-is-redirect="true">
+    <image src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/icon_couponMall.png" mode="aspectFit"></image>
+    <text>微分商城</text>
+  </view>
+  <view class="tabbar active">
+    <image src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/icon_userCenter_active.png" mode="aspectFit"></image>
+    <text>我的</text>
+  </view>
+</view>
+<!-- 底部tabbar end -->
+
+<!-- toast start -->
+<view class="toast-wrap {{toastInfo.isShow ? 'show' : ''}}">
+  <text>{{toastInfo.tipTxt}}</text>
+</view>
+<!-- toast end -->

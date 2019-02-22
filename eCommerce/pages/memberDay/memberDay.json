@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "会员日日历",
+  "usingComponents":{
+    "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+  }
+}

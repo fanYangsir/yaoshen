@@ -1,0 +1,109 @@
+page{
+  position: relative;
+}
+.content{
+  padding-bottom: 98rpx;
+  background-color:#f2f2f2;
+  min-height: calc(100vh - 100rpx);
+}
+.info-wrapper{
+  padding: 0 30rpx;
+  background-color: #fff;
+}
+.info-item{
+  padding: 39rpx 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+}
+.info-item.birthday-info{
+  align-items: flex-start;
+}
+.info-item .name{
+  flex: 0 0 135rpx;
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+}
+.info-item .star::before{
+  content: '*';
+  color: #f00;
+  float: left;
+  margin-left: -16rpx;
+}
+.info-item .right-block{
+  flex: 1;
+  position: relative;
+  font-size: 32rpx;
+  color: #404040;
+}
+.info-item .right-block .cover-thumb{
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  right: 50rpx;
+  top: -12rpx;
+  border-radius: 50%;
+}
+.info-item .right-block .icon-rightarrow{
+  position: absolute;
+  right: 10rpx;
+  top: 2rpx;
+  font-size: 28rpx;
+  line-height: 42rpx;
+  color: #D2D2D2;
+}
+.info-item .right-block .get-authorize{
+  position: absolute;
+  top: 6rpx;
+  right: 6rpx;
+  font-size: 24rpx;
+  padding: 4rpx 8rpx;
+  color: #fff;
+  border-radius: 4rpx;
+  line-height: 1.4;
+  z-index: 2;
+}
+.birthday-info .comment{
+  margin-top: 4rpx;
+  font-size: 24rpx;
+  color: #FFAE00;
+  position: absolute;
+  bottom: 0;
+}
+.info-item.birthday-info .icon-rightarrow{
+  top: 18rpx;
+}
+.birthday-info .birthday-picker{
+  padding-bottom: 40rpx;
+}
+.tip{
+  width: calc(100% + 60rpx);
+  position: relative;
+  left: -30rpx;
+  top: -2rpx;
+  text-align: center;
+  line-height: 100rpx;
+  color: #A4A4A4;
+  font-size: 24rpx;
+}
+.save-btn{
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  line-height: 100rpx;
+  background-color: #ff7100;
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 0;
+  z-index: 2;
+}
+.wx-radio-input{
+  width: 34rpx !important;
+  height: 34rpx !important;
+}
+.radio{
+  margin-right: 10rpx;
+}

@@ -1,0 +1,425 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-share pageQRCodeData="{{pageQRCodeData}}"></component-share>
+<view class="collage-paySuccess">
+  <view class="collage-section collage-goods" style="background:url({{myTeams.activity_info.pay_success_img || 'https://img.zhichiwangluo.com/zcimgdir/album/file_5c35b5412bd8d.jpg'}}) no-repeat top;background-size:100%;">
+    <view class="goods-infor  isRelative" catchtap='turnToGoodsDetail'>
+      <view class="goods-detail">
+        <view class="image-wrap">
+          <image src="{{myTeams.goods_cover}}"></image>
+        </view>
+        <view class="content-wrap">
+          <view class="title">
+            <view class="classify-type">
+              <view>
+                <icon class="ico-moon icon-number-people"></icon>
+              </view>
+              <text>{{myTeams.activity_type== 0 ?  myTeams.max_user_num + '人团' : (myTeams.activity_type == 1 ? '新人团' : (myTeams.activity_type == 2 ? '阶梯团' : (myTeams.activity_type ==  3 ? '帮帮团' :  '抽奖团')))}}</text>
+            </view>{{goodsDetail.goods_name}}
+          </view>
+          <view class="price">
+            <label class="min-price">¥
+              <text>{{myTeams.group_buy_price}}</text>
+            </label>
+            <text class="origin-price">¥ {{originPrice}}</text>
+          </view>
+        </view>
+      </view>
+      <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+        <button formType="submit" hover-class="none" class='invisibleclass'>
+        </button>
+      </form>
+    </view>
+    <view class="collage-section collage-infor">
+      <block wx:if="{{myTeams.activity_type != 4}}">
+        <view class="loading-stand" wx:if="{{myTeams.current_status == 2}}">
+          <view class="tip">
+            <view>
+              <block wx:if="{{myTeams.activity_type != '2'}}">
+                还差
+                <text class="needNum"> {{needNum}}人</text>拼购成功, 剩余
+              </block>
+              <block wx:else>
+                人数越多, 价格越低, 剩余
+              </block>
+            </view>
+            <view class="countDown">
+              <text>{{myTeams.downCount.hours}} </text>
+              <text>:</text>
+              <text style="width:48rpx;">{{myTeams.downCount.minutes}} </text>
+              <text>:</text>
+              <text style="width:48rpx;">{{myTeams.downCount.seconds}}</text>
+            </view>
+          </view>
+          <view class="member-cover">
+            <view wx:for="{{member}}" wx:key="">
+              <image src="{{item.image}}" style="border: {{item.isNum == 1 ? '2rpx solid #ff7100' : ''}}"></image>
+              <view class="leader-logo" wx:if="{{index == 0}}">团长</view>
+            </view>
+          </view>
+          <view class="btn-wrap">
+            <view class="open-new isRelative" bindtap="inviteFriends">邀请好友参团
+              <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                <button formType="submit" hover-class="none" class='invisibleclass'>
+                </button>
+              </form>
+            </view>
+            <view class="show-own isRelative" bindtap="showMyTeam">查看我的拼团
+              <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                <button formType="submit" hover-class="none" class='invisibleclass'>
+                </button>
+              </form>
+            </view>
+          </view>
+        </view>
+        <view class="success-stand" wx:if="{{myTeams.current_status == 3}}">
+          <view class="tip">
+            <block wx:if="{{myTeams.activity_type == 3}}">
+              <text style="color:#ff7100;">拼团成功，</text>商家将给团长发货
+            </block>
+            <block wx:else>
+              <text style="color:#ff7100;">拼购成功，</text>请耐心等待商家发货
+            </block>
+          </view>
+          <view class="member-cover">
+            <view wx:for="{{member}}" wx:key="">
+              <image src="{{item.image}}" style="border: {{item.isNum == 1 ? '2rpx solid #ff7100' : ''}}"></image>
+              <view class="leader-logo" wx:if="{{index == 0}}">团长</view>
+
+            </view>
+          </view>
+          <view class="btn-wrap">
+            <view class="open-new isRelative" bindtap="openNewGroup">开启新团
+              <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                <button formType="submit" hover-class="none" class='invisibleclass'>
+                </button>
+              </form>
+            </view>
+            <view class="show-own isRelative" bindtap="showMyTeam">查看我的拼团
+              <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                <button formType="submit" hover-class="none" class='invisibleclass'>
+                </button>
+              </form>
+            </view>
+          </view>
+        </view>
+        <view class="fail-stand" wx:if="{{myTeams.current_status == 4 || myTeams.current_status == 5}}">
+          <view class="tip">
+            <view>超过时限,
+              <text style="color:#ff7100;">团已过期</text>
+            </view>
+          </view>
+          <view class="member-cover">
+            <view wx:for="{{member}}" wx:key="">
+              <image src="{{item.image}}" style="border: {{item.isNum == 1 ? '2rpx solid #ff7100' : ''}}"></image>
+              <view class="leader-logo" wx:if="{{index == 0}}">团长</view>
+
+            </view>
+          </view>
+          <view class="btn-wrap">
+            <view class="open-new isRelative" bindtap="openNewGroup">开启新团
+              <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                <button formType="submit" hover-class="none" class='invisibleclass'>
+                </button>
+              </form>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="success-draw" wx:if="{{myTeams.current_status == 2}}">
+          <view class="tip">
+            <view>抽奖结果将于
+              <view class="countDown">
+                <text>{{myTeams.downCount.hours}}</text>
+                <text>:</text>
+                <text style="width:48rpx;">{{myTeams.downCount.minutes}}
+                </text>
+                <text>:</text>
+                <text style="width:48rpx;">{{myTeams.downCount.seconds}}
+                </text>
+              </view> 后揭晓</view>
+          </view>
+          <view class="member-cover">
+            <view>
+              <image src="http://cdn.jisuapp.cn//zhichi_frontend/static/webapp/images/group/question-mask.png" style="border: {{item.isNum == 1 ? '2rpx solid #ff7100' : ''}}"></image>
+            </view>
+          </view>
+          <view class="btn-wrap">
+            <view class="open-new isRelative" bindtap="inviteFriends">邀请好友
+              <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                <button formType="submit" hover-class="none" class='invisibleclass'>
+                </button>
+              </form>
+            </view>
+            <view class="show-own isRelative" bindtap="showMyTeam">查看我的拼团
+              <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                <button formType="submit" hover-class="none" class='invisibleclass'>
+                </button>
+              </form>
+            </view>
+          </view>
+        </view>
+        <view class="success-draw" wx:if="{{myTeams.current_status == 3 && myTeams.is_winner == 1}}">
+          <view class="tip">
+            <view>运气爆棚！
+              <text style='color:#ff7100;'>中奖啦</text>～</view>
+          </view>
+          <view class="member-cover">
+            <view>
+              <image src="{{myTeams.winner}}"  style="border: 2rpx solid #ff7100;"></image>
+            </view>
+          </view>
+          <view class="btn-wrap">
+            <view class="open-new isRelative" bindtap="goToGroupDetail">查看我的拼团
+              <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                <button formType="submit" hover-class="none" class='invisibleclass'>
+                </button>
+              </form>
+            </view>
+          </view>
+        </view>
+        <view class="loading-draw" wx:if="{{myTeams.current_status == 4 || myTeams.current_status == 5 || myTeams.is_winner == 0}}">
+          <view class="tip"><block wx:if="{{myTeams.is_winner == 0}}">很遗憾，您未中奖</block><block wx:else>很遗憾，本次活动未达到开奖门槛</block></view>
+          <view class="member-cover"  style="margin-bottom:50rpx;width:165rpx;height:165rpx;">
+              <image src="http://cdn.jisuapp.cn//zhichi_frontend/static/webapp/images/group/draw-fail.png"></image>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="collage-section">
+    <view wx:if="{{ status == 1 }}" class="collect-benefit-area">
+      <view class="activity-box">
+        <view class="line"></view>
+        <view class="activity-title">活动</view>
+        <view class="line"></view>
+      </view>
+      <view class="collect-item">
+        <view class="star-num">集集乐个数: {{ collectBenefitData.star_num }}</view>
+        <view class="star-list">
+          <block wx:for="{{ starData }}" wx:key="">
+            <image class="star-item" wx:if="{{ item == 'light' }}" src="{{ collectBenefitData.light_img }}"></image>
+            <image class="star-item" wx:elif="{{ item== 'dark' }}" src="{{ collectBenefitData.dark_img }}"></image>
+          </block>
+        </view>
+        <view class="star-full" wx:if="{{ collectBenefitData.star_num == collectBenefitData.collect_num }}">
+          <view class="star-full-text">满</view>
+        </view>
+      </view>
+      <view class="tip-item">
+        <view wx:if="{{ collectBenefitData.star_num == collectBenefitData.collect_num }}">
+          获得一张{{ collectBenefitData.coupon_title }}
+        </view>
+        <view wx:elif="{{ collectBenefitData.star_num != collectBenefitData.collect_num }}">
+          消费{{collectBenefitData.play_type == 0 ? '每满':'超过'}}{{ collectBenefitData.value }}元，累计一颗星，集满可获得{{ collectBenefitData.coupon_title }}一张
+        </view>
+      </view>
+    </view>
+    <!-- 刮刮乐 -->
+    <view class='scratchWhole' hidden='{{isWhole}}'>
+      <view class="activity-box scratch-activity">
+        <view class="line"></view>
+        <view class="activity-title">活动</view>
+        <view class="line"></view>
+      </view>
+      <view class="scratchArea">
+        <!-- 未中奖 -->
+        <view class="scratchFail" hidden='{{isFail}}'>
+          <image src="http://cdn.jisuapp.cn/static/webapp/images/scratchFail.png"></image>
+          <view class="failTitle">
+            <button class='failShare' open-type="share">分享</button>
+            <view class="failText">很遗憾没有中奖哦</view>
+          </view>
+        </view>
+        <!-- 中奖 -->
+        <view class="scratchWinning" hidden='{{isWinning}}'>
+          <image src="http://cdn.jisuapp.cn/static/webapp/images/scratchPrize.png"></image>
+          <view class="winningTitle">
+            <button class='winningShare' open-type="share">分享</button>
+            <view class="winningText">恭喜你获得了</view>
+            <view class="winningText winningValue">{{winingTitle}}</view>
+          </view>
+        </view>
+        <!-- 安慰奖 -->
+        <view class="scratchComfort" hidden='{{isComfort}}'>
+          <image src="http://cdn.jisuapp.cn/static/webapp/images/scratchComfort.png"></image>
+          <view class="comfortTitle">
+            <button class='comfortShare' open-type="share">分享</button>
+            <view wx:if="{{ifGetComfort}}" class="comfortText">已领取，在微信卡包中查看哦~</view>
+            <view wx:else class="comfortText" class="comfortText">又没中奖，送你一个小礼品</view>
+            <view wx:if="{{!ifWxCoupon && !ifGetComfort}}" class="comfortText">>在优惠券卡包进行查收哦~</view>
+          </view>
+        </view>
+        <view class="scratch_wp" hidden='{{hideCanvas}}' style="width: {{scratch.width}}px; height: {{scratch.height}}px;">
+          <canvas class="scratch-canvas" style="width: {{scratch.width}}px;height: {{scratch.height}}px;" canvas-id="scratch" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" disable-scroll="{{!isScroll}}">
+            <cover-view class="showArea" wx:if='{{isShowteam}}'>
+              <cover-view class="showTitle">赢取优惠大奖</cover-view>
+              <cover-view class="showBtn" bindtap='showAreaClick'>点我刮奖</cover-view>
+            </cover-view>
+          </canvas>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="vipCard-dialog" wx:if="{{ isShowVipCardDialog }}" bindtap="closeVipCardDialog" data-type="shadow">
+      <view class="content" wx:if="{{ !ifUserInfo }}">
+        <view class="top-block" style="background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/vip-card-dialog-head2.png);">
+          <text class="text">请填写会员信息</text>
+        </view>
+        <view class="vip-info">
+          <view class="info-item" wx:if="{{ userInfoCollectConfig.collect_username == 1 }}">
+            <view class="item-name">姓名</view>
+            <view class="item-right">
+              <input type="text" placeholder="请填写姓名" maxlength="10" value="{{ userInfo.nickname }}" data-type="name" bindinput="inputUserInfo" />
+            </view>
+          </view>
+          <view class="info-item" wx:if="{{ userInfoCollectConfig.collect_phone == 1 }}">
+            <view class="item-name">电话</view>
+            <view class="item-right">
+              <input type="number" disabled="true" placeholder="请授权手机号码" value="{{ userInfo.phone }}" data-type="phone" bindinput="inputUserInfo" />
+              <button class="get-authorize" wx:if="{{ isGetPhoneNumber }}" style="background-color: #D2D2D2">已授权</button>
+              <button class="get-authorize" wx:if="{{ !isGetPhoneNumber }}" style="background-color: #FF7100" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获得授权</button>
+            </view>
+          </view>
+          <view class="info-item" wx:if="{{ userInfoCollectConfig.collect_birthday == 1 }}">
+            <view class="item-name">生日</view>
+            <view class="item-right">
+              <picker mode="date" value="{{ userInfo.birthday }}" start="1900-01-01" end="{{ todayDate }}" bindchange="bindBirthdayChange">
+                <view class="picker" style="color: {{ userInfo.birthday === '' ? '#999' : '#000' }}">
+                  {{ userInfo.birthday === '' ? '请选择生日信息' : userInfo.birthday }}
+                </view>
+              </picker>
+              <view class="ico-moon icon-rightarrow"></view>
+            </view>
+          </view>
+          <view class="info-item" wx:if="{{ userInfoCollectConfig.collect_region == 1 }}">
+            <view class="item-name">城市</view>
+            <view class="item-right">
+              <picker mode="region" bindchange="bindCityChange" value="{{userCityArr}}">
+                <view class="picker" style="color: {{userCityArr[0] === '' ? '#999' : '#000'}}">
+                  {{ userCityArr[0] === '' ? '请填写所在城市' : userCityArr[0] + userCityArr[1] + userCityArr[2] }}
+                </view>
+              </picker>
+              <view class="ico-moon icon-rightarrow"></view>
+            </view>
+          </view>
+
+          <view class="save-btn" bindtap="saveUserInfo">立即领取</view>
+        </view>
+        <view class="ico-moon icon-closed" data-type="shadow"></view>
+      </view>
+      <view class="content" wx:if="{{ ifUserInfo }}">
+        <view class="top-block" style="background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/vip-card-dialog-head.png);">
+          <view class="text-block">
+            <view class="success-text">注册会员成功</view>
+            <view class="success-text">恭喜获得以下权益</view>
+          </view>
+        </view>
+        <view class="interests-block">
+          <view class="interests-item" wx:if="{{ vipCardInfo.discount }}">
+            <!-- <view class="ico-moon icon-remind"></view> -->
+            <image class="icon" src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/discount-icon.svg" />
+            <view class="count">{{ vipCardInfo.discount }}折</view>
+            <view class="text">会员折扣</view>
+          </view>
+          <view class="interests-item" wx:if="{{ vipCardInfo.coupon_list && vipCardInfo.coupon_list.length }}">
+            <image class="icon" src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/coupon-icon.svg" />
+            <view class="count">{{ vipCardInfo.coupon_list.length }}张</view>
+            <view class="text">会员赠送</view>
+          </view>
+          <view class="interests-item" wx:if="{{ vipCardInfo.integral && vipCardInfo.integral != 0  }}">
+            <image class="icon" src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/integral-icon.svg" />
+            <view class="count">{{ vipCardInfo.integral }}+</view>
+            <view class="text">积分赠送</view>
+          </view>
+        </view>
+        <view class="ico-moon icon-closed" data-type="shadow"></view>
+      </view>
+    </view>
+  </view>
+  <view class="collage-section collage-more" wx:if="{{goodsData.goods_list.length > 0}}">
+    <view class="collage-section title">
+      更多精彩拼团
+    </view>
+    <view>
+      <view class="goods-list opposite">
+        <view class="goods-item isRelative" wx:for="{{goodsData.goods_list}}" wx:key="" data-goodsId="{{item.goods_id}}" data-activityId="{{item.activity_id}}" bindtap='gotoDetail'>
+          <view class="image-wrap">
+            <image src='{{item.cover}}'></image>
+          </view>
+          <view class="content-wrap">
+            <view class="title">
+              <view class="classify-type">
+                <view>
+                  <icon class="ico-moon icon-number-people"></icon>
+                </view>
+                <text>{{item.activity_type== 0 ? (item.num_of_people.length > 1 ? '多人团' : item.num_of_people[0] + '人团') : (item.activity_type == 1 ? '新人团' : (item.activity_type == 2 ? '阶梯团' : (item.activity_type ==  3 ? '帮帮团' :  '抽奖团')))}}</text>
+              </view>{{item.title}}
+            </view>
+            <view class="hava-sales" wx:if="{{item.salesnum}}">
+              <view class="price">
+                <text class="min-price">¥ <text>{{item.group_buy_price}}</text></text>
+                <text class="origin-price"> ¥ {{item.original_price}}</text>
+              </view>
+              <view class="status">
+                <view class="sales">
+                  已团{{item.salesnum}}件
+                </view>
+                <view class="to-join">
+                  <block wx:if="{{item.status == 0}}">
+                    <button class="ready">即将开团</button>
+                  </block>
+                  <block wx:elif="{{item.status == 1}}">
+                    <button class="remain">提醒我</button>
+                  </block>
+                  <block wx:elif="{{item.status == 2}}">
+                    <button class="reminded">已提醒</button>
+                  </block>
+                  <block wx:elif="{{item.status == 3}}">
+                    <button class="go">去拼团</button>
+                  </block>
+                  <block wx:elif="{{item.status == 4}}">
+                    <button class="over">已结束</button>
+                  </block>
+                </view>
+              </view>
+            </view>
+            <view class="no-sales" wx:else>
+              <view class="price">
+                <view class="min-price">
+                  ¥
+                  <text>{{item.group_buy_price}}</text>
+                </view>
+                <view class="origin-price">
+                  ¥ {{item.original_price}}
+                </view>
+              </view>
+              <view class="to-join">
+                <block wx:if="{{item.status == 0}}">
+                  <button class="ready">即将开团</button>
+                </block>
+                <block wx:elif="{{item.status == 1}}">
+                  <button class="remain">提醒我</button>
+                </block>
+                <block wx:elif="{{item.status == 2}}">
+                  <button class="reminded">已提醒</button>
+                </block>
+                <block wx:elif="{{item.status == 3}}">
+                  <button class="go">去拼团</button>
+                </block>
+                <block wx:elif="{{item.status == 4}}">
+                  <button class="over">已结束</button>
+                </block>
+              </view>
+            </view>
+          </view>
+          <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+            <button formType="submit" hover-class="none" class='invisibleclass'>
+            </button>
+          </form>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

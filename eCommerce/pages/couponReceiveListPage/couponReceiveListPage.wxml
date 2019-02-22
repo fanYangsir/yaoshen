@@ -1,0 +1,203 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view id="coupon-receive-list-page" class="coupon-receive-list-page">
+  <block wx:if="{{isParentShop}}">
+    <view class="coupon-receive-head">
+      <view class="clearfix">
+        <view class="coupon-receive-user">
+          <view class="coupon-receive-cover">
+            <image src="{{userInfo.cover_thumb}}" mode="aspectFill"></image>
+          </view>
+          <view class="coupon-receive-nickname">{{userInfo.nickname}}</view>
+        </view>
+        <view class="coupon-receive-competitor">{{totalUser}}人正在抢</view>
+      </view>
+      <view class="coupon-pft-wrap">
+        <view class="coupon-pft-item">
+          <view class="coupon-pft-num" bindtap="gotoCouponList">{{couponsAndDiscount.coupons || 0}}</view>
+          <view class="coupon-pft-text">已抢优惠券（张）</view>
+        </view>
+        <view class="coupon-pft-item">
+          <view class="coupon-pft-num">{{couponsAndDiscount.cut_total_price || 0}}</view>
+          <view class="coupon-pft-text">已节省（元）</view>
+        </view>
+      </view>
+    </view>
+    <scroll-view class="coupon-cate" scroll-x="true">
+      <view class="coupon-cate-item {{currentCate == '' ? 'active' : ''}}" data-id="" bindtap="changeTab">全部</view>
+      <view class="coupon-cate-item {{currentCate == index ? 'active' : ''}}" wx:for="{{category}}" wx:key="" data-id="{{index}}" bindtap="changeTab">{{item}}</view>
+    </scroll-view>
+    <view class="ticket-list">
+      <block wx:for="{{couponList}}" wx:for-item="coupon" wx:key="id">
+        <view class="ticket franchisee-ticket" catchtap="gotoCouponDetail" data-coupon-id="{{ coupon.id }}" data-appid="{{coupon.app_id}}">
+          <view class="top-section">
+            <view class="coupon-franchisee">
+              <image class="coupon-franchisee-logo" mode="aspectFill" src="{{coupon.logo}}"></image>
+              <view class="coupon-franchisee-name" catchtap="gotoShop" data-mode="{{coupon.mode_id}}" data-appid="{{coupon.app_id}}">{{coupon.name}} <label class="ico-moon icon-rightarrow"></label></view>
+              <view class="coupon-franchisee-distance">附近{{coupon.distance}}</view>
+            </view>
+            <block wx:if="{{ coupon.type == 0 }}">
+              <view class="detail-info-franchisee">
+                <view class="coupon-value"><label>￥</label>{{ coupon.value }}</view>
+                <view class="coupon-condition">满{{ coupon.condition }}可用</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 1 }}">
+              <view class="detail-info-franchisee">
+                <view class="coupon-value">{{ coupon.value }}<label>折</label></view>
+                <view class="coupon-condition" wx:if="{{coupon.extra_goods == 'null'}}">全部商品可享优惠</view>
+                <view class="coupon-condition" wx:else>部分商品可享优惠</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 2 }}">
+              <view class="detail-info-franchisee">
+                <view class="coupon-value"><label>￥</label>{{ coupon.value }}</view>
+                <view class="coupon-condition">商品代金券</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 3 }}">
+              <view class="detail-info-franchisee">
+                <view class="coupon-value">兑换券</view>
+                <view class="coupon-condition" wx:if="{{ coupon.extra_condition == '' }}" >直接兑换{{ coupon.coupon_goods_info.title }} </view>
+                <view class="coupon-condition" wx:elif="{{ coupon.extra_condition.price }}" >消费满{{ coupon.extra_condition.price }}元可兑换{{ coupon.coupon_goods_info.title }}</view>
+                <view class="coupon-condition" wx:elif="{{ coupon.extra_condition.goods_id }}" >购买{{ coupon.condition_goods_info.title }}可兑换{{ coupon.coupon_goods_info.title }}</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 4 }}">
+              <view class="detail-info-franchisee">
+                <view class="coupon-value"><label>￥</label>{{ coupon.value }}</view>
+                <view class="coupon-condition">商品储值金</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 5 }}">
+              <view class="detail-info-franchisee">
+                <view class="coupon-value">通用券</view>
+                <view class="coupon-condition">{{ coupon.extra_condition }}</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 6 }}">
+              <view class="detail-info-franchisee">
+                <view class="coupon-value">次数券</view>
+                <view class="coupon-condition">可兑换{{coupon.limit_num}}次</view>
+              </view>
+            </block>
+            <form bindsubmit="formSubmitFranchisee" report-submit="{{true}}" data-index="{{index}}" >
+              <button wx:if="{{ coupon.recv_status == 1 }}" class="receive-btn" formType="submit" catchtap="stopPropagation">领取</button>
+              <view wx:elif="{{ coupon.recv_status == 0 }}" class="receive-btn" catchtap="gotoShop" data-mode="{{coupon.mode_id}}" data-appid="{{coupon.app_id}}" >去使用</view>
+            </form>
+          </view>
+          <view class="bottom-section">
+            <view>有效期 {{coupon.expire == '-1' ?  (coupon.start_use_date + '至' + coupon.end_use_date) : coupon.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (coupon.react > 0 ? coupon.react + '天后' : '当天') + '生效，有效期'+ coupon.expire +'天')}} {{ coupon.exclude_holiday == 0 ? '':'除去法定节假日'}} {{coupon.exclude_weekend == 0 ? '':'周一至周五'}} {{ coupon.start_use_time }}-{{ coupon.end_use_time }}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="coupon-no-more" wx:if="{{couponNoMore}}">没有更多了</view>
+  </block>
+  <block wx:else>
+    <view class="ticket-list">
+      <block wx:for="{{couponList}}" wx:for-item="coupon" wx:key="">
+        <view class="ticket {{ coupon.recv_status == 1 ? '' : 'has-receive'}}" catchtap="gotoCouponDetail" data-coupon-id="{{ coupon.id }}">
+          <view class="top-section" style="{{ 'border-color: ' + coupon.list_color }}">
+            <block wx:if="{{ coupon.type == 0 }}">
+              <view class="detail-info">
+                <view class="name">{{ coupon.title }}</view>
+                <view class="use-condition">使用条件：满{{ coupon.condition }}元，减{{ coupon.value }}元</view>
+              </view>
+              <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+                <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+                <view class="background-word">减</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 1 }}">
+              <view class="detail-info">
+                <view class="name">{{ coupon.title }}</view>
+                <view class="use-condition">使用条件: 打{{ coupon.value }}折</view>
+              </view>
+              <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+                <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+                <view class="background-word">折</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 2 }}">
+              <view class="detail-info">
+                <view class="name">{{ coupon.title }}</view>
+                <view class="use-condition">使用条件：可抵扣{{ coupon.value }}元</view>
+              </view>
+              <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+                <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+                <view class="background-word">代</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 3 }}">
+              <view class="detail-info">
+                <view class="name">{{ coupon.title }}</view>
+                <view class="use-condition" wx:if="{{ coupon.extra_condition == '' }}" >使用条件：直接兑换{{ coupon.coupon_goods_info.title }} </view>
+                <view class="use-condition" wx:elif="{{ coupon.extra_condition.price }}" >使用条件：消费满{{ coupon.extra_condition.price }}元可兑换{{ coupon.coupon_goods_info.title }}</view>
+                <view class="use-condition" wx:elif="{{ coupon.extra_condition.goods_id }}" >使用条件：购买{{ coupon.condition_goods_info.title }}可兑换{{ coupon.coupon_goods_info.title }}</view>
+              </view>
+              <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+                <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+                <view class="background-word">兑</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 4 }}">
+              <view class="detail-info">
+                <view class="name">{{ coupon.title }}</view>
+                <view class="use-condition">使用条件: 储值金可充值{{ coupon.value }}元</view>
+              </view>
+              <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+                <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+                <view class="background-word">储</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 5 }}">
+              <view class="detail-info">
+                <view class="name">{{ coupon.title }}</view>
+                <view class="use-condition">使用条件: {{ coupon.extra_condition }}</view>
+              </view>
+              <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+                <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+                <view class="background-word">通</view>
+              </view>
+            </block>
+            <block wx:elif="{{ coupon.type == 6 }}">
+              <view class="detail-info">
+                <view class="name">{{ coupon.title }}</view>
+                <view class="coupon-condition">使用条件: 可使用{{coupon.value}}次</view>
+              </view>
+              <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+                <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+                <view class="background-word">次</view>
+              </view>
+            </block>
+            <form bindsubmit="formSubmit" report-submit="{{true}}" data-coupon-id="{{ coupon.id }}" data-index="{{index}}">
+            <button wx:if="{{ coupon.recv_status == 1 }}" class="receive-btn" formType="submit" catchtap="stopPropagation" style="{{ 'background-color:' + coupon.list_color }}">领取</button>
+            <view wx:elif="{{ coupon.recv_status == 0 }}" class="receive-btn" >已领取</view>
+            </form>
+          </view>
+          <view class="bottom-section">
+            <view>有效期 {{coupon.expire == '-1' ?  (coupon.start_use_date + '至' + coupon.end_use_date) : coupon.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (coupon.react > 0 ? coupon.react + '天后' : '当天') + '生效，有效期'+ coupon.expire +'天')}} {{ coupon.exclude_holiday == 0 ? '':'除去法定节假日'}} {{coupon.exclude_weekend == 0 ? '':'周一至周五'}} {{ coupon.start_use_time }}-{{ coupon.end_use_time }}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="goto-coupon-list">
+      <view catchtap="gotoCouponList">查看我的优惠券>>></view>
+    </view>
+  </block>
+  <view class="zc-toast-bg {{ receiveSuccess == 1 ? 'show' : '' }}" catchtap="hideToast">
+    <view class="zc-toast">
+      <icon class="icon" type="success" size="20"></icon>
+      <view class="title">领取成功!</view>
+      <view class="content">已领{{ receiveCount }}张，限领{{ receiveLimitNum }}张</view>
+    </view>
+  </view>
+  <view class="pop-wrap" wx:if="{{recvCouponPopFranchisee}}">
+    <view class="pop-bg" catchtap="closeRecvCouponPopFranchisee"></view>
+    <view class="pop-inner">
+      <label class="pop-close ico-moon icon-closes" catchtap="closeRecvCouponPopFranchisee"></label>
+      <view class="recvCoupon-success"><icon type="success" size="14" color="#FF7100"/><label>恭喜领取成功</label></view>
+      <view class="recvCoupon-pop-btn" data-appid="{{recvCouponPopAppId}}" data-mode="{{recvCouponPopAppMode}}" catchtap="gotoShop">进店购物，立享优惠</view>
+    </view>
+  </view>
+</view>

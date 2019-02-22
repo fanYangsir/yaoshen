@@ -1,0 +1,49 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="refund-box">
+  <view class="goods-detail-contain">
+    <view wx:for="{{ goodsList }}" wx:key="" wx:for-item="goods" class="goods-detail-box">
+      <image src="{{ goods.cover }}"></image>
+      <view class="goods-detail-content">
+        <view class="goods-name"><text class="is-seckill" wx:if="{{ goods.is_seckill == 1 }}">秒杀</text>{{ goods.title }}</view>
+        <view wx:if="{{ goods.model_name }}" class="goods-rules">{{ goods.model_name }}</view>
+      </view>
+    </view>
+  </view>
+  <view class="logistics-box">
+    <text class="logistics-title">物流公司</text>
+    <text class="pull-right ico-moon icon-rightarrow"></text>
+    <view class="pull-right">
+      <picker bindchange="selectExpress" range="{{ expressList }}" range-key="{{ 'name' }}">
+        <view>{{ expressList[expressIndex]['name'] || '选择物流' }}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="logistics-box">
+    <text class="logistics-title">物流单号</text>
+    <text class="ico-moon icon-shopping-scan pull-right" catchtap="scanLogisticsNumber"></text>
+    <input value="{{ shipment }}" bindinput="shipmentNumber" class="pull-right" type="text" placeholder="请填写物流单号" />
+  </view>
+  <view class="logistics-box logistics-contact">
+    <text class="logistics-title">联系电话</text>
+    <input bindinput="phoneNumber" value="{{ phone }}" class="pull-right" type="text" placeholder="请填写手机号码" />
+  </view>
+  <view class="refund-instruct">
+    <view class="refund-instruct-title">退款说明<text>选填</text></view>
+    <textarea class="refund-des" value="{{ refundDes }}" bindinput="inputRefundDes"></textarea>
+    <view class="images-box">
+      <view wx:for="{{ imagesArr }}" wx:key="">
+        <text class="delete-image ico-moon icon-closes" catchtap="deleteImage" data-index="{{ index }}"></text>
+        <image src="{{ item }}" data-index="{{ index }}" catchtap="previewImage"></image>
+      </view>
+      <view class="add-pic" bindtap="chooseImage">
+        <text class="ico-moon icon-goods-add-image"></text>
+        <view>添加图片</view>
+      </view>
+    </view>
+  </view>
+  <view class="refund-bottom">
+    <view class="refund-cancel" catchtap="cancelRefund">取消</view>
+    <view class="refund-submit" style="{{'background:' + storeStyle.theme}}" catchtap="sureSubmit">提交</view>
+  </view>
+</view>
+

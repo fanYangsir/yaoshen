@@ -1,0 +1,218 @@
+.content{
+  width: 100vw;
+  min-height: 100vh;
+  background: url(https://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/vip-card/more-power-bg.jpg);
+  background-size: 100% 100%;
+  padding-bottom: 28rpx;
+  background-position: 0rpx -130rpx;
+}
+.slide-wrapper{
+  width: 100%;
+  height: 100px;
+  padding: 50rpx 0;
+  overflow: hidden;
+  position: relative;
+}
+.slide-item{
+  width: 150rpx;
+  line-height: 150rpx;
+  text-align: center;
+  padding: 50rpx;
+  position: absolute;
+  opacity: 0.5;
+  top: 50rpx;
+}
+.slide-item .image-block{
+  width: 100%;
+  height: 115rpx;
+  position: relative;
+}
+.slide-item .image-block > image{
+  width: 100%;
+  height: 115rpx;
+}
+.slide-item .image-block .card-name{
+  width: 100rpx;
+  height: 20rpx;
+  position: absolute;
+  bottom: 80rpx;
+  left: 24rpx;
+  display: inline-flex;
+  justify-content: space-around;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  font-size: 14rpx;
+}
+.slide-item.active{
+  transform: scale(1.6, 1.6);
+  opacity: 1;
+}
+.member-day-block{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120rpx;
+  height: 100rpx;
+  color: #fff;
+  font-size: 24rpx;
+  text-align: center;
+  z-index: 2;
+}
+.member-day{
+  content: '';
+  line-height: 60rpx;
+  position: relative;
+  top: 20rpx;
+  background-color: #FF7100;
+  border-top-left-radius: 30rpx;
+  border-bottom-left-radius: 30rpx;
+}
+.star-img{
+  position: absolute;
+  top: 28rpx;
+  left: 50%;
+  width: 234rpx;
+  height: 150rpx;
+  transform: translate(-50%, 0);
+}
+.detail{
+  width: 694rpx;
+  margin: 0 28rpx 90rpx 28rpx;
+  border-radius: 12rpx;
+  background-color: #fff;
+  padding: 0 26rpx;
+  box-sizing:border-box;
+  box-shadow: 0px 4px 144px 0px rgba(209, 209, 209, 0.5);
+}
+.detail .detail-item{
+  padding: 30rpx 0;
+  border-bottom: 2rpx solid #F1F1F1;
+}
+.detail .detail-item:last-child{
+  border-bottom: none;
+}
+.detail .detail-benefit{
+  border-bottom: none;
+}
+.detail-item .top-block{
+  display: flex;
+}
+.detail-item .top-block > .name{
+  flex: 0 0 180rpx;
+  font-size: 32rpx;
+}
+.detail-item .top-block > .condition{
+  flex: 1;
+  color: #FF7100;
+  font-size: 32rpx;
+}
+.detail-item .top-block > .condition .condition-item{
+  margin-bottom: 10rpx;
+}
+.detail-item .about-wrapper .about-item{
+  display: flex;
+  font-size: 28rpx;
+  padding-bottom: 17rpx;
+}
+.about-wrapper .about-item > .name{
+  flex: 0 0 170rpx;
+}
+.about-wrapper .about-item > .about{
+  flex: 1;
+  color: #999999;
+}
+.m-b-30{
+  margin-bottom: 30rpx;
+}
+.benefits{
+  width: calc(100% + 20rpx);
+  overflow: hidden;
+  white-space: nowrap;
+  padding-bottom: 2rpx;
+}
+.benefits .benefit-item{
+  max-width: 250rpx;
+  height: 226rpx;
+  display: inline-block;
+  padding: 33rpx 34rpx;
+  margin-right: 25rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  margin-bottom: 2rpx;
+  position: relative;
+  vertical-align: top;
+  background-color: #f3f3f3;
+  box-sizing:border-box;
+}
+.benefits .benefit-item.active{
+  background-color: #ffebdc;
+}
+.content-block{
+  position: relative;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.benefits .benefit-item .icon-block{
+  width: 20rpx;
+  height: 20rpx;
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  padding: 6rpx;
+  border: 2rpx solid #d5d5d5;
+  border-radius: 50%;
+}
+.benefits .benefit-item .icon-gou{
+  font-size: 20rpx;
+  color: #ff7a10;
+  vertical-align:top;
+}
+.benefits .benefit-item .count{
+  width: 100%;
+  font-size: 30rpx;
+  color: #686868;
+  margin-bottom: 6rpx;
+}
+.benefits .benefit-item .price{
+  width: 100%;
+  color: #FF7100;
+  font-size: 34rpx;
+  margin-bottom: 6rpx;
+}
+.benefits .benefit-item .price > label{
+  font-size: 54rpx;
+}
+.benefits .benefit-item .cut-price{
+  width: 100%;
+  color: #999999;
+  font-size: 28rpx;
+}
+.benefits .benefit-item .cut-price > label{
+  text-decoration: line-through;
+}
+.buy-btn{
+  width: 100%;
+  line-height: 90rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #FF7100;
+  color: #fff;
+  font-size: 30rpx;
+  text-align: center;
+  border-radius: 0;
+  cursor: pointer;
+}
+.buy-btn[disabled]:not([type]){
+  background-color: #f9984a;
+  color: #fff;
+}
+.empty-data{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #adadad;
+  display: inline-block;
+}

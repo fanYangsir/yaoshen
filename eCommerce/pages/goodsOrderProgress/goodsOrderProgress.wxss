@@ -1,0 +1,73 @@
+page {
+  background: #f3f3f3;
+}
+.progress-contain {
+  padding: 30rpx;
+  background: #fff;
+}
+.progress-header{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50rpx;
+}
+.progress-header > view {
+  width: 345rpx;
+  background: #EDEDED;
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.content-box {
+  display: flex;
+  font-size: 24rpx;
+  color: #999;
+}
+.content-box text {
+  display: block;
+}
+.progress-left,.progress-right {
+  margin-bottom: 60rpx;
+  width: 340rpx;
+  box-sizing: border-box;
+  padding-left: 50rpx;
+  vertical-align: top;
+  line-height: 40rpx;
+}
+.progress-right {
+  padding-left: 90rpx;
+}
+.progress-center {
+  position: relative;
+}
+.progress-center::before {
+  position: absolute;
+  width: 14rpx;
+  height: 14rpx;
+  background: #D2D2D2;
+  border-radius: 50%;
+  content: '';
+  display: inline-block;
+  z-index: 2;
+  top: 8rpx;
+}
+.content-box:first-child .progress-center::before{
+  background: #ff7100;
+  border: 6rpx solid #FFC699;
+  left: -6rpx;
+}
+.progress-center::after {
+  position: absolute;
+  height: 126rpx;
+  background: #EBEBEB;
+  width: 1rpx;
+  content: '';
+  top: 22rpx;
+  display: inline-block;
+  z-index: 1;
+  left: 6rpx;
+}
+.content-box:last-child .progress-center::after {
+  display: none;
+}

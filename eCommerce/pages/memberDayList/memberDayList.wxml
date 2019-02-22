@@ -1,0 +1,14 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<!-- style="min-height:{{ screenHeight }}rpx" -->
+<view class="content" >
+  <view class="memberdDay-item" wx:for="{{ listData }}" wx:key="{{}}">
+    <view class="top-block">
+      <view class="name">名称：{{ item.title }}</view>
+      <view class="more-btn" data-id="{{ item.id }}" bindtap="gotoDetail">查看详情</view>
+    </view>
+    <view class="line"></view>
+    <view class="bottom-block">
+      <view class="date">日期:  {{ item.date }}</view>
+    </view>
+  </view>
+</view>

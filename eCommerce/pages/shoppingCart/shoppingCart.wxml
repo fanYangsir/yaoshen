@@ -1,0 +1,113 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-goodsShoppingCart 
+  id="component-goodsShoppingCart"
+  bind:afterSelectedGoods="afterSelectedGoods"></component-goodsShoppingCart>
+<component-sinkingModal></component-sinkingModal>
+
+<view class="shoppingCart-wrap page" id="shoppingCart">
+  <view class="shoppingCart-top-nav" wx:if="{{ goodsList.length }}">
+    <text>操作</text>
+    <view class="shoppingCart-top-right pull-right">
+      <view class="shoppingCart-edit-btn" hidden="{{ editing }}" bindtap="switchToEdit">管理</view>
+      <view class="shoppingCart-edit-box" hidden="{{ !editing }}" >
+        <text bindtap="editComplete">完成</text>
+        <text class="delete-goods" catchtap="showDeleteWindow">删除</text>
+      </view>
+    </view>
+  </view>
+  <view class="shoppingCart-list-wrap">
+    <view class="shoppingCart-goods-list" wx:if="{{ goodsList.length }}">
+      <view wx:for="{{ goodsList }}" wx:for-item="goods" wx:key="">
+        <label data-index="{{ index }}" style="{{ goods.selected ? 'color:' + storeStyle.theme : '' }}" class="shoppingCart-check-box {{ goods.selected ? 'checked ico-moon icon-success-tip' : '' }}" bindtap="clickSelectGoods"></label>
+        <view class="shoppingCart-goods-content" bindtap="{{goods.goods_type == 0 ? 'goCommodityDetail' : ''}}" data-id="{{ goods.goods_id }}">
+          <view class="shoppingCart-goods-cover">
+            <image src="{{ goods.cover }}"></image>
+          </view>
+          <view class="goods-content-box">
+            <view class="shoppingCart-goods-title"><text wx:if="{{goods.is_group_buy == 1}}" class="is-seckill">拼团</text><text wx:if="{{goods.is_seckill == 1}}" class="is-seckill">秒杀</text>{{ goods.title }}</view>
+            <view class="ellipsis shoppingCart-goods-model" wx:if="{{ goods.model_value_str }}">{{ goods.model_value_str }}</view>
+            <view class="shoppingCart-price-box">
+              <text class="seckill-price" style="{{'color:' + storeStyle.theme }}" wx:if="{{goods.is_seckill == 1}}">¥ {{ goods.original_price }}</text>
+              <text class="real-price" style="{{'color:' + storeStyle.theme }}" wx:if="{{goods.integral != '2' || (goods.price != 0 && goods.price != '0.00')}}">¥ {{ goods.price }}</text>
+              <text class="real-price" style="{{'color:' + storeStyle.theme }}" wx:if="{{goods.integral == '2' && (goods.price != 0 || goods.price != '0.00')}}">+</text>
+              <text class="real-price" style="{{'color:' + storeStyle.theme }}" wx:if="{{goods.integral == '2'}}">{{ goods.max_can_use_integral}}积分</text>
+              <view class="goods-number-box pull-right" catchtap="stopPropagation">
+                <view class="goods-num-mius {{ goods.num <= 0 ? 'disabled' : '' }}" bindtap="clickMinusButton" data-index="{{ index }}">-</view>
+                <input type="number" class="goods-num-box" value="{{ goods.num }}" data-index="{{ index }}" bindinput="inputGoodsCount"/>
+                <view class="goods-num-plus" style="{{'color:' + storeStyle.theme }}" bindtap="clickPlusButton" data-index="{{ index }}">+</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="shoppingCart-goods-list unable-goods-list" wx:if="{{ unableData.length }}">
+      <view wx:for="{{ unableData }}" wx:for-item="goods" wx:key="">
+        <view class="shoppingCart-goods-content">
+          <view class="shoppingCart-goods-cover">
+            <image src="{{ goods.cover }}"></image>
+          </view>
+          <view class="goods-content-box">
+            <view class="shoppingCart-goods-title"><text wx:if="{{goods.is_seckill == 1}}" class="is-seckill">秒杀</text>{{ goods.title }}</view>
+            <view class="ellipsis shoppingCart-goods-model" wx:if="{{ goods.model_value_str }}">{{ goods.model_value_str }}</view>
+            <view class="shoppingCart-price-box">
+              <text>已失效，去看看其它商品吧</text>
+              <text class="ico-moon icon-shopping-cart-delete pull-right" bindtap="deleteUnableGoods" data-index="{{ index }}"></text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="shoppingCart-null {{ !cartConfig.convenient_shopping.goods ? 'margin310' : ''}}" wx:if="{{ !goodsList.length && !unableData.length }}">
+    <image src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-goods/shopping-cart-null.png"></image>
+    <view class="shoppingCart-null-label">购物车空空哒</view>
+    <view class="go-home-page" style="{{'background:' + storeStyle.theme }}" bindtap="goToHomepage">去逛逛</view>
+  </view>
+  <view class="fast-goods" wx:if="{{ cartConfig.convenient_shopping.goods }}">
+    <view class="fast-goods-header">{{ cartConfig.convenient_shopping.name }}<text catchtap="showFastGoods" class="pull-right ico-moon icon-rightarrow"></text></view>
+    <block wx:if="{{ showFastGoods }}">
+      <view wx:for="{{ cartConfig.convenient_shopping.goods }}" wx:for-item="goods" wx:key="">
+        <view class="shoppingCart-goods-content">
+          <view class="shoppingCart-goods-cover">
+            <image src="{{ goods.cover }}"></image>
+          </view>
+          <view class="goods-content-box">
+            <view class="shoppingCart-goods-title"><text wx:if="{{goods.is_seckill == 1}}" class="is-seckill">秒杀</text>{{ goods.title }}</view>
+            <view class="ellipsis shoppingCart-goods-model" wx:if="{{ goods.model_value_str }}">{{ goods.model_value_str }}</view>
+            <view class="shoppingCart-price-box">
+              <text class="real-price" style="{{'color:' + storeStyle.theme }}">¥ {{ goods.price }}</text>
+              <text class="seckill-price" wx:if="{{goods.is_seckill == 1}}">¥ {{ goods.original_price }}</text>
+              <view catchtap="selectGoodsDetail" data-goods-id="{{ goods.id }}" class="pull-right addShoppingcart ico-moon icon-addshoppingcart3"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+<view class="shoppingCart-bottom-nav" wx:if="{{ goodsList.length }}">
+  <label style="{{ selectAll ? 'color:' + storeStyle.theme : '' }}" class="shoppingCart-check-box {{ selectAll ? 'checked ico-moon icon-success-tip' : '' }}" bindtap="clickSelectAll"></label>
+  <text class="select-all" style="{{ selectAll ? 'color:' + storeStyle.theme : '' }}">全选</text>
+  <form report-submit="true" bindsubmit="goToPay">
+    <button formType="submit" style="{{'background:' + storeStyle.theme }}" class="pull-right shoppingCart-goto-pay" >结算({{ goodsCountToPay }})</button>
+  </form>
+  <view class="pull-right total-price-box">
+    <view class="shoppingCart-all-price" style="{{'color:' + storeStyle.theme }}">¥ {{ priceToPay }}</view>
+    <view class="no-contain-freight">不含运费</view>
+  </view>
+</view>
+<view wx:if="{{ cartConfig.shopping_by_scanning_code == 1 }}" class="scan-it" catchtap="scanShopping" catchtouchmove="scanMove" style="{{'box-shadow: 0 0 6rpx' + storeStyle.theme + ';background:' + storeStyle.theme + ';top:' + widowTop + 'px;'}}">
+  <text class="ico-moon icon-shopping-scan"></text>
+  <view class="scan-it-word">扫码购</view>
+</view>
+<view class="delete-tip-window" wx:if="{{ showDeleteWindow }}">
+  <view class="delete-box">
+    <view class="delete-tip">确定要删除所选商品吗？</view>
+    <view class="delete-btn-box">
+      <text bindtap="cancelDelete">取消</text>
+      <text wx:if="{{ deleteType == 'singel'}}" class="sure-delete" bindtap="sureSingelDelete">确定</text>
+      <text wx:else class="sure-delete" bindtap="sureMutiDelete">确定</text>
+    </view>
+  </view>
+</view>

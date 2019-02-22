@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText":"个人积分",
+    "usingComponents":{
+        "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+    }
+}

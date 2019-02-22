@@ -1,0 +1,254 @@
+<import src="../../../components/wxParse/wxParse.wxml" />
+<component-reward-point rewardPointObj="{{rewardPointObj}}"></component-reward-point>
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-share pageQRCodeData="{{pageQRCodeData}}"></component-share>
+<view class="goods-detail-wrap">
+  <view class="goods-detail-nav">
+    <view class="pull-right ico-moon icon-service2"><contact-button type="default-light" session-from="goodsdetail"></contact-button></view>
+    <!-- <view class="pull-right ico-moon icon-new-share" bindtap="showQRCodeComponent" wx:if="{{goodsInfo.detail_type != 2}}"></view> -->
+    <view class="pull-right ico-moon icon-notebook" bindtap="goToMyOrder"></view>
+    <view class="pull-right ico-moon icon-shoppingcart" bindtap="goToShoppingCart">
+      <view class="goods-detail-cart-num" wx:if="{{ cartGoodsNum && cartGoodsNum != 0 }}">{{ cartGoodsNum }}</view>
+    </view>
+  </view>
+
+
+
+  <view class="goods-detail-content">
+    <view class="goods-detail-section">
+      <view class="goods-cover-container">
+        <image src="{{ goodsInfo.cover }}" mode="aspectFit" onload="goodsCoverOnload"></image>
+        <view class="goods-info-block">
+          <view class="goods-title text-overflow">{{ goodsInfo.title }}</view>
+          <view class="goods-origin-price">
+            <text class="origin-price-text">¥{{ goodsInfo.highPrice > goodsInfo.lowPrice && goodsInfo.lowPrice != 0 ? (goodsInfo.lowPrice+'~'+goodsInfo.highPrice) : goodsInfo.price}}</text>
+          </view>
+          <view class="people-amount">{{goodsInfo.group_buy_info.num_of_people_list[0]}}人团 | 已团{{goodsInfo.sales}}件</view>
+          <view class="group-price {{goodsInfo.is_group_buy_goods == 0 ? 'hide' : ''}}">
+            <view class="goods-current-price {{goodsInfo.group_buy_info.group_buy_min_price === goodsInfo.group_buy_info.group_buy_max_price ? 'hide' :''}}">
+              <text style="color: #fff;">拼团价: </text> ¥<text class="group-price-text">{{goodsInfo.group_buy_info.group_buy_min_price}}~{{goodsInfo.group_buy_info.group_buy_max_price}}</text>
+            </view>
+            <view class="goods-current-price {{goodsInfo.group_buy_info.group_buy_min_price !== goodsInfo.group_buy_info.group_buy_max_price ? 'hide' :''}}">
+              <text style="color: #fff;">拼团价: </text> ¥<text class="group-price-text">{{goodsInfo.group_buy_info.group_buy_min_price}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="goods-detail-section {{goodsInfo.is_group_buy_goods == 0 ? 'hide' : ''}}" style="padding:0 30rpx;">
+      <view class="group-rule" catchtap="turnToGroupRules">
+        <view class="group-tag">限购</view>
+        <text style="vertical-align:middle;display:inline-block;color:#666;font-size:30rpx;">每笔订单限购{{goodsInfo.group_buy_info.user_limit_buy}}件</text>
+        <view class="ico-moon icon-rightarrow" style="vertical-align:middle;color:#ddd;float:right;"></view>
+      </view>
+      <view class="group-step">
+        <view class="ico-moon icon-group-join" style="font-size:74rpx;"></view>
+        <text class="arr">>></text>
+        <view class="ico-moon icon-group-pay1"></view>
+        <text class="arr">>></text>
+        <view class="ico-moon icon-group-complete"></view>
+        <view class="step-description">
+          <text>加入拼团或自己开团</text><text>支付货款</text><text>拼团成功分别发货逾期未完成退款</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="goods-detail-section" style="padding:0 30rpx;">
+      <view class="grouping" wx:if="{{currentModelInfo.group_id}}">{{endTime === '已截止' ? '拼团已结束' : '火热拼团中：'}}</view>
+      <view class="grouping" wx:if="{{!currentModelInfo.group_id}}">拼团已结束</view>
+      <view class="progress" wx:if="{{currentModelInfo.group_id}}">
+        <view class="head-logo">
+          <view class="group-leader">
+            <image src="{{ currentModelInfo.leader_thumb }}"></image>
+            <view class="tag">团长</view>
+          </view>
+          <view wx:if="{{ currentModelInfo.max_user_num <= 5 }}" class="group-number">
+            <image wx:for="{{ currentModelInfo.member }}"  wx:key="" class="members" src="{{item}}"></image>
+            <view wx:for="{{ more_members_arr }}" wx:key="" class="more-members">?</view>
+          </view>
+          <view wx:if="{{ currentModelInfo.max_user_num > 5 }}" class="group-number">
+            <image wx:for="{{ currentModelInfo.member }}" wx:key="" class="members" hidden="{{(index > 1)}}" src="{{item}}"></image>
+            <view wx:for="{{ more_members_arr }}" wx:key="" class="more-members">?</view>
+            <view class="omit">...</view>
+            <view class="more-members" wx:if="{{ (currentModelInfo.member.length < currentModelInfo.max_user_num - 1) }}">?</view>
+            <image class="members" wx:if="{{ (currentModelInfo.member.length == currentModelInfo.max_user_num - 1) }}" src="{{currentModelInfo.member[currentModelInfo.max_user_num - 2]}}"></image>
+          </view>
+        </view>
+        <view class="total-mumber">已拼
+          <text class="red-price">{{ currentModelInfo.current_user_count }}</text>人，还差
+          <text class="red-price">{{ currentModelInfo.max_user_num - currentModelInfo.current_user_count }}</text>人成团
+          <text wx:if="{{ endTime !== '已截止'}}"><text class="red-price">{{ endTime }} </text>后结束</text>
+          <text wx:if="{{ endTime === '已截止'}}"><text class="red-price">{{ endTime }} </text></text>
+        </view>
+        <label class="join-btn" bindtap="participateGroup" data-type="join" wx:if="{{endTime !== '已截止' && currentModelInfo.group_id}}">马上参团</label>
+      </view>
+    </view>
+
+    <view class="goods-detail-section" wx:if="{{ commentExample }}">
+      <view class="block-item">
+        <view style="margin-bottom:11px; font-size:14px;">宝贝评价 ({{ commentNums[0] || 0 }})</view>
+        <view>
+          <view class="goods-comment-label">有图 ({{ commentNums[4] || 0 }})</view>
+          <view class="goods-comment-label">好评 ({{ commentNums[1] || 0 }})</view>
+          <view class="goods-comment-label">中评 ({{ commentNums[2] || 0 }})</view>
+          <view class="goods-comment-label">差评 ({{ commentNums[3] || 0 }})</view>
+        </view>
+        <view>
+          <view class="comment-item">
+            <view>
+              <image class="comment-user-photo" src="{{ commentExample.buyer_headimgurl || defaultPhoto }}"></image>
+              <text>{{ commentExample.buyer_nickname }}</text>
+              <view class="comment-date pull-right">{{ commentExample.add_time }}</view>
+            </view>
+            <view class="comment-content">{{ commentExample.assess_info.content }}</view>
+          </view>
+          <view style="text-align:center;">
+            <button class="btn" style="color:#f15a0c;border-color:#f15a0c;margin-top:5px;" bindtap="goToCommentPage">查看全部评价</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="goods-bottom-opt {{goodsInfo.is_group_buy_goods == 1 ? '' : 'hide'}}">
+    <view class="flex-sub-box-2" hidden="{{endTime === '已截止' || !currentModelInfo.group_id}}">
+      <label class="btn" style="background-color:#f33c52;" bindtap="participateGroup" data-type="join">¥{{ selectModelInfo.groupPrice }} 立即参团</label>
+    </view>
+    <view class="flex-sub-box-2">
+      <label class="btn" style="background-color:#d0011b;" bindtap="showGroupBuy" data-type="add">马上开团</label>
+    </view>
+  </view>
+
+</view>
+<view id="payDialog" class="page-dialog-wrap" hidden="{{ addToShoppingCartHidden }}">
+  <view class="page-bottom-dialog">
+    <view class="page-bottom-content">
+      <view class="pay-close-dialog page-dialog-close" bindtap="hiddeAddToShoppingCart">×</view>
+      <view class="dialog-block-item">
+        <view class="thumb">
+          <image class="pay-goods-cover" src="{{ goodsInfo.cover }}"></image>
+        </view>
+        <view class="pay-goods-baseinfo">
+          <view class="pay-goods-title ellipsis">{{ goodsInfo.title }}</view>
+          <view class="pay-goods-price clearfix">
+            <view class="pay-current-price pull-left">
+              ¥
+              <text style="font-weight:bold; font-size:18px;">{{ selectModelInfo.price }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="dialog-block-item" hidden="{{ !goodsInfo.model_items.length }}">
+        <view class="pay-goods-models">
+          <view wx:for="{{ goodsInfo.model }}" wx:for-item="model" wx:for-index="modelIndex" wx:key="">
+            <text style="vertical-align:middle;">{{ model.name }}：</text>
+            <label class="pills-list">
+              <label wx:for="{{ model.subModelName }}" wx:key="" wx:for-item="name" data-model-index="{{ modelIndex }}" data-submodel-index="{{ index }}" class="subModel {{ selectModelInfo.models[modelIndex] == model.subModelId[index] ? 'select' : '' }}" data-submodel-id="{{ model.subModelId[index] }}"
+                bindtap="selectSubModel">{{ name }}</label>
+            </label>
+          </view>
+        </view>
+      </view>
+      <view class="dialog-block-item" style="padding-left:10px;padding-right:10px;">
+        <view class="clearfix">
+          <text>数量：</text>
+          <view class="pull-right">
+            <label class="pull-left">库存
+              <text class="pay-goods-stock">{{ selectModelInfo.stock }}</text>
+            </label>
+            <view class="quantity pull-left">
+              <label class="minus {{ selectModelInfo.buyCount <= 1 ? 'disabled' : '' }}"></label>
+              <input class="pay-buy-count" type="text" class="txt" value="{{ selectModelInfo.buyCount }}" bindinput="inputBuyCount" />
+              <label class="plus {{ selectModelInfo.buyCount >= selectModelInfo.stock ? 'disabled' : '' }}"></label>
+              <view class="response-area response-area-minus" bindtap="clickMinusButton"></view>
+              <view class="response-area response-area-plus" bindtap="clickPlusButton"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="dialog-block-item">
+        <view hidden="{{ ifAddToShoppingCart }}">
+          <view class="btn btn-block btn-orange pay-buy-next" bindtap="buyDirectlyNextStep">下一步</view>
+        </view>
+        <view hidden="{{ !ifAddToShoppingCart }}">
+          <view class="btn btn-block btn-orange pay-add-to-shoppingcart" bindtap="sureAddToShoppingCart">加入购物车</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view id="groupPayDialog" class="page-dialog-wrap" hidden="{{ addToGroupBuyCart }}">
+  <view class="page-bottom-dialog">
+    <view class="page-bottom-content">
+      <view class="pay-close-dialog page-dialog-close" bindtap="hideGroupBuyCart">×</view>
+      <view class="dialog-block-item">
+        <image class="pic" src="{{ goodsInfo.cover }}"></image>
+        <view class="pay-goods-baseinfo">
+          <view class="pay-goods-title ellipsis">{{ goodsInfo.title }}</view>
+          <view class="pay-goods-price">
+            <view class="pay-current-price">
+              拼团价：¥<text>{{ selectModelInfo.groupPrice }}</text>
+            </view>
+          </view>
+          <view class="limit">提示：每人限参{{goodsInfo.group_buy_info.user_limit_join}}团，每团限购{{goodsInfo.group_buy_info.user_limit_buy}}件</view>
+        </view>
+      </view>
+      <view class="dialog-block-item">
+        <view class="pay-goods-models">
+          <view class="group-info group-buy-num" hidden="{{isParticipate}}">
+            <text>拼团人数：</text>
+            <label class="pills-list">
+              <label wx:for="{{ goodsInfo.group_buy_info.num_of_people_list }}" wx:key="" wx:for-item="num" class="subModel {{ selectModelInfo.groupNum == num ? 'select' : '' }}" data-num="{{num}}" bindtap="selectGroupNum">{{ num }}人</label>
+            </label>
+          </view>
+          <view class="group-info group-buy-num" hidden="{{!isParticipate}}">
+            <text>拼团人数：</text>
+            <label class="pills-list">
+              {{selectModelInfo.groupNum}}人团
+            </label>
+          </view>
+          <view class="group-info">原价：￥{{ selectModelInfo.price }}</view>
+          <view class="group-info" hidden="{{isParticipate}}">团长价：￥{{selectModelInfo.groupLeaderPrice == 0 ? '免单' : selectModelInfo.groupLeaderPrice}}</view>
+          <view class="group-info" hidden="{{isParticipate}}">拼团时限：{{goodsInfo.group_buy_info.hour_of_duration}}小时{{goodsInfo.group_buy_info.minute_of_duration}}分钟</view>
+        </view>
+      </view>
+      <view class="dialog-block-item" hidden="{{ !goodsInfo.model_items.length }}">
+        <view class="pay-goods-models">
+          <view wx:for="{{ goodsInfo.model }}" wx:key="" wx:for-item="model" wx:for-index="modelIndex">
+            <text style="vertical-align:middle;">{{ model.name }}：</text>
+            <label class="pills-list">
+              <label wx:for="{{ model.subModelName }}" wx:key="" wx:for-item="name" data-model-index="{{ modelIndex }}" data-submodel-index="{{ index }}" class="subModel {{ selectModelInfo.models[modelIndex] == model.subModelId[index] ? 'select' : '' }}" data-submodel-id="{{ model.subModelId[index] }}" bindtap="selectSubModel">{{ name }}</label>
+            </label>
+          </view>
+        </view>
+      </view>
+      <view class="dialog-block-item" style="padding-left:10px;padding-right:10px;">
+        <view class="clearfix">
+          <text style="vertical-align:middle;">数量：</text>
+          <view class="pull-right">
+            <label class="pull-left">库存
+              <text class="pay-goods-stock">{{ selectModelInfo.stock }}</text>
+            </label>
+            <view class="quantity pull-left">
+              <label class="minus {{ selectModelInfo.groupBuyCount <= 1 ? 'disabled' : '' }}"></label>
+              <input disabled class="pay-buy-count" type="text" class="txt" value="{{ selectModelInfo.groupBuyCount }}" bindinput="inputBuyCount" />
+              <label class="plus {{ selectModelInfo.groupBuyCount >= goodsInfo.group_buy_info.user_limit_buy ? 'disabled' : '' }}"></label>
+              <view class="response-area response-area-minus" bindtap="clickGroupMinusButton"></view>
+              <view class="response-area response-area-plus" bindtap="clickGroupPlusButton"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="dialog-block-item">
+        <view hidden="{{isParticipate}}">
+          <view class="btn btn-block pay-buy-next" bindtap="groupBuyDirectlyNextStep">确认开团</view>
+        </view>
+        <view hidden="{{!isParticipate}}">
+          <view class="btn btn-block pay-buy-next" bindtap="participateGroupBuy">确认参团</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "拼团详情",
+  "usingComponents": {
+    "component-share": "/components/pageQRCode/pageQRCode",
+    "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+  }
+}

@@ -1,0 +1,40 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-goodsShoppingCart 
+  id="component-goodsShoppingCart"
+  bind:afterSelectedGoods="afterSelectedGoods"></component-goodsShoppingCart>
+<block wx:if="{{ goodslist.length || search }}">
+  <view class="{{ showCheckedBox ? 'foot-print-container' : '' }}">
+    <view class="foot-print-header">
+      <view class="foot-print-search"><text class="ico-moon icon-search"></text><input type="text" confirm-type="search" bindconfirm="searchGoods" placeholder="请输入搜索内容" /></view><text wx:if="{{ !showCheckedBox }}" class="foot-print-operat" catchtap="footPrintOperat">管理</text><text wx:else="{{ showCheckedBox }}" class="foot-print-operat" catchtap="footPrintComplete">完成</text>
+    </view>
+    <view class="foot-print-content">
+      <view class="goods-content">
+        <view wx:for="{{ goodslist }}" wx:key="" bindtap="{{item.status != 1 && !showCheckedBox ? 'goGoodsDetail' : ''}}" data-id="{{ item.id }}">
+          <image class="goods-cover" src="{{ item.cover }}"></image>
+          <view class="goods-detail">
+            <view class="goods-title">{{ item.title }}</view>
+            <view class="goods-price" style="{{'color:' + storeStyle.theme }}">￥{{ item.price }}</view>
+            <view class="goods-bottom">{{ item.sales }}人付款
+              <text wx:if="{{ item.status == 1 }}" class="foot-invalid">失效</text>
+              <text wx:else catchtap="{{showCheckedBox ? '' : 'addShoppingCart'}}" data-id="{{ item.id }}" class="ico-moon icon-addshoppingcart3 add-shopping-cart" style="{{'color:' + storeStyle.theme }}"></text>
+            </view>
+          </view>
+          <label wx:if="{{ showCheckedBox }}" data-index="{{ index }}" class="foot-check-box {{ item.selected ? 'checked ico-moon icon-success-tip' : '' }}" style="{{'color:' + storeStyle.theme }}" catchtap="selectGoods"></label>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="foot-bottom" wx:if="{{ showCheckedBox }}">
+    <view class="select-all">
+      <label class="foot-check-box {{ selectAll ? 'checked ico-moon icon-success-tip' : '' }}" style="{{'color:' + storeStyle.theme }}" bindtap="clickSelectAll"></label>
+      <text>全选</text>
+    </view>
+    <view class="pull-right delete-goods" style="{{'background:' + storeStyle.theme }}" catchtap="deleteGoods">一键删除</view>
+  </view>
+</block>
+<block wx:else>
+  <view class="foot-null-box">
+    <image src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-goods/foot-print-null.png"></image>
+    <view>暂时没有浏览记录</view>
+  </view>
+</block>

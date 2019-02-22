@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "商家信息",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+  }
+}

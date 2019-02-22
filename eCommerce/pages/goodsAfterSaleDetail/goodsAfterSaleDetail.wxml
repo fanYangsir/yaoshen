@@ -1,0 +1,105 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-reward-point rewardPointObj="{{rewardPointObj}}"></component-reward-point>
+<view class="order-contain">
+  <view class="seller-shipped" style="{{'background:' + storeStyle.theme}}">
+    <text class="order-icon ico-moon icon-{{orderIcon[afterSaleData.status]}}"></text>
+    <text>{{ orderReason[afterSaleData.status] }}</text> 
+    <image src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-goods/goods-order-bg.png"></image>
+  </view>
+  <view class="order-prompt" wx:if="{{ afterSaleData.status == 0 }}">你已成功发起退款申请，请耐心等待商家处理，还剩<text style="{{'color:' + storeStyle.theme}}">{{ afterSaleData.expire }}</text>（超时按<text style="{{'color:' + storeStyle.theme}}">拒绝退款</text>处理）</view>
+  <view class="order-prompt" wx:if="{{ afterSaleData.status == 3 }}">商家已同意你的退货申请，请及时填写退货信息，还剩<text style="{{'color:' + storeStyle.theme}}">{{ afterSaleData.expire }}</text>（超时按<text style="{{'color:' + storeStyle.theme}}">退款失败</text>处理）</view> 
+  <block wx:if="{{ afterSaleData.status == 3 }}">
+    <view class="refund-address-box">
+      <view class="refund-address-title"><text>退货地址</text><text class="pull-right">{{ refundAdress.brand_name }} {{ refundAdress.phone }}</text></view>
+      <view class="pull-right refund-address">{{ refundAdress.region_info[2].name + refundAdress.region_info[1].name + refundAdress.region_info[0].name + refundAdress.detail_address }}</view>
+    </view>
+  </block>
+  <view class="refuse-message" wx:if="{{ afterSaleData.refuse_msg }}">商家拒绝退款原因：{{afterSaleData.refuse_msg}}</view>
+  <view class="app-box">
+    <view>
+      <text class="app-name">退货信息</text>
+    </view>
+  </view>
+  <view class="goods-detail-box" wx:for="{{ afterSaleData.refund_goods }}" wx:key="" >
+    <image src="{{ item.cover }}"></image>
+    <view>
+      <view class="goods-name"><text class="is-seckill" wx:if="{{ afterSaleData.is_group_buy_order == 1 }}">拼团</text><text class="is-seckill" wx:if="{{ afterSaleData.is_seckill == 1 }}">秒杀</text>{{ item.title }}</view>
+      <view wx:if="{{ item.model_name }}" class="goods-rules">{{ item.model_name }}</view>
+      <view class="goods-price">
+        <text class="colorff7" style="{{'color:' + storeStyle.theme}}">¥{{ item.price }}</text>
+        <text class="pull-right">x {{ item.num }}</text>
+      </view>
+    </view>
+  </view>
+  <view class="goods-amount" hidden="{{afterSaleData.is_pay_on_delivery == 1}}">
+    <text>退货原因</text>
+    <text class="pull-right color999">{{ refundReason[afterSaleData.refund_reason] }}</text>
+  </view>
+  <view class="goods-amount">
+    <text>退款金额</text>
+    <text class="pull-right color999">¥ {{ afterSaleData.refund_price }}</text>
+  </view>
+  <view class="goods-amount refund-apply-time">
+    <text>申请时间</text>
+    <text class="pull-right color999">{{ afterSaleData.add_time }}</text>
+  </view>
+  <view class="actual-payment">
+    <view>
+      <text>实际付款</text>
+      <text class="pull-right colorff7" style="{{'color:' + storeStyle.theme}}">¥ {{ afterSaleData.total_price }}</text>
+    </view>
+  </view>
+  <view class="addition-info no-border" bindtap="goOrderProgress">
+    <view>
+      <text>订单进度</text>
+      <text class="pull-right color999 ico-moon icon-rightarrow"></text>
+    </view>
+  </view>
+  <view class="order-number">
+    <view>
+      <text>订单编号</text>
+      <text>{{ afterSaleData.order_id }}</text>
+      <text class="pull-right" catchtap="copyOrderId">复制</text>
+    </view>
+  </view>
+  <view class="order-bottom">
+    <block wx:if="{{ afterSaleData.status == 0 }}">
+      <text class="btn" bindtap="showEventDialog" data-type="cancelRefund">撤销申请</text>
+      <text wx:if="{{ afterSaleData.is_pay_on_delivery != 1 }}" class="btn" bindtap="editorRefund">修改申请</text>
+    </block>
+    <block wx:if="{{ afterSaleData.status == 1 }}">
+      <text class="btn" bindtap="showEventDialog" data-type="orderDelete">删除售后订单</text>
+    </block>
+    <block wx:if="{{ afterSaleData.status == 2 }}">
+      <text class="btn" bindtap="showEventDialog" data-type="orderDelete">删除售后订单</text>
+    </block>
+    <block wx:if="{{ afterSaleData.status == 3 }}">
+      <text class="btn" bindtap="showEventDialog" data-type="cancelRefund">撤销申请</text>
+      <text class="btn" wx:if="{{ afterSaleData.is_pay_on_delivery != 1 }}" bindtap="editorRefund">修改申请</text>
+      <text class="btn btn-orange" wx:if="{{ afterSaleData.is_pay_on_delivery != 1 }}" style="{{'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme}}" bindtap="returnInfor">填写退货信息</text>
+    </block>
+    <block wx:if="{{ afterSaleData.status == 4 }}">
+      <text class="btn" bindtap="checkLogistics">查看退货物流</text>
+    </block>
+    <block wx:if="{{ afterSaleData.status == 5 }}">
+      <text class="apply-refund" bindtap="showEventDialog" data-type="orderDelete">删除售后订单</text>
+    </block>
+    <block wx:if="{{ afterSaleData.status == 6 }}">
+      <text class="apply-refund" bindtap="showEventDialog" data-type="orderDelete">删除售后订单</text>
+    </block>
+    <block wx:if="{{ afterSaleData.status == 7 }}">
+      <text class="apply-refund" bindtap="showEventDialog" data-type="orderDelete">删除售后订单</text>
+    </block>
+  </view>
+</view>
+<view class="event-dialog-mask" wx:if="{{ showEventDialog }}">
+  <view class="event-dialog">
+    <view class="event-dialog-title" wx:if="{{ eventType == 'orderDelete' }}">订单删除后不可找回，确认删除？</view>
+    <view class="event-dialog-title" wx:if="{{ eventType == 'cancelRefund' }}">是否撤销退款申请？</view>
+    <view class="event-dialog-bottom">
+      <text class="event-cancel" catchtap="hideEventDialog">取消</text>
+      <text wx:if="{{ eventType == 'orderDelete' }}" style="{{'color:' + storeStyle.theme}}" class="event-sure" catchtap="orderDelete">确认</text>
+      <text wx:if="{{ eventType == 'cancelRefund' }}" style="{{'color:' + storeStyle.theme}}" class="event-sure" catchtap="cancelRefund">确认</text>
+    </view>
+  </view>
+</view>

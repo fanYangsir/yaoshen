@@ -1,0 +1,421 @@
+
+.goods-list .goods-item {
+  background: #fff;
+  vertical-align: top;
+  width: 50%;
+}
+
+.goods-list .goods-item .content-wrap {
+  padding: 12rpx 0;
+}
+
+.goods-list.opposite .goods-item .content-wrap {
+  padding: 16rpx 16rpx 20rpx;
+}
+
+.goods-list .goods-item .content-wrap.haveSales {
+  height: 230rpx;
+}
+
+.goods-list .goods-item .content-wrap.noSales {
+  height: 204rpx;
+}
+
+.goods-list .goods-item .content-wrap .title {
+  display: flex;
+  height: 70rpx;
+  font-size: 26rpx;
+  color: #333;
+  margin-top: 13rpx;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.goods-list.opposite .goods-item .content-wrap .title {
+  margin-top: 0;
+  margin-bottom: 8rpx;
+}
+
+.goods-list .goods-item .content-wrap .title .type {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 28rpx;
+  line-height: 24rpx;
+  margin-right: 12rpx;
+  font-size: 22rpx;
+  color: #ff3800;
+  background: #fff;
+  border: 1px solid #ff3800;
+  border-radius: 4rpx;
+}
+
+.goods-list .goods-item .content-wrap .title .type>view {
+  display: inline-block;
+  background: #ff3800;
+  height: 25rpx;
+  width: 28rpx;
+}
+
+.goods-list .goods-item .content-wrap .title .type>text {
+  display: inline-block;
+  height: 100%;
+  line-height: 26rpx;
+  padding: 0 4rpx;
+  vertical-align: top;
+}
+
+.goods-list .goods-item .content-wrap .title .type>view icon {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 25rpx;
+  color: #fff;
+  text-align: center;
+  justify-content: center;
+}
+
+.goods-list .goods-item .content-wrap .title .type .image-wrap {
+  width: 30rpx;
+  height: 30rpx;
+  background: #ff3600;
+}
+
+.goods-list .goods-item .content-wrap .title .type .image-wrap image {
+  width: 25rpx;
+  height: 25rpx;
+  background: #fff;
+}
+
+.goods-list .goods-item .content-wrap .title .name {
+  width: calc(100% - 100rpx);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.goods-list .goods-item .content-wrap .same-line>view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.goods-item .content-wrap .same-line>view .sales-num {
+  font-size: 24rpx;
+  color: #a1a1a1;
+}
+
+.goods-item .content-wrap .same-line>view .count-big-down {
+  font-size: 22rpx;
+  color: #ff3600;
+}
+
+.goods-list .goods-item .content-wrap .same-line .first-line {
+  margin: 28rpx 0 12rpx;
+}
+
+.goods-list .goods-item .content-wrap .differ-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28rpx;
+}
+
+.goods-list .goods-item .content-wrap .differ-line .first-line {
+  width: calc(100% - 150rpx)
+}
+
+.goods-list .goods-item .content-wrap .differ-line .second-line {
+  flex: 1;
+  width: 150rpx
+}
+
+
+.goods-list .goods-item .content-wrap .differ-line .sales-num {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #a1a1a1;
+}
+
+.goods-list.list .goods-item .content-wrap .differ-line {
+  display: flex;
+}
+
+.goods-list .goods-item .content-wrap .price {
+  line-height: 40rpx;
+}
+
+.goods-list .goods-item .content-wrap .min-price {
+  font-size: 26rpx;
+  color: #ff3600;
+  margin-right: 14rpx;
+}
+
+.goods-list.opposite .goods-item .content-wrap .min-price {
+  font-size: 26rpx;
+}
+
+.goods-list .goods-item .content-wrap .min-price>text {
+  font-size: 36rpx;
+}
+
+.goods-list .goods-item .content-wrap .origin-price {
+  font-size: 26rpx;
+  color: #a1a1a1;
+  text-decoration: line-through;
+}
+
+.goods-list.opposite .goods-item .content-wrap .origin-price {
+  font-size: 24rpx;
+}
+
+.goods-list .goods-item .content-wrap .status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6rpx;
+}
+
+.goods-list .goods-item .content-wrap .sales {
+  font-size: 24rpx;
+  color: #a1a1a1;
+}
+
+.goods-list .goods-item .content-wrap .countdown {
+  font-size: 22rpx;
+  color: #ff3600;
+}
+
+.goods-list .goods-item .content-wrap .to-join button {
+  float: right;
+  width: 150rpx;
+  text-align: center;
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size: 28rpx;
+  padding: 0;
+  color: #fff;
+  border-radius: 30rpx;
+}
+
+.goods-list .goods-item .content-wrap .to-join .ready,
+.goods-list .goods-item .content-wrap .to-join .remain {
+  background: rgba(255, 174, 0, 1);
+  box-shadow: 0px 2rpx 8rpx 0px rgba(255, 138, 0, 0.4);
+}
+
+.goods-list .goods-item .content-wrap .to-join .reminded {
+  background: rgba(255, 174, 0, 1);
+  box-shadow: 0px 2rpx 8rpx 0px rgba(255, 138, 0, 0.4);
+}
+
+.goods-list .goods-item .content-wrap .to-join .go {
+  background: #ff3600;
+  background: linear-gradient(270deg, rgba(255, 54, 0, 1) 0%, rgba(255, 174, 0, 1) 100%);
+  box-shadow: 0px 2rpx 8rpx 0px rgba(255, 138, 0, 0.4);
+}
+
+.goods-list .goods-item .content-wrap .to-join .over {
+  background: #d2d2d2;
+}
+
+.goods-list.opposite .goods-item,
+.goods-list.carousel .goods-item {
+  display: inline-block;
+  margin-top: 10rpx;
+  width: 50%;
+}
+
+.goods-list.opposite .goods-item {
+  width: 369rpx;
+}
+
+.goods-list .goods-list .no-sales {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16rpx;
+}
+
+.group .loading-btn {
+  font-size: 26rpx;
+}
+
+.goods-list.opposite .image-wrap,
+.goods-list.opposite .image-wrap image {
+  position: relative;
+  width: 369rpx;
+  height: 370rpx;
+}
+
+.goods-list .count-down {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  height: 50rpx;
+  width: 100%;
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.goods-list .count-down.going,
+.goods-list .count-down.going>view:nth-last-child(1) view {
+  background: #ff3600;
+}
+
+.goods-list .count-down.ready,
+.goods-list .count-down.going>view:nth-last-child(1) view {
+  background: #ffae00;
+}
+
+.goods-list .count-down>view:nth-last-child(1) {
+  display: flex;
+  margin-left: 10rpx;
+}
+
+.goods-list .count-down>view:nth-last-child(1) view {
+  box-sizing: border-box;
+  padding: 0 10rpx;
+  text-align: center;
+  height: 34rpx;
+  border-radius: 4rpx;
+}
+
+.goods-list .count-down.going>view:nth-last-child(1) view {
+  background: #c20d0f;
+}
+
+.goods-list .count-down.ready>view:nth-last-child(1) view {
+  background: #e28502;
+}
+
+.goods-list .count-down>view:nth-last-child(1) text {
+  margin: 0 5rpx;
+}
+
+/* 左右 */
+
+.goods-list.opposite {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: #f3f3f3;
+}
+
+.goods-list.opposite .goods-item:nth-child(2n-1) {}
+
+/* 横滑 */
+
+.group .goods-list.carousel {
+  height: auto;
+}
+
+.goods-list.carousel>.swiper {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.goods-list.carousel .goods-item {
+  margin-right: 15rpx;
+  vertical-align: top;
+  width: 330rpx;
+}
+
+.goods-list.carousel .goods-item .content-wrap {
+  padding: 16rpx 16rpx 20rpx;
+}
+
+.goods-list.carousel .goods-item .content-wrap .title {
+  margin-top: 0;
+  margin-bottom: 8rpx;
+}
+
+.goods-list.carousel .image-wrap {
+  position: relative;
+  width: 330rpx;
+  height: 370rpx;
+}
+
+.goods-list.carousel .goods-item:nth-last-child(1) {
+  margin-right: 0;
+}
+
+/* 列表 */
+
+.goods-list.list .goods-item {
+  box-sizing: border-box;
+  padding: 20rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 260rpx;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.goods-list.list .image-wrap,
+.goods-list.list .image-wrap image {
+  width: 220rpx;
+  height: 220rpx;
+}
+
+.goods-list.list .content-wrap {
+  height: 220rpx;
+  width: 100%;
+  padding-left: 20rpx;
+}
+
+/* 大图 */
+
+.goods-list.bigPicture .goods-item {
+  margin-bottom: 10rpx;
+  width: 100%;
+}
+
+.goods-list.bigPicture .goods-item .content-wrap {
+  box-sizing: border-box;
+  padding: 16rpx 16rpx 16rpx;
+  width: 100%;
+}
+
+.goods-list.bigPicture .goods-item:nth-last-child(1) {
+  margin-bottom: 0;
+}
+
+.goods-list.bigPicture .goods-item .content-wrap .title {
+  margin-top: 0;
+  height: auto;
+}
+
+.goods-list.bigPicture .image-wrap,
+.goods-list.bigPicture .image-wrap image {
+  position: relative;
+  width: 750rpx;
+  height: 360rpx;
+}
+
+.goods-list.bigPicture .sales-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.goods-list.bigPicture .count-down {
+  width: auto;
+}
+
+.goods-list.bigPicture .content-wrap .status {
+  margin-top: 0;
+}
+
+/* 拼团 end */

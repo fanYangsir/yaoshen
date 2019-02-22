@@ -1,0 +1,5 @@
+{"navigationBarTitleText": "我的拼团",
+  "usingComponents": {
+    "component-share": "/components/pageQRCode/pageQRCode",
+    "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+  }}

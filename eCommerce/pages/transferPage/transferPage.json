@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText":"当面付",
+    "usingComponents":{
+        "component-getUserInfo": "/components/getUserInfo/getUserInfo",
+        "component-memberDiscount": "/components/memberDiscount/memberDiscount"
+    }
+}

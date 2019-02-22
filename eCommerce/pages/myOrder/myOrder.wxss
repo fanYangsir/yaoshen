@@ -1,0 +1,756 @@
+page {
+  height: 100%;
+  background-color: #eee;
+  font-size: 29rpx;
+}
+.dialog-block-item {
+  padding: 8px 0;
+}
+.myOrder-wrap {
+  height: 100%;
+}
+.myOrder-content-body {
+  height:calc(100% - 186rpx);
+  margin-top: 186rpx;
+}
+.lengthOneBody {
+  height:calc(100% - 94rpx);
+  margin-top: 94rpx;
+}
+.myOrder-content-container {
+  height: 100%;
+}
+.myOrder-tab-list {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  line-height: 85rpx;
+  height: 88rpx;
+  font-size: 33rpx;
+  background: #fff;
+  text-align: center;
+  white-space: nowrap;
+}
+.myOrder-tab-list view {
+  border-bottom: 2px solid transparent;
+}
+.myOrder-tab-list view.active {
+  border-color: #ff7100;
+  color: #FF7100;
+}
+.myOrder-list-wrap {
+  padding: 0 23rpx;
+  margin-bottom: 19rpx;
+  background-color: #fff;
+}
+.myOrder-tostore .myOrder-list-wrap {
+  font-size: 13px;
+  margin-bottom: 10rpx;
+}
+.tostore-see-detail {
+  color: #999;
+  font-size: 24rpx;
+}
+.myOrder-goods-cover {
+  position: absolute;
+  left: 0;
+  width: 50px;
+  height: 50px;
+}
+.myOrder-tostore .myOrder-goods-cover {
+  width: 140rpx;
+  height: 140rpx;
+}
+.myOrder-goods-cover.transfer-order-cover {
+  /* border-radius: 50%; */
+  /* background-color: #09ba07; */
+  line-height: 50px;
+  font-size: 34px;
+  text-align: center;
+  color: #fff;
+}
+.myOrder-goods-cover.transfer-order-cover image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.myOrder-goods-title {
+  padding: 0 70px 0 60px;
+  height: 50px;
+  word-break: break-all;
+  overflow: hidden;
+}
+.myOrder-transfer .myOrder-goods-title {
+  padding-top: 15px;
+  height: 35px;
+}
+.tostore-goods-detail {
+  padding-left: 160rpx;
+  height: 140rpx;
+  box-sizing:border-box;
+  font-size: 24rpx;
+}
+.myOrder-tostore-title {
+  margin-bottom:5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  width: calc(100% - 300rpx);
+  display:inline-block;
+}
+.myOrder-goods-right {
+  position: absolute;
+  top: 0.625rem;
+  right: 0;
+  /* max-width: 4.5625rem; */
+  line-height: 1.25rem;
+  text-align: right;
+}
+.myOrder-transfer .myOrder-goods-right {
+  top: 1.35rem;
+}
+.myOrder-goods-count {
+  margin-left: 10rpx;
+}
+.myOrder-total-item {
+  text-align: right;
+}
+.myOrder-list-bottom {
+  text-align: right;
+  line-height: 64rpx;
+  padding: 16rpx 0;
+}
+.myOrder-transfer .myOrder-list-bottom {
+  padding: 22rpx 0;
+}
+.myOrder-list-count {
+  margin-right: 10px;
+}
+.myOrder-pay-price, .myOrder-order-status {
+  color: #ff7100;
+  margin-top: 4rpx;
+}
+.myOrder-list-bottom .btn {
+  font-size: 29rpx;
+  padding: 0.1875rem 0.5rem;
+  margin-right: 0.625rem;
+  border-radius: 1px;
+  color: #444;
+}
+.myOrder-list-bottom .btn:last-child {
+  margin-right:0;
+}
+.btn.btn-orange {
+  color: #ff7100;
+  background-color: #fff;
+}
+.btn.btn-grey {
+  width:120rpx;
+  height:40rpx ;
+  line-height:40rpx ;
+  border:1px solid rgba(210,210,210,1);
+  color: #999;
+  font-size: 26rpx;
+}
+.noMoreNewDataTip {
+  text-align: center;
+  color: #aaa;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+.scrollContainer {
+  height: 100%;
+}
+.myOrder-franchisee-name {
+  padding: 5px 0;
+  color: #aaa;
+}
+.tostore-order-status {
+  margin-left: 15px;
+  color: #ff7100;
+}
+.tostore-order-waittime {
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: left;
+  color: #616161;
+}
+
+.myOrder-ebusiness .myOrder-list-wrap,
+.myOrder-appointment .myOrder-list-wrap {
+  padding: 0 29rpx;
+}
+.myOrder-ebusiness .dialog-block-item,
+.myOrder-appointment .dialog-block-item {
+  padding: 29rpx 0;
+  border-bottom: none;
+}
+.myOrder-ebusiness .myOrder-goods-list,
+.myOrder-appointment .myOrder-goods-list {
+  padding: 0 25rpx;
+  margin: 0 -25rpx;
+  background-color: #FAFAFA;
+}
+.myOrder-ebusiness .myOrder-goods-list .dialog-block-item,
+.myOrder-appointment .myOrder-goods-list .dialog-block-item {
+  padding-top: 12rpx;
+  padding-bottom: 12rpx;
+  border-bottom: 1px solid #f2f2f2;
+}
+.myOrder-ebusiness .myOrder-goods-list .dialog-block-item:last-child,
+.myOrder-appointment .myOrder-goods-list .dialog-block-item:last-child {
+  border-bottom: none;
+}
+.myOrder-ebusiness .myOrder-goods-right,
+.myOrder-appointment .myOrder-goods-right {
+  top: 12rpx;
+  min-width: 115rpx;
+  line-height: 1.5;
+}
+.myOrder-ebusiness .myOrder-list-bottom,
+.myOrder-appointment .myOrder-list-bottom {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  border-top: 1px solid #f2f2f2;
+}
+.myOrder-ebusiness .myOrder-goods-cover,
+.myOrder-appointment .myOrder-goods-cover {
+  width: 120rpx;
+  height: 120rpx;
+}
+.myOrder-ebusiness .myOrder-goods-title,
+.myOrder-appointment .myOrder-goods-title {
+  height: 120rpx;
+  padding: 0 120rpx 0 145rpx;
+}
+/*外卖*/
+.myOrder-takeout .myOrder-goods-cover{
+  height: 66rpx;
+  width: 66rpx;
+  border-radius: 4px;
+}
+.myOrder-takeout .myOrder-takeout-Info {
+  margin-left: 86rpx;
+}
+.myOrder-takeout .takeout-order-status {
+  /* color: #666; */
+  color: #000;
+}
+.myOrder-takeout .dialog-block-item{
+  border: none;
+  padding:15px 0;
+}
+.myOrder-takeout .takeout-goods-detail{
+  padding-left:86rpx;
+  padding-bottom:16rpx;
+}
+.myOrder-takeout .myOrder-takeout-title {
+  margin-bottom:5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-size: 28rpx;
+  padding-bottom: 20rpx;
+  color: #666;
+}
+.myOrder-gift-text {
+  position: absolute;
+  bottom: 40rpx;
+  left: 146rpx;
+  border: 1rpx solid #ff7100;
+  color: #ff7100;
+}
+.gift-text {
+  display: inline-block;
+  border: 1rpx solid #ff7100;
+  color: #ff7100;
+}
+.tostorePrice-num {
+  width: 300rpx;
+  display:inline-block;
+  vertical-align:top;
+  text-align:right;
+}
+.tostorePrice-num view{
+  text-align: right;
+}
+.myOrder-tostore-bottom {
+  text-align:right;
+  line-height:80rpx;
+  font-size: 26rpx;
+}
+/* 子菜单 */
+.tab-list-submenu {
+  position: fixed;
+  top: 92rpx;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  line-height: 85rpx;
+  height: 88rpx;
+  font-size: 33rpx;
+  background: #fff;
+  text-align: center;
+  color: #999;
+}
+.tab-list-submenu view.active,.tostore-list-submenu view.active{
+  color: #ff7100;
+  border: none;
+}
+.MeanTab {
+  display: inline-block;
+  padding: 0 20rpx;
+}
+.tostore-sub-box {
+  display: inline-block;
+  padding: 0 10px;
+}
+.tostore-list-submenu {
+  overflow-x: auto;
+  white-space: nowrap;
+  background: #fff;
+  color: #999;
+  margin-top: 2px;
+  border-bottom: none;
+}
+.myOrder-tab-list .tostore-list-submenu view {
+  border-bottom: none;
+}
+/* 排号 */
+.myOrder-row-number-shop {
+  margin: 30rpx 0;
+}
+.myOrder-row-number-shop image{
+  width: 48rpx;
+  height: 48rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 20rpx;
+  border-radius: 50%;
+}
+.myOrder-row-number-shop text{
+  display: inline-block;
+  vertical-align: middle;
+  color: #333;
+  font-size: 28rpx;
+}
+.row-number-box {
+  color: #999999;
+  font-size: 24rpx;
+}
+.dialog-block-time {
+  color: #999;
+}
+.row-number-box .row-num-content {
+ margin-bottom: 20rpx; 
+}
+.row-number-box .last-row-num-content {
+  margin-bottom: 28rpx;
+}
+.myOrder-rowNum-bottom {
+  border-top: 1px solid rgba(238, 238, 238, 0.5);
+  height: 78rpx;
+  line-height: 78rpx;
+  text-align: right;
+}
+.myOrder-rowNum-bottom .rowNum-order-status {
+  color: #FF7100;
+}
+.myOrder-rowNum-bottom .used-rowNum-order {
+  color: #999999;
+}
+.myOrder-rowNum-bottom  .myOrder-list-price {
+  margin-right: 40rpx;
+}
+.row-number-box .take-num-time{
+  height: 74rpx;
+  line-height: 74rpx;
+  position:relative;
+  border-bottom:1px solid rgba(238, 238, 238, 0.5);
+  display:block;
+}
+.row-number-box .icon-mine-row-number {
+  color: #EE7856;
+  margin-right: 10rpx;
+}
+.row-number-box .icon-row-number-type {
+  color: #68ABDE;
+  margin-right: 10rpx;
+}
+.row-number-box .icon-row-number-wait {
+  color: #F5B022;
+  margin-right: 10rpx;
+}
+.row-number-box .icon-row-number-fee {
+  margin-right: 10rpx;
+}
+.cash-delivery {
+  display:inline-block;
+  padding: 0 10rpx;
+  background: #f2303e;
+  color: #fff;
+  font-size: 25rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+  border-radius: 4rpx;
+}
+.add-time {
+  vertical-align: middle;
+}
+/* 核销码 */
+.verification-code {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  z-index: 1;
+}
+.verification-code-img {
+  width: 100%;
+  height: 100%;
+}
+.verification-code-text {
+  color: #fff;
+  margin-top: 20rpx;
+  font-size: 30rpx;
+}
+.verification-image-box {
+  width: 460rpx;
+  height: 460rpx;
+  margin-top: 30rpx;
+  display: inline-block;
+  position: relative;
+}
+.verification-code-tips {
+  font-size: 32rpx;
+  color: #fff;
+  margin-top: 290rpx;
+}
+.verification-code-finished {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 2555, 0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.verification-code-finished > view {
+  position: absolute;
+  width: 200rpx;
+  height: 200rpx;
+  top: -100rpx;
+  left: -100rpx;
+  color: #fff;
+  background: #F2303E;
+  transform: rotate(-45deg);
+  line-height: 325rpx;
+  font-size: 26rpx;
+}
+.goods-gift {
+  display:inline-block;
+  padding: 0 10rpx;
+  background: #f2303e;
+  color: #fff;
+  font-size: 22rpx;
+  height: 26rpx;
+  line-height: 26rpx;
+  margin-right: 10rpx;
+  border-radius: 4rpx;
+}
+.myOrder-list-wrap .btn {
+  width:120rpx;
+  height:40rpx ;
+  line-height:40rpx ;
+  font-size: 26rpx;
+  border-radius: 30rpx;
+  -webkit-border-radius: 30rpx;
+  -moz-border-radius: 30rpx;
+  -ms-border-radius: 30rpx;
+  -o-border-radius: 30rpx;
+}
+.myOrder-goods-tips {
+  position: absolute;
+  width: 30rpx;
+  height: 40rpx;
+  color: #fff;
+  font-size: 22rpx;
+  overflow: hidden;
+  z-index: 1;
+}
+.myOrder-goods-tips-top {
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  background: #FF7100;
+  z-index: 1;
+  text-align: center;
+}
+.myOrder-goods-tips-left {
+  position: absolute;
+  top: 20rpx;
+  left: -3px;
+  width: 15rpx;
+  height: 15rpx;
+  background: #FF7100;
+  transform: rotate(-30deg);
+  -webkit-transform: rotate(-30deg);
+  -moz-transform: rotate(-30deg);
+  -ms-transform: rotate(-30deg);
+  -o-transform: rotate(-30deg);
+}
+.myOrder-goods-tips-right {
+  position: absolute;
+  top: 20rpx;
+  right: -3px;
+  width: 15rpx;
+  height: 15rpx;
+  background: #FF7100;
+  transform: rotate(30deg);
+  -webkit-transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  -o-transform: rotate(30deg);
+}
+.newAppointment-list-wrap{
+  width:690rpx;
+  /*height:519rpx;*/
+  background:rgba(255,255,255,1);
+  box-shadow:0px 3rpx 22prx 1px rgba(0, 0, 0, 0.06);
+  border-radius:20rpx;
+  margin:30rpx 30rpx 0 30rpx;
+  font-size:26rpx;
+  color:#333333;
+  box-sizing:border-box;
+  padding:30rpx;
+
+}
+.newAppointment-status{
+  color:#999999;
+  text-align:right;
+}
+.newAppointment-goods-list{
+  margin-top:20rpx;
+}
+.newAppointment-goods-list .appointment-info{
+  display:flex;
+  justify-content:space-between;
+}
+.newAppointment-goods-list .appointment-info>image{
+  width:66rpx;
+  height:66rpx;
+  margin-right:16rpx;
+}
+.newAppointment-goods-list .appointment-info .serve-title{
+  display:flex;
+  justify-content:space-between;
+  font-size:30rpx;
+  font-weight:bold;
+  line-height:66rpx;
+}
+.newAppointment-goods-list .appointment-info .serve-title>text{
+  width:518rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:#202020;
+  font-size:30rpx;
+  font-weight:bold;
+}
+.newAppointment-goods-list .appointment-info .serve-title .ico-moon{
+  color:#ADADAD;
+}
+
+.newAppointment-goods-list .appointment-info .section>view{
+  color:#333;
+  font-size:26rpx;
+  line-height:42rpx;
+}
+.newAppointment-goods-list .section text{
+  color:#999;
+}
+.newAppointment-goods-list .appointment-info .arrival-detail-time{
+  color:#ff7000;
+}
+.newAppointment-list-bottom{
+  text-align:right;
+  margin-top:22rpx;
+}
+.newAppointment-list-bottom .btn{
+  width:200rpx;
+  height:70rpx;
+  background:rgba(255,255,255,1);
+  border:2rpx solid rgba(210,210,210,1);
+  border-radius:35rpx;
+  line-height:66rpx;
+  text-align:center;
+  color:#333333;
+  font-size:26rpx;
+  padding:0;
+}
+.newAppointment-list-bottom .ico-moon{
+  position: relative;
+  top: 3rpx;
+  margin: 2rpx;
+}
+.new-verification-code{
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background:#FF7000;
+  text-align:center;
+  z-index:1;
+}
+.new-verification-image-box.used>view{
+  opacity:0.5;
+}
+.new-verification-image-box{
+  width:690rpx;
+  height:862rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0px 3rpx 22rpx 1px rgba(0, 0, 0, 0.08);
+  border-radius:20rpx;
+  margin:60rpx auto 0 auto;
+  box-sizing:border-box;
+  padding:75rpx;
+}
+.new-code-title{
+  display:flex;
+  justify-content:space-between;
+  color:#333;
+  line-height:42rpx;
+}
+.new-code-title>text:first-of-type{
+  font-weight:bold;
+  font-size:40rpx;
+}
+.new-code-title>text:last-of-type{
+  font-size:30rpx;
+  font-weight:400;
+  opacity:0.5;
+}
+.new-verification-code-box{
+  width:453rpx;
+  height:453rpx;
+  border:1px solid rgba(210,210,210,0.3);
+  margin:75rpx auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+.new-verification-code .new-verification-code-img{
+  width:419rpx;
+  height:419rpx;
+}
+.new-verification-code .used-shade{
+  position:absolute;
+  font-size:180rpx;
+  right:-75rpx;
+  top:-36rpx;
+  display:none;
+  color:#FF7000;
+}
+
+.new-verification-image-box.used .used-shade{
+  display:inline-block;
+}
+.new-verification-code-tip {
+  color:#333;
+  font-size:26rpx;
+  line-height:42rpx;
+}
+.new-code-end_date{
+  color:#999;
+}
+.new-verification-image-box.used .new-code-end_date>text{
+  text-decoration:line-through;
+}
+.newAppointment-list-bottom.grade{
+  height:80rpx;
+  background:rgba(243,243,243,0.6);
+  border-radius:4rpx;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-left:20rpx;
+  padding-right:10rpx;
+  font-size:26rpx;
+}
+.newAppointment-list-bottom.grade .myOrder-make-comment{
+  width:110rpx;
+  height:53rpx;
+  background:linear-gradient(90deg,rgba(255,169,0,1) 0%,rgba(255,110,0,1) 100%);
+  border-radius:27px;
+  text-align:center;
+  line-height:53rpx;
+  color:#FFF;
+  border:none;
+}
+.newAppointment-list-bottom.grade .ico-moon{
+  color:#C6C6C6;
+  margin:0 10rpx;
+}
+.newAppointment-list-bottom.grade .ico-moon.orange{
+  color:#FF7000;
+}
+.newAppointment-list-bottom.grade .graded{
+  color:#333333;
+}
+.paid-card-block{
+  display: flex;
+}
+.paid-card-block .img-block{
+  flex: 0 0 157rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 157rpx;
+  background-color: #f3f3f3;
+}
+.paid-card-block .img-block .order-img{
+  width: 130rpx;
+  height: 100rpx;
+  display: inline-block;
+}
+.paid-card-block .block-right{
+  flex: 1;
+  padding: 14rpx 24rpx 0 24rpx;
+}
+.paid-card-block .block-right-item{
+  display: flex;
+  justify-content: space-between;
+  color: #999999;
+  font-size: 30rpx;
+  margin-bottom: 10rpx;
+}
+.paid-card-block .total-calculation{
+  color: #999999;
+  text-align: right;
+}
+.paid-card-block .total-calculation > .price{
+  color: #ff7100;
+}
+.paid-card-block .paid-card-name{
+  max-width: 260rpx;
+  font-size: 32rpx;
+  color: #686868;
+}
+.paid-card-block .paid-card-combo{
+  max-width: 260rpx;
+  font-size: 24rpx;
+}
+.paid-card-bottom .order-id{
+  padding: 16rpx 0;
+}
+.border-none{
+  border: none;
+}

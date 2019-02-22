@@ -1,0 +1,57 @@
+<!-- <component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo> -->
+<view class="communityPublish-wrap" id="communityPublish" wx:if="{{communityPublish.show}}" bindtouchmove="pageTouchMove" bindtouchend="pageTouchEnd">
+  <view class="communityPublish-main" style="{{require_loc ? 'padding-bottom: 0;' : ''}}">
+    <view class="communityPublish-title">
+      <input class="communityPublish-title-input {{showClassifyBox ? 'hide' : ''}}" id="communityPublish-title-input" placeholder="请输入标题" placeholder-style="color:#6e6e6e;font-size:14px;" type="text" bindblur="bindTitleInput" value="{{articleData.title}}" />
+    </view>
+    <view class="communityPublish-content" wx:if="{{type == 'default'}}">
+      <textarea wx:if="{{!pageMoving && !showSlectWindow}}" class="communityPublish-content-input {{showClassifyBox ? 'hide' : ''}}" id="communityPublish-content-input" placeholder="请输入内容..." placeholder-style="color:#6e6e6e;font-size:12px;" bindinput="bindTextInput" bindblur="bindTextBlur" maxlength="-1" value="{{articleData.text}}" fixed="{{true}}" />
+      <view wx:else style="color: {{articleData.viewtext ? '' : '#6e6e6e'}}"><text>{{articleData.viewtext || '请输入内容...'}}</text></view>
+    </view>
+    <view class="communityPublish-content" wx:if="{{type == 'link'}}">
+      <textarea wx:if="{{!pageMoving && !showSlectWindow}}" class="communityPublish-content-input {{showClassifyBox ? 'hide' : ''}}" id="communityPublish-content-input" placeholder="请粘贴公众号文章或腾讯视频链接" placeholder-style="color:#6e6e6e;font-size:12px;"  bindinput="bindLinkInput" bindblur="bindLinkBlur" maxlength="-1" value="{{articleData.origin_url}}" fixed="{{true}}" />
+      <view wx:else style="color: {{articleData.view_origin_url ? '' : '#6e6e6e'}}"><text>{{articleData.view_origin_url || '请粘贴公众号文章或腾讯视频链接'}}</text></view>
+    </view>
+    <view class="communityPublish-img-wrap" wx:if="{{type == 'default'}}">
+      <view class="communityPublish-ul clearfix" id="communityPublish-ul">
+        <view wx:for="{{articleData.imgs}}" wx:key="" class="communityPublish-item">
+          <image src="{{item}}" mode="aspectFill"></image>
+          <view class="communityPublish-item-delete" data-index="{{index}}" catchtap="deleteImg">×</view>
+        </view>
+        <view class="communityPublish-item-add" catchtap="uploadImg"><span>+</span></view>
+      </view>
+    </view>
+    <view class="communityPublish-address" bindtap="getAddress" wx:if="{{require_loc}}">
+      <label class="ico-moon icon-community-location" style="color:{{address ? theme_color : ''}}"></label>
+      <input class="communityPublish-address-input {{showClassifyBox ? 'hide' : ''}}" id="communityPublish-address-input" placeholder="所在位置" placeholder-style="color:#6e6e6e;font-size:14px;" type="text" disabled="true" bindinput="addressInput" value="{{address}}" />
+    </view>
+  </view>
+  <view class="communityPublish-center">
+    <view class="communityPublish-phone" wx:if="{{require_phone}}">
+      <label class="ico-moon icon-takeout-cellphone" style="color:{{articleData.phone ? theme_color : ''}}"></label>
+      <input class="communityPublish-phone-input" id="communityPublish-phone-input" placeholder="电话号码" placeholder-style="color:#6e6e6e;font-size:14px;" type="number" bindinput="bindPhoneInput" bindblur="bindPhoneBlur" value="{{articleData.phone}}" />
+    </view>
+    <view class="communityPublish-classify-title"><label class="ico-moon icon-community-category" style="color:{{selectedSectionName && selectedCategoryName ? theme_color : ''}}"></label><text>选择分类</text></view>
+    <view class="communityPublish-classify">
+      <view wx:if="{{!selectedCategoryName}}" class="communityPublish-select-classify" catchtap="showSlectWindowAct"><text>请选择</text><label class="ico-moon icon-filter-down"></label></view>
+      <view wx:else class="communityPublish-current-classify" catchtap="showSlectWindowAct"><text>{{selectedSectionName}}</text>-<text>{{selectedCategoryName}}</text></view>
+    </view>
+  </view>
+  <view class="communityPublish-foot">
+    <button class="communityPublish-btn" catchtap="submitData" style="background-color:{{theme_color}};">立即发布</button>
+  </view>
+  <view class="return-btn" bindtap="returnBack"><label class="ico-moon icon-closes"></label></view>
+</view>
+<view wx:if="{{showSlectWindow}}" class="communityPublish-classify-select-wrap" catchtap="showSlectWindowAct" catchtouchmove=" ">
+  <view class="communityPublish-classify-select-window" catchtap="stopPropagation">
+    <view class="communityPublish-classify-select-top">
+      <text wx:if="{{selectedSectionName}}" catchtap="changeShowListAct">{{selectedSectionName}}</text><text wx:if="{{selectedCategoryName && showCategoryList}}">{{selectedCategoryName}}</text><text wx:if="{{!selectedCategoryName}}">{{selectedSectionName ? '选择分类' : '请选择'}}</text>
+    </view>
+    <view wx:if="{{showCategoryList}}" class="communityPublish-classify-select-list category-list">
+      <view wx:for="{{categoryList}}" wx:for-index="cateIdx" wx:for-item="cate" wx:key="cateIndex" class="communityPublish-classify-select-item" data-index="{{cateIdx}}" catchtap="selectCategoryAct"><text>{{cate.name}}</text><label class="ico-moon icon-rightarrow"></label></view>
+    </view>
+    <view wx:else class="communityPublish-classify-select-list section-list">
+      <view class="communityPublish-classify-select-item" wx:for="{{sectionList}}" wx:for-index="secIdx" wx:for-item="sec" wx:key="secIdx" data-index="{{secIdx}}" catchtap="selectSectionAct"><image src="{{sec.img}}" alt=""></image><text>{{sec.name}}</text><label class="ico-moon icon-rightarrow"></label></view>
+    </view>
+  </view>
+</view>

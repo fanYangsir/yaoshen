@@ -1,0 +1,12 @@
+<!--differentialMall/pages/dMCouponSuccess/dMCouponSuccess.wxml-->
+<view class="couponSuccess-main-wrap">
+  <view class="success-img">
+    <view class="success-tip-title">
+      <text>恭喜您，兑换成功!</text>
+    </view>
+    <!-- <image src="../images/exchange_success_tip.png"></image> -->
+  </view>
+  <text class="success-tip-content">请前往优惠券详情查看，</text>
+  <text class="success-tip-content">长按识别商家小程序二维码，进入商家小程序使用</text>
+  <view class="jump-btn" bindtap="turnToPage" data-url="/differentialMall/pages/dMCouponDetail/dMCouponDetail?mId={{merchantId}}&cId={{couponId}}&uId={{userCouponId}}&type=1&status=1" data-is-redirect="true">立即前往</view>
+</view>

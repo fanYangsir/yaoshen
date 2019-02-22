@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText":"系统通知",
+    "usingComponents":{
+        "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+    }
+}

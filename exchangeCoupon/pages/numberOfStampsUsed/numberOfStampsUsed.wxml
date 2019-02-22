@@ -1,0 +1,30 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="coupon-verify-wrap show">
+  <!-- <view class="top-section">
+    <view class="cancel" bindtap="hideCouponVerify" hidden="{{ verifyData.success }}" >取消</view>
+    <view class="name">{{ couponDetail.app_name }}</view>
+    <view class="title">{{ couponDetail.title }}</view>
+  </view> -->
+  <!-- <view class="division-line">
+    <view class="left-circle" style="background: {{ couponDetail.background }}"></view>
+    <view class="right-circle" style="background: {{ couponDetail.background }}"></view>
+  </view> -->
+  <view class="bottom-section">
+    <view class="verify-block" wx:if="{{ !verifyData.success }}">
+      <view class="qrcode">
+        <image src="{{ verifyData.qrcodeUrl }}"></image>
+      </view>
+      <view class="code">
+        <view style="color: #FF7100">核销码</view>
+        <view>{{ couponDetail.verify_code }}</view>
+      </view>
+    </view>
+    <view class="success-block" wx:elif="{{ verifyData.success }}">
+      <view class="success-tip">
+        <icon class="success-tip-icon" type="success" size="20"></icon>
+        <text class="success-tip-text">核销成功!</text>
+      </view>
+      <view class="back-tip" bindtap="hideCouponVerify">>>>返回</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText":"确认支付",
+    "usingComponents":{
+        "component-getUserInfo": "/components/getUserInfo/getUserInfo",
+        "component-memberDiscount": "/components/memberDiscount/memberDiscount"
+    }
+}

@@ -1,0 +1,6 @@
+<view wx:if="{{sinkingModalData.showModal}}" class="sinking-modal-wrap {{ sinkingModalData.isSinking ? 'show-modal' : 'hide-modal' }}" catchtap="tapEventCommonHandler" data-event-params="{{sinkingModalData.eventParams}}">
+  <view class="sinking-modal">
+    <text class="tip-txt">{{sinkingModalData.pushContent}}</text>
+    <text class="btn-txt">查看</text>
+  </view>
+</view>

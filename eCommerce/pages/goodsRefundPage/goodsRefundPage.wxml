@@ -1,0 +1,115 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="refund-box">
+  <view class="goods-detail-box" wx:for="{{ goodsList }}" wx:key="" wx:for-item="goods">
+    <image src="{{ goods.cover }}"></image>
+    <view>
+      <view class="goods-name"><text class="is-seckill" wx:if="{{ is_group_buy_order != 0 }}">拼团</text><text class="is-seckill" wx:if="{{ goods.is_seckill == 1 }}">秒杀</text>{{ goods.goods_name }}</view>
+      <view wx:if="{{ goods.model_value }}" class="goods-rules">{{ goods.model_value }}</view>
+      <view class="goods-price">
+        <block wx:if="{{goods.use_integral == 0}}">
+          <text class="colorff7" style="{{'color:' + storeStyle.theme }}">¥ {{ goods.price }}</text>
+        </block>
+        <block wx:else>
+          <text class="colorff7" style="{{'color:' + storeStyle.theme }}" wx:if="{{goods.price !='0.00' || !goods.use_integral || (goods.use_integral == 0)}}">¥ {{ goods.price }}</text>
+          <text class="colorff7" style="{{'color:' + storeStyle.theme }}" wx:if="{{goods.use_integral && goods.use_integral != 0 && goods.price !='0.00'}}">+</text>
+          <text class="colorff7" style="{{'color:' + storeStyle.theme }}" wx:if="{{goods.use_integral}}">{{goods.use_integral}}积分</text>
+        </block>
+        <text class="pull-right">x {{ goods.preview_refund_num }}</text>
+      </view>
+    </view>
+  </view>
+  <view class="type-reason-way">
+    <view catchtap="showRefundBox" data-type="type">
+      <text class="type-reason-way-title">退款类型</text>
+      <text class="pull-right ico-moon icon-rightarrow"></text>
+      <text class="pull-right select-reason {{ typeIndex !== '' ? 'select' : ''}}">{{ refundTypeData[typeIndex].title || '请选择'}}</text>
+    </view>
+    <view catchtap="showRefundBox" data-type="reason">
+      <text class="type-reason-way-title">退款原因</text>
+      <text class="pull-right ico-moon icon-rightarrow"></text>
+      <text class="pull-right select-reason {{ reasonIndex !== '' ? 'select' : ''}}">{{ refundReasonData[reasonIndex].title || '请选择退款原因'}}</text>
+    </view>
+    <view catchtap="showRefundBox" data-type="way">
+      <text class="type-reason-way-title">退款方式</text>
+      <text class="pull-right ico-moon icon-rightarrow"></text>
+      <text class="pull-right select-reason {{ wayIndex !== '' ? 'select' : ''}}">{{ refundWayData[wayIndex].title || '请选择退款方式'}}</text>
+      <view wx:if="{{ wayIndex == 1 }}" class="storage-tip">注：储值金不会跟着退款一起退回，在商家同意退款后，还需用户点击“确认退款”，才会退回。</view>
+    </view>
+  </view>
+  <view class="refund-price-box">
+    <view>
+      <text class="refund-price-title">退款金额</text>
+      <text wx:if="{{ typeIndex != 1 }}" class="pull-right refund-price" style="{{'color:' + storeStyle.theme }}">￥{{ refundPrice }}</text>
+      <input wx:if="{{ typeIndex == 1 && showRefundType && showRefundReason && showRefundWay }}" style="{{'color:' + storeStyle.theme }}" class="pull-right refund-price-input" type="digit" value="{{ refundPrice }}" bindinput="changeRefundPrice" />
+    </view>
+    <view class="refund-price-detail">最多退￥{{ maxRefundPrice }}，含运费￥{{ express }}元</view>
+    <view wx:if="{{ wayIndex == 1 }}" class="refund-price-detail">最终退款储值金额 ￥{{ refundPrice }}元</view>
+  </view>
+  <view class="refund-instruct">
+    <view class="refund-instruct-title"><text class="refund-instruct-label">退款说明</text><input wx:if="{{ showRefundType && showRefundReason && showRefundWay}}" class="refund-instruct-input" type="text" value="{{ refundDes }}" bindinput="inputRefundDes" placeholder="选填" /></view>
+    <view class="images-box">
+      <view wx:for="{{ imagesArr }}" wx:key="">
+        <text class="delete-image ico-moon icon-closes" catchtap="deleteImage" data-index="{{ index }}"></text>
+        <image src="{{ item }}" data-index="{{ index }}" catchtap="previewImage"></image>
+      </view>
+      <view wx:if="{{ imagesArr.length < 8 }}" class="add-images" bindtap="chooseImage">
+        <text class="ico-moon icon-goods-add-image"></text>
+        <view>添加图片</view>
+      </view>
+    </view>
+    <view class="images-length">{{ imagesArr.length }}/8</view>
+  </view>
+  <view class="refund-bottom">
+    <view class="refund-cancel" catchtap="cancelRefund">取消</view>
+    <view class="refund-submit" catchtap="sureRefund" style="{{'background:' + storeStyle.theme }}">提交</view>
+  </view>
+</view>
+<!-- 退款类型 -->
+<view class="refund-type-mask" bindtap="closeRefundBox" hidden="{{showRefundType}}">
+  <view class="refund-type-box" catchtap="stopPropagation">
+    <view class="refund-type-title">退款类型</view>
+    <view class="refund-type-menu">
+      <block wx:for="{{ refundTypeData }}" wx:key="">
+        <view hidden="{{ ((refundWithGoods == 0 || orderInfoStatus == 1) && index == 2) || (isFullRefund == 0 && (index == 0 || index == 1)) }}" class="refund-type-list" catchtap="selectReason" data-index="{{ index }}" data-type="type">
+          <text style="{{ typeIndex === index ? 'color:' + storeStyle.theme : ''}}" class="{{ typeIndex === index ? 'select' : '' }}">{{item.title}}</text>
+          <text class="pull-right ico-moon icon-rightarrow"></text>  
+        </view>
+      </block>
+    </view>
+    <view class="refund-type-close" catchtap="closeRefundBox" style="{{'background:' + storeStyle.theme }}">关闭</view>
+  </view>
+</view>
+<!-- 退款原因 -->
+<view class="refund-type-mask" bindtap="closeRefundBox" hidden="{{showRefundReason}}">
+  <view class="refund-type-box" catchtap="stopPropagation">
+    <view class="refund-type-title">退款原因</view>
+    <view class="refund-type-menu">
+      <view wx:for="{{ refundReasonData }}" wx:key="" class="refund-type-list" catchtap="selectReason" data-index="{{ index }}" data-type="reason">
+        <text style="{{ reasonIndex === index ? 'color:' + storeStyle.theme : ''}}" class="{{ reasonIndex === index ? 'select' : '' }}">{{item.title}}</text>
+        <text class="pull-right ico-moon icon-rightarrow"></text>  
+      </view>
+    </view>
+    <view class="refund-reason-close">
+      <text class="pre-btn" catchtap="prevRefundBox" data-type="reason">上一步</text>
+      <text class="close-btn" catchtap="closeRefundBox" style="{{'background:' + storeStyle.theme }}">关闭</text>
+    </view>
+  </view>
+</view>
+<!-- 退款方式 -->
+<view class="refund-type-mask" bindtap="closeRefundBox" hidden="{{showRefundWay}}">
+  <view class="refund-type-box" catchtap="stopPropagation">
+    <view class="refund-type-title">退款方式</view>
+    <view class="refund-type-menu">
+      <block wx:for="{{ refundWayData }}" wx:key="">
+        <view hidden="{{ refundTobalance == 0 && index == 1 }}" class="refund-type-list" catchtap="selectReason" data-index="{{ index }}" data-type="way">
+          <text style="{{ wayIndex === index ? 'color:' + storeStyle.theme : ''}}" class="{{ wayIndex === index ? 'select' : '' }}">{{item.title}}</text>
+          <text class="pull-right ico-moon icon-rightarrow"></text>  
+        </view>
+      </block>
+    </view>
+    <view class="refund-reason-close" >
+      <text class="pre-btn" catchtap="prevRefundBox" data-type="way">上一步</text>
+      <text class="close-btn" catchtap="closeRefundBox" style="{{'background:' + storeStyle.theme }}">关闭</text>
+    </view>
+  </view>
+</view>

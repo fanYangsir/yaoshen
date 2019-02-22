@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText":"选择自提点",
+    "usingComponents":{
+        "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+    }
+}

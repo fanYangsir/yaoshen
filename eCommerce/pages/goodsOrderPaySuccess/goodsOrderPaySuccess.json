@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "支付成功",
+  "usingComponents": {
+    "component-reward-point": "\/components\/rewardPointModal\/rewardPointModal",
+    "component-getUserInfo": "/components/getUserInfo/getUserInfo",
+    "component-recommend": "/components/recommend/recommend"
+  }
+}

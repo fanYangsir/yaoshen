@@ -1,0 +1,702 @@
+/* page{
+  position: relative;
+} */
+#goldenEggs{
+  height: 100%;
+  padding-bottom: 20px;
+  position: relative;
+}
+#goldenEggs image,
+#goldenEggs view{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none; 
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-text-size-adjust: none;
+}
+#goldenEggs .golden_cantaniner{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -20;
+}
+.goldenMusic{
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+  top: 8px;
+  right: 5%;
+  text-align: center;
+  border-radius: 50%;
+  background: rgba(0,0,0,.4);
+  color: #fff;
+}
+.goldenMusic text{
+  padding-top:20rpx;
+}
+.goldenMusic.active{
+ animation:roes 2s infinite linear; 
+}
+@keyframes roes{
+  0%{
+    transform: rotate(0deg)
+  }
+  100%{
+    transform: rotate(360deg)
+  }
+}
+#goldenEggs .scatter{
+  width:526rpx;
+  height: 379rpx;
+  margin: 0 auto;
+  margin-top:-20rpx;
+}
+#goldenEggs .scatter image{
+  width: 100%;
+  height: 100%;
+}
+#goldenEggs .goldenHouse{
+  width: 748rpx;
+  height: 748rpx;
+  margin: 0 auto;
+  background-image: url(http://cdn.jisuapp.cn/static/webapp/images/goldenHouse.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+}
+#goldenEggs .goldenHouse .goldenSinker{
+  position: absolute;
+  width: 205rpx;
+  height: 201rpx;
+  left: 505rpx;
+  top: 112rpx;
+}
+#goldenEggs .goldenHouse .goldenSinker image{
+  width: 100%;
+  height: 100%;
+}
+#goldenEggs .goldenEgg{
+  width: 100%;
+  height: 350rpx;
+  position: absolute;
+  top: 160rpx;
+  left: 0;
+  padding: 0 23rpx;
+}
+#goldenEggs .goldenEgg view{
+  width: 350rpx;
+  height: 350rpx;
+  position: absolute;
+  cursor: pointer;
+}
+#goldenEggs .goldenEgg .egg0{
+  left: 23rpx;
+}
+#goldenEggs .goldenEgg .egg1{
+  left: 215rpx;
+}
+#goldenEggs .goldenEgg .egg2{
+  left: 405rpx;
+}
+#goldenEggs .goldenEgg view image{
+  width: 100%;
+  height: 100%;
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+#goldenEggs .structurePrize{
+  width: 100%;
+  margin: 0 auto;
+  height: 70.2rpx;
+  text-align: center;
+}
+#goldenEggs .structurePrize .lookPrize{
+  display: inline-block;
+  height: 74rpx;
+  width: 248.04rpx;
+  text-align: center;
+  background: #fed932;
+  line-height: 74rpx;
+  border-radius: 9.36rpx;
+  font-size: 32.76rpx;
+  font-weight: bold;
+  color: rgb(104,51,0);
+  box-shadow: 0px 2px 2px rgba(38,38,38,.2);
+}
+#goldenEggs .structurePrize .exchangePrize{
+  display: inline-block;
+  width: 248.04rpx;
+  height: 74rpx;
+  text-align: center;
+  background: #fed932;
+  line-height: 74rpx;
+  border-radius: 9.36rpx;
+  font-size: 32.76rpx;
+  font-weight: bold;
+  color: rgb(104,51,0);
+  margin-left: 23.4rpx;
+  box-shadow: 0px 2px 2px rgba(38,38,38,.2);
+}
+.golden-winner{
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 50rpx;
+}
+.golden-winner .winner-header{
+  width: 510rpx;
+  height: 135rpx;
+  line-height: 135rpx;
+  color: #ff516a;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 auto;
+  background-image: url(http://cdn.jisuapp.cn/static/webapp/images/goldenPrize.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.golden-winner .winner-content{
+  text-align: center;
+  color: #faef09;
+  overflow: hidden;
+  height: 187rpx;
+  position: relative;
+}
+.golden-winner .winner-list{
+  width: 468rpx;
+  position: absolute;
+  left:140rpx;
+  top:190rpx;
+}
+.golden-winner .winner-list view{
+  height: 44rpx;
+  line-height: 44rpx;
+  font-size: 26rpx; 
+}
+.golden-winner .winner-list view text{
+  display: inline-block;
+  text-align: left;
+  width: 50%;
+}
+.golden-winner .winner-list view text:nth-child(2){
+  text-align: right;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.golden-rule{
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 50rpx;
+}
+.golden-rule .goldenDisc{
+  padding: 0 8rpx;
+  font-size: 40rpx;
+}
+.golden-rule .rule-header{
+  width: 510rpx;
+  height: 135rpx;
+  line-height: 135rpx;
+  color: #ff516a;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 auto;
+  background-image: url(http://cdn.jisuapp.cn/static/webapp/images/goldenPrize.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.golden-rule .rule-content{
+  border: 4rpx solid #faef09;
+  padding: 30rpx;
+  width: 655rpx;
+  margin: 0 auto;
+  border-radius: 10rpx;
+  margin-top: 24rpx;
+  color: #fcdc65;
+  font-size: 24rpx;
+  box-sizing: border-box;
+}
+.golden-rule .rule-content view{
+  line-height: 50rpx;
+  word-break:break-all;
+}
+.goldenHouse .activeData{
+  width: 100%;
+  height: 117rpx;
+  position: absolute;
+  left: 0;
+  bottom: 77rpx;
+  color: #27241a;
+  text-align: center;
+}
+.goldenHouse .activeData text{
+  color: #ff0000;
+}
+.goldenHouse .activeData .activepopNum{
+  font-size: 37rpx;
+  margin-top: 11rpx;
+}
+.goldenHouse .activeData .phone-personNum{
+  font-size: 28rpx;
+}
+ /*兑换次数弹窗*/
+.exchange{
+width: 100%;
+height: 100%;
+position: fixed;
+left: 0;
+top: 0;
+background: rgba(0,0,0,.4);
+z-index: 1200;
+
+}
+.exchange .exchange-wrap{
+width: 538.2rpx;
+background: #fff;
+border-radius: 9.36rpx;
+margin: 0 auto;
+margin-top: 351rpx;
+}
+.exchange .exchange-wrap .exchange-con{
+padding-top: 58.5rpx;
+margin-bottom: 37.44rpx;
+font-size: 32.76rpx;
+color: #999;
+}
+.exchange-con .exchangeCan{
+width: 439.92rpx;
+margin: 0 auto;
+text-align: center;
+margin-bottom: 35.1rpx;
+color: #000;
+}
+.exchange-con .exchangeCan label{
+color: #ff7100;
+}
+.exchange-con .exchangeLimit{
+width: 439.92rpx;
+color: #999;
+padding: 11.7rpx 0;
+margin: 0 auto;
+border-bottom: 2.34rpx solid #D2D3D5;
+}
+.exchange-con .exchangeLimit input{
+border: none;
+outline: none;
+width:145rpx;
+color: #000;
+display: inline-block;
+}
+.exchange-con .exchangeLimit label{
+color: #ff7100;
+font-size: 28.08rpx;
+cursor: pointer;
+}
+.exchange-con .exchangeRule{
+width: 439.92rpx;
+padding:28rpx 0 20rpx 0;
+margin: 0 auto;
+}
+.exchange-con .exchangeBalance{
+width: 439.92rpx;
+padding-bottom: 11.7rpx;
+margin: 0 auto;
+}
+.exchange .exchange-wrap .exchange-btns{
+height: 114.66rpx;
+width: 100%;
+font-size: 35.1rpx;
+border-top: 2.34rpx solid #D2D3D5;
+}
+.exchange .exchange-wrap .exchange-btns .exchange-confirm{
+width: 266.76rpx;
+float: left;
+text-align: center;
+line-height: 114.66rpx;
+color: #ff7100;
+}
+.exchange .exchange-wrap .exchange-btns .exchange-cancel{
+width: 266.76rpx;
+float: left;
+text-align: center;
+line-height: 114.66rpx;
+color: #333333;
+}
+/* 我的中奖记录弹窗 */
+#goldenEggs .golden-record{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.8);
+  z-index: 1200;
+}
+#goldenEggs .golden-record .record-wrap{
+  margin: 0 auto;
+  margin-top: 164rpx;
+  width: 604rpx;
+  height: 712rpx;
+  /*background: #FDFFDA;*/
+  
+}
+#goldenEggs .golden-record .record-wrap-header{
+  height: 108rpx;
+  line-height: 108rpx;
+  text-align: center;
+  font-weight: 700;
+  font-size: 37rpx;
+  color: #fff;
+}
+#goldenEggs .golden-record .record-wrap-edge{
+  width: 100%;
+  height: 603rpx;
+  border: 4rpx solid rgba(239,131,230,.4);
+  border-radius: 10rpx;
+}
+#goldenEggs .golden-record .record-wrap-con{
+  background: #6b4780;
+  width: 580rpx;
+  height: 580rpx;
+  margin: 0 auto;
+  margin-top: 10rpx;
+  border-radius: 10rpx;
+  color: #fff;
+}
+#goldenEggs .golden-record .record-wrap-title{
+  width: 100%;
+  height: 93rpx;
+  border-bottom: 2rpx dashed rgba(239,131,230,.5);
+  position: relative;
+}
+#goldenEggs .golden-record .record-wrap-title text{
+  width: 50%;
+  display: inline-block;
+  height: 100%;
+  text-align: center;
+  line-height: 93rpx;
+  float: left;
+}
+#goldenEggs .golden-record .record_line{
+  width: 0px;
+  height: 58rpx;
+  border-left: 2rpx dashed rgba(239,131,230,.5);
+  position: absolute;
+  left: 295rpx;
+  top: 23rpx;
+}
+#goldenEggs .golden-record .record-list{
+  height: 486rpx;
+  overflow-y:auto;
+}
+
+#goldenEggs .golden-record .record-list view {
+  height: 70rpx;
+  line-height: 70rpx;
+}
+#goldenEggs .golden-record .record-list view text{
+  text-align: center;
+  width: 50%;
+  height: 100%;
+  color: #fff;
+  font-size: 28rpx;
+  display: inline-block;
+}
+#goldenEggs .golden-record .record_fail{
+  text-align: center;
+  margin-top: 100rpx;
+}
+#goldenEggs .golden-record .record_fail image{
+  width: 187rpx;
+  height: 82rpx;
+}
+#goldenEggs .golden-record .record_fail view{
+  margin-top: 70rpx;
+}
+/* 抽奖次数用完弹窗 */
+  .duraMaxDiv,.degreeDiv{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 1200;
+  
+  }
+  .duraMaxDiv .duraMaxDiv-wrap,.degreeDiv .degreeDiv-wrap{
+  width: 538.2rpx;
+  height: 346.32rpx;
+  background: #fff;
+  border-radius: 9.36rpx;
+  margin: 0 auto;
+  margin-top: 444.6rpx;
+  }
+  .duraMaxDiv-wrap .duraMaxDiv-con,.degreeDiv-wrap .degreeDiv-con{
+  height: 229.32rpx;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 53.82rpx;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+  }
+   /* .duraMaxDiv-wrap .duraMaxDiv-con view{
+    padding:4.68rpx 0;
+    font-size:32.76rpx;
+    line-height: 50rpx;
+  }  */
+  .degreeDiv-wrap .degreeDiv-con view,
+  .duraMaxDiv-wrap .duraMaxDiv-con view{
+    font-size: 32.76rpx;
+    line-height: 120rpx;
+  }
+  .duraMaxDiv .duraMaxDiv-wrap .duraMaxDiv-con .balance,.degreeDiv .degreeDiv-wrap .degreeDiv-con .balance{
+  color: #ff7100;
+ }
+ .duraMaxDiv .duraMaxDiv-wrap .duraMaxDiv-btns,.degreeDiv .degreeDiv-wrap .degreeDiv-btns{
+  height: 114.66rpx;
+  width: 100%;
+  border-top: 2.34rpx solid #e6e6e6;
+  line-height: 114.66rpx;
+  color: #05C204;
+  font-size: 32rpx!important;
+  cursor: pointer;
+  text-align: center
+ }
+ .duraMaxDiv .duraMaxDiv-wrap .duraMaxDiv-btns .duraMaxDiv-confirm,
+ .degreeDiv .degreeDiv-wrap .degreeDiv-btns .degreeDiv-confirm{
+  width: 266.76rpx;
+  float: left;
+  text-align: center;
+  line-height: 114.66rpx;
+  color: #ff7100;
+  border-left: 1px solid #e6e6e6;
+  font-size: 14px;
+  background-color: #fff;
+  padding:0;
+ }
+ .duraMaxDiv .duraMaxDiv-wrap .duraMaxDiv-btns .duraMaxDiv-cancel,
+ .degreeDiv .degreeDiv-wrap .degreeDiv-btns .degreeDiv-cancel{
+  width: 266rpx;
+  float: left;
+  text-align: center;
+  line-height: 114.66rpx;
+  color: #333333;
+  font-size: 14px;
+ }
+ /* 抽中奖品弹窗 */
+ .Congratulations_sick{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.8);
+  z-index: 1200;
+  
+   
+}
+.Congratulations_sick .Congratulations_wrap{
+  width: 656rpx;
+  height: 702rpx;
+  margin: 0 auto;
+  margin-top: 210.6rpx;
+}
+.Congratulations_sick .Congratulations_wrap .Congratulations-con{
+  width: 100%;
+  height: 494rpx;
+  position: relative;
+}
+.Congratulations_sick .Congratulations_wrap .Congratulations-con image{
+  width: 100%;
+  height: 100%;
+}
+.Congratulations_sick .Congratulations_wrap .Congratulations-con label{
+  position:absolute;
+  display:block;
+  left:140rpx;
+  top:300.7rpx;
+  color:#fff;
+  font-size:46.8rpx;
+  font-weight:bold;
+  text-align: center;
+  width: 420rpx;
+  letter-spacing:2rpx;
+
+}
+.Congratulations_sick .Congratulations_wrap .Congratulations-btns{
+  height: 60.84rpx;
+  width: 100%;
+  margin-top: 46.8rpx;
+}
+.Congratulations_sick .Congratulations_wrap .Congratulations-btns .btns{
+    width:195rpx;
+    float:left;
+    height:75rpx;
+    line-height:75rpx;
+    background:#FFE71D;
+    text-align:center;
+    margin-left:46.8rpx;
+    color:#bf1e2e;
+    border-radius:4rpx;
+    font-size:28.08rpx;
+    padding:0;
+
+}
+/* 未中奖和安慰奖弹窗 */
+.consolation_sick{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.8);
+  z-index: 1200;
+}
+.notwinning_sick{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.8);
+  z-index: 1200;
+   
+}
+.consolation_sick .consolation_wrap,.notwinning_sick .notwinning_wrap{
+  margin: 0 auto;
+  margin-top: 262.08rpx;
+  width: 538.2rpx;
+  height: 585rpx;
+  background: #FDFFDA;
+  border-bottom-left-radius: 11.7rpx;
+  border-bottom-right-radius: 11.7rpx;
+
+}
+.consolation_sick .consolation_wrap .consolation_title,
+.notwinning_sick .notwinning_wrap .notwinning_title{
+  height: 98.28rpx;
+  line-height: 98.28rpx;
+  text-align: center;
+  background: #FEE94E;
+  color: #7a2716;
+  font-weight: bold;
+  border-bottom: 1px dashed #e3dcb1;
+  position: relative;
+}
+.consolation_sick .consolation_wrap .consolation_title:before,.notwinning_sick .notwinning_wrap .notwinning_title:before{
+  content: '';
+    position: absolute;
+    top: 11.7rpx;
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+    z-index: -1;
+    background:#FEE94E;
+}
+.consolation_sick .consolation_wrap .consolation_title .conBefore,.notwinning_sick .notwinning_wrap .notwinning_title .conBefore{
+    width: 23.4rpx;
+    height: 23.4rpx;
+    border-radius: 50%;
+    background: rgba(0,0,0,.8);
+    position: absolute;
+    left: -11.7rpx;
+    top: 86.58rpx;
+}
+.consolation_sick .consolation_wrap .consolation_title .conAfter,.notwinning_sick .notwinning_wrap .notwinning_title .conAfter{
+    width: 23.4rpx;
+    height: 23.4rpx;
+    border-radius: 50%;
+    background: rgba(0,0,0,.8);
+    position: absolute;
+    right: -11.7rpx;
+    top: 86.58rpx;
+}
+.consolation_sick .consolation_wrap .consolation_con,.notwinning_sick .notwinning_wrap .notwinning_con{
+   text-align: center;
+  
+}
+.consolation_sick .consolation_wrap .consolation_con image,.notwinning_sick .notwinning_wrap .notwinning_con image{
+  width:155rpx;
+  height:85rpx;
+  margin-top: 65rpx;
+  margin-bottom:38rpx;
+}
+.consolation_sick .consolation_wrap .consolation_con view,.notwinning_sick .notwinning_wrap .notwinning_con view{
+  color: #954d29;
+  font-weight: 400;
+  font-size:30rpx;
+  padding: 10rpx 0;
+}
+.consolation_sick .consolation_wrap .consolation_btns,.notwinning_sick .notwinning_wrap .notwinning_btns{
+  width:195.2rpx;
+  height:75.2rpx;
+  margin: 0 auto;
+  margin-top: 50rpx;
+}
+.consolation_sick .consolation_wrap .consolation_btns .push,.notwinning_sick .notwinning_wrap .notwinning_btns .push{
+  width:195.2rpx;
+  height:75.2rpx;
+  line-height: 70.2rpx;
+  border-radius: 4.68rpx;
+  text-align: center;
+  background: #FEE94E;
+  color: #954d29;
+  float: left;
+  font-size:28.08rpx;
+  padding: 0;
+}
+.comfortCouponBtn{
+    display:flex;
+    margin-top:60rpx;
+}
+.comfortCouponBtn .push{
+    width:195.2rpx;
+    height:75.2rpx;
+    line-height: 70.2rpx;
+    border-radius: 4.68rpx;
+    text-align: center;
+    background: #FEE94E;
+    color: #954d29;
+    font-size:28.08rpx;
+    padding: 0;
+}
+.egg-png{
+  width : 100%;
+  height: 100%;
+  background: url(http://cdn.jisuapp.cn/static/webapp/images/golden-steady.png) 0 0 no-repeat;
+  background-size: 100%;
+}
+.egg-gif {
+  display: block;
+  width : 100%;
+  height: 100%;
+  background-size: 4000%;
+  animation: goldenEggAnimate steps(39) 1.8s 1 both;
+  -webkit-animation: goldenEggAnimate steps(39) 1.8s 1 both;
+}
+.egg-win{
+   background: url(http://cdn.jisuapp.cn/static/webapp/images/golden-eggs-win.png) 0 0 no-repeat;
+   background-size: 4000%;
+}
+.egg-notwin{
+   background: url(http://cdn.jisuapp.cn/static/webapp/images/golden-eggs-notwin.png) 0 0 no-repeat;
+   background-size: 4000%;
+}
+@keyframes goldenEggAnimate {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+@-webkit-keyframes  goldenEggAnimate {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}

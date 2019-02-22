@@ -1,0 +1,29 @@
+.content{
+  padding: 0 29rpx;
+}
+.space-between{
+  display: flex;
+  justify-content: space-between;
+}
+.info-item{
+  padding: 30rpx 0;
+  color: #404040;
+  font-size: 32rpx;
+  border-bottom: 2rpx solid #F1F1F1;
+}
+.info-item:last-child{
+  border-bottom: none;
+}
+.info-item .name{
+  font-weight: 500;
+}
+.space-between > .name{
+  flex: 0 0 200rpx;
+}
+.space-between > .right-block{
+  flex: 1;
+}
+.about-block .about-item{
+  margin-top: 30rpx;
+  font-size: 28rpx;
+}

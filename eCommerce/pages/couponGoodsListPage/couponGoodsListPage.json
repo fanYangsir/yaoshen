@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "可用商品",
+  "usingComponents":{
+    "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+  }
+}

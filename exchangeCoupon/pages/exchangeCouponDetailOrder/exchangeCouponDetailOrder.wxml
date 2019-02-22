@@ -1,0 +1,81 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-memberDiscount 
+  id="component-memberDiscount"
+  discountType="{{ discountList }}"
+  bind:afterSelectedDiscount="afterSelectedBenefit"></component-memberDiscount>
+<view class="preview-goods-wrap">
+  <view class="exchange-coupon">
+    <view class="exchange-coupon-wrapper" >
+    <view class="exchange-coupon-linetop" wx:if="{{ couponDetail.recv_status == 1 }}" style="background:{{style.secColor}}"></view>
+    <view class="exchange-coupon-linetop" style="background-color:#CCCCCC"  wx:elif="{{ couponDetail.recv_status == 0 }}"></view>
+    <view class="exchange-coupon-top" style="background-color: {{style.lineBackgroundColor}}">
+      <view class="exchange-coupon-left">
+        <view class="exchange-coupon-left-first">{{couponDetail.title}}</view>
+        <view class="exchange-coupon-left-second" wx:if="{{ couponDetail.recv_status == 1 }}" style="color:{{style.strStyle.color}};font-size:{{style.strStyle['font-size']}}">
+          <text wx:if="{{couponDetail.exchange_condition.price > 0}}">￥{{couponDetail.exchange_condition.price}}</text>
+          <text wx:if="{{couponDetail.exchange_condition.price > 0 && couponDetail.exchange_condition.integral && couponDetail.exchange_condition.integral > 0}}">+</text>
+          <text wx:if="{{couponDetail.exchange_condition.integral && couponDetail.exchange_condition.integral > 0}}">{{couponDetail.exchange_condition.integral}}积分</text>
+        </view>
+        <view class="exchange-coupon-left-second" style="color:#333" wx:elif="{{ couponDetail.recv_status == 0 }}">
+          <text wx:if="{{couponDetail.exchange_condition.price > 0}}">￥{{couponDetail.exchange_condition.price}}</text>
+          <text wx:if="{{couponDetail.exchange_condition.price > 0 && couponDetail.exchange_condition.integral && couponDetail.exchange_condition.integral > 0}}">+</text>
+          <text wx:if="{{couponDetail.exchange_condition.integral && couponDetail.exchange_condition.integral > 0}}">{{couponDetail.exchange_condition.integral}}积分</text>
+        </view>
+      </view>
+      <view class="exchange-coupon-icon" wx:if="{{couponDetail.type == 1 && couponDetail.recv_status == 1}}"  style="{{ 'background-color:' + style.secColor }}"><view>折</view></view>
+      <view class="exchange-coupon-icon exchange-coupon-icon-used" wx:elif="{{couponDetail.type == 1 && couponDetail.recv_status == 0}}" ><view>折</view></view>
+      <view class="exchange-coupon-icon" wx:elif="{{couponDetail.type == 2 && couponDetail.recv_status == 1}}"  style="{{ 'background-color:' + style.secColor }}"><view>代</view></view>
+      <view class="exchange-coupon-icon exchange-coupon-icon-used" wx:elif="{{couponDetail.type == 2 && couponDetail.recv_status == 0}}" ><view>代</view></view>
+      <view class="exchange-coupon-icon" wx:elif="{{couponDetail.type == 0 && couponDetail.recv_status == 1}}"  style="{{ 'background-color:' + style.secColor }}"><view>减</view></view>
+      <view class="exchange-coupon-icon exchange-coupon-icon-used" wx:elif="{{couponDetail.type == 0 && couponDetail.recv_status == 0}}" ><view>减</view></view>
+      <view class="exchange-coupon-icon" wx:elif="{{couponDetail.type == 3 && couponDetail.recv_status == 1}}"  style="{{ 'background-color:' + style.secColor }}"><view>兑</view></view>
+      <view class="exchange-coupon-icon exchange-coupon-icon-used" wx:elif="{{couponDetail.type == 3 && couponDetail.recv_status == 0}}" ><view>兑</view></view>
+      <view class="exchange-coupon-icon" wx:elif="{{couponDetail.type == 4 && couponDetail.recv_status == 1}}"  style="{{ 'background-color:' + style.secColor }}"><view>储</view></view>
+      <view class="exchange-coupon-icon exchange-coupon-icon-used" wx:elif="{{couponDetail.type == 4 && couponDetail.recv_status == 0}}" ><view>储</view></view>
+        <view class="exchange-coupon-icon" wx:elif="{{couponDetail.type == 5 && couponDetail.recv_status == 1}}" style="{{ 'background-color:' + style.secColor }}" ><view>通</view></view>
+      <view class="exchange-coupon-icon exchange-coupon-icon-used" wx:elif="{{couponDetail.type == 5 && couponDetail.recv_status == 0}}" ><view>通</view></view>
+        <view class="exchange-coupon-icon " wx:elif="{{couponDetail.type == 6 && couponDetail.recv_status == 1}}"  style="{{ 'background-color:' + style.secColor }}"><view>次</view></view>
+      <view class="exchange-coupon-icon exchange-coupon-icon-used" wx:elif="{{couponDetail.type == 6 && couponDetail.recv_status == 0}}" ><view>次</view></view>
+      <view class="exchange-coupon-icon-wrapper"   wx:if="{{ couponDetail.recv_status == 1 }}" style="{{ 'border-color:' + style.secColor }}"></view>
+      <view class="exchange-coupon-icon-wrapper" style="background-color:#ccc" wx:elif="{{ couponDetail.recv_status == 0 }}"></view>
+    </view>
+    <view class="exchange-coupon-bottom"   style="background-color: {{style.lineBackgroundColor}}">
+      <view class="exchange-coupon-cut" style="{{data.style}}"></view>
+      <view>有效期 {{couponDetail.expire == '-1' ?  (couponDetail.start_use_date + '至' + couponDetail.end_use_date) : couponDetail.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (couponDetail.react > 0 ? couponDetail.react + '天后' : '当天') + '生效，有效期'+ couponDetail.expire +'天')}} {{ couponDetail.exclude_holiday == 0 ? '':'除去法定节假日'}} {{couponDetail.exclude_weekend == 0 ? '':'周一至周五'}} {{ couponDetail.start_use_time }}-{{ couponDetail.end_use_time }}</view>
+    </view>
+  </view>
+  </view>
+  <view class="preview-box">
+    <view class="single-box">商品金额 
+    <text class="pull-right">
+      <text>¥{{payInfo.original_price}}</text>
+      <text wx:if="{{payInfo.integral != 0}}">+</text>
+      <text wx:if="{{payInfo.integral != 0}}">{{payInfo.integral}}积分</text>
+    </text></view>
+    <view bindtap="showMemberDiscount" wx:if="{{ payInfo.benefit.all_vip_benefit.length != 0 || payInfo.benefit.coupon_benefit.length != 0 }}">
+      <view class="balance-switch">
+        <text>优惠方式</text> 
+        <view class="ico-moon icon-rightarrow pull-right"></view>
+        <text class="pull-right">{{ selectDiscountInfo.discount_title ||  selectDiscountInfo.title}}</text> 
+      </view>
+      <view hidden="{{ selectDiscountIndex == 0 }}" class="balance-price">
+        <text class="pull-right" >- ¥ {{ payInfo.discount_price }}</text>
+      </view>
+    </view>
+    <view>
+      <view class="balance-switch">
+        <text>使用储值金</text> 
+        <switch color="{{ storeStyle.theme }}" class="pull-right" checked="true" bindchange="useBalanceChange"/>
+      </view>
+      <view hidden="{{ !useBalance }}" class="balance-price">
+        <text class="pull-right" style="{{ 'color:' + storeStyle.theme }}">- ¥ {{ balance }}</text>
+      </view>
+    </view>
+  </view>
+  <view class="bottom-nav">
+    <view class="preview-goods-total-price">合计: <text class="price-count"   >¥{{payInfo.final_price}}</text></view>
+    <form report-submit="true" bindsubmit="confirmPayment">
+      <button formType="submit">立即付款</button>
+    </form>
+  </view>
+</view>

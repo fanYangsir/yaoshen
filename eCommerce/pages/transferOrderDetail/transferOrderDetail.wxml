@@ -1,0 +1,78 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="transfer-wrap">
+  <view class="top-block">
+    <image class="icon-img" src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/finish-icon.svg" wx:if="{{ orderInfo.status === '6' }}"/>
+    <image class="icon-img" src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/no-finish-icon.svg" wx:if="{{ orderInfo.status === '0' || orderInfo.status === '7' }}"/>
+    <view class="text">{{ orderInfo.status === '0' ? '订单未完成' : orderInfo.status === '6' ? '订单已完成' : orderInfo.status === '7' ? '订单已关闭' : ''}}</view>
+    <image class="bg-img" src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/wave.png"/>
+  </view>
+  <view class="total-payment">
+    <view class="content">
+      <view class="text">实付金额</view>
+      <view class="price">¥ {{ orderInfo.total_price }}</view>
+    </view>
+  </view>
+
+  <view class="transfer-detail">
+    <view class="detail-item">
+      <view class="detail-text">消费金额</view>
+      <view class="detail-content">¥ {{ orderInfo.original_price }}</view>
+    </view>
+    <!-- <view class="detail-item">
+      <view class="detail-text">不参与优惠金额</view>
+      <view class="detail-content">¥ 10.00</view>
+    </view> -->
+    <!-- 唯一优惠 -->
+    <view class="detail-item" wx:if="{{ orderInfo.store_benefit_info && orderInfo.store_benefit_info.discount_price && orderInfo.store_benefit_info.discount_price != 0 }}">
+      <view class="detail-text">店铺满减</view>
+      <view class="detail-content">-¥ {{ orderInfo.store_benefit_info.discount_price }}</view>
+    </view>
+    <view class="detail-item" wx:if="{{ (orderInfo.selected_benefit_info.discount_type === 'vip' || orderInfo.selected_benefit_info.discount_type === 'paid_vip' || orderInfo.selected_benefit_info.discount_type === 'vip_benefit_day') && orderInfo.selected_benefit_info.discount_cut_price && orderInfo.selected_benefit_info.discount_cut_price != 0 }}">
+      <view class="detail-text">会员卡优惠</view>
+      <view class="detail-content">-¥ {{ orderInfo.selected_benefit_info.discount_cut_price }}</view>
+    </view>
+    <view class="detail-item" wx:if="{{ orderInfo.selected_benefit_info.discount_type === 'coupon' && orderInfo.selected_benefit_info.discount_cut_price && orderInfo.selected_benefit_info.discount_cut_price != 0 }}">
+      <view class="detail-text">券类优惠</view>
+      <view class="detail-content">-¥ {{ orderInfo.selected_benefit_info.discount_cut_price }}</view>
+    </view>
+    <view class="detail-item" wx:if="{{ orderInfo.selected_benefit_info.discount_type === 'integral' && orderInfo.selected_benefit_info.discount_cut_price && orderInfo.selected_benefit_info.discount_cut_price != 0 }}">
+    <view class="detail-text">积分抵扣</view>
+      <view class="detail-content">-¥ {{ orderInfo.selected_benefit_info.discount_cut_price }}</view>
+    </view>
+    <!-- 自定义优惠 -->
+    <view class="detail-item" wx:if="{{ combinationBenefit.store_benefit && combinationBenefit.store_benefit.discount_price && combinationBenefit.store_benefit.discount_price != 0 }}">
+      <view class="detail-text">店铺满减</view>
+      <view class="detail-content">-¥ {{ combinationBenefit.store_benefit.discount_price }}</view>
+    </view>
+    <view class="detail-item" wx:if="{{ combinationBenefit.vip_benefit_discount_price && combinationBenefit.vip_benefit_discount_price != 0 }}">
+      <view class="detail-text">会员卡优惠</view>
+      <view class="detail-content">-¥ {{ combinationBenefit.vip_benefit_discount_price }}</view>
+    </view>
+    <view class="detail-item" wx:if="{{ combinationBenefit.coupon_benefit_discount_price && combinationBenefit.coupon_benefit_discount_price != 0 }}">
+      <view class="detail-text">券类优惠</view>
+      <view class="detail-content">-¥ {{ combinationBenefit.coupon_benefit_discount_price }}</view>
+    </view>
+    <view class="detail-item" wx:if="{{ combinationBenefit.integral_benefit && combinationBenefit.integral_benefit.discount_price && combinationBenefit.integral_benefit.discount_price != 0 }}">
+    <view class="detail-text">积分抵扣</view>
+      <view class="detail-content">-¥ {{ combinationBenefit.integral_benefit.discount_price }}</view>
+    </view>
+    <view class="detail-item" wx:if="{{ orderInfo.use_balance && orderInfo.use_balance != 0 }}">
+      <view class="detail-text">储值</view>
+      <view class="detail-content">-¥ {{ orderInfo.use_balance }}</view>
+    </view>
+    <view class="detail-item" wx:if="{{ orderInfo.coupon_fee && orderInfo.coupon_fee != 0 }}">
+      <view class="detail-text">社交立减金</view>
+      <view class="detail-content">-¥ {{ orderInfo.coupon_fee }}</view>
+    </view>
+  </view>
+
+  <view class="remarks" wx:if="{{ orderInfo.remark }}">
+    <view class="text">备注</view>
+    <view class="content">{{ orderInfo.remark }}</view>
+  </view>
+
+  <view class="transfer-bottom-operation" wx:if="{{ orderInfo.status === '0' }}">
+    <text class="btn carry-btn" bindtap="payOrder">支付</text>
+    <text class="btn cancel-btn" bindtap="cancelOrder">取消支付</text>
+  </view>
+</view>

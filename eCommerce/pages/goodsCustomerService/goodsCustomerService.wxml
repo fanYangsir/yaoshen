@@ -1,0 +1,35 @@
+<view>
+  <view class="goods-customer-contain" wx:for="{{ orderInfo }}" wx:key="">
+    <view class="goods-customer-header">
+      <view>
+        <text class="customer-add-time">{{ item.add_time }}</text>
+        <text class="pull-right {{ (item.status == 0 || item.status == 4) ? 'waiting-color' : ''}}">{{ orderStatus[item.status] }}</text>
+      </view>
+    </view>
+    <view catchtap="toGoodsOrderDetail" data-apply-id="{{ item.id }}" data-order-id="{{ item.order_id }}" data-franchisee-id="{{ item.app_id }}" class="goods-customer-content" wx:for="{{ item.refund_goods_info }}" wx:for-item="goods" wx:key="" >
+      <image src="{{ goods.cover }}"></image>
+      <view class="goods-detail-box">
+        <view class="goods-title">{{ goods.title }}</view>
+        <view class="goods-model" wx:if="{{ goods.model_name }}">{{ goods.model_name }}</view>
+        <view class="goods-price-box">
+          <text>￥{{ goods.price }}</text>
+          <text class="pull-right goods-num">x{{ goods.num }}</text>
+        </view>
+      </view>
+    </view>
+    <view class="goods-customer-bottom">
+      <view class="order-refund-box">
+        <view class="order-status-explain"><text class="ico-moon icon-goods-after-sale"></text><text>{{ refundType[item.refund_type] }}</text></view>
+        <text wx:if="{{ item.status == 1 || item.status == 2 || item.status == 5 || item.status == 7 }}" class="pull-right order-refund-price">{{ orderReason[item.status] }}</text>
+        <text wx:if="{{ item.status == 3 }}" class="pull-right order-refund-price">等待商家发货，还剩{{ item.expire }}</text>
+        <text wx:if="{{ item.status == 6 }}" class="pull-right order-refund-price">退款金额 ￥{{ item.refund_price }}</text>
+      </view>
+      <view class="customer-btn-box">
+        <text wx:if="{{ item.status == 0 }}" class="customer-btn" catchtap="cancelRefund" data-order-id="{{ item.order_id }}" data-apply-id="{{ item.id }}" data-franchisee-id="{{ item.app_id }}">撤销申请</text>
+        <text wx:if="{{ item.status == 1 || item.status == 2 || item.status == 5 || item.status == 6 }}" class="customer-btn" catchtap="deleteAfterSale" data-order-id="{{ item.order_id }}" data-apply-id="{{ item.id }}" data-index="{{ index }}">删除记录</text>
+        <text wx:if="{{ item.status == 1 }}" class="customer-btn" catchtap="refuseReason" data-reason="{{ item.refuse_msg }}">拒绝原因</text>
+        <text class="customer-btn" catchtap="toGoodsOrderDetail" data-apply-id="{{ item.id }}" data-order-id="{{ item.order_id }}" data-franchisee-id="{{ item.app_id }}">查看订单</text> 
+      </view>
+    </view>
+  </view>
+</view>

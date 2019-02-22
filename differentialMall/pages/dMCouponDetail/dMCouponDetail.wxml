@@ -1,0 +1,120 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<!-- 优惠券详情样式一 start -->
+<view class="couponDetail-main-wrap"  wx:if="{{styleType == 1}}">
+  <view class="couponDetail-detail-wrap1">
+    <view class="coupon-status-bg">
+     <image class="coupon-mark" wx:if="{{couponStatus == 1}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_success_mark.svg"></image>
+      <image class="coupon-mark" wx:if="{{couponStatus == 2}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_active_mark.svg"></image>
+      <image class="coupon-mark" wx:if="{{couponStatus == 3}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_hasuse_mark.svg"></image>
+      <image class="coupon-mark" wx:if="{{couponStatus == 4}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_expired_mark.svg"></image>
+    </view>
+    <view class="merchant-info">
+      <image class="merchant-img" src="{{couponDetail.logo}}" mode="aspectFill"></image>
+      <text class="merchant-name">{{couponDetail.app_name}}</text>
+      <view class="ico-moon icon-share-new">
+        <button open-type="share"></button>
+      </view>
+    </view>
+    <view class="coupon-type-name">
+      <text class="coupon-type">{{couponDetail.title}}</text>
+      <text class="coupon-name">{{couponDetail.sub_title}}</text>
+    </view>
+    <view class="coupon-info-item coupon-use-condition" wx:if="{{couponDetail.useCondition !== ''}}">
+      <text class="title">使用条件：</text>
+      <text class="content">{{couponDetail.useCondition}}</text>
+    </view>
+    <view class="coupon-info-item coupon-use-date">
+      <text class="title">可用时间：</text>
+      <text class="content">{{couponDetail.expire == '-1' ?  (couponDetail.start_use_date + '至' + couponDetail.end_use_date) : couponDetail.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (couponDetail.react > 0 ? couponDetail.react + '天后' : '当天') + '生效，有效期'+ couponDetail.expire +'天')}} {{ couponDetail.exclude_holiday == 1 ? '除法定节假日' : '' }} {{ couponDetail.exclude_weekend == 1 ? '周一至周五' : '' }} {{ couponDetail.start_use_time + '-' + couponDetail.end_use_time }}</text>
+    </view>
+    
+    <view class="coupon-info-item merchant-address thin-bd-b" wx:if="{{ couponDetail.address != '' }}">
+      <text class="title">店铺地址：</text>
+      <text class="content">{{couponDetail.address}}</text>
+    </view>
+
+    <view class="coupon-info-item merchant-contact thin-bd-b" wx:if="{{ couponDetail.phone != '' }}">
+      <text class="title">联系电话：</text>
+      <text class="content">{{couponDetail.phone}}</text>
+    </view>
+
+    <view class="coupon-info-item merchant-code" bindtap="previewQRCode" data-img-src="{{couponDetail.merchantsQRCode}}">
+      <text class="title">商家二维码：</text>
+      <view class="merchant-code-img-wrap">
+        <image class="merchant-code-img" src="{{couponDetail.merchantsQRCode}}" mode="aspectFill" wx:if="{{couponDetail.merchantsQRCode}}"></image>
+        <icon wx:if="{{!couponDetail.merchantsQRCode}}" type="waiting" size="32" color="#eee"></icon>
+      </view>
+    </view>
+
+    <view class="tip-wrap">
+      <text>*</text>
+      <text>预览商家小程序码，长按识别并确认激活优惠券后，即可使用该优惠券</text>
+    </view>
+  </view>
+</view>
+<!-- 优惠券详情样式一 end -->
+
+<!-- 优惠券详情样式二 start -->
+<view class="couponDetail-main-wrap2" wx:if="{{styleType == 2}}">
+  <view class="couponDetail-detail-wrap2" >
+    <view class="coupon-simple-info">
+      <view class="coupon-info-item">
+        <view class="coupon-name-use">
+          <text class="coupon-name">{{couponDetail.title}}</text>
+          <view class="coupon-use">
+            <text class="use-condition">{{ couponDetail.useCondition }}</text>
+          </view>
+          <view class="coupon-mark">
+            <text wx:if="{{couponDetail.type == 0}}">减</text>
+            <text wx:if="{{couponDetail.type == 1}}">折</text>
+            <text wx:if="{{couponDetail.type == 2}}">代</text>
+            <text wx:if="{{couponDetail.type == 3}}">兑</text>
+            <text wx:if="{{couponDetail.type == 4}}">储</text>
+            <text wx:if="{{couponDetail.type == 5}}">通</text>
+            <text wx:if="{{couponDetail.type == 6}}">次</text>
+          </view>
+        </view>
+        <view class="coupon-indate">有效期{{couponDetail.expire == '-1' ? (couponDetail.start_use_date + ' 至 ' + couponDetail.end_use_date) : couponDetail.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (couponDetail.react > 0 ? couponDetail.react + '天后' : '当天') + '生效，有效期'+ couponDetail.expire +'天')}} {{ couponDetail.exclude_holiday == 0 ? '':'除去法定节假日'}}{{couponDetail.exclude_weekend == 0 ? '':'周一至周五'}} {{ couponDetail.start_use_time }}-{{ couponDetail.end_use_time }}</view>
+      </view>
+      <view class="coupon-exchang-btn">
+        <view class="btn-txt" catchtap="exchangeBtnHandler" data-id="{{couponDetail.id}}" data-mid="{{couponDetail.app_id}}">{{couponDetail.exchange_condition.integral}}微分兑换</view>
+      </view>
+    </view>
+    <view class="coupon-detail-info">
+      <view class="detail-item thin-bd-b" wx:if="{{couponDetail.type !== ''}}">
+        <view class="item-title">优惠券类型：</view>
+        <view class="item-content" wx:if="{{couponDetail.type == 0}}">满减券</view>
+        <view class="item-content" wx:if="{{couponDetail.type == 1}}">折扣券</view>
+        <view class="item-content" wx:if="{{couponDetail.type == 2}}">代金券</view>
+        <view class="item-content" wx:if="{{couponDetail.type == 3}}">兑换券</view>
+        <view class="item-content" wx:if="{{couponDetail.type == 4}}">储值券</view>
+        <view class="item-content" wx:if="{{couponDetail.type == 5}}">通用券</view>
+        <view class="item-content" wx:if="{{couponDetail.type == 6}}">次数券</view>
+      </view>
+      <view class="detail-item thin-bd-b" wx:if="{{couponDetail.app_name != ''}}">
+        <view class="item-title">优惠券名称：</view>
+        <view class="item-content">{{couponDetail.title}}</view>
+      </view>
+      <view class="detail-item thin-bd-b" wx:if="{{couponDetail.useCondition != ''}}">
+        <view class="item-title">使用条件：</view>
+        <view class="item-content">{{couponDetail.useCondition}}</view>
+      </view>
+      <view class="detail-item thin-bd-b">
+        <view class="item-title">可用时间：</view>
+        <view class="item-content">{{couponDetail.expire == '-1' ? (couponDetail.start_use_date + '-' + couponDetail.end_use_date) : couponDetail.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (couponDetail.react > 0 ? couponDetail.react + '天后' : '当天') + '生效，有效期'+ couponDetail.expire +'天')}} {{ couponDetail.exclude_holiday == 0 ? '':'除去法定节假日'}}{{couponDetail.exclude_weekend == 0 ? '':'周一至周五'}} {{ couponDetail.start_use_time }}-{{ couponDetail.end_use_time }}</view>
+      </view>
+      <view class="detail-item" wx:if="{{couponDetail.limit_num != ''}}">
+        <view class="item-title">可兑换次数：</view>
+        <view class="item-content" wx:if="{{couponDetail.limit_num != 0}}">{{couponDetail.limit_num}}次</view>
+        <view class="item-content" wx:if="{{couponDetail.limit_num == 0}}">不限</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 优惠券详情样式二 end -->
+
+<!-- toast start -->
+<view class="toast-wrap {{toastInfo.isShow ? 'show' : ''}}">
+  <text>{{toastInfo.tipTxt}}</text>
+</view>
+<!-- toast end -->

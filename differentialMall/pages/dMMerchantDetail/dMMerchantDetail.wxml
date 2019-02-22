@@ -1,0 +1,82 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+
+<view class="merchantDetail-main-wrap">
+  <!-- 商家信息 start-->
+  <view class="merchantDetail-info-wrap">
+    <view class="merchant-info-wrap">
+    <scroll-view class="merchant-img-list" scroll-x>
+      <block wx:for="{{merchantInfo.imgs}}" wx:key=''>
+        <view class="merchant-img" data-imgs="{{merchantInfo.imgs}}" data-index="{{index}}" data-img-src="{{item}}" catchtap="previewMerchantImgs">
+          <image class="{{item == 'http://cdn.jisuapp.cn/zhichi_frontend/static/invitation/images/logo.png' ? 'logo-img' : ''}}" src="{{item}}" mode="{{item == 'http://cdn.jisuapp.cn/zhichi_frontend/static/invitation/images/logo.png' ? 'aspectFit' : 'aspectFill'}}"></image>
+        </view>
+      </block>
+    </scroll-view>
+    <view class="merchant-info-text">
+      <view class="merchant-name-like">
+        <text class="merchant-name">{{merchantInfo.app_name}}</text>
+        <text class="ico-moon icon-{{merchantInfo.isFavorite === 0 ? 'dmstar-empty' : 'dmstar'}}" catchtap="toggleFavoriteMerchant" data-is-favorite="{{merchantInfo.isFavorite}}" data-id="{{merchantInfo.app_id}}"></text>
+      </view>
+      <text class="merchant-type">{{merchantInfo.industry_name}}</text>
+    </view>
+    </view>
+    <view class="merchant-address thin-bd-t" wx:if="{{merchantInfo.location.address != '' && merchantInfo.phone != ''}}">
+      <view class="address-wrap" catchtap="openWXMap">
+        <text class="ico-moon icon-fesadress"></text>
+        <text class="address-txt">{{merchantInfo.location.address}}</text>
+      </view>
+      <text class="ico-moon icon-takeout-cellphone" catchtap="togglePhoneCall" data-phone="{{merchantInfo.contact_phone}}"></text>
+    </view>
+  </view>
+  <!-- 商家信息 end>
+
+
+  <!-- 商家优惠券 start -->
+  <view class="merchantDetail-coupons-wrap">
+    <!-- 优惠券列表 start-->
+    <view class="merchant-coupons-list">
+      <block wx:for="{{merchantInfo.couponsList}}" wx:key="couponsList">
+        <view class="coupon-item" catchtap="turnToPage" data-url="../dMCouponDetail/dMCouponDetail?type=2&cId={{item.id}}&mId={{merchantInfo.app_id}}" data-is-redirect="false">
+          <view class="coupon-info">
+            <text class="coupon-mark">劵</text>
+            <view class="coupon-name-exchange">
+              <text class="coupon-name">{{item.title}}</text>
+              <text class="coupon-exchange-num" wx:if="{{item.type == 0}}">满{{ item.condition }}元，减{{ item.value }}元</text>
+              <text class="coupon-exchange-num" wx:if="{{item.type == 1}}">打{{ item.value }}折</text>
+              <text class="coupon-exchange-num" wx:if="{{item.type == 2}}">可抵扣{{ item.value }}元</text>
+              <view class="coupon-exchange-num" wx:if="{{item.type == 3 && item.extra_condition == '' }}">使用条件: 直接兑换{{ item.coupon_goods_info.title }} </view>
+              <view class="coupon-exchange-num" wx:elif="{{item.type == 3 && item.extra_condition.price }}">使用条件: 消费满{{ item.extra_condition.price }}元可兑换{{ item.coupon_goods_info.title }}</view>
+              <view class="coupon-exchange-num" wx:elif="{{item.type == 3 && item.extra_condition.goods_id }}">使用条件: 购买{{ item.condition_goods_info.title }}可兑换{{ item.coupon_goods_info.title }}</view>
+              <text class="coupon-exchange-num" wx:if="{{item.type == 4}}">储值金可充值{{ item.value }}元</text>
+              <text class="coupon-exchange-num" wx:if="{{item.type == 5}}">{{ item.extra_condition }}</text>
+              <text class="coupon-exchange-num" wx:if="{{item.type == 6}}">可使用{{ item.value }}次</text>
+              <view class="coupon-indate">有效期{{item.expire == '-1' ? (item.start_use_date + ' 至 ' + item.end_use_date) : item.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (item.react > 0 ? item.react + '天后' : '当天') + '生效，有效期'+ item.expire +'天')}} {{ item.exclude_holiday == 0 ? '':'除去法定节假日'}}{{item.exclude_weekend == 0 ? '':'周一至周五'}} {{ item.start_use_time }}-{{ item.end_use_time }}</view>
+          </view>
+            </view>
+          <view class="coupon-exchange">
+            <view class="exchange-diff">
+              <text>微分</text>
+              <text>{{item.exchange_condition.integral}}</text>
+            </view>
+            <view class="exchange-btn" catchtap="exchangeBtnHandler" data-id="{{item.id}}" data-mid="{{item.app_id}}">立即兑换</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <!-- 优惠券列表 end-->
+  </view>
+  <!-- 商家优惠券 end -->
+</view>
+
+<!-- 打电话 start -->
+<view class="callphone-wrap" wx:if="{{!isHidePhoneCall}}" catchtap="togglePhoneCall">
+  <view class="phone-txt thin-bd-b">{{merchantInfo.contact_phone}}</view>
+  <view class="call-btn" data-phone="{{merchantInfo.contact_phone}}" catchtap="makePhoneCall">呼叫</view>
+  <view class="cancle-btn">取消</view>
+</view>
+<!-- 打电话 end -->
+
+<!-- toast start -->
+<view class="toast-wrap {{toastInfo.isShow ? 'show' : ''}}">
+  <text>{{toastInfo.tipTxt}}</text>
+</view>
+<!-- toast end -->

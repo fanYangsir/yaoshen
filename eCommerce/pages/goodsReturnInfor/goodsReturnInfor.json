@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText":"填写退货信息",
+    "usingComponents":{
+        "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+    }
+}

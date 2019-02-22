@@ -1,0 +1,300 @@
+@charset 'utf-8';
+@import "/utils/font_icon.wxss";
+
+.communityPublish-wrap{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #eee;
+  height: 100vh;
+  z-index: 99999;
+  overflow-y: auto;
+}
+.communityPublish-main{
+  padding: 15px;
+  background-color: #fff;
+  border-bottom: 1px solid #d7d7d7;
+}
+.communityPublish-title {
+  height: 30px;
+}
+.communityPublish-title-input{
+  width: 100%;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid #e6e6e6;
+  outline: none;
+  font-size: 14px;
+  color: #343434;
+}
+.communityPublish-content {
+  padding-top: 10px;
+  height: 100px;
+}
+.communityPublish-content-input{
+  width: 100%;
+  height: 100px;
+  border: none;
+  resize: none;
+  outline: none;
+  font-size: 24rpx;
+  line-height: 30rpx;
+  color: #343434;
+  overflow: hidden;
+}
+.communityPublish-content > view {
+  width: 100%;
+  height: 100px;
+  font-size: 24rpx;
+  line-height: 30rpx;
+  color: #343434;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.communityPublish-content-input.hide,
+.communityPublish-title-input.hide,
+.communityPublish-address-input.hide {
+  display: none;
+}
+.communityPublish-img-wrap{
+  margin-top: 5px;
+}
+.communityPublish-ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+.communityPublish-item, .communityPublish-item-add{
+  /*float: left;*/
+  width: 150rpx;
+  height: 150rpx;
+  position: relative;
+  margin-right: 18rpx;
+  margin-top: 10px;
+}
+.communityPublish-item > image{
+  width: 100%;
+  height: 100%;
+}
+.communityPublish-item-delete{
+  display: block;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 16px;
+  font-size: 16px;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 11px;
+  background-color: #000;
+  opacity: .25;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+.communityPublish-item-add{
+  text-align: center;
+  color: #cbcbcb;
+  border: 1px dashed #ccc;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  overflow: hidden;
+}
+.communityPublish-item-add span {
+  font-size: 60px;
+  line-height: 60px;
+}
+.communityPublish-tip{
+  color: #a3a3a3;
+  margin-top: 15px;
+  font-size: 0.6em;
+}
+.communityPublish-btn{
+  display: block;
+  width: 90%;
+  height:44px;
+  line-height:44px;
+  border: none;
+  color: #fff;
+  background-color: #00b6f8;
+  margin: 0 auto;
+  border-radius: 3px;
+  margin-top: 20px;
+}
+
+.communityPublish-center {
+  margin-top: 10px;
+  padding: 0 15px;
+  background: #fff;
+  color: #6e6e6e;
+}
+.communityPublish-center > view {
+  display: flex;
+  align-items: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 14px;
+}
+.communityPublish-center label {
+  margin-right: 8px;
+  font-size: 16px;
+  color: #d8d8d8; 
+}
+.communityPublish-classify picker {
+  flex: 1;
+}
+.communityPublish-classify .icon-rightarrow {
+  font-size: 14px;
+}
+.communityPublish-center input {
+  flex: 1;
+  color: #343434;
+}
+.communityPublish-phone {
+  border-bottom: 1px solid #e5e5e5;
+}
+.communityPublish-address {
+  display:flex;
+  align-items:center;
+  margin-top: 10px;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size:12px;
+  border-top:1px solid #e5e5e5;
+}
+.communityPublish-address input {
+  flex:1;
+}
+.communityPublish-address label {
+  margin-right:8px;
+  font-size:16px;
+  color:#d8d8d8;
+}
+.communityPublish-foot {
+  margin-bottom: 100px;
+}
+.communityPublish-center label.colorBlur,
+.communityPublish-address label.colorBlur {
+  color: #3091f2;
+}
+.communityPublish-classify > view {
+  padding: 0 30rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  background: #f8f8f8;
+  color: #6e6e6e;
+}
+.communityPublish-classify > view > text {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 28rpx;
+  margin:0 10rpx;
+  max-width: 200rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.communityPublish-classify > view > label {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 15rpx;
+  font-size: 28rpx;
+}
+.communityPublish-current-classify {
+  color: #343434;
+}
+.communityPublish-classify-select-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.3);
+  z-index: 99999;
+}
+.communityPublish-classify-select-window {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 650rpx;
+  background: #fff;
+}
+.communityPublish-classify-select-top {
+  padding: 0 30rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  background: #f8f8f8;
+}
+.communityPublish-classify-select-top > text {
+  position: relative;
+  display: inline-block;
+  margin-right: 20rpx;
+  max-width: 200rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.communityPublish-classify-select-top > text:last-child::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  border-bottom: 1px solid #000;
+}
+.communityPublish-classify-select-list {
+  height: 560rpx;
+  overflow-x: hidden;
+  overflow-y: auto; 
+}
+.communityPublish-classify-select-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 30rpx;
+  height: 90rpx;
+  border-bottom: 1px solid #E5E5E5;
+  color: #343434;
+}
+.communityPublish-classify-select-item > image {
+  display: inline-block;
+  vertical-align: middle;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background: #f8f8f8;
+}
+.communityPublish-classify-select-item > text {
+  flex: 1;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 90rpx;
+  margin-left: 20rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.communityPublish-classify-select-item > label {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 26rpx;
+  color: #6e6e6e;
+}
+.return-btn {
+  position: fixed;
+  bottom: 155rpx;
+  right: 32rpx;
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 35rpx;
+  color: #888;
+  box-shadow: 0 0 18rpx rgba(0,0,0,.13);
+}

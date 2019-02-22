@@ -1,0 +1,39 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="calendar calendar-style">
+  <!-- 主标题 -->
+  <view class="calendar-header header-style" wx:if="{{header}}">
+    <text wx:if="{{year == min_year && month == min_month}}"></text>
+    <text class="ico-moon icon-leftarrow" bindtap="prevMonth" wx:elif="{{prev}}"></text>
+    <text wx:else></text>
+    <picker mode="date" value="{{year}}-{{month}}" start="{{startDate}}" end="{{endDate}}" bindchange="dateChange" fields="month">
+      <text class="date-text">{{year}}年{{month}}月</text>
+    </picker>
+    <text wx:if="{{year == max_year && month == max_month}}"></text>
+    <text class="ico-moon icon-rightarrow" bindtap="nextMonth" wx:elif="{{next}}"></text>
+    <text wx:else></text>
+  </view>
+  <!-- 日历面板 -->
+  <view class="calendar-board board-style">
+    <!-- 周标题 -->
+    <view class="calendar-weeks" wx:if="{{weeks && weekTitle.length == 7}}">
+      <text class="calendar-weekday" wx:for="{{weekTitle}}" wx:key="">{{item}}</text>
+    </view>
+    <!-- 日期 -->
+    <view class="calendar-days">
+      <block wx:for="{{days_array}}" wx:for-item="item" wx:key="" wx:for-index="i">
+        <!-- 日期行 -->
+        <view class="calendar-row">
+          <block wx:for="{{days_array[i]}}" wx:for-item="day" wx:key="">
+            <view class="calendar-cell" style="background: {{day.background}}; width: {{cellSize}}px; height: {{cellSize}}px;" wx:if="{{day.day <= 0}}">
+              <image class="member-day-img" wx:if="{{day.is_member_day}}" src=""/>
+            </view>
+            <view class="calendar-cell cell-rounded {{day.is_today === 1 ? 'today' : ''}}" style="background: {{day.background}}; width: {{cellSize}}px; height: {{cellSize}}px;" wx:else bindtap="dayClick" data-day="{{day}}">
+              <image class="member-day-img" wx:if="{{day.is_member_day}}" src="https://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/vip-card/member-day.png"/>
+              <text class="calendar-day" style="color: {{day.color}};">{{day.day}}</text>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

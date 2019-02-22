@@ -1,0 +1,221 @@
+.merchantLocation-main-wrap {
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+/* 搜索 */
+.merchantLocation-search-wrap {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60rpx;
+  padding: 26rpx 30rpx;
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  background-color: #fff;
+  box-shadow:0 2rpx 8rpx 0 rgba(41,41,41,0.05) inset;
+}
+.merchantLocation-search-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #f3f3f3;
+  transform: scaleY(0.5);
+  box-sizing: border-box;
+}
+.merchantLocation-search-wrap .search-location {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+}
+.merchantLocation-search-wrap .icon-fesadress {
+  font-size: 24rpx;
+  font-weight: 600;
+}
+.merchantLocation-search-wrap .location-txt {
+  max-width: 104rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 26rpx;
+  margin: 0 10rpx;
+}
+.merchantLocation-search-wrap .icon-downarrow {
+  font-size: 20rpx;
+}
+.merchantLocation-search-wrap .search-input {
+  width: 460rpx;
+  padding: 0 32rpx;
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  background-color: #f3f3f3;
+}
+.merchantLocation-search-wrap .search-input .icon-search {
+  margin-right: 18rpx;
+  font-size: 28rpx;
+  color: #b3b3b3;
+}
+.merchantLocation-search-wrap .search-input input {
+  width: 100%;
+}
+.merchantLocation-search-wrap .search-input-pla {
+  color: #999;
+}
+/* 最近访问 */
+.merchantLocation-recents-wrap,
+.merchantLocation-hot-wrap {
+  padding: 50rpx 54rpx 10rpx 30rpx;
+}
+.merchantLocation-recents-wrap {
+  padding-top: 160rpx;
+}
+.merchantLocation-recents-wrap .city-title,
+.merchantLocation-hot-wrap .city-title {
+  margin-bottom: 6rpx;
+  font-size: 26rpx;
+  color: #999;
+}
+.merchantLocation-recents-wrap .city-list,
+.merchantLocation-hot-wrap .city-list {
+  display: flex;
+  flex-flow: wrap;
+}
+.merchantLocation-recents-wrap .city-list view,
+.merchantLocation-hot-wrap .city-list view{
+  width: 146rpx;
+  height: 64rpx;
+  margin-top: 30rpx;
+  margin-right: 20rpx;
+  border-radius: 4rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 26rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+}
+.merchantLocation-recents-wrap .city-list .hover-city,
+.merchantLocation-hot-wrap .city-list .hover-city {
+  background-color: rgba(255,113,0,.06);
+}
+.merchantLocation-recents-wrap .city-list view.active,
+.merchantLocation-hot-wrap .city-list view.active {
+  position: relative;
+  border-radius:4rpx;
+  border: 1px solid #ff7100;
+  color: #ff7100;
+  background-color: rgba(255,113,0,.06);
+}
+
+/* 所有城市 搜索结果 */
+.merchantLocation-search-citys-wrap {
+  z-index: 10;
+  position: fixed;
+  top: 112rpx;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: calc(100%-90rpx);
+  padding: 0 60rpx 0 30rpx;
+  background-color: #fff;
+}
+.merchantLocation-all-citys-wrap {
+  padding: 40rpx 60rpx 0 30rpx;
+}
+.merchantLocation-all-citys-wrap .initial-txt {
+  padding: 20rpx 0;
+  font-weight: bold;
+  font-size: 24rpx;
+  color: #999;
+}
+.merchantLocation-all-citys-wrap .title-fixed {
+  z-index: 10;
+  position: fixed;
+  top: 110rpx;
+  left: 30rpx;
+  right: 40rpx;
+  background-color: #fff;
+}
+.merchantLocation-all-citys-wrap .city-name,
+.merchantLocation-search-citys-wrap .city-name {
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+/* 右边城市定位首拼音字母 */
+.merchantLocation-city-wrap {
+  z-index: 9;
+  position: fixed;
+  right: 10rpx;
+  top: 180rpx;
+  width: 40rpx;
+}
+.merchantLocation-city-wrap .city-initial-title {
+  font-size: 20rpx;
+  color: #999;
+}
+.merchantLocation-city-wrap .city-initial-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20rpx;
+  font-size: 22rpx;
+  color: #999;
+}
+.merchantLocation-city-wrap .city-initial-list text {
+  width: 60rpx;
+  height: 40rpx;
+  text-align: center;
+}
+.selected-initial-wrap {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 140rpx;
+  height: 140rpx;
+  line-height: 140rpx;
+  text-align: center;
+  background-color: #f8f8f8;
+  border: 1px solid #f3f3f3;
+  font-size: 70rpx;
+  color: #ff7100;
+}
+
+/* 0.5px线条 */
+.thin-bd-b,
+.thin-bd-t {
+  position: relative;
+}
+.thin-bd-b:before,
+.thin-bd-t:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #f3f3f3;
+  transform: scaleY(0.5);
+  box-sizing: border-box;
+}
+.thin-bd-b:before {
+  bottom: 0;
+}
+.thin-bd-t:before {
+  top: 0;
+}

@@ -1,0 +1,25 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="winningRecord page" id="winningRecord">
+<view class="record-tab-list">
+   <view data-index="1" style="{{currentTabIndex == 1 ? ('color:' + storeStyle.theme + ';border-color:' + storeStyle.theme): ''}}" class="{{ currentTabIndex == 1 ? 'active' : '' }}" catchtap="clickTap">大转盘</view>
+   <view data-index="2" style="{{currentTabIndex == 2 ? ('color:' + storeStyle.theme + ';border-color:' + storeStyle.theme): ''}}" class="{{ currentTabIndex == 2 ? 'active' : '' }}" catchtap="clickTap">砸金蛋</view>
+   <view data-index="3" style="{{currentTabIndex == 3 ? ('color:' + storeStyle.theme + ';border-color:' + storeStyle.theme): ''}}" class="{{ currentTabIndex == 3 ? 'active' : '' }}" catchtap="clickTap">刮刮乐</view>
+</view>
+<view class="record-content-body">
+ <view class="scrollContainer">
+  <scroll-view scroll-y="">
+   <view class="record-wrap-list" wx:for="{{myPrizeList}}" wx:key="" data-id="{{item.id}}" hidden="{{myPrizeList==''}}">
+    <view class="record-name">{{item.prize_level}}:{{item.custom_prize_title}}</view>
+    <view class="record-name custom-record-name" wx:if="{{item.custom_prize_title != item.prize_title}}"><text>奖品</text>{{item.prize_title}}</view>
+    <view class="record-start">
+        <view class="record-apply">使用日期：{{item.start_use_date}}至{{item.end_use_date}}</view>
+    </view>
+    <view wx:if="{{item.coupon_type != 1}}" class="record-staus ico-moon icon-winning-record-{{item.is_selected=='0'?'nouse':'used'}}" style="color:{{item.is_selected=='0'?'#FF7100':'#999999'}}"></view>
+    <view class="record-end">中奖时间：{{item.add_time}}</view>
+   </view>
+   <view class="record-none" hidden="{{myPrizeList!=''}}">暂无任何中奖记录</view>
+  </scroll-view>
+ </view>
+ <!-- <view class="scrollContainer" hidden="{{currentTabIndex!=1}}"></view> -->
+</view>
+</view>

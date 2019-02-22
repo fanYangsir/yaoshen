@@ -1,0 +1,21 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view id="logisticsPage">
+  <view class="logistics-header">
+    <view class="logistics-company">承运公司：<text>{{ info.express_name }}</text></view>
+    <view>运单编号：<text>{{ info.LogisticCode || info.express_no }}</text></view>
+  </view>
+  <view class="logistics-container">
+    <block wx:if="{{ info.is_custom }}">
+      <text wx:for="{{ desArr }}" wx:key="" class="self-express {{index%2 == 1 ? 'express-phone' : ''}}" catchtap="{{ index%2 == 1 ? 'dialNumber' : ''}}" data-phone="{{ item }}">{{ index%2 == 1 ? '[' + item + ']' : item }}</text>
+    </block>
+    <block wx:else>
+      <view class="logistics-list">
+        <view wx:for="{{ logistics }}" wx:key="" class="logistics-item">
+          <view class="logistics-location">{{ item.AcceptStation }}</view>
+          <view class="logistics-time">{{ item.AcceptTime }}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+

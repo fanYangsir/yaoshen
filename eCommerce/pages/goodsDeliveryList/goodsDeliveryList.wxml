@@ -1,0 +1,18 @@
+<view wx:if="{{ showMap }}">
+  <map longitude="{{ centerLng }}" latitude="{{ centerLat }}" scale="14" controls="{{controls}}" markers="{{ markers }}" ></map>
+</view>
+<view class="delivery-list-box">
+  <view class="delivery-list" wx:for="{{ deliveryList }}" wx:key="" catchtap="selectDelivery" data-index="{{ index }}">
+    <text class="ico-moon icon-goods-location"></text>
+    <view class="delivery-list-content">
+      <view class="delivery-list-title">{{ item.contact_name }} {{ item.service_phone }}</view>
+      <view class="delivery-list-detail">{{  item.region_data.region_string + item.address_detail }}</view>
+      <view wx:if="{{ !statusFail }}">
+        <text class="delivery-lately" style="{{'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme}}" wx:if="{{ index == 0 }}">离你最近</text>
+        <text class="delivery-list-distance">距离当前定位{{ item.distance }}米</text>
+      </view>
+    </view>
+    <label style="{{deliveryId == item.id ? ('color:'+ storeStyle.theme) : ''}}" class="delivery-check-box ico-moon icon-success-tip {{ deliveryId == item.id ? 'checked' : '' }}"></label>
+  </view>
+</view>
+<view class="sure-delivery" style="{{'background:' + storeStyle.theme}}" catchtap="sureDelivery">选为自提点</view>

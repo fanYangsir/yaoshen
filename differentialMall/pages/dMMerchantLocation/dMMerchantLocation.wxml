@@ -1,0 +1,76 @@
+<!-- 搜索 start -->
+<view class="merchantLocation-search-wrap">
+  <view class="search-location">
+    <text class="ico-moon icon-fesadress"></text>
+    <text class="location-txt">{{locationCity.selectedCity}}</text>
+    <text class="ico-moon icon-downarrow"></text>
+  </view>
+  <view class="search-input">
+    <text class="ico-moon icon-search"></text>
+    <input type="text"  placeholder="输入首字母或城市名称" placeholder-class="search-input-pla" bindinput="searchInputHandler"></input>
+  </view>
+</view>
+<!-- 搜索 end -->
+
+<!-- 搜索结果 start -->
+<scroll-view scroll-y class="merchantLocation-search-citys-wrap" hidden="{{isHideSearchResult}}">
+  <block wx:for="{{searchCitys}}" wx:key="" wx:if="{{searchCitys && searchCitys !== 0}}">
+    <view class="city-name thin-bd-b" data-city-name="{{item.name}}" data-id="{{item.id}}" catchtap="chooseCity">{{item.name}}</view>
+  </block>
+</scroll-view>
+<!-- 搜索结果 end -->
+
+<view class="merchantLocation-main-wrap" hidden="{{!isHideSearchResult}}">
+  <!-- 定位/最近访问 start -->
+  <view class="merchantLocation-recents-wrap thin-bd-t">
+    <view class="city-title">定位/最近访问</view>
+    <view class="city-list" bindtap="chooseCity">
+      <view class="active" data-city-name="{{locationCity.city}}" data-lat="{{locationCity.location.lat}}" data-lng="{{locationCity.location.lng}}">{{locationCity.city}}</view>
+      <block wx:for="{{historyCitys}}" wx:key="historyCitys">
+      <view wx:if="{{item.city}}" data-city-name="{{item.city}}" data-id="{{item.id}}" hover-class="hover-city">{{item.city}}</view>
+      </block>
+    </view>
+  </view>
+  <!-- 定位/最近访问 end -->
+
+  <!-- 热门城市 start -->
+  <view class="merchantLocation-hot-wrap">
+    <view class="city-title">热门城市</view>
+    <view class="city-list" bindtap="chooseCity">
+      <block wx:for="{{hotCitys}}" wx:key="hotCitys">
+      <view data-city-name="{{item.name}}" data-id="{{item.id}}" hover-class="hover-city">{{item.name}}</view>
+      </block> 
+    </view>
+  </view>
+  <!-- 热门城市 end -->
+
+  <!-- 所有城市 start -->
+  <view class="merchantLocation-all-citys-wrap">
+    <block wx:for="{{citys}}" wx:key="">
+      <!-- <view class="initial-citys"> -->
+        <view class="initial-txt" id="{{item.strtoupper}}">{{item.strtoupper}}</view>
+        <block wx:for="{{item.data}}" wx:key="">
+          <view class="city-name thin-bd-b" data-city-name="{{item.name}}" data-id="{{item.id}}" catchtap="chooseCity">{{item.name}}</view>
+        </block>
+      <!-- </view> -->
+    </block>
+  </view>
+  <!-- 所有城市 end -->
+
+</view>
+
+<!-- 右边城市定位 start -->
+<view class="merchantLocation-city-wrap">
+  <view class="city-initial-title">城市定位</view>
+  <view class="city-initial-list" catchtouchmove="moveInitialCitys" catchtouchend="chooseTouchEnd">
+    <block wx:for="{{initialArr}}" wx:key="initialArr">
+    <text data-value="{{item}}" data-id="{{item}}" catchtap="chooseInitialCitys" catchtouchend="chooseTouchEnd">{{item}}</text>
+    </block>
+  </view>
+</view>
+<!-- 右边城市定位 end -->
+
+<view class="selected-initial-wrap" hidden="{{isHideInitial}}">
+  <text>{{selectedInitial}}</text>
+</view>
+

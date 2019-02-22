@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "微分商城",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+  },
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 100
+}

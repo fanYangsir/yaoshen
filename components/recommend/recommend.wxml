@@ -1,0 +1,116 @@
+<import src="../../components/wxParse/wxParse.wxml" />
+<template name="articleRecommendItem">
+  <view class="recommend-item">
+    <view class="recommend-article" style="width:{{item.style != 1 || item.form_data.url.video ? '70%' : '100%'}};">
+      <view class="recommend-content">{{item.title}}</view>
+      <view class="recommend-adver-footer" wx:if="{{item.article_type == 3}}">
+        <text class="recommend-adver-tag">推荐</text>
+        <time class="recommend-publish-time">{{item.publish_time}}</time>
+      </view>
+      <view wx:else class="recommend-key-words">
+        <text>{{item.comment_count}}评论</text>
+        <text>{{item.publish_time}}</text>
+      </view>
+    </view>
+    <view class="img-wrap" wx:if="{{item.style != 1 || item.form_data.url.video || item.form_data.video[0]}}">
+      <image src="{{item.imgs || item['form_data']['video'][0]['video_url'] || item['form_data']['url']['video']['cover']}}"></image>
+      <view class="icon-wrap" wx:if="{{item['form_data']['url']['video']['cover'] || item['form_data']['video'][0]['video_url']}}">
+        <icon class="ico-moon icon-news-video-play"></icon>
+      </view>
+    </view>
+  </view>
+</template>
+<view class="recommend-wrap">
+  <view class="recommend-box" wx:for="{{recommendInfo}}" wx:key="" wx:for-item="recommendItem">
+    <view class="more-operations" wx:if="{{recommendItem.recommend_type == 3 && recommendItem.recommend_info.length != 0}}">
+      <view class="recommend-title">更多操作</view>
+      <view class="operations{{recommendItem.recommend_info.length < 3 ? recommendItem.recommend_info.length : '3'}}">
+        <view wx:for="{{recommendItem.recommend_info}}" wx:key="" wx:for-item="recList">
+          <button class="sharefriends" open-type="share" wx:if="{{recList.action == 'share'}}" data-eventParams="{{recList}}" catchtap="onShareAppMessage">
+            <view class="icon-wrap">
+              <icon wx:if="{{recList.local_icon}}" class="ico-moon icon-news-sharefriends"></icon>
+              <image wx:else src="{{recList.iconImg}}"></image>
+            </view>
+            <view class="name">分享好友</view>
+          </button>
+          <view class="concat-custom" wx:elif="{{recList.action == 'contact'}}">
+            <view class="icon-wrap">
+              <icon wx:if="{{recList.local_icon}}" class="ico-moon icon-news-custom"></icon>
+              <image wx:else src="{{recList.iconImg}}"></image>
+              <button open-type="contact" session-from="newsDetail"></button>
+            </view>
+            <view class="name">联系客服</view>
+          </view>
+          <view wx:elif="{{recList.action == 'turn-to-xcx'}}">
+            <navigator target="miniProgram" open-type="navigate" app-id="{{recList['xcx-appid']}}" path="{{recList['xcx-page-url']}}" extra-data="" version="release">
+              <view class="icon-wrap">
+                <icon wx:if="{{recList.local_icon}}" class="ico-moon {{recList.local_icon}}"></icon>
+                <image wx:else src="{{recList.iconImg}}"></image>
+              </view>
+              <view class="name">{{recList.name}}</view>
+            </navigator>
+          </view>
+          <view wx:else catchtap="bindEventTapHandler" data-event-params="{{recList}}">
+            <view class="icon-wrap">
+              <icon wx:if="{{recList.local_icon}}" class="ico-moon {{recList.local_icon}}"></icon>
+              <image wx:else src="{{recList.iconImg}}"></image>
+            </view>
+            <view class="name">{{recList.name}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view  wx:elif="{{recommendItem.recommend_type == 0 && recommendItem.recommend_info.length > 0}}">
+      <view class="recommend-title">推荐文章</view>
+      <view class="recommmend-list" wx:for="{{recommendItem.recommend_info}}" wx:key="{{item.id}}" wx:if="{{item.is_publish == 1}}">
+        <navigator wx:if="{{item.article_type == 3 && item.form_data.event.action == 'turn-to-xcx'}}" target="miniProgram" open-type="navigate" app-id="{{item.form_data.event['xcx-appid']}}" path="{{item.form_data.event['xcx-page-url']}}" extra-data="" version="release">
+          <template is="articleRecommendItem" data="{{item}}"></template>
+        </navigator>
+        <view wx:elif="{{item.article_type == 3 && item.form_data.event.action == 'share'}}">
+          <button class="news-share-button" open-type="share" data-eventParams="{{newsItem.event_params}}" catchtap="onShareAppMessage">
+            <template is="articleRecommendItem" data="{{item}}"></template>
+          </button>
+        </view>
+        <view wx:elif="{{item.article_type == 3 && item.form_data.event.action == 'contact'}}">
+          <view class="contact-button">
+            <button open-type="contact" session-from="newsDetail"></button>
+            <template is="articleRecommendItem" data="{{item}}"></template>
+          </view>
+        </view>
+        <view wx:else data-id="{{item.id}}" catchtap="turnToArticle" data-article-type="{{item.article_type}}" data-event-params="{{item.event_params}}">
+          <template is="articleRecommendItem" data="{{item}}"></template>
+        </view>
+      </view>
+    </view>
+    <view class="goods-list" wx:elif="{{recommendItem.recommend_type == 1 && recommendItem.recommend_info.length > 0}}">
+      <view class="recommend-title">推荐商品</view>
+      <view class="recommmend-list recommend-item" wx:for="{{recommendItem.recommend_info}}" data-id="{{item.id}}" catchtap="turnToGoodsDetail" data-style="{{item.goods_type}}" wx:key="">
+        <view>
+          <view class="img-wrap">
+            <image src="{{item.cover}}"></image>
+          </view>
+          <view class="recommend-article">
+            <view class="recommend-goods-title">{{item.title}}</view>
+            <view class="recommend-goods-price" style="{{'color:' + storeStyle.theme}}">¥ {{item.price}}</view>
+            <view class="recommend-goods-sales">月销{{item.sales}}件</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="ticket" wx:elif="{{recommendItem.recommend_type == 2 && recommendItem.recommend_info.length > 0}}">
+      <view class="recommend-title">福利领取</view>
+      <block wx:for="{{recommendItem.recommend_info}}" wx:for-item="coupon" wx:key="">
+        <view class="recommmend-list" catchtap="gotoCouponDetail" data-coupon-id="{{ coupon.id }}">
+          <view class="top-section">
+            <image src="{{ appLogo }}"></image>
+            <view class="detail-info">
+              <view class="name">{{ coupon.title }}</view>
+              <view class="use-condition">使用条件：{{ coupon.discount }}</view>
+            </view>
+            <view class="receive-btn" catchtap="gotoCouponDetail" data-coupon-id="{{ coupon.id }}" >领取</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,193 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="luckyWheelDetail page" id="luckyWheelDetail">
+<image class="lucky-cantaniner" src="{{activityData.background || 'http://cdn.jisuapp.cn/static/webapp/images/phone-container.png'}}"></image>
+<view class="pageMusic {{isPlay==true?'active':''}}" bindtap='playMusics' wx:if="{{activityData.bgm!=0}}">
+ <text wx:if="{{isPlay==true}}" class="ico-moon icon-luckyMusic"></text> 
+ <text wx:if="{{isPlay==false}}" class="ico-moon icon-luckyMute"></text>
+ <audio id="luckyAudio" wx:if="{{goldenData.bgm != 0}}" src="{{activityData.bgm}}" bindplay="audioPlay" bindpause="audioPause" loop></audio>
+</view>
+
+<view class="lucky-wheel-content">
+  <view wx:if="{{activityData.category=='1'}}" class="motive-square">
+    <image src="http://cdn.jisuapp.cn/static/webapp/images/phone-surprise.png"></image>
+  </view>
+  <view wx:else class="motive" >
+    <image src="http://cdn.jisuapp.cn/static/webapp/images/phone-motive.png"></image>
+  </view>
+ 
+ <view class="wholeDiv" style="background:{{activityData.category==1?'rgba(97, 65, 116, 0.6)':'rgba(243,190,30,.3)'}}">
+   <view class="todayChance" style="color:{{activityData.category==1?'#fff':'#6b3600'}}">
+      你今日还剩<label style="color:{{activityData.category==1?'#fed932':'#ff090f'}}">{{opportunities}}</label>次抽奖机会
+    </view>
+    <view class="personNum" style="color:{{activityData.category==1?'#fff':'#6b3600'}};display:{{activityData.joined_show=='-1'?'none':'inline-block'}}">
+      ,共有<label style="color:{{activityData.category==1?'#fed932':'#ff090f'}}">{{activityData.joined_show}}</label>人参加活动
+    </view>
+ </view>
+    <view wx:if="{{activityData.category=='1'}}" id="plateDiv">
+      <image id="plate_img" src="http://cdn.jisuapp.cn/static/webapp/images/startSquare.png" bindtap="tipClick"></image>
+      <view class="plate-cont">
+        <image src="http://cdn.jisuapp.cn/static/webapp/images/phone-square.gif"></image>
+        <view class="zf zf{{groupindex}}" data-id="{{item.id}}" wx:for="{{activityData.turntable}}" wx:for-index="groupindex" style="background-color:{{(groupindex===indexSelect)?colorAwardSelect:colorAwardDefault}};" wx:key="">
+          <image src="{{item.prize_logo}}"></image>
+          <view>{{item.prize_title}}</view>
+        </view>
+        
+      </view>
+    </view>
+    <view wx:else id="outDiv">
+      <image id="tip" src="http://cdn.jisuapp.cn/static/webapp/images/phone-start.png" bindtap="tipClick" data-id="{{activityData.id}}"></image>
+      <view class="outer-cont" animation="{{animationData}}">
+      <image class="img" src="http://cdn.jisuapp.cn/static/webapp/images/phone-wheel.gif"></image>
+       <view class="zp zp{{groupindex}}" data-id="{{item.id}}" wx:for="{{activityData.turntable}}" wx:for-index="groupindex" wx:key="">
+        <label>{{item.prize_title}}</label>
+        <image src="{{item.prize_logo}}"></image>
+       </view>
+      </view>
+    </view>
+    
+    <view class="structurePrize">
+      <view class="lookPrize" catchtap="clickpagePrize">查看奖品</view>
+      <view class="exchangePrize" style="display:{{activityData.integral_exchange==0?'none':'inline-block'}}" bindtap="exchangePrize">积分兑换</view>
+    </view>
+    <view class="winList">
+      <view class="wintitle">中奖名单</view>
+      <view class="winCon" style="background:{{activityData.category==1?'#6b4780':'#AE2C53'}}">
+       <view class="winconList" animation="{{winListData}}">
+        <view wx:for="{{winnerList}}" wx:key="">{{item.nickname}}抽中{{item.prize_title}}</view>
+       </view>
+       <view class="winconList" animation="{{winListData2}}">
+        <view wx:for="{{winnerList}}" wx:key="">{{item.nickname}}抽中{{item.prize_title}}</view>
+       </view>
+      </view>
+    </view>
+    <view class="active-rule">
+     <view class="active-rule-title">活动规则</view>
+     <view class="strip-content" style="background:{{activityData.category==1?'#6b4780':'#AE2C53'}}">
+       <view class="strip-time"><label>活动时间：</label><label class="specific-time">{{activityData.start_time}}-{{activityData.end_time}}</label></view>
+       <view class="textValue" style="word-break:break-all;"><text>{{activityData.description}}</text></view>
+       <view class="prizedTotalBox" wx:if="{{activityData.user_times_initial > 0}}"><label class="prizeDisc">·</label>用户每日首次登录可获取<label>{{activityData.user_times_initial}}</label>次抽奖机会</view>
+       <view class="drawTotalTimes"><label class="prizeDisc">·</label>每日抽奖机会最多为<label>{{activityData.user_times=='-1'?'无数':activityData.user_times}}</label>次</view>
+       <view class="exchangeTimes" wx:if="{{activityData.integral_exchange!='0'}}"><label class="prizeDisc">·</label>每<label>{{activityData.integral_exchange=='0'?'0':activityData.integral_exchange}}</label>积分可兑换一次抽奖机会</view>
+       <view class="sharesTimes" wx:if="{{activityData.time_share!='0'}}"><label class="prizeDisc">·</label>每成功分享1个好友可增加<label>{{activityData.time_share=='0'?'0':activityData.time_share}}</label>次抽奖机会，最多可增加<label>{{activityData.time_share_limit=='0'?'0':activityData.time_share_limit}}</label>次机会</view>
+     </view>
+    </view>
+</view>
+<!--抽奖次数用完可以分享给好友弹窗-->
+<view class="duraMaxDiv" wx:if="{{duraMax==1}}">
+    <view class="duraMaxDiv-wrap">
+      <view class="duraMaxDiv-con">
+            <view>对不起,您的抽奖<label class="balance">次数不足</label></view>
+      </view>
+      <view class="duraMaxDiv-btns">
+        <div class="duraMaxDiv-cancel" bindtap="sureClick">确定</div>
+        <button class="duraMaxDiv-confirm" open-type="share">获取更多</button>
+        
+      </view>
+    </view>
+</view>
+<!-- 抽奖次数用完不可分享给好友弹窗 -->
+<view class="degreeDiv" wx:if="{{isdegree==1}}">
+    <view class="degreeDiv-wrap">
+      <view class="degreeDiv-con">
+            <view>对不起,您的抽奖<label class="balance">次数不足</label></view>
+      </view>
+      <view class="degreeDiv-btns">
+        <div class="degreeDiv-confirm" bindtap='degreeClick'>确定</div>
+        <div class="degreeDiv-cancel" bindtap="degreeClick">取消</div>
+      </view>
+    </view>
+</view>
+<!-- 抽中奖品弹窗 -->
+   
+
+<view class="Congratulations_sick" wx:if="{{congratulation==1}}" bindtap="shadeClose">
+  <view class="Congratulations_wrap">
+    <view class="Congratulations-con">
+      <image src="http://cdn.jisuapp.cn/static/webapp/images/Congratulations.png"></image>
+      <label>{{prize_title}} </label>
+    </view>
+    <view class="Congratulations-btns">
+      <button wx:if="{{ifWxCoupon}}" class="btns Congratulations-confirm" style="margin-left: 62px;" catchtap="toAddCard">立即领取</button>
+      <button wx:else class="btns Congratulations-confirm" style="margin-left: 62px;" catchtap="confirmClick">确定</button>
+      <button class="btns Congratulations-share" style="margin-left: 25px;" open-type="share">传达喜悦</button>
+    </view>
+  </view>
+ </view>
+ <!-- 我的中奖记录弹窗 -->
+ <view class="record_sick" bindtap="clickRecordSick" wx:if="{{ recordSick == 1}}">
+    <view class="record_wrap" catchtap="stopPropagation">
+        
+      <view class="record_header"></view>
+      <view class="record_content">
+       <image class="img_con" style="display:{{RecordSickArr==''?'none':'block'}}" src="http://cdn.jisuapp.cn/static/webapp/images/prize_con.png"></image>
+        <view class="content_title">
+            <view class="record_line"></view>
+          <label>中奖时间</label>
+          <label>获得奖品</label>
+        </view>
+        <scroll-view scroll-y class="prizeList" hidden="{{RecordSickArr==''}}">
+         <view wx:for="{{RecordSickArr}}" wx:key=""><label>{{item.add_time}}</label><label>{{item.prize_title}}</label></view>
+        </scroll-view>
+        <view class="record_fail" hidden="{{RecordSickArr!=''}}">
+          <image src="http://cdn.jisuapp.cn/static/webapp/images/prize_fail.png"></image>
+          <view>暂未获得任何奖品哦~</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 安慰奖弹窗 -->
+  <view class="consolation_sick" wx:if="{{comfort==1}}" bindtap="shadeClose">
+    <view class="consolation_wrap">
+      <view class="consolation_title">安慰奖
+          <view class="conBefore"></view>
+          <view class="conAfter"></view>
+      </view>
+      <view class="consolation_con">
+        <image src="http://cdn.jisuapp.cn/static/webapp/images/consolation.png"></image>
+        <view wx:if="{{ifGetComfort}}" class="comfortText">已领取，在微信卡包中查看哦~</view>
+        <view wx:else class="comfortText" class="comfortText">又没中奖，送你一个小礼品</view>
+        <view wx:if="{{!ifWxCoupon && !ifGetComfort}}" class="comfortText">在优惠券卡包进行查收哦~</view>
+      </view>
+        <view wx:if="{{ifWxCoupon}}" class='comfortCouponBtn'>
+            <button class="push consolation_share" catchtap='toAddCard'>立即领取</button>
+            <button class="push consolation_confirm" catchtap="shadeClose">确定</button>
+        </view>
+        <view wx:else class="consolation_btns">
+            <button class="push consolation_confirm" catchtap="comfortClick">确定</button>
+        </view>
+    </view>
+  </view>
+  <!-- 积分兑换弹窗 -->
+  <view class="exchange" wx:if="{{isExchange==1}}">
+    <view class="exchange-wrap">
+      <view class="exchange-con">
+        <view class="exchangeCan">可兑换次数：<label>{{exchangeMessage.exchange_times}}</label><label>次</label></view>  
+        <view class="exchangeLimit">兑换次数：<input type="text" bindinput="bindReplaceInput" value="{{inputValue}}"/><label class="exchangeAll" bindtap="exchangeAll">全部兑换</label></view>
+        <view class="exchangeRule">兑换规则：<label>{{exchangeMessage.integral_exchange}}</label>分/次</view>
+        <view class="exchangeBalance">积分余额：<label>{{exchangeMessage.can_use_integral}}</label>分</view>
+      </view>
+      <view class="exchange-btns">
+        <view class="exchange-cancel" bindtap="exchangeCancel">取消</view>
+        <view class="exchange-confirm" bindtap="exchangeConfirm">确定</view>
+      </view>
+    </view>
+  </view>
+  <!-- 未中奖弹窗 -->
+  <view class="notwinning_sick" wx:if="{{prizeFail==1}}">
+    <view class="notwinning_wrap">
+      <view class="notwinning_title">未中奖
+          <view class="conBefore"></view>
+          <view class="conAfter"></view>
+      </view>
+      <view class="notwinning_con">
+        <image src="http://cdn.jisuapp.cn/static/webapp/images/notWinning.png"></image>
+        <view>很遗憾！</view>
+        <view>您什么都没抽中哦~</view>
+      </view>
+      <view class="notwinning_btns">
+        <button class="push notwinning_confirm" bindtap="notwinningClick">确定</button>
+        <!-- <button class="push notwinning_share" style="margin-left: 36rpx;" data-type="share" open-type="share">分享给好友    </button> -->
+      </view>
+    </view>
+  </view>
+</view>

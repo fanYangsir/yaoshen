@@ -1,0 +1,98 @@
+.vip-banner{
+  width: 100%;
+  height: 220rpx;
+}
+.vip-banner image{
+  width: 100%;
+  height: 100%;
+}
+.vip-list{
+  padding: 0 20rpx;
+}
+.vip-item{
+  position: relative;
+  width: 100%;
+  margin-top: 40rpx;
+  border-radius: 10rpx;
+  background-size:cover;
+  background-position: center center;
+}
+.vip-item:nth-child(odd){
+  background: -webkit-linear-gradient(#FFD23A , #FFB411);
+  background: linear-gradient(#FFD23A , #FFB411)
+}
+.vip-item:nth-child(even){
+  background: -webkit-linear-gradient(#36E6FE, #12ABFF);
+  background: linear-gradient(#36E6FE, #12ABFF)
+}
+.vip-item-cover{
+  display: inline-block;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin: 25rpx;
+  overflow: hidden;
+  vertical-align: top;
+}
+.vip-item-cover image{
+  width: 100%;
+  height: 100%;
+}
+.vip-item-info{
+  display: inline-block;
+  min-height: 134rpx;
+  color: #fff;
+  margin-right: 30rpx;
+  vertical-align: top;
+  margin-bottom: 30px;
+}
+.vip-item-title{
+  font-size: 26rpx;
+  margin-top: 25rpx;
+}
+.vip-item-rights{
+  font-size: 24rpx;
+  margin-top: 10rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.vip-item-bottom{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 45rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  font-size: 22rpx;
+  color: #fff;
+  line-height: 45rpx;
+  text-align: right;
+  background-color: rgba(0, 0, 0, .25);
+  border-radius: 0 0 10rpx 10rpx;
+}
+
+.no-receive-card .tip-area {
+  padding-top: 150rpx;
+  text-align: center;
+}
+.no-receive-card .tip-img {
+  display: block;
+  width: 120px;
+  height: 90px;
+  margin: 0 auto 22px;
+}
+.no-receive-card .tip-text-1 {
+  display: block;
+  margin-bottom: 10px;
+  color: #888;
+  font-size: 20px;
+}
+.no-receive-card .tip-text-2 {
+  display: block;
+  color: #b2b2b2;
+  font-size: 14px;
+}

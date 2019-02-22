@@ -1,0 +1,49 @@
+/* differentialMall/pages/dMCouponSuccess/dMCouponSuccess.wxss */
+.couponSuccess-main-wrap {
+  height: 100%;
+  background-color: #fff;
+  box-shadow:0 2rpx 8rpx 0 rgba(41,41,41,0.05) inset;
+}
+.couponSuccess-main-wrap .success-img {
+  width: 100%;
+  padding: 80rpx 0 40rpx;
+
+}
+.couponSuccess-main-wrap .success-tip-title {
+  width: 533rpx;
+  height: 381rpx;
+  margin: 0 auto;
+  font-size: 38rpx;
+  color: #000;
+  text-align: center;
+  background-image: url('http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/exchange_success_bg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.couponSuccess-main-wrap .success-tip-title text {
+  display: inline-block;
+  padding-top: 56rpx;
+  color: #000;
+}
+.couponSuccess-main-wrap .success-tip-content {
+  display: block;
+  max-width: 618rpx;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 26rpx;
+  line-height: 33rpx;
+  color: #999;
+}
+.couponSuccess-main-wrap .jump-btn {
+  height: 86rpx;
+  width: 618rpx;
+  margin: 78rpx auto;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 86rpx;
+  color:#fff;
+  background:linear-gradient(-105deg,rgba(255,163,53,1),rgba(239,62,42,1));
+  box-shadow:0rpx 4px 16rpx 0px rgba(238,120,22,0.36);
+}

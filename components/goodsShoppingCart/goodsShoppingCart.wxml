@@ -1,0 +1,48 @@
+<view class="goods-detail-dialog" hidden="{{ !isVisibled }}">
+  <view class="goods-detail-contain">
+    <view class="ico-moon icon-closes" bindtap="hideDialog"></view>
+    <view class="goods-detail-header">
+      <image class="goods-cover" src="{{ selectGoodsModelInfo.imgurl || goodsInfo.cover }}"></image>
+      <view class="select-goods-info">
+        <view class="goods-price">
+        <text style="{{'color:' + storeStyle.theme }}">¥ {{ selectGoodsModelInfo.price }}</text>
+          <!-- <text style="{{'color:' + storeStyle.theme }}" wx:if="{{selectGoodsModelInfo.price != '0.00'}}">¥ {{ selectGoodsModelInfo.price }}</text>
+          <text style="{{'color:' + storeStyle.theme }}" wx:if="{{selectGoodsModelInfo.price != '0.00' && selectGoodsModelInfo.max_can_use_integral != 0}}">+</text>
+          <text style="{{'color:' + storeStyle.theme }}" wx:if="{{selectGoodsModelInfo.max_can_use_integral != 0}}">{{ selectGoodsModelInfo.max_can_use_integral }}积分</text> -->
+          <text class="virtualPrice" wx:if="{{ showVirtualPrice && selectGoodsModelInfo.virtual_price != 0 }}">¥ {{selectGoodsModelInfo.virtual_price}}</text>
+        </view>
+        <view class="goods-stock">库存{{ selectGoodsModelInfo.stock }}</view>
+        <view wx:if="{{selectGoodsModelInfo.models_text}}" class="select-model">已选：{{ selectGoodsModelInfo.models_text }}</view>
+      </view>
+    </view>
+    <view class="goods-detail-content">
+      <view class="goods-dialog-content" hidden="{{ !goodsInfo.model_items.length }}">
+        <view class="goods-model" wx:for="{{ goodsInfo.model }}" wx:key="" wx:for-item="model" wx:for-index="modelIndex">
+          <view class="model-title">{{ model.name }}</view>
+          <view class="sub-model">
+            <text wx:for="{{ model.subModelName }}"
+                  wx:for-item="name"
+                  wx:key=""
+                  data-model-index="{{ modelIndex }}"
+                  data-submodel-index="{{ index }}"
+                  class="subModel {{ selectGoodsModelInfo.models[modelIndex] == model.subModelId[index] ? 'select' : '' }}"
+                  data-submodel-id="{{ model.subModelId[index] }}" bindtap="selectGoodsSubModel"
+                  style="{{ selectGoodsModelInfo.models[modelIndex] == model.subModelId[index] ? 'background:' + storeStyle.theme + '33;color:' + storeStyle.theme + ';border-color:' + storeStyle.theme : '' }}">{{ name }}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="goods-num-contain">
+      <text class="goods-num-title">购买数量：</text>
+      <view class="good-number-box pull-right">
+        <view class="goods-minus" data-index="{{ goodsIndex }}" catchtap="clickGoodsMinusButton">-</view>
+        <input class="goods-count" data-index="{{ goodsIndex }}" type="number" value="{{ selectGoodsModelInfo.buyCount }}" bindinput="inputBuyCount" />
+        <view class="goods-plus" data-index="{{ goodsIndex }}" catchtap="clickGoodsPlusButton">+</view>
+      </view>
+    </view>
+    <view class="goods-shopping-bottom">
+      <view style="{{'background:' + storeStyle.secondary + ';color:' + (storeStyle.secondary == '#ACD3FA' || storeStyle.secondary == '#FFCFDF' || storeStyle.secondary == '#ffffff' || storeStyle.secondary == '#DFF3ED' || storeStyle.secondary == '#FAF7ED' ? storeStyle.theme : '')}}" class="add-shoppingcart" bindtap="sureAddToShoppingCart">加入购物车</view>
+      <view wx:if="{{ showBuyNow }}" style="{{'background:' + storeStyle.theme }}" class="now-buy" bindtap="goPreviewGoodsOrder">立即购买</view>
+    </view>
+  </view>
+</view>

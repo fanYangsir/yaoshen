@@ -1,0 +1,85 @@
+.winningRecord{
+  height: 100%;
+  background:#f3f3f3;
+
+}
+.record-tab-list{
+  position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    line-height: 85rpx;
+    background: #fff;
+    text-align: center;
+}
+.record-tab-list view{
+    width: 33%;
+    float: left;
+    border-bottom: 1px solid transparent;
+}
+.record-tab-list view.active{
+   color: #ff7100;
+   border-color: #ff7100;
+}
+.record-content-body{
+  margin-top: 105rpx;
+}
+.record-wrap-list{
+  padding: 32rpx 23rpx;
+  background: #fff;
+  margin: 0 24rpx 20rpx 24rpx;
+  border-radius: 10rpx;
+  position: relative;
+  overflow: hidden;
+}
+.record-name{
+  color: #333333;
+  font-size: 32rpx;
+  margin-bottom: 24rpx;
+}
+.custom-record-name{
+  font-size: 28rpx;
+  margin-bottom: 24rpx;
+}
+.custom-record-name>text{
+  width:72rpx;
+  height:38rpx;
+  border:1px solid rgba(255,54,0,0.4);
+  border-radius:1px;
+  text-align: center;
+  line-height: 38rpx;
+  font-size: 22rpx;
+  color: #FF3600;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.record-start{
+  color: #999;
+  height: 42rpx;
+  line-height: 42rpx;
+  font-size: 26rpx;
+}
+.record-start .record-apply{
+  float: left;
+}
+.record-staus{
+  position: absolute;
+  top: -36rpx;
+  right: -36rpx;
+  font-size: 230rpx;
+  opacity: 0.6;
+}
+.record-end{
+  color: #999;
+  height: 42rpx;
+  line-height: 42rpx;
+  font-size: 26rpx;
+}
+.record-none{
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #c2c2c2;
+  background: #fff;
+}

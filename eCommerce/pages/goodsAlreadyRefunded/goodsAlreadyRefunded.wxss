@@ -1,0 +1,65 @@
+page {
+  background: #f3f3f3;
+}
+.already-goods-box {
+  padding: 0 30rpx;
+  background: #fff;
+}
+.goods-detail-box image{
+  width: 156rpx;
+  height: 156rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+.goods-detail-box {
+  padding: 30rpx 0;
+  border-bottom: 1px solid #F3F3F3;
+}
+.goods-detail-box > view {
+  width: 506rpx;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 28rpx;
+}
+.goods-name {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 36rpx;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  display: -webkit-box; 
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; 
+}
+.goods-rules {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 8rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.goods-price {
+  font-size: 24rpx;
+  color: #333;
+  margin-top: 12rpx;
+}
+.colorff7 {
+  color: #ff7100;
+}
+.already-price {
+  font-size: 26rpx;
+  padding: 20rpx 0;
+  color: #333;
+}
+.is-seckill {
+  display:inline-block;
+  padding: 0 10rpx;
+  background: #f2303e;
+  color: #fff;
+  font-size: 22rpx;
+  height: 26rpx;
+  line-height: 26rpx;
+  margin-right: 10rpx;
+  border-radius: 4rpx;
+}

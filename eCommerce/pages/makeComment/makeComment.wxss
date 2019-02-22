@@ -1,0 +1,169 @@
+page {
+  background-color: #f3f3f3;
+}
+.makeCom-wrap {
+  margin-top: 10rpx;
+  padding-bottom: 100rpx;
+}
+.makeCom-item {
+  background-color: #fff;
+  padding: 30rpx;
+}
+.makeCom-goods-cover {
+  width: 156rpx;
+  height: 156rpx;
+  vertical-align: top;
+}
+.makeCom-textarea {
+  display: inline-block;
+  width: 100%;
+  font-size: 26rpx;
+  height: 176rpx;
+  line-height: 37rpx;
+  border-top: 1rpx solid #F3F3F3;
+  padding:30rpx 0;
+  margin-top:30rpx;
+}
+.makeCom-textarea:focus {
+  outline: none;
+}
+.makeCom-upload-pic {
+  position: relative;
+  display: inline-block;
+  height: 146rpx;
+  width: 146rpx;
+  color: #D2D2D2;
+  font-size: 22rpx;
+  border: 1rpx solid #D2D2D2;
+  text-align: center;
+  vertical-align: top;
+}
+.makeCom-upload-pic view {
+  font-size: 28px;
+  line-height: 35px;
+}
+.makeCom-upload-pic input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.makeCom-level-container {
+  display: flex;
+}
+.makeCom-level-span {
+  flex: 1;
+  font-size: 26rpx;
+  color: #D2D2D2;
+}
+.makeCom-level-span label {
+  display: inline-block;
+  width: 50rpx;
+  height: 40rpx;
+  font-size: 32rpx;
+  vertical-align: middle;
+}
+.makeCom-level-span.active {
+  color: #ff7100;
+}
+.makeCom-pic-wrap {
+  position: relative;
+  display: inline-block;
+  width: 150rpx;
+  height: 150rpx;
+  vertical-align: top;
+  margin-right: 30rpx;
+}
+.makeCom-pic-container image {
+  width: 100%;
+  height: 100%;
+}
+.makeCom-remove-pic {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30rpx;
+  height: 30rpx;
+  font-size: 22rpx;
+  text-align: center;
+  line-height: 30rpx;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+}
+.makeCom-mark-container {
+  display: inline-block;
+  font-size: 34rpx;
+  color: #d2d2d2;
+  vertical-align: middle;
+}
+.makeCom-mark-container .icon-star,
+.makeCom-mark-container .icon-star-empty {
+  display: inline-block;
+  height: 30rpx;
+  width: 30rpx;
+  text-align: center;
+  margin-right: 20rpx;
+}
+.makeCom-mark-container .icon-star {
+  color: #ff7100;
+}
+.submit-comment {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 88rpx;
+  line-height: 88rpx;
+  color: #fff;
+  background: #ff7100;
+  text-align: center;
+  font-size: 30rpx;
+}
+.make-header-right {
+  width: 505rpx;
+  display: inline-block;
+  margin-left: 30rpx;
+  vertical-align: top;
+}
+.goods-name {
+  font-size: 26rpx;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 37rpx;
+  margin-bottom: 20rpx;
+}
+.shop-title {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+  border-bottom: 1px solid #f3f3f3;
+  line-height:88rpx;
+}
+.evaluat-title {
+  font-size: 26rpx;
+  color: #333;
+}
+.evaluat-box {
+  line-height: 56rpx;
+}
+.makeCom-upload-pic .icon-goods-add-image {
+  font-size:80rpx;
+  display:block;
+  margin-top:22rpx;
+  margin-bottom:10rpx;
+}
+.shop-title text {
+  display:inline-block;
+  vertical-align:middle;
+}
+.shop-title .icon-store2 {
+  font-size: 36rpx;
+  color: #666666;
+  margin-right: 16rpx;
+}

@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText":"收藏夹",
+    "usingComponents":{
+        "component-getUserInfo": "/components/getUserInfo/getUserInfo",
+        "component-goodsShoppingCart": "/components/goodsShoppingCart/goodsShoppingCart"
+    }
+}

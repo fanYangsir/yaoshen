@@ -1,0 +1,16 @@
+<view class="already-goods-box">
+  <block wx:for="{{ alreadyGoods }}" wx:key="">
+    <view class="goods-detail-box" wx:if="{{ item.refunded_num > 0 }}">
+      <image src="{{ item.cover }}"></image>
+      <view>
+        <view class="goods-name"><text class="is-seckill" wx:if="{{ item.is_group_buy_order && item.is_group_buy_order != 0 }}">拼团</text><text class="is-seckill" wx:if="{{ item.is_seckill == 1 }}">秒杀</text><text class="is-seckill" wx:if="{{ item.is_benefit_goods == 1 }}">赠品</text>{{ item.goods_name }}</view>
+        <view wx:if="{{ item.model_value }}" class="goods-rules">{{ item.model_value }}</view>
+        <view class="goods-price">
+          <text class="colorff7">¥{{ item.price }}</text>
+          <text class="pull-right">x {{ item.refunded_num }}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="already-price">退款金额 <text class="pull-right colorff7">￥{{ refundPrice }}</text></view>
+</view>

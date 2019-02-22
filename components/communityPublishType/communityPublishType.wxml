@@ -1,0 +1,20 @@
+<view hidden="{{!communityPublishType.show}}" class="communityPublishType-wrap" catchtouchmove=" ">
+  <view class="communityPublishType-list">
+    <view class="type-default communityPublishType-type"
+          data-type="default" bindtap="turnToCommunityPublish">
+      <view class="type-image"><image src="https://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/pocket/community_default.png" alt=""></image></view>
+      <view class="type-text">
+        <view class="type-title">图文</view>
+        <view class="type-desc">拍照或相册上传</view>
+      </view>
+    </view>
+    <view class="type-link communityPublishType-type" data-type="link" bindtap="turnToCommunityPublish">
+      <view class="type-image"><image src="https://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/pocket/community_link.png" alt=""></image></view>
+      <view class="type-text">
+        <view class="type-title">文章/视频</view>
+        <view class="type-desc">公众号文章或腾讯视频链接</view>
+      </view>
+    </view>
+  </view>
+  <view class="return-btn" bindtap="returnBack"><label class="ico-moon icon-closes"></label></view>
+</view>

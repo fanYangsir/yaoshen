@@ -1,0 +1,137 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-share pageQRCodeData="{{pageQRCodeData}}"></component-share>
+<view class="collage-myOrder">
+  <view class="collage-section collage-classify">
+    <view class="total-classify">
+      <view class="{{isLeader? 'active': ''}}  isRelative" catchtap="changeIdentity" data-isLeader="true">
+        我发起的团
+        <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+          <button formType="submit" hover-class="none" class='invisibleclass'>
+          </button>
+        </form>
+      </view>
+      <view class="{{!isLeader? 'active': ''}} isRelative" catchtap='changeIdentity' data-isLeader="false">
+        我参与的团
+        <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+          <button formType="submit" hover-class="none" class='invisibleclass'>
+          </button>
+        </form>
+      </view>
+    </view>
+    <scroll-view class="branch-classify" scroll-x="true">
+      <view class="{{type == '0' ? 'active' : ''}} isRelative" catchtap='changeType' data-type='0'>
+        全部
+        <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+          <button formType="submit" hover-class="none" class='invisibleclass'>
+          </button>
+        </form>
+      </view>
+      <view class="{{type == '2' ? 'active' : ''}} isRelative" catchtap='changeType' data-type='2'>
+        拼团中
+        <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+          <button formType="submit" hover-class="none" class='invisibleclass'>
+          </button>
+        </form>
+      </view>
+      <view class="{{type == '3' ? 'active' : ''}} isRelative" catchtap='changeType' data-type='3'>
+        拼团成功
+        <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+          <button formType="submit" hover-class="none" class='invisibleclass'>
+          </button>
+        </form>
+      </view>
+      <view class="{{type == '4' ? 'active' : ''}} isRelative" catchtap='changeType' data-type='4'>
+        拼团结束
+        <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+          <button formType="submit" hover-class="none" class='invisibleclass'>
+          </button>
+        </form>
+      </view>
+      <view class="{{type == '5' ? 'active' : ''}} isRelative" catchtap='changeType' data-type="5" wx:if="{{isLeader}}">
+        已关闭
+        <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+          <button formType="submit" hover-class="none" class='invisibleclass'>
+          </button>
+        </form>
+      </view>
+    </scroll-view>
+
+  </view>
+  <view class="collage-section collage-content">
+    <block wx:if="{{haveData}}">
+      <view class="data-list">
+        <view class="data-item  isRelative" wx:for="{{goodsList}}" wx:key="" catchtap="goToGroupDetail" data-teamToken="{{item.team_token}}">
+          <view class="state-wrap">
+            <view class="timetable">
+              {{item.add_time}}
+            </view>
+            <view class="status" style="color: {{item.current_status_title != '拼团中' ? '#666' : '#ff7100'}}">
+              {{item.current_status_title}}{{item.current_status == 2 ? (item.expired) : ''}}
+            </view>
+          </view>
+          <view class="infor-wrap">
+            <view class="image-wrap">
+              <image src="{{item.goods_info[0].cover}}"></image>
+            </view>
+            <view class="detail-wrap">
+              <view class="title">
+                {{item.goods_info[0].goods_name}}
+              </view>
+              <view class="buy-infor">
+                <view class="price">
+                  <text>{{item.activity_type== 0 ?  item.max_user_num + '人团' : (item.activity_type == 1 ? '新人团' : (item.activity_type == 2 ? '阶梯团' : (item.activity_type ==  3 ? '帮帮团' :  '抽奖团')))}} {{item.data.type}} ¥ </text>
+                  <text>{{item.goods_info[0].price}}</text>
+                </view>
+                <view class="num">
+                  x{{item.goods_info[0].num}}
+                </view>
+              </view>
+              <view class="btn-wrap">
+                <block wx:if="{{item.current_status==1}}">
+                  <view class="buy-now orange">
+                    立即支付
+                  </view>
+                  <view class="not-spelling empty">
+                    不拼了
+                  </view>
+                </block>
+                <block wx:elif="{{item.current_status==2}}">
+                  <view class="invite-friends orange" catchtap="inviteFriends" data-index="{{item.index}}">
+                    邀请好友
+                  </view>
+                </block>
+                <block wx:elif="{{item.current_status ==3}}">
+                  <view class="spell-again orange" catchtap="openNewGroup" data-goodsId="{{item.goods_id}}" data-activityId="{{item.activity_id}}" data-status="{{item.current_status}}" data-type="{{item.activity_type}}" data-groupbuy="{{item.is_group_buy}}">
+                    再拼一次
+                  </view>
+                  <view class="order-progress empty" catchtap="gotoGoodsOrder" data-teamToken="{{item.team_token}}" data-orderid="{{item.order_id}}" wx:if="{{item.order_status != 7}}">
+                    订单进度
+                  </view>
+                </block>
+                <block wx:elif="{{item.current_status ==4}}">
+                  <view class="spell-again orange" catchtap="openNewGroup" data-goodsId="{{item.goods_id}}" data-activityId="{{item.activity_id}}" data-status="{{item.current_status}}" data-groupbuy="{{item.is_group_buy}}">
+                    再拼一次
+                  </view>
+                </block>
+              </view>
+            </view>
+          </view>
+         
+        </view>
+      </view>
+      <view class="no-more">
+        暂无更多拼购
+      </view>
+    </block>
+    <block wx:else>
+      <view class="no-collage">
+        <view class="image-wrap">
+          <image src="http://cdn.jisuapp.cn//zhichi_frontend/static/webapp/images/group/no-collage.png"></image>
+        </view>
+        <view class="tip-wrap">
+          暂无拼团
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

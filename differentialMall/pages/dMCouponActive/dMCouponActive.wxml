@@ -1,0 +1,47 @@
+<view class="couponActive-main-wrap">
+  <!-- 优惠券信息 start -->
+  <view class="coupon-item">
+    <view class="coupon-info">
+      <image class="merchant-img" src="{{couponDetail.logo}}" mode="aspectFill"></image>
+      <view class="coupon-name-condition">
+        <text class="coupon-name">{{couponDetail.title}}</text>
+        <text class="use-condition" wx:if="{{couponDetail.type == 0}}">使用条件：满{{ couponDetail.condition }}元，减{{ couponDetail.value }}元</text>
+        <text class="use-condition" wx:if="{{couponDetail.type == 1}}">使用条件：打{{ couponDetail.value }}折</text>
+        <text class="use-condition" wx:if="{{couponDetail.type == 2}}">使用条件：可抵扣{{ couponDetail.value }}元</text>
+        <view class="use-condition" wx:if="{{couponDetail.type == 3 && couponDetail.extra_condition == '' }}">使用条件: 直接兑换{{ couponDetail.coupon_goods_info.title }} </view>
+        <view class="use-condition" wx:elif="{{couponDetail.type == 3 && couponDetail.extra_condition.price }}">使用条件: 消费满{{ couponDetail.extra_condition.price }}元可兑换{{ couponDetail.coupon_goods_info.title }}</view>
+        <view class="use-condition" wx:elif="{{couponDetail.type == 3 && couponDetail.extra_condition.goods_id }}">使用条件: 购买{{ couponDetail.condition_goods_info.title }}可兑换{{ couponDetail.coupon_goods_info.title }}</view>
+        <text class="use-condition" wx:if="{{couponDetail.type == 4}}">使用条件：储值金可充值{{ couponDetail.value }}元</text>
+        <text class="use-condition" wx:if="{{couponDetail.type == 5}}">使用条件：{{ couponDetail.extra_condition }}</text>
+        <text class="use-condition" wx:if="{{couponDetail.type == 6}}">使用条件：可使用{{ couponDetail.verify_times }}次</text>
+      </view>
+      <image class="coupon-mark" wx:if="{{couponDetail.status == 1}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_success_mark.svg"></image>
+      <image class="coupon-mark" wx:if="{{couponDetail.status == 2}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_active_mark.svg"></image>
+      <image class="coupon-mark" wx:if="{{couponDetail.status == 3}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_hasuse_mark.svg"></image>
+      <image class="coupon-mark" wx:if="{{couponDetail.status == 4}}" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/coupon_expired_mark.svg"></image>
+    </view>
+    <view class="coupon-indate">有效期 {{couponDetail.expire == '-1' ? (couponDetail.start_use_date + ' 至 ' + couponDetail.end_use_date) : couponDetail.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (couponDetail.react > 0 ? couponDetail.react + '天后' : '当天') + '生效，有效期'+ couponDetail.expire +'天')}} {{ couponDetail.exclude_holiday == 0 ? '':'除去法定节假日'}}{{couponDetail.exclude_weekend
+      == 0 ? '':'周一至周五'}} {{ couponDetail.start_use_time }}-{{ couponDetail.end_use_time }}</view>
+  </view>
+  <!-- 优惠券信息 end -->
+  <!-- 提示文案 -->
+  <view class="active-tip">
+    <text>激活成功后可以在优惠券列表中查看并使用。</text>
+  </view>
+  <!-- 激活按钮 -->
+  <view class="active-btn" bindtap="activeCoupon" wx:if="{{couponDetail.status == 1}}">确认激活</view>
+  <view class="active-btn" bindtap="turnToHomePage" wx:if="{{couponDetail.status == undefined}}">返回首页</view>
+</view>
+
+<!-- toast start -->
+<wxs module="toastModule">
+  module.exports = {
+    getWidth: function (text) {
+      return 28 * text.length + 'rpx';
+    }
+  }
+</wxs>
+<view class="toast-wrap {{toastInfo.isShow ? 'show' : ''}}" style="width:{{toastModule.getWidth(toastInfo.tipTxt)}};">
+  <text>{{toastInfo.tipTxt}}</text>
+</view>
+<!-- toast end -->

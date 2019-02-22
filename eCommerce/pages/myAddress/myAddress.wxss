@@ -1,0 +1,155 @@
+page {
+  background: #f3f3f3;
+  height: 100%;
+}
+.address-list-title {
+  width: 100%;
+  height: 66rpx;
+  background-color: #f3f3f3;
+  color: #666;
+  font-size: 26rpx;
+  text-indent: 30rpx;
+  line-height: 66rpx;
+}
+.myAddress-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  line-height: 94rpx;
+  z-index: 1;
+  font-size: 28rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #FF7100;
+}
+.myAddress-bottom-nav text{
+  vertical-align: middle;
+  margin: 0 8rpx;
+}
+.myAddress-content-container {
+  background-color: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 30rpx;
+}
+.myAddress-address {
+  position: relative;
+  padding: 26rpx 0;
+  border-bottom: 1px solid #F3F3F3;
+}
+.address-label {
+  font-size: 22rpx;
+  width: 66rpx;
+  text-align: center;
+  margin-right: 10rpx;
+  border-radius: 14rpx;
+  vertical-align: middle;
+  line-height: 28rpx;
+  display: inline-block;
+}
+.home {
+  border: 1px solid #ff7100;
+  background: #FFEFE2;
+  color: #ff7100;
+}
+.company {
+  border: 1px solid #3091f2;
+  background: #EAF4FE;
+  color: #3091f2;
+}
+.school {
+  border: 1px solid #79DC31;
+  background: #F1FBEA;
+  color: #79DC31;
+}
+.myAddress-address view {
+  position: relative;
+}
+.check-box-container {
+  position: relative;
+  padding: 10px;
+  margin: 0 5px;
+  z-index:1;
+  float: left;
+}
+.myAddress-edit {
+  display: inline-block;
+  color: #999999;
+  font-size: 32rpx;
+  padding: 20rpx 20rpx 20rpx 40rpx;
+  border-left:1px solid #F3F3F3;
+}
+.myAddress-address-top {
+  width: 590rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+.myAddress-address-top .address-detail {
+  font-size: 26rpx;
+  color: #666666;
+  display: block;
+  width: 550rpx;
+  line-height:44rpx;
+  margin-top: 10rpx;
+}
+.myAddress-address-top .address-person{
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 50rpx;
+  display:inline-block;
+  vertical-align:middle;
+  font-weight: 600;
+}
+.add-btn {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1px solid #ff7100;
+  position: relative;
+  vertical-align:middle;
+}
+.add-btn:before, 
+.add-btn:after{
+  position: absolute;
+  content: "";
+  display: block;
+  background-color: #ff7100;
+}
+.add-btn:before{
+  width: 7px;
+  height: 1px;
+  left:3px;
+  top:6px;
+}
+.add-btn:after {
+  width: 1px;
+  height: 7px;
+  left: 6px;
+  top: 3px;
+} 
+.get-wechat-address {
+  line-height: 84rpx;
+  font-size: 26rpx;
+  color: #333;
+  padding-left: 30rpx;
+  background:#fff;
+  margin-bottom:15rpx;
+}
+.get-wechat-address image {
+  width:40rpx;
+  height:32rpx;
+  margin-right:10rpx;
+  vertical-align: middle;
+}
+.get-wechat-address .icon-rightarrow{
+  float:right;
+  color:#D2D2D2;
+  font-size:20rpx;
+  margin-right:30rpx;
+}
+.get-wechat-address text {
+  display: inline-block;
+  vertical-align: middle;
+}

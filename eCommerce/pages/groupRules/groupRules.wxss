@@ -1,0 +1,13 @@
+.wrap{
+  padding: 40rpx;
+}
+.title{
+  font-weight: bold;
+  margin: 40rpx 0;
+}
+.content{
+  margin: 40rpx 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 20px;
+}

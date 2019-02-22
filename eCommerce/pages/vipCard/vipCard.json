@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText":"会员卡",
+    "usingComponents":{
+        "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+    }
+}

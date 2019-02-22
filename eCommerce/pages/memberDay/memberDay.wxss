@@ -1,0 +1,104 @@
+/**
+ * 日历组件
+ */
+ .calendar {
+  display: block;
+  margin: 0rpx;
+  font-size: 28rpx;
+}
+
+/**
+ * 日历主标题
+ */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0rpx 20rpx;
+  line-height: 120rpx;
+  text-align: center;
+  font-weight: bold;
+  color: #686868;
+}
+
+.calendar-header .date-text{
+  font-size: 40rpx;
+}
+
+/**
+ * 日历周标题
+ */
+.calendar-weeks {
+  display: flex;
+  justify-content: space-around;
+  font-weight: bold;
+  color: #686868;
+  font-size: 32rpx;
+}
+
+/**
+ * 日历周标题单个项目
+ */
+.calendar-weekday {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
+}
+
+/**
+ * 日历日期行
+ */
+.calendar-row {
+  display: flex;
+  justify-content: space-around;
+  font-size: 32rpx;
+  padding: 34rpx 0 18rpx 0;
+  margin: 0 20rpx;
+  border-bottom: 2rpx solid #F1F1F1;
+}
+.calendar-row:last-child{
+  border-bottom: none;
+}
+/**
+ * 日历单个日期项
+ */
+.calendar-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 10rpx;
+  margin-bottom: 10rpx; */
+  text-align: center;
+}
+
+.calendar-cell.today{
+  border: 2rpx solid #FF7100;
+}
+
+.cell-rounded {
+  border-radius: 50%;
+}
+
+.calendar-lunar-day {
+  font-size: 20rpx;
+}
+
+.calendar-day{
+  line-height: 1;
+}
+
+.member-day-img{
+  position: absolute;
+  top: -22rpx;
+  left: -8rpx;
+  width: 80rpx;
+  height: 40rpx;
+  border-radius: 10rpx;
+}

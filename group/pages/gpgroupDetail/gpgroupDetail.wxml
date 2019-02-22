@@ -1,0 +1,446 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-share pageQRCodeData="{{pageQRCodeData}}"></component-share>
+<view class="collage-orderInfo">
+  <view class="collage-section collage-goods" style="background:url({{myTeams.activity_info.pay_success_img || 'https://img.zhichiwangluo.com/zcimgdir/album/file_5c35b5412bd8d.jpg'}}) no-repeat top;background-size:100%;">
+    <view class="goods-infor  isRelative" catchtap='turnToGoodsDetail'>
+      <view class="goods-detail">
+        <view class="image-wrap">
+          <image src="{{myTeams.goods_cover}}"></image>
+        </view>
+        <view class="content-wrap">
+          <view class="title">
+            <view class="classify-type">
+              <view>
+                <icon class="ico-moon icon-number-people"></icon>
+              </view>
+              <text>{{myTeams.activity_type== 0 ?  myTeams.max_user_num + '人团' : (myTeams.activity_type == 1 ? '新人团' : (myTeams.activity_type == 2 ? '阶梯团' : (myTeams.activity_type ==  3 ? '帮帮团' :  '抽奖团')))}}</text>
+            </view>{{myTeams.goods_title}}
+          </view>
+          <view class="price">
+            <label class="min-price">¥ <text>{{myTeams.group_buy_price}}</text></label>
+            <text class="origin-price">¥ {{originPrice}}</text>
+          </view>
+        </view>
+      </view>
+      <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+        <button formType="submit" hover-class="none" class='invisibleclass'>
+        </button>
+      </form>
+    </view>
+    <view class="collage-section collage-infor" style="padding:0;">
+      <block wx:if="{{myTeams.activity_type != 4}}">
+        <view class="loading-stand" wx:if="{{myTeams.current_status == 2}}">
+          <view class="tip">
+            <view>
+              <block wx:if="{{myTeams.activity_type != '2'}}">
+                还差
+                <text class="needNum"> {{needNum}}人</text>拼团成功,剩余
+              </block>
+              <block wx:else>
+                人数越多,价格越低,剩余
+              </block>
+            </view>
+            <view class="countDown">
+              <text>{{myTeams.downCount.hours}} </text>
+              <text>:</text>
+              <text style="width:48rpx;">{{myTeams.downCount.minutes}} </text>
+              <text>:</text>
+              <text style="width:48rpx;">{{myTeams.downCount.seconds}}</text>
+            </view>
+          </view>
+          <view class="member-cover">
+            <view wx:for="{{member}}" wx:key="">
+              <image src="{{item.image}}" style="border: {{item.isNum == 1 ? '2rpx solid #ff7100' : ''}}"></image>
+              <view class="leader-logo" wx:if="{{index == 0}}">团长</view>
+            </view>
+          </view>
+          <view class="btn-wrap">
+            <block wx:if="{{myTeams.joined == 1}}">
+              <view class="open-new isRelative" bindtap="inviteFriends">邀请好友参团
+                <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                  <button formType="submit" hover-class="none" class='invisibleclass'>
+                  </button>
+                </form>
+              </view>
+              <view class="show-own isRelative" bindtap="showMyTeamList" wx:if="{{myTeams.is_leader == 1}}">查看我的拼团
+                <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                  <button formType="submit" hover-class="none" class='invisibleclass'>
+                  </button>
+                </form>
+              </view>
+            </block>
+            <block wx:else>
+              <view class="open-new isRelative" bindtap="participateGroup" data-token="{{item.team_token}}">立即参团
+                <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                  <button formType="submit" hover-class="none" class='invisibleclass'>
+                  </button>
+                </form>
+              </view>
+              <view class="show-own isRelative" bindtap="showMyTeamList" wx:if="{{myTeams.is_leader == 1}}">查看我的拼团
+                <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                  <button formType="submit" hover-class="none" class='invisibleclass'>
+                  </button>
+                </form>
+              </view>
+            </block>
+          </view>
+        </view>
+        <view class="success-stand" wx:if="{{myTeams.current_status == 3 && myTeams.joined == 1}}">
+          <view class="tip">
+            <block wx:if="{{myTeams.activity_type == 3}}">
+              <text style="color:#ff7100;">拼团成功，</text>商家将给团长发货
+            </block>
+            <block wx:else>
+              <text style="color:#ff7100;">拼团成功，</text>请耐心等待商家发货
+            </block>
+          </view>
+          <view class="member-cover">
+            <view wx:for="{{member}}" wx:key="">
+              <image src="{{item.image}}" style="border: {{item.isNum == 1 ? '2rpx solid #ff7100' : ''}}"></image>
+              <view class="leader-logo" wx:if="{{index == 0}}">团长</view>
+            </view>
+          </view>
+          <view class="btn-wrap">
+            <view class="open-new isRelative" bindtap="openNewGroup">开启新团
+              <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                <button formType="submit" hover-class="none" class='invisibleclass'>
+                </button>
+              </form>
+            </view>
+            <view class="show-own isRelative" bindtap="showMyTeamList" wx:if="{{myTeams.is_leader == 1}}">查看我的拼团
+              <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                <button formType="submit" hover-class="none" class='invisibleclass'>
+                </button>
+              </form>
+            </view>
+          </view>
+        </view>
+        <view class="fail-stand" wx:if="{{myTeams.current_status == 4 || myTeams.current_status == 5 || (myTeams.current_status != 2  && myTeams.joined == 0)}}">
+          <view class="tip">
+            来迟一步，这个团已经拼完啦～
+          </view>
+          <view class="member-cover">
+            <view wx:for="{{member}}" wx:key="">
+              <image src="{{item.image}}" style="border: {{item.isNum == 1 ? '2rpx solid #ff7100' : ''}}"></image>
+              <view class="leader-logo" wx:if="{{index == 0}}">团长</view>
+            </view>
+          </view>
+          <view class="btn-wrap">
+            <view class="open-new isRelative" bindtap="openNewGroup">开启新团
+              <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                <button formType="submit" hover-class="none" class='invisibleclass'>
+                </button>
+              </form>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="loading-draw" wx:if="{{myTeams.current_status == 2}}">
+          <view class="progress">
+            <view class="success" style="width:{{progress}}%;">
+              <view class="inner">
+                已抢{{myTeams.current_user_count}}件
+              </view>
+            </view>
+            <view class="percent">{{progress}}%</view>
+          </view>
+          <view class="tip">
+            <view>已有<text class="needNum">{{myTeams.current_user_count}}</text>人参与，满{{myTeams.max_user_num}}人开奖，快去邀请小伙伴吧～</view>
+            <view>剩余
+              <view class="countDown">
+                <text>{{myTeams.downCount.hours}} </text>
+                <text>:</text>
+                <text style="width:48rpx;">{{myTeams.downCount.minutes}} </text>
+                <text>:</text>
+                <text style="width:48rpx;">{{myTeams.downCount.seconds}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="btn-wrap">
+            <view class="open-new" bindtap="inviteFriends">邀请好友</view>
+          </view>
+        </view>
+        <view class="success-draw" wx:if="{{myTeams.current_status == 3 && myTeams.is_winner == 1}}">
+          <view class="tip">
+            <view>运气爆棚！
+              <text style='color:#ff7100;'>中奖啦</text>～</view>
+          </view>
+          <view class="member-cover">
+            <view>
+              <image src="{{myTeams.winner}}"  style="border: 2rpx solid #ff7100"></image>
+            </view>
+          </view>
+          <view class="btn-wrap">
+            <view class="open-new">查看订单</view>
+          </view>
+        </view>
+        <view class="loading-draw" wx:if="{{myTeams.current_status == 4 || myTeams.current_status == 5 || myTeams.is_winner == 0}}">
+          <view class="tip"><block wx:if="{{myTeams.is_winner == 0}}">很遗憾，您未中奖</block><block wx:else>很遗憾，本次活动未达到开奖门槛</block></view>
+          <view class="member-cover" style="margin:40rpx auto 50rpx;width:165rpx;height:165rpx;">
+              <image src="http://cdn.jisuapp.cn//zhichi_frontend/static/webapp/images/group/draw-fail.png"></image>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="play-rules" bindtap="goToPlaylaws">
+    <view>
+      <view>拼购规则</view>
+      <view>
+        <text>团长开团 · 邀请好友 · 拼购成功</text>
+        <text class="ico-moon icon-rightarrow"></text>
+      </view>
+    </view>
+  </view>
+  <view class="collage-section collage-more" wx:if="{{goodsData.goods_list.length > 0}}">
+    <view class="title ">
+      更多精彩拼团
+    </view>
+    <view>
+      <view class="goods-list opposite">
+        <view class="goods-item isRelative" wx:for="{{goodsData.goods_list}}" wx:key="" data-goodsId="{{item.goods_id}}" data-activityId="{{item.activity_id}}" bindtap='gotoDetail'>
+          <view class="image-wrap">
+            <image src='{{item.cover}}'></image>
+          </view>
+          <view class="content-wrap">
+            <view class="title">
+              <view class="classify-type">
+                <view>
+                  <icon class="ico-moon icon-number-people"></icon>
+                </view>
+                <text>{{item.activity_type== 0 ? (item.num_of_people.length > 1 ? '多人团' : item.num_of_people[0] + '人团') : (item.activity_type == 1 ? '新人团' : (item.activity_type == 2 ? '阶梯团' : (item.activity_type ==  3 ? '帮帮团' :  '抽奖团')))}}</text>
+              </view>{{item.title}}
+            </view>
+            <view class="hava-sales" wx:if="{{item.salesnum}}">
+              <view class="price">
+                <label class="min-price">¥
+                  <text style="font-size:32rpx;">{{item.group_buy_price}}</text>
+                </label>
+                <text class="origin-price"> ¥ {{item.original_price}}</text>
+              </view>
+              <view class="status">
+                <view class="sales">
+                  已团{{item.salesnum}}件
+                </view>
+                <view class="to-join">
+                  <block wx:if="{{item.status == 0}}">
+                    <button class="ready">即将开团</button>
+                  </block>
+                  <block wx:elif="{{item.status == 1}}">
+                    <button class="remain">提醒我</button>
+                  </block>
+                  <block wx:elif="{{item.status == 2}}">
+                    <button class="reminded">已提醒</button>
+                  </block>
+                  <block wx:elif="{{item.status == 3}}">
+                    <button class="go">去拼团</button>
+                  </block>
+                  <block wx:elif="{{item.status == 4}}">
+                    <button class="over">已结束</button>
+                  </block>
+                </view>
+              </view>
+            </view>
+            <view class="no-sales" wx:else>
+              <view class="price">
+                <view class="min-price">
+                  ¥
+                  <text>{{item.group_buy_price}}</text>
+                </view>
+                <view class="origin-price">
+                  ¥ {{item.original_price}}
+                </view>
+              </view>
+              <view class="to-join">
+                <block wx:if="{{item.status == 0}}">
+                  <button class="ready">即将开团</button>
+                </block>
+                <block wx:elif="{{item.status == 1}}">
+                  <button class="remain">提醒我</button>
+                </block>
+                <block wx:elif="{{item.status == 2}}">
+                  <button class="reminded">已提醒</button>
+                </block>
+                <block wx:elif="{{item.status == 3}}">
+                  <button class="go">去拼团</button>
+                </block>
+                <block wx:elif="{{item.status == 4}}">
+                  <button class="over">已结束</button>
+                </block>
+              </view>
+            </view>
+          </view>
+          <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+            <button formType="submit" hover-class="none" class='invisibleclass'>
+            </button>
+          </form>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view id="groupPayDialog" class="page-dialog-wrap" hidden="{{ addToGroupBuyCart }}" catchtap='hideMask'>
+    <view class="page-bottom-dialog">
+      <view class="pay-close-dialog page-dialog-close" bindtap="hideGroupBuyCart">
+        <text class="ico-moon icon-closes"></text>
+        <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+          <button formType="submit" hover-class="none" class='invisibleclass'>
+          </button>
+        </form>
+      </view>
+      <view class="dialog-goods-header">
+        <view>
+          <view class="thumb">
+            <view class="thumb-wrap">
+              <image data-src="{{ selectModelInfo.imgurl || goodsInfo.cover }}" catchtap="clickPlusImages" class="pay-goods-cover" src="{{ selectModelInfo.imgurl || goodsInfo.cover }}"></image>
+            </view>
+          </view>
+          <view class="pay-goods-baseinfo">
+            <view class="pay-goods-price">
+              <view class="pay-current-price groupMaskPrice">
+                <block wx:if="{{goods.type != 4}}">
+                  <block wx:if="{{goods.is_leader == 0 || isParticipate}}">
+                    <view class="type">
+                      <icon class="ico-moon icon-number-people"></icon>
+                      团员价
+                    </view>
+                    <view class="member_price">
+                      ¥ {{selectModelInfo.member_price}}
+                    </view>
+                    <view class="price">
+                      ¥ {{selectModelInfo.virtualPrice || selectModelInfo.price}}
+                    </view>
+                  </block>
+                  <block wx:else>
+                    <view class="type">
+                      <icon class="ico-moon icon-leader-logo"></icon>
+                      团长价
+                    </view>
+                    <view class="leader_price">
+                      ¥ {{selectModelInfo.leader_price}}
+                    </view>
+                    <view class="price">
+                      ¥ {{selectModelInfo.virtualPrice || selectModelInfo.price}}
+                    </view>
+                  </block>
+                </block>
+                <block wx:else>
+                  <view class="type">
+                    <icon class="ico-moon icon-number-people"></icon>
+                    抽奖团
+                  </view>
+                  <view class="member_price">
+                    ¥ {{groupInfo.group_buy_price}}
+                  </view>
+                  <view class="price">
+                    ¥ {{selectModelInfo.virtualPrice || goodsInfo.price}}
+                  </view>
+                </block>
+                <!-- <text class="goods-price-discount" wx:if="{{ priceDiscountStr != '' }}">{{ priceDiscountStr }}</text> -->
+                <text class="virtualPrice" wx:if="{{ isShowVirtualPrice && selectModelInfo.virtualPrice != 0 }}">￥{{selectModelInfo.virtualPrice}}</text>
+              </view>
+            </view>
+            <view class="pay-goods-stock">库存 {{ selectModelInfo.stock }}</view>
+            <view wx:if="{{selectModelInfo.models_text}}" class="pay-checked-text clearfix">已选 :{{ selectModelInfo.models_text }}</view>
+          </view>
+        </view>
+        <view class="tip">
+          <block wx:if="{{goods.type == 0 || goods.type == 1 || goods.type == 3}}">
+            <view>
+              成团人数: {{selectModelInfo.groupNum}}人团
+            </view>
+          </block>
+          <block wx:elif="{{goods.type == 2}}">
+            <view>TIPS :
+              <block wx:if="{{goods.current_user_count}}">
+                已拼{{goods.current_user_count}}人，人数越多，价格越低
+              </block>
+              <block wx:else>
+                人数越多，价格越低
+              </block>
+            </view>
+            <view class="showMoreTips" catchtap="showMoreTips">查看更多
+              <text class="ico-moon icon-downarrow" wx:if='{{showTips}}'></text>
+              <text class="ico-moon icon-uparrow" wx:else></text>
+              <view class="mask-tips" hidden='{{showTips}}'>
+                <view wx:for="{{discountInfoArr}}" wx:key=''>
+                  <text>满{{item.num_of_people}}人</text>
+                  <text>¥{{goods.is_leader ?item.leader_price : item.member_price}}</text>
+                </view>
+              </view>
+            </view>
+          </block>
+          <block wx:elif="{{goods.type == 4}}">
+            <view>TIPS : 满{{goods.least_cost}}元开奖
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class="payDialog-content">
+        <view class="pay-goods-models" wx:if="{{goods.type == 0 && !isParticipate}}">
+          <view class="group-info group-buy-num">
+            <view class="model-title">成团人数</view>
+            <label class="pills-list">
+              <label wx:for="{{ groupInfo.num_of_people }}" wx:key="" wx:for-item="num" class="subModel {{ selectModelInfo.groupNum == num ? 'select' : '' }} isRelative" data-num="{{num}}" bindtap="selectGroupNum">{{ num }}人团
+                <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                  <button formType="submit" hover-class="none" class='invisibleclass'>
+                  </button>
+                </form>
+              </label>
+            </label>
+          </view>
+        </view>
+        <view class="pay-goods-models" hidden="{{ !goodsInfo.model_items.length }}">
+          <view wx:for="{{ goodsInfo.model }}" wx:for-item="model" wx:for-index="modelIndex" wx:key="">
+            <text class="model-title">{{ model.name }}</text>
+            <label class="pills-list">
+              <label wx:for="{{ model.subModelName }}" wx:for-item="name" wx:key="" data-model-index="{{ modelIndex }}" data-submodel-index="{{ index }}" class="subModel {{ selectModelInfo.models[modelIndex] == model.subModelId[index] ? 'select' : '' }}" data-submodel-id="{{ model.subModelId[index] }}"
+                bindtap="selectSubModel" style="{{ selectModelInfo.models[modelIndex] == model.subModelId[index] ? 'background:' + storeStyle.theme : '' }}">{{ name }}</label>
+            </label>
+          </view>
+        </view>
+        <view class="payDialog-buy-num">
+          <view class="clearfix">
+            <text>购买数量</text>
+            <view class="pull-right">
+              <view class="quantity pull-left">
+                <label class="minus {{ selectModelInfo.buyCount <= 1 ? 'disabled' : '' }}"></label>
+                <input class="pay-buy-count" type="number" class="txt" value="{{ selectModelInfo.buyCount }}" bindinput="inputBuyCount" />
+                <label class="plus {{ (selectModelInfo.buyCount >= selectModelInfo.stock) || (isSeckill && selectModelInfo.buyCount >= goodsInfo.seckill_buy_limit) ? 'disabled' : '' }}"></label>
+                <view class="response-area response-area-minus" bindtap="clickMinusButton">
+                  <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                    <button formType="submit" hover-class="none" class='invisibleclass'>
+                    </button>
+                  </form>
+                </view>
+                <view class="response-area response-area-plus" bindtap="clickPlusButton">
+                  <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+                    <button formType="submit" hover-class="none" class='invisibleclass'>
+                    </button>
+                  </form>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="dialog-bottom groupSureMask">
+        <view>
+          <view wx:if="{{goods.is_leader == 0 || isParticipate}}" style="{{ isSeckill ? '' : 'background:' + storeStyle.theme }}" class="pay-add-to-shoppingcart isRelative" data-isLeader="{{godos.is_leader}}" bindtap="sureJoinGroup">马上参团
+            <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+              <button formType="submit" hover-class="none" class='invisibleclass'>
+              </button>
+            </form>
+          </view>
+          <view wx:else style="{{ isSeckill ? '' : 'background:' + storeStyle.theme }}" class="pay-add-to-shoppingcart isRelative" data-isLeader="{{godos.is_leader}}" bindtap="sureJoinGroup">{{goods.type == 4 ? '参与抽奖' : '马上开团'}}
+            <form bindsubmit="formSubmit_collect" report-submit="true" class="getFormId" data-id="{{goodsInfo.id}}" data-orderid="{{goodsInfo.order_id}}" data-bargainid="{{goodsInfo.bargain_id}}">
+              <button formType="submit" hover-class="none" class='invisibleclass'>
+              </button>
+            </form>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

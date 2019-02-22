@@ -1,0 +1,25 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view wx:if="{{ hasRecommendConfig }}" class="success-box" style="{{'background:' + storeStyle.theme}}">
+  <view class="title"><image class="goods-complete-succes" src="http://cdn.jisuapp.cn/static/webapp/images/xcx-goods/goods-complete-success.png"></image><text>{{pageFrom == 'transation' ? '交易成功' : '评价成功'}}</text></view>
+  <view class="slogan">{{pageFrom == 'transation' ? '去评价一下这次的购物体验吧~' : '再去逛逛店铺吧~'}}</view>
+  <view class="btn-area">
+    <view wx:if="{{pageFrom == 'transation'}}" bindtap="goToComment">立即评价</view>
+    <view bindtap="goToHomepage">返回首页</view>
+  </view>
+  <image class="goods-complete-bg" src="http://cdn.jisuapp.cn/static/webapp/images/xcx-goods/goods-complete-bg.png"></image>
+</view>
+<block wx:else >
+  <view class="no-recommend-box">
+    <view class="success-box" style="{{'background:' + storeStyle.theme}}">
+      <view class="title"><image class="goods-complete-succes" src="http://cdn.jisuapp.cn/static/webapp/images/xcx-goods/big-goods-complete-success.png"></image></view>
+      <image class="goods-complete-bg" src="http://cdn.jisuapp.cn/static/webapp/images/xcx-goods/goods-complete-bg.png"></image>
+    </view>
+    <view class="goods-complete-title" style="{{'color:' + storeStyle.theme}}">{{pageFrom == 'transation' ? '交易成功' : '评价成功'}}</view>
+    <view class="slogan">{{pageFrom == 'transation' ? '去评价一下这次的购物体验吧~' : '再去逛逛店铺吧~'}}</view>
+    <view class="btn-area">
+      <view wx:if="{{pageFrom == 'transation'}}" class="go-comment" style="{{'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme}}" bindtap="goToComment">立即评价</view>
+      <view class="{{pageFrom == 'transation' ? '' : 'comment-back-homepage'}}" style="{{'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme}}" bindtap="goToHomepage">返回首页</view>
+    </view>
+  </view>
+</block>
+<component-recommend franchiseeId="{{ franchiseeId }}" id="component-recommend"></component-recommend>

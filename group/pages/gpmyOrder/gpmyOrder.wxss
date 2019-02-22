@@ -1,0 +1,229 @@
+page {
+  background: #f3f3f3;
+}
+
+.collage-section {
+  background: #fff;
+  margin-bottom: 15rpx;
+  padding: 30rpx;
+}
+
+.collage-classify {
+  padding-bottom: 0;
+}
+
+.total-classify {
+  display: flex;
+  justify-content: space-between;
+}
+
+.total-classify view {
+  box-sizing: border-box;
+  flex: 1;
+  text-align: center;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 26rpx;
+  border: 1px solid #ff7100;
+  color: #ff7100;
+}
+
+.total-classify view:nth-child(1) {
+  border-radius: 6rpx 0 0 6rpx;
+}
+
+.total-classify view:nth-child(2) {
+  border-radius: 0 6rpx 6rpx 0;
+}
+
+.total-classify .active {
+  color: #fff;
+  background: #ff7100;
+}
+
+.branch-classify {
+  margin-top: 20rpx;
+  height: 70rpx;
+  width:100%;
+  white-space:nowrap;
+  text-decoration:inherit;
+  overflow-x:scroll;
+  overflow-y:hidden;
+}
+
+.branch-classify view {
+  display: inline-block;
+  text-align: center;
+  height: 66rpx;
+  line-height: 66rpx;
+  width: 25%;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.branch-classify .active {
+  color: #ff7100;
+  border-bottom: 4rpx solid #ff7100;
+}
+
+.collage-content {
+  background: #f3f3f3;
+  text-align: center;
+  font-size: 30rpx;
+  padding: 0 20rpx;
+  color: #999;
+}
+
+.collage-content .data-item {
+  background: #fff;
+  height: 330rpx;
+  padding: 0 20rpx;
+  margin-top: 20rpx;
+}
+
+.collage-content .data-item .state-wrap {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.collage-content .data-item .state-wrap .timetable {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.collage-content .data-item .state-wrap .status {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.collage-content .data-item .infor-wrap {
+  display: flex;
+  margin-top: 20rpx;
+}
+
+.collage-content .data-item .infor-wrap .image-wrap {
+  width: 220rpx;
+  height: 220rpx;
+}
+
+.collage-content .data-item .infor-wrap .image-wrap image {
+  width: 100%;
+  height: 100%;
+}
+
+.collage-content .data-item .infor-wrap .detail-wrap {
+  box-sizing: border-box;
+  padding-left: 26rpx;
+  padding-top: 5rpx;
+  width: calc(100% - 226rpx);
+  text-align: left;
+}
+
+.collage-content .data-item .infor-wrap .detail-wrap .title {
+  font-size: 28rpx;
+  color: #333;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.collage-content .data-item .infor-wrap .detail-wrap .buy-infor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18rpx;
+}
+
+.collage-content .data-item .infor-wrap .detail-wrap .buy-infor .price {
+  font-size: 26rpx;
+  color: #ff7100;
+}
+
+.collage-content .data-item .infor-wrap .detail-wrap .buy-infor .price>text:nth-last-child(1) {
+  font-size: 34rpx;
+}
+
+.collage-content .data-item .infor-wrap .detail-wrap .buy-infor .num {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.collage-content .data-item .infor-wrap .detail-wrap .btn-wrap {
+  display: flex;
+  margin-top: 18rpx;
+}
+
+.collage-content .data-item .infor-wrap .detail-wrap .btn-wrap>view {
+  width: 170rpx;
+  text-align: center;
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size: 26rpx;
+  border-radius: 34rpx;
+}
+
+.collage-content .data-item .infor-wrap .detail-wrap .btn-wrap .orange {
+  box-shadow: 0px 2rpx 8rpx 0px rgba(255, 138, 0, 0.4);
+  color: #fff;
+  background: linear-gradient(-90deg, rgba(255, 54, 0, 1) 0%, rgba(255, 174, 0, 1) 100%);
+}
+
+.collage-content .data-item .infor-wrap .detail-wrap .btn-wrap .empty {
+  border: 1px solid #FF7100;
+  color: #FF7100;
+  margin-left: 30rpx;
+}
+
+.collage-content .no-collage .image-wrap {
+  width: 389rpx;
+  height: 190rpx;
+  margin: 225rpx auto 50rpx;
+}
+
+.collage-content .no-collage .image-wrap image {
+  width: 100%;
+  height: 100%;
+}
+.collage-content .no-more{
+  position: relative;
+  font-size: 24rpx;
+  color: #ccc;
+  padding: 30rpx 0 15rpx;
+}
+.collage-content .no-more::before{
+  content:'';
+  width: 100rpx;
+  height: 1px;
+  position: absolute;
+  left: 100rpx;
+  top: 50%;
+  color: #333;
+}.getFormId {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.getFormId button {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.isRelative{
+  position: relative;
+}
+.no-collage .tip-wrap{
+  color: #ccc;
+  font-size: 28rpx;
+}

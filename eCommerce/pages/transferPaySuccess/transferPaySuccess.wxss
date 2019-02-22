@@ -1,0 +1,751 @@
+page {
+  font-size: 28rpx;
+  background-color: #F3F3F3;
+  color: #666;
+}
+.top-block{
+  width: 750rpx;
+  background-color: #fff;
+}
+.success-block{
+  width: 750rpx;
+  height: 260rpx;
+  background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/pay_success.png);
+  background-size: 100% 100%;
+}
+.transfer-mess{
+  text-align: center;
+}
+.transfer-mess .beneficiary{
+  color: #333;
+  font-size: 30rpx;
+  margin: 25rpx 0 15rpx 0;
+}
+.transfer-mess .price-block{
+  font-size: 38rpx;
+  margin-bottom: 42rpx;
+  color: #FF7100;
+}
+.transfer-mess .actually-price{
+  display: inline-block;
+  margin: 0 20rpx 0 5rpx;
+  font-size: 50rpx;
+}
+.transfer-mess .original-price{
+  color: #999999;
+  font-size: 26rpx;
+  text-decoration: line-through;
+}
+.discount-wrapper .discount-item{
+  width: calc(100% - 60rpx);
+  display: flex;
+  justify-content: space-between;
+  padding: 27rpx 0;
+  margin: 0 30rpx;
+  border-top: 1rpx solid #F3F3F3;
+}
+.discount-wrapper .discount-item .count{
+  color: #FF7100;
+}
+.btn-wrapper{
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 30rpx 40rpx 30rpx;
+}
+.btn-wrapper .btn{
+  width: 335rpx;
+  border-radius: 35rpx;
+  border: 2rpx solid #FF7100;
+  color: #FF7100;
+  font-size: 30rpx;
+}
+.btn-wrapper .view-btn{
+  border-color: #D2D2D2;
+  color: #666666;
+  margin-left: 20rpx;
+}
+.advertising{
+  width: 750rpx;
+  height: 150rpx;
+  background-color: #038BDC;
+}
+.advertising .text{
+  width: 80rpx;
+  line-height: 40rpx;
+  text-align: center;
+  background-color: rgba(0, 0, 0, .4);
+  color: #fff;
+  font-size: 22rpx;
+}
+.activity{
+  width: 100%;
+  background-color: #fff;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.activity .copyWriting{
+  width: calc(100% + 60rpx);
+  height: 70rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: -30rpx;
+  background-color: #F3F3F3;
+}
+.activity .copyWriting .line{
+  width: 330rpx;
+  height: 1rpx;
+  background-color: #ccc;
+}
+.activity .copyWriting .text{
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #F3F3F3;
+  padding: 0 15rpx;
+  color: #ccc;
+  font-size: 22rpx;
+}
+.vip-card{
+  position: relative;
+  padding: 50rpx 30rpx;
+  border-radius: 10rpx;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 27rpx;
+  border-bottom: 27rpx solid #fff;
+}
+.vip-card .card-img{
+  display: inline-block;
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  border: 2rpx solid #fff; 
+  background-color: #fff;
+}
+.vip-card .card-info{
+  display: inline-block;
+  width: 300rpx;
+  color: #fff;
+}
+.vip-card .card-info .card-name{
+  font-size: 24rpx;
+  margin-bottom: 5rpx;
+}
+.vip-card .card-info .card-mess{
+  font-size: 22rpx;
+}
+.vip-card .card-btn{
+  position: absolute;
+  right: 30rpx;
+  display: inline-block;
+  padding: 8rpx 20rpx;
+  text-align: center;
+  font-size: 22rpx;
+  background: rgba(255,168,0,1);
+  border-radius: 23rpx;
+  box-shadow: 1rpx 1rpx 1rpx rgba(255,157,18,1);
+  color: #fff;
+}
+.collect{
+  width: calc(100% - 58rpx);
+  padding-top: 29rpx;
+  background-color: #fff;
+} 
+.collect .text{
+  font-size: 26rpx;
+}
+.collect .star-block{
+  width: calc(100% - 94rpx);
+  padding: 30rpx 78rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+.collect .star-block .star{
+  flex: 0 0 74rpx;
+  height: 74rpx;
+  margin: 30rpx 30rpx 0 30rpx;
+}
+.collect .star-six .star{
+  margin: 30rpx 52rpx 0 52rpx;
+}
+.collect .about{
+  width: 690rpx;
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 40rpx;
+  padding: 32rpx 0;
+  border-top: 1rpx solid #F3F3F3;
+}
+.coupon{
+  display: flex;
+  margin-top: 27rpx;
+  border-bottom:27rpx solid #fff;
+}
+.coupon .coupon-item{
+  flex: 1;
+  position: relative;
+  background-color: #fff;
+  border-top: 10rpx solid #FF4D64;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.1)
+}
+.coupon .coupon-item:nth-child(2){
+  margin-left: 20rpx;
+}
+.coupon .coupon-item .info{
+  padding: 45rpx 27rpx;
+}
+.coupon .coupon-item .info .coupon-title{
+  /* width: calc(100% - 40rpx); */
+  font-size: 28rpx;
+  margin-bottom: 26rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.coupon .coupon-item .info .use-condition{
+  /* width: calc(100% - 40rpx); */
+  font-size: 26rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.coupon .coupon-item .info .btn{
+  color: #FFF;
+  background-color: #FF4D64;
+  position: absolute;
+  right: 30rpx;
+  top: calc(50% - 32rpx);
+  font-size: 26rpx;
+  border-radius: 24rpx;
+  padding: 4rpx 20rpx;
+}
+.coupon-item .info .icon-success-tip{
+  position:absolute;
+  right:30rpx;
+  top:calc(50% - 32rpx);
+  font-size:32rpx;
+  color: #FF4D65;
+}
+.coupon .pending-btn{
+  text-align: center;
+  padding: 13rpx 0;
+  border-top: 1rpx dotted #EBEBEB;
+}
+.coupon .pending-btn2{
+  z-index: 2;
+  display: inline-block;
+  color: #FFF;
+  background-color: #FF4D64;
+  position: absolute;
+  right: 30rpx;
+  top: calc(50% - 32rpx);
+  font-size: 26rpx;
+  border-radius: 24rpx;
+  padding: 4rpx 20rpx;
+}
+.background-word-area{
+  position: absolute;
+  right: -64rpx;
+  top: -70rpx;
+  padding: 10rpx;
+  border-radius: 50%;
+  color: #fff;
+  opacity: 0.1;
+}
+.background-word-area .background-circle{
+  background-color: #FF4D65;
+  width: 180rpx;
+  height: 180rpx;
+  line-height: 180rpx;
+  border-radius: 50%;
+}
+.background-word-area .background-word{
+  position: absolute;
+  bottom: 50rpx;
+  left: 50rpx;
+  font-size: 64rpx;
+  line-height: 64rpx;
+}
+.integral, .recharge{
+  padding-top: 20rpx;
+  background-color: #fff;
+  border-bottom: 27rpx solid #fff;
+}
+.integral .num{
+  text-shadow: 1rpx 1rpx 1rpx rgba(255, 121, 1, 0.66);
+}
+.recharge .num{
+  text-shadow: 1rpx 1rpx 1rpx rgba(247, 96, 70, 0.66);
+}
+.integral-block, .recharge-block{
+  width: 630rpx;
+  height: 140rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  border-radius: 10rpx;
+  color: #fff;
+  font-size: 28rpx;
+  background-size: 100% 100%;
+}
+.integral-block{
+  background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/integral@2x.png);
+}
+.recharge-block{
+  background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/recharge@2x.png);
+}
+.turntable, .gold-egg{
+  width: calc(100% + 60rpx);
+  height: 250rpx;
+  background-size: 100% 100%;
+  position: relative;
+  margin-top: 20rpx;
+  left: -30rpx;
+}
+.turntable .tip, .gold-egg .tip{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgb(0, 0, 0);
+  font-size: 22rpx;
+  color: #fff;
+  padding: 4rpx;
+  opacity: .5;
+}
+.turntable{
+  background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/turntable@2x.png);
+}
+.gold-egg{
+  background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/gold-egg@2x.png);
+}
+#scratch{
+  width: calc(100% + 30rpx);
+  position: relative;
+  border: 14rpx solid #FFC404;
+  min-height: 290rpx;
+  left: -30rpx;
+}
+#scratch .scratch_wp{
+  width: 100%; 
+  height: 345rpx;
+  position: absolute;
+  top: 0;
+}
+.scratch-canvas{
+  background: transparent;
+  position: relative;
+}
+#scratch .showArea{
+  position: absolute;
+  left: 0;
+  top: 0; 
+  width: 722rpx;
+  height: 290rpx;
+}
+#scratch .showArea .showTitle{
+  width: 100%;
+  font-size: 32rpx;
+  color: rgb(102,102,102);
+  text-align: center;
+  padding: 60rpx 0;
+  letter-spacing: 4rpx;
+}
+#scratch .showArea .showBtn{
+  width: 206rpx;
+  height: 70rpx;
+  background: #ff5b3f;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 9rpx;
+  text-align: center;
+  line-height: 70rpx;
+  margin: 0 auto;
+}
+/*未中奖*/
+.scratchFail {
+  position: relative;
+  width: 100%;
+  height: 290rpx;
+}
+.scratchFail image {
+  width: 100%;
+  height: 100%;
+}
+.scratchFail .failTitle{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.scratchFail .failTitle .failShare{
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  padding: 24rpx 40rpx;
+  cursor: pointer;
+  background: none;
+  line-height: 1.5;
+}
+.scratchFail .failTitle .failText{
+  text-align: center;
+  padding: 40rpx 0 24rpx 0;
+  font-size: 26rpx;
+  color: rgb(102,102,102);
+}
+.scratchFail .failTitle .failBtn{
+  width: 206rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #ff5b3f;
+  text-align: center;
+  color: #fff;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  font-size: 28rpx;
+  cursor: pointer;
+}
+/*中奖*/
+#scratch .scratchWinning{
+  position: relative;
+  width: 100%;
+  height: 290rpx;
+}
+.scratchWinning image{
+  width: 100%;
+  height: 100%;
+}
+.scratchWinning .winningTitle{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.scratchWinning .winningTitle .winningShare{
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  padding: 24rpx 40rpx 0px 40rpx;
+  cursor: pointer;
+  background: none;
+  line-height: 1.5;
+}
+.scratchWinning .winningTitle .winningText{
+  text-align: center;
+  color: #ff5b3f;
+}
+.scratchWinning .winningTitle .winningBtn{
+  width: 206rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #ff5b3f;
+  text-align: center;
+  color: #fff;
+  border-radius:8rpx;
+  margin: 0 auto;
+  font-size: 28rpx;
+  cursor: pointer;
+  margin-top: 40rpx;
+}
+/*次数不足，分享可获得次数*/
+#scratch .scratchDurMax{
+  position: relative;
+  width: 100%;
+  height: 290rpx;
+}
+#scratch .scratchDurMax image{
+  width: 100%;
+  height: 100%;
+}
+.scratchDurMax .durMaxTitle{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.scratchDurMax .durMaxTitle .durMaxShare{
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  padding:23rpx 40rpx 100rpx 40rpx;
+  cursor: pointer;
+  background: none;
+  line-height: 1.5;
+}
+.scratchDurMax .durMaxTitle .durMaxText{
+  text-align: center;
+  color: rgb(102,102,102);
+  font-size:26rpx;
+  line-height: 35rpx;
+}
+/*次数不足不可分享*/
+#scratch .scratchDegree{
+  position: relative;
+  width: 100%;
+  height: 290rpx;
+}
+#scratch .scratchDegree image{
+  width: 100%;
+  height: 100%;
+}
+.scratchDegree .degreeTitle{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.scratchDegree .degreeTitle .degreeText{
+  text-align: center;
+  color: rgb(102,102,102);
+  font-size: 26rpx;
+}
+/* 次数达到上限 */
+#scratch .scratchLimit{
+  position: relative;
+  width: 100%;
+  height: 290rpx;
+}
+#scratch .scratchLimit image{
+  width: 100%;
+  height: 100%;
+}
+.scratchLimit .limitTitle{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.scratchLimit .limitTitle .limitShare{
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  padding:23rpx 40rpx 100rpx 40rpx;
+  cursor: pointer;
+  background: none;
+  line-height: 1.5;
+}
+.scratchLimit .limitTitle .limitText{
+  text-align: center;
+  color: rgb(102,102,102);
+  font-size:26rpx;
+}
+/*安慰奖*/
+.scratchComfort{
+  position: relative;
+  width: 100%;
+  height: 290rpx;
+}
+.scratchComfort image{
+  width: 100%;
+  height: 100%
+}
+.scratchComfort .comfortTitle{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.scratchComfort .comfortTitle .comfortShare{
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  padding: 24rpx 40rpx 10rpx 40rpx;
+  cursor: pointer;
+  background: none;
+  line-height: 1.5;
+}
+.scratchComfort .comfortTitle .comfortText{
+  color: rgb(102,102,102);
+  text-align: center;
+  letter-spacing: 2rpx;
+  font-size: 32rpx;
+}
+.scratchComfort .comfortTitle .comfortBtn{
+  width: 206rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #ff5b3f;
+  text-align: center;
+  color: #fff;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  font-size: 28rpx;
+  cursor: pointer;
+  margin-top: 16rpx;
+}
+.scratchWinning .winningTitle .btnGroup,.scratchComfort .comfortTitle .btnGroup{
+    display:flex;
+    justify-content:center;
+    margin-top:40rpx;
+}
+.scratchWinning .winningTitle .btnGroup .winningBtn,.scratchComfort .comfortTitle .btnGroup .comfortBtn{
+    margin: 0 10rpx;
+}
+.get-reward-text{
+  font-size: 26rpx;
+  padding-top: 26rpx;
+}
+.vipCard-dialog{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 997;
+}
+.vipCard-dialog .content{
+  width: 632rpx;
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 12rpx;
+}
+.vipCard-dialog .top-block{
+  width: 100%;
+  height: 280rpx;
+  background-size: 100% 100%;
+  text-align: center;
+  position: relative;
+  border-top-left-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+}
+.vipCard-dialog .top-block .text{
+  display: inline-block;
+  color: #fff;
+  font-weight: blod;
+  margin-top: 50rpx;
+  font-size: 32rpx;
+}
+.vipCard-dialog .top-block .text-block{
+  width: 230rpx;
+  height: 60rpx;
+  position: absolute;
+  top: calc(50% - 40rpx);
+  right: 65rpx;
+  text-align: center;
+}
+.vipCard-dialog .top-block .text-block .success-text:nth-child(1){
+  margin-bottom: 8rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+}
+.vipCard-dialog .top-block .text-block .success-text:nth-child(2){
+  font-size: 28rpx;
+}
+.vipCard-dialog .top-block .text-block .success-text{
+  color: #fff;
+
+}
+.vipCard-dialog .vip-info{
+  padding: 50rpx 70rpx;
+}
+.vipCard-dialog .vip-info .info-item{
+  margin-bottom: 50rpx;
+  display: flex;
+}
+.vipCard-dialog .vip-info .item-name{
+  font-size: 28rpx;
+  margin-right: 68rpx;
+  line-height:56rpx;
+}
+.vipCard-dialog .vip-info .item-right{
+  flex: 1;
+  height: 56rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+  padding-left: 10rpx;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.vipCard-dialog .vip-info input{
+  width: 100%;
+  font-size: 28rpx;
+  text-overflow: ellipsis;
+}
+.vipCard-dialog .vip-info .get-authorize{
+  position: absolute;
+  top: 6rpx;
+  right: 6rpx;
+  font-size: 24rpx;
+  padding: 4rpx 8rpx;
+  color: #fff;
+  border-radius: 2rpx;
+  line-height: 1.4;
+  z-index: 2;
+}
+.vipCard-dialog .vip-info picker{
+  line-height: 56rpx;
+  font-size:28rpx;
+  width: 100%;
+}
+.vipCard-dialog .vip-info .icon-rightarrow{
+  position: absolute;
+  top: 16rpx;
+  right: 2rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+.vipCard-dialog .content .icon-closed{
+  font-size: 50rpx;
+  position: absolute;
+  bottom: -91rpx;
+  left: calc(50% - 28rpx);
+  color: #fff;
+}
+.vipCard-dialog .interests-block{
+  width: 100%;
+  height: 280rpx;
+  background-color: #fff;
+  display: flex;
+}
+.vipCard-dialog .interests-block .interests-item{
+  flex: 1;
+  text-align: center;
+  font-size: 26rpx;
+}
+.vipCard-dialog .interests-item .icon{
+  width: 42rpx;
+  height: 42rpx;
+  display: inline-block;
+  margin: 63rpx 0 28rpx 0;
+}
+.vipCard-dialog .interests-item .text{
+  color: #666666;
+  font-size: 28rpx;
+}
+.vipCard-dialog .interests-item .count{
+  color: #FF7100;
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 15rpx;
+}
+.vipCard-dialog .save-btn{
+  width: 490rpx;
+  line-height: 80rpx;
+  background-color: #ff7100;
+  border-radius: 6rpx;
+  margin: 20rpx auto 0 auto;
+  text-align: center;
+  color: #fff;
+  font-size: 30rpx;
+}
+.ad-block{
+  margin-top: 10rpx;
+}

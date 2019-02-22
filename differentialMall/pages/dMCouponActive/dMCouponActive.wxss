@@ -1,0 +1,150 @@
+/* differentialMall/pages/dMCouponActive/dMCouponActive.wxss */
+.couponActive-main-wrap {
+  height: 100%;
+  padding: 36rpx 30rpx 0;
+  background-color: #fff;
+  box-shadow:0 2rpx 8rpx 0 rgba(41,41,41,0.05) inset;
+}
+.couponActive-main-wrap .coupon-item {
+  position: relative;
+  border-top-width: 8rpx;
+  border-top-style: solid;
+  border-top-color: #ff7100;
+  border-radius:8rpx;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position:right top;
+  background-size: 144rpx 164rpx;
+  box-shadow:0 0 30rpx 0 rgba(0, 0, 0, .1);
+}
+.couponActive-main-wrap .coupon-item .coupon-mark {
+  position: absolute;
+  top: -22rpx;
+  right: -34rpx;
+  width: 168rpx;
+  height: 168rpx;
+  opacity: .6;
+}
+.couponActive-main-wrap .coupon-item:last-child {
+  margin-bottom: 58rpx;
+}
+.couponActive-main-wrap .coupon-item::before,
+.couponActive-main-wrap .coupon-item::after {
+  z-index: 10;
+  content: '';
+  position: absolute;
+  bottom: 46rpx;
+  height: 22rpx;
+  width: 22rpx;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.couponActive-main-wrap .coupon-item::before {
+  left: -11rpx;
+  box-shadow: -12rpx 0 16rpx 0 rgba(0, 0, 0, .06) inset;
+
+}
+.couponActive-main-wrap .coupon-item::after {
+  right: -11rpx;
+  box-shadow: 12rpx 0 16rpx 0 rgba(0, 0, 0, .06) inset;
+
+}
+.couponActive-main-wrap .coupon-item .coupon-info {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 56rpx 38rpx 42rpx;
+  overflow: hidden;
+}
+.couponActive-main-wrap .coupon-item .merchant-img {
+  max-width: 90rpx;
+  max-height: 90rpx;
+  border-radius: 50%;
+}
+.couponActive-main-wrap .coupon-item .coupon-name {
+  max-width: 484rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 36rpx;
+  line-height: 36rpx;
+  color: #333;
+}
+.couponActive-main-wrap .coupon-item .coupon-name-condition {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 30rpx;
+}
+.couponActive-main-wrap .coupon-item .use-condition {
+  max-width: 484rpx;
+  padding-top: 22rpx;
+  font-size: 26rpx;
+  line-height: 26rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #666;
+}
+.couponActive-main-wrap .coupon-item .coupon-indate {
+  position: relative;
+  padding: 18rpx 38rpx;
+  font-size: 22rpx;
+  line-height: 22rpx;
+  color: #999;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.couponActive-main-wrap .coupon-item .coupon-indate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -28rpx;
+  right: -28rpx;
+  border-top-color: #dbdbdb;
+  border-top-style: dashed;
+  border-top-width: 1px;
+  transform: scaleY(0.5);
+}
+.couponActive-main-wrap .active-tip {
+  margin-top: 26rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+.couponActive-main-wrap .active-btn {
+  height: 86rpx;
+  width: 618rpx;
+  margin: 48rpx auto;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 86rpx;
+  color:#fff;
+  background: linear-gradient(-105deg,rgba(255,163,53,1),rgba(239,62,42,1));
+}
+/* toast样式 */
+.toast-wrap {
+  z-index: 10000;
+  position: fixed;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 0 50rpx;
+  border-radius: 80rpx;
+  font-size: 28rpx;
+  line-height: 72rpx;
+  color: #fff;
+  background-color: #ff7100;
+  height: 0;
+  opacity: 0;
+  transition: opacity .6s ease-out;
+}
+.toast-wrap.show {
+  height: 72rpx;
+  opacity: 1;
+  transition: opacity .6s ease-out;
+}
+.toast-wrap text {
+  text-align: center;
+}

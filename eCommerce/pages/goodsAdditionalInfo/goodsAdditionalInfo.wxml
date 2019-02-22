@@ -1,0 +1,64 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="editor-additional" wx:if="{{ !from }}">
+  <view wx:for="{{ goods_info }}" wx:for-item="goods" wx:key="">
+    <view class="additional-box">
+      <view class="goods-detail">
+        <image class="goods-cover" src="{{ goods.cover }}"></image>
+        <view class="goods-info">
+          <view class="goods-title">{{ goods.title || goods.goods_name }}</view>
+          <view class="goods-model" wx:if="{{ goods.model_value_str }}">{{ goods.model_value_str }}</view>
+      </view>
+      </view>
+      <view class="additional-list" wx:for="{{ additional_info_obj[goods.id || goods.goods_id] }}" wx:key="" wx:for-index="additionalIndex">
+        <view class="additional-text" wx:if="{{ item.type == 'text' }}">
+          <text class="additional-name {{ item.is_required == 0 ? 'is-required' : '' }}">{{ item.title }}</text><view class="additional-info"><input type="text" bindinput="inputFormControl" data-goods-id="{{ goods.id || goods.goods_id}}" data-additional-index="{{ additionalIndex }}" value="{{ item.value }}"></input></view>
+        </view>
+        <view class="additional-textarea" wx:if="{{ item.type == 'mul-text' }}">
+          <text class="additional-name {{ item.is_required == 0 ? 'is-required' : '' }}">{{ item.title }}</text><view class="additional-info"><textarea maxlength="-1" bindinput="inputFormControl" data-goods-id="{{ goods.id || goods.goods_id}}" data-additional-index="{{ additionalIndex }}" value="{{ item.value }}"></textarea></view>
+        </view>
+        <view class="additional-picture" wx:if="{{ item.type == 'picture' }}">
+          <text class="additional-name {{ item.is_required == 0 ? 'is-required' : '' }}">{{ item.title }}</text>
+          <view class="additional-info">
+            <view class="image-list" wx:for="{{ item.value }}" wx:key="" wx:for-item="imgSrc" wx:for-index="imageIndex">
+              <image src="{{ imgSrc }}"></image><label class="delete-image ico-moon icon-closes" bindtap="deleteImage" data-goods-id="{{ goods.id || goods.goods_id}}" data-additional-index="{{ additionalIndex }}" data-image-index="{{ imageIndex }}">-</label>
+            </view>
+            <view wx:if="{{ item.value.length < 9 }}" class="add-images" bindtap="uploadImg" data-goods-id="{{ goods.id || goods.goods_id}}" data-additional-index="{{ additionalIndex }}">
+              <text class="ico-moon icon-goods-add-image"></text>
+              <view>添加图片</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="additional-sure" style="{{'background:' + storeStyle.theme}}" bindtap="submitAdditionalInfo">提交</view>
+</view>
+<view wx:if="{{ from == 'goodsOrderDetail' }}" class="show-additional">
+  <view wx:for="{{ goods_info }}" wx:for-item="goods" wx:key="">
+    <view class="additional-box">
+      <view class="goods-detail">
+        <image class="goods-cover" mode="scaleToFill" src="{{ goods.cover }}"></image>
+        <view class="goods-info">
+          <view class="goods-title">{{ goods.title || goods.goods_name }}</view>
+          <view class="goods-model" wx:if="{{ goods.model_value_str }}">{{ goods.model_value_str }}</view>
+        </view>
+      </view>
+      <view class="additional-list" wx:for="{{ additional_info_obj[goods.id || goods.goods_id] }}" wx:key="" wx:for-index="additionalIndex">
+        <view class="additionals-text" wx:if="{{ item.type == 'text' }}">
+          <text class="additional-name {{ item.is_required == 0 ? 'is-required' : '' }}">{{ item.title }}</text><view class="additional-info">{{ item.value }}</view>
+        </view>
+        <view class="additional-textarea" wx:if="{{ item.type == 'mul-text' }}">
+          <text class="additional-name {{ item.is_required == 0 ? 'is-required' : '' }}">{{ item.title }}</text><view class="additional-info">{{ item.value }}</view>
+        </view>
+        <view class="additional-picture" wx:if="{{ item.type == 'picture' }}">
+          <text class="additional-name {{ item.is_required == 0 ? 'is-required' : '' }}">{{ item.title }}</text>
+          <view class="additional-info">
+            <view class="image-list" wx:for="{{ item.value }}" wx:key="" wx:for-item="imgSrc" wx:for-index="imageIndex">
+              <image src="{{ imgSrc }}" bindtap="previewImage" data-image-index="{{ imageIndex }}" data-additional-index="{{ additionalIndex }}" data-goods-id="{{ goods.id || goods.goods_id }}"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

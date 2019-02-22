@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "component-filter": "/components/filter/filter",
+        "component-getUserInfo": "/components/getUserInfo/getUserInfo",
+        "component-goodsShoppingCart": "/components/goodsShoppingCart/goodsShoppingCart"
+    }
+}

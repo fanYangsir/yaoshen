@@ -1,0 +1,24 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="progress-contain">
+  <view class="progress-header">
+    <view>买家操作</view>
+    <view>卖家操作</view>
+  </view>
+  <view class="progress-content">
+    <view class="content-box" wx:for="{{ OrderFlowData }}" wx:key="">
+      <view class="progress-left">
+        <block wx:if="{{ item.is_custom }}">
+          <text>{{ item.content.msg }}</text>
+          <text>{{ item.op_time }}</text>
+        </block>
+      </view>
+      <view class="progress-center"></view>
+      <view class="progress-right">
+        <block wx:if="{{ !item.is_custom }}">
+          <text>{{ item.content.msg }}</text>
+          <text>{{ item.op_time }}</text>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

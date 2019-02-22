@@ -1,0 +1,205 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-memberDiscount 
+  id="component-memberDiscount"
+  discountType="{{ discountList }}"
+  bind:afterSelectedDiscount="afterSelectedBenefit"></component-memberDiscount>
+<view class="preview-goods-wrap">
+  <view class="preview-section delivery-method" wx:if="{{ storeConfig.is_self_delivery == 1 && storeConfig.express == 1}}">
+    <view style="{{'border-color:' + storeStyle.theme + ';color:' + storeStyle.theme + (is_self_delivery == 0 ? ';color: #fff;background:' + storeStyle.theme : '')}}" class="merchant-delivery {{ is_self_delivery == 0 ? 'active' : ''}}" catchtap="deliveryWayChange" data-type="0">商家配送</view>
+    <view style="{{'border-color:' + storeStyle.theme + ';color:' + storeStyle.theme + (is_self_delivery == 1 ? ';color: #fff;background:' + storeStyle.theme : '')}}" class="delivery-myself {{ is_self_delivery == 1 ? 'active' : ''}}" catchtap="deliveryWayChange" data-type="1">上门自提</view>
+  </view>
+  <view class="preview-section" hidden="{{ is_self_delivery == 1 }}">
+    <block wx:if="{{ selectAddress.id }}">
+      <view class="address-box" bindtap="goToMyAddress" data-address-id="{{ selectAddress.id }}">
+        <text class="ico-moon icon-goods-location"></text>
+        <view class="address-detail">
+          <view class="buyer-name-box"><text wx:if="{{ storeConfig.is_self_delivery == 0 && storeConfig.express == 1 }}" class="store-config-label" style="{{'background:' + storeStyle.theme}}">快递</text><text class="buyer-name">{{ selectAddress.address_info.name }}</text> <text>{{ selectAddress.address_info.contact }}</text></view>
+          <view class="buyer-address">{{ selectAddress.address_info.province.text + selectAddress.address_info.city.text + selectAddress.address_info.district.text + selectAddress.address_info.detailAddress }}</view>
+        </view>
+        <view class="ico-moon icon-rightarrow"></view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="address-null-box">
+        <view class="pull-right ico-moon icon-rightarrow"></view>
+        <view bindtap="goToMyAddress">
+          <text class="ico-moon icon-goods-location"></text>
+          <text class="add-new-address">新增地址</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="preview-section" hidden="{{ is_self_delivery == 0 }}">
+    <block wx:if="{{ selectDelivery.id }}">
+      <view class="address-box" bindtap="toDeliveryList" data-address-id="{{ selectDelivery.id }}">
+        <text class="ico-moon icon-goods-location"></text>
+        <view class="address-detail">
+          <view class="buyer-name-box"><text wx:if="{{ storeConfig.is_self_delivery == 1 && storeConfig.express == 0 }}" class="store-config-label" style="{{'background:' + storeStyle.theme}}">自提</text><text class="buyer-name">{{ selectDelivery.contact_name }}</text> <text>{{ selectDelivery.service_phone }}</text></view>
+          <view class="buyer-address">{{ selectDelivery.region_data.region_string + selectDelivery.address_detail }}</view>
+        </view>
+        <view class="ico-moon icon-rightarrow"></view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="address-null-box" bindtap="toDeliveryList">
+        <view class="pull-right ico-moon icon-rightarrow"></view>
+        <view>
+          <text class="ico-moon icon-goods-location"></text>
+          <text class="add-new-address">选择自提点</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="address-bg">
+    <image src="http://cdn.jisuapp.cn/static/webapp/images/xcx-goods/goods-address-bg.png"></image>
+  </view>
+  <view class="preview-goods-order-list" wx:for="{{ goodsList }}" wx:for-item="goods" wx:for-index="goodsIndex" wx:key="">
+    <view class="preview-goods-order-item">
+      <image class="preview-goods-cover" src="{{ goods.cover }}" mode="aspectFill"></image>
+      <view class="preview-goods-content">
+        <view class="preview-goods-title"><text wx:if="{{ is_group }}" class="exchange-tip">拼团</text><text wx:if="{{ goods.is_seckill == 1 }}" class="exchange-tip">秒杀</text>{{ goods.title }}</view>
+        <view wx:if="{{ goods.model_value_str }}" class="preview-goods-model">{{ goods.model_value_str }}</view>
+        <view class="goods-price-box">
+          <block wx:if="{{goods.integral != '2'}}">
+            <text class="preview-goods-price" style="{{ !is_group ? 'color:' + storeStyle.theme : '' }}">¥ {{ is_group ? group_buy_price : goods.price  }}</text>
+          </block>
+          <block wx:else>
+            <text class="preview-goods-price" style="{{ !is_group ? 'color:' + storeStyle.theme : '' }}" wx:if="{{goods.price != '0.00'}}">¥ {{ goods.price }}</text>
+            <text class="preview-goods-price" style="{{ !is_group ? 'color:' + storeStyle.theme : '' }}" wx:if="{{goods.price != '0.00' && goods.use_integral != 0}}">+</text>
+            <text class="preview-goods-price" wx:if="{{goods.use_integral != 0}}" style="{{ !is_group ? 'color:' + storeStyle.theme : '' }}">{{ goods.max_can_use_integral }}积分</text>
+          </block>
+          <view class="good-number-box pull-right" wx:if="{{ !is_group }}">
+            <view class="goods-minus" data-index="{{ goodsIndex }}" catchtap="clickMinusButton">-</view>
+            <input class="goods-count" data-index="{{ goodsIndex }}" type="number" value="{{ goods.num }}" bindinput="inputGoodsCount" />
+            <view class="goods-plus" style="{{ 'color:' + storeStyle.theme }}" data-index="{{ goodsIndex }}" catchtap="clickPlusButton">+</view>
+          </view>
+          <view class="good-number-box pull-right" wx:if="{{ is_group }}">
+            <view class="group-count">数量：{{ goods.num }}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="preview-goods-order-list" wx:if="{{ exchangeCouponData.hasSelectGoods }}">
+    <view class="preview-goods-order-item">
+      <image class="preview-goods-cover" src="{{ exchangeCouponData.goodsInfo.cover }}"></image>
+      <view class="preview-goods-content">
+        <view class="preview-goods-title"><text class="exchange-tip">赠品</text>{{ exchangeCouponData.goodsInfo.title }}</view>
+        <view wx:if="{{ exchangeCouponData.goodsInfo.model_value_str }}" class="preview-goods-model">{{ exchangeCouponData.goodsInfo.model_value_str }}</view>
+        <view class="goods-number-contain">
+          <view class="exchange-num pull-right">x1</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="preview-box">
+    <view class="single-box">商品金额 <text class="pull-right">¥ {{is_group ? group_buy_price : original_price }}</text></view>
+    <view class="single-box">运费 <text class="pull-right">¥ {{ express_fee }}</text></view>
+    <view bindtap="showMemberDiscount" wx:if="{{ discountList.length }}">
+      <view class="balance-switch">
+        <text>优惠方式</text> 
+        <view class="ico-moon icon-rightarrow pull-right"></view>
+        <text class="pull-right select-discount">{{ selectDiscountInfo.name }}</text>
+      </view>
+      <view hidden="{{ selectDiscountIndex == 0 }}" class="balance-price">
+        <text class="pull-right" style="{{ 'color:' + storeStyle.theme }}">- ¥ {{ discount_cut_price }}</text>
+      </view>
+    </view>
+    <view wx:if="{{ balance != 0 }}">
+      <view class="balance-switch">
+        <text>使用储值金</text> 
+        <switch color="{{ storeStyle.theme }}" class="pull-right" checked="true" bindchange="useBalanceChange"/>
+      </view>
+      <view hidden="{{ !useBalance }}" class="balance-price">
+        <text class="pull-right" style="{{ 'color:' + storeStyle.theme }}">- ¥ {{ deduction }}</text>
+      </view>
+    </view>
+    <view wx:if="{{ canCashDelivery === 1 && totalPayment > 0 && (storeConfig.express == 1 || selfPayOnDelivery == 1) }}">
+      <view class="balance-switch">
+        <text>货到付款（先下单，验货后支付）</text>
+        <switch color="{{ storeStyle.theme }}" class="pull-right" bindchange="useCashDelivery" checked="{{ cashOnDelivery }}"/>
+      </view>
+    </view>
+  </view>
+  <view class="preview-box">
+    <view class="buyer-message single-box">
+      买家留言 <view class="pull-right"><input class="remark" value="{{orderRemark}}" bindinput="remarkInput" placeholder="买家留言" /></view>
+    </view>
+    <view class="border-top1 single-box" bindtap="goToAdditionalInfo" wx:if="{{ !noAdditionalInfo && !aloneDeliveryShow }}">
+      补充信息 
+      <view class="ico-moon icon-rightarrow pull-right"></view>
+      <text style="{{'color:' + ((hasRequiredSuppInfo && !deliverydWrite) ? storeStyle.theme : '#666')}}" class="additional-tip pull-right">{{ deliverydWrite ? '已填写' : '未填写'}}</text>
+    </view>
+  </view>
+  <!-- 单件商品展示补充信息 -->
+  <view class="additional-list" wx:if="{{ aloneDeliveryShow }}" wx:for="{{ additional_info[additional_goodsid_arr[0]] }}" wx:key="">
+    <view class="additional-text" wx:if="{{ item.type == 'text' }}">
+      <text class="additional-name {{ item.is_required == 0 ? 'is-required' : '' }}">{{ item.title }}</text>
+      <view class="additional-info"><input type="text" bindinput="inputFormControl" value="{{ item.value }}"></input></view>
+    </view>
+    <view class="additional-textarea" wx:if="{{ item.type == 'mul-text' }}">
+      <text class="additional-name {{ item.is_required == 0 ? 'is-required' : '' }}">{{ item.title }}</text>
+      <view class="additional-info"><textarea maxlength="-1" bindinput="inputFormControl" value="{{ item.value }}"></textarea></view>
+    </view>
+    <view class="additional-picture" wx:if="{{ item.type == 'picture' }}">
+      <text class="additional-name {{ item.is_required == 0 ? 'is-required' : '' }}">{{ item.title }}</text>
+      <view class="additional-info">
+        <view class="image-list" wx:for="{{ item.value }}" wx:key="" wx:for-item="imgSrc" wx:for-index="imageIndex">
+          <image src="{{ imgSrc }}"></image><label class="delete-image ico-moon icon-closes" bindtap="deleteImage" data-image-index="{{ imageIndex }}">-</label>
+        </view>
+        <view wx:if="{{ item.value.length < 9 }}" class="add-images" bindtap="addDeliveryImg">
+          <text class="ico-moon icon-goods-add-image"></text>
+          <view>添加图片</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="bottom-nav">
+    <view class="preview-goods-total-price">合计: <text class="price-count" style="{{ 'color:' + storeStyle.theme }}">¥ {{ totalPayment }}</text></view>
+    <form report-submit="true" bindsubmit="confirmPayment">
+      <button formType="submit" style="{{ 'background:' + storeStyle.theme }}">{{ cashOnDelivery ? '货到付款' : '在线支付' }}</button>
+    </form>
+  </view>
+  <template name="exchangeCouponUseDialog">
+    <view class="page-dialog-wrap" hidden="{{ dialogHidden }}">
+      <view class="page-bottom-dialog">
+        <view class="page-bottom-content">
+          <view class="pay-close-dialog page-dialog-close" bindtap="exchangeCouponHideDialog">×</view>
+          <view class="dialog-block-item">
+            <view class="thumb">
+              <view class="thumb-wrap">
+                <image class="pay-goods-cover" src="{{ selectModelInfo.imgurl || goodsInfo.cover }}"></image>
+              </view>
+            </view>
+            <view class="pay-goods-baseinfo">
+              <view class="pay-goods-title ellipsis">
+                <text class="gift-text">赠品</text>
+                <text class="gift-title">{{ goodsInfo.title }}</text>
+              </view>
+              <view wx:if="{{selectModelInfo.models_text}}" class="pay-checked-text clearfix">已选：{{ selectModelInfo.models_text }}</view>
+              <text class="gift-price">￥{{ selectModelInfo.price }}</text>
+            </view>
+          </view>
+          <view class="exchange-rules-box" hidden="{{ !goodsInfo.model_items.length }}">
+            <view class="pay-goods-models">
+              <view wx:for="{{ goodsInfo.model }}" wx:key="" wx:for-item="model" wx:for-index="modelIndex">
+                <text class="model-title">{{ model.name }}</text>
+                <label class="pills-list">
+                  <label wx:for="{{ model.subModelName }}"
+                        wx:for-item="name"
+                        wx:key=""
+                        data-model-index="{{ modelIndex }}"
+                        data-submodel-index="{{ index }}"
+                        class="subModel {{ selectModelInfo.models[modelIndex] == model.subModelId[index] ? 'select' : '' }}"
+                        data-submodel-id="{{ model.subModelId[index] }}" bindtap="exchangeCouponSelectSubModel">{{ name }}</label>
+                </label>
+              </view>
+            </view>
+          </view>
+          <view class="confirm-goods" bindtap="exchangeCouponConfirmGoods">确认</view>
+        </view>
+      </view>
+    </view>
+  </template>
+  <template is="exchangeCouponUseDialog" data="{{ ...exchangeCouponData }}"></template>
+</view>

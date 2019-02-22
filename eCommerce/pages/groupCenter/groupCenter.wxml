@@ -1,0 +1,93 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+
+<view class='collage-goodsList'>
+  <view class="collage-section">
+    <view class="goods-list list">
+      <view class="goods-item isRelative" wx:for="{{goodsData.goods_list}}" wx:key="" catchtap='gotoDetail'
+        data-goodsId="{{item.goods_id}}" data-activityId="{{item.activity_id}}">
+        <view class="image-wrap">
+          <image src='{{item.cover}}'></image>
+        </view>
+        <view class="content-wrap">
+          <view class="title">
+            <view class="type">
+              <view>
+                <icon class="ico-moon icon-number-people"></icon>
+              </view>
+              <text>{{item.activity_type== 0 ? (item.num_of_people.length > 1 ? '多人团' : item.num_of_people[0] + '人团')
+                : (item.activity_type == 1 ? '新人团' : (item.activity_type == 2 ? '阶梯团' : (item.activity_type == 3 ?
+                '帮帮团' : '抽奖团')))}}</text>
+            </view>{{item.title}}
+          </view>
+          <view class='same-line' wx:if="{{!(item.status == 3 && item.end_date == '-1')}}">
+            <view class="first-line">
+              <view class="price-detail">
+                <text class="min-price">¥ <text style="font-size:36rpx;">{{item.group_buy_price}}</text></text>
+                <text class="origin-price">¥{{item.original_price}}</text>
+              </view>
+              <view class="to-join">
+                <block wx:if="{{item.status == 0}}">
+                  <button class="ready">即将开团</button>
+                </block>
+                <block wx:elif="{{item.status == 1}}">
+                  <button class="remain" catchtap='remainMe' data-goodsId="{{item.goods_id}}" data-activityId="{{item.activity_id}}" data-index="{{index}}">提醒我</button>
+                </block>
+                <block wx:elif="{{item.status == 2}}">
+                  <button class="reminded">已提醒</button>
+                </block>
+                <block wx:elif="{{item.status == 3}}">
+                  <button class="go">{{item.activity_type == 4 ? '参与抽奖' : '去拼团' }}</button>
+                </block>
+                <block wx:elif="{{item.status == 4}}">
+                  <button class="over">已结束</button>
+                </block>
+              </view>
+            </view>
+            <view class="second-line">
+              <view class="sales-num">
+                <block>
+                  已团{{item.goods_count}}件
+                </block>
+              </view>
+              <view class="count-big-down" wx:if="{{!(item.status == 3 && item.end_date == '-1') && item.status != 4}}">{{item.status != 3
+                ? '距开始' : '距结束'}} {{item.downCount.hours}} : {{item.downCount.minutes}} : {{item.downCount.seconds}}
+              </view>
+            </view>
+          </view>
+          <view class="differ-line" wx:else>
+            <view class="first-line">
+              <view class="price-detail">
+                <text class="min-price">¥ <text style="font-size:36rpx;">{{item.group_buy_price}}</text></text>
+                <text class="origin-price">¥{{item.original_price}}</text>
+              </view>
+              <view class="sales-num">
+                <block>
+                  已团{{item.goods_count}}件
+                </block>
+              </view>
+            </view>
+            <view class="second-line">
+              <view class="to-join">
+                <block wx:if="{{item.status == 0}}">
+                  <button class="ready">即将开团</button>
+                </block>
+                <block wx:elif="{{item.status == 1}}">
+                  <button class="remain" catchtap='remainMe' data-goodsId="{{item.goods_id}}" data-activityId="{{item.activity_id}}"  data-index="{{index}}">提醒我</button>
+                </block>
+                <block wx:elif="{{item.status == 2}}">
+                  <button class="reminded">已提醒</button>
+                </block>
+                <block wx:elif="{{item.status == 3}}">
+                  <button class="go">{{item.activity_type == 4 ? '参与抽奖' : '去拼团' }}</button>
+                </block>
+                <block wx:elif="{{item.status == 4}}">
+                  <button class="over">已结束</button>
+                </block>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

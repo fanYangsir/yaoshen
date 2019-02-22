@@ -1,0 +1,4 @@
+<!--differentialMall/pages/dMWebView/dMWebView.wxml-->
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<web-view src="{{webRequestUrl}}" wx:if="{{webRequestUrl}}"></web-view>
+

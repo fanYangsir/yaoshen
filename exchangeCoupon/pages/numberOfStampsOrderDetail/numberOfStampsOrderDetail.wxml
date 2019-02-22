@@ -1,0 +1,103 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="order-contain {{ detailShow ? 'show' : ''  }} ">
+  <view class="orderDetail-goto-homepage" bindtap="goToHomepage" wx:if="{{ isFromTemplateMsg }}">返回首页</view>
+  <view class="seller-shipped">
+    <view>
+      订单状态：{{status_name}}
+    </view>
+  </view>
+  <block>
+    <view class="app-box">
+      <view>
+        <text class="app-name">下单时间</text>
+        <view class='contact-service pull-right'>
+          <text>{{ orderInfo.add_time }}</text>
+        </view>
+      </view>
+    </view>
+    <block>
+      <view class="goods-detail-box">
+        <image src="{{ appLogo }}"></image>
+        <view>
+          <view wx:if="{{ orderInfo.goods_info.goods_name }}" class="goods-rules" style="color: #333;font-size:26rpx">{{ orderInfo.goods_info.goods_name }}</view>
+          <view class="goods-rules">使用时间{{orderInfo.goods_info.expire}}</view>
+          <view class="goods-price">
+            <text class="color333" wx:if="{{orderInfo.goods_info.price != 0 && orderInfo.goods_info.price != '0.00'}}">¥{{ orderInfo.goods_info.price }}</text>
+            <text class="color333" wx:if="{{orderInfo.goods_info.price != 0 && orderInfo.goods_info.price != '0.00' && orderInfo.goods_info.integral}}">+</text>
+            <text class="color333" wx:if="{{orderInfo.goods_info.integral}}">{{ orderInfo.goods_info.integral }}积分</text>
+            <text class="pull-right">x 1</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </block>
+  <view class="actual-payment">
+    <view>
+      <text>实际付款</text>
+      <text class="pull-right colorff7">¥ {{ orderInfo.total_price }}</text>
+    </view>
+  </view>
+  <view class="order-used" wx:if="{{orderInfo.status != 0 && orderInfo.coupon_type == 6}}">
+    <view class="order-used-title" catchtap="getVerificationInfo">
+      <text>核销情况</text>
+      <view class="ico-moon icon-rightarrow"></view>
+    </view>
+    <view class="order-used-line order-used-bottom"><view>已核销</view><view class="colorff7">{{orderInfo.verified_times}}次</view></view>
+    <view class="order-used-line"><view>未核销</view><view  class="colorff7">{{orderInfo.un_verify_times}}次</view></view>
+  </view>
+  <view class="order-number">
+    <view>
+      <text>订单编号</text>
+      <text>{{ orderInfo.order_id }}</text>
+      <text class="pull-right" catchtap="copyOrderId">复制</text></view>
+  </view>
+  <view class="order-bottom" wx:if="{{orderInfo.coupon_type == 6 && orderInfo.can_verify == 1 && orderInfo.status != 0 && orderInfo.un_verify_times != 0}}">
+    <text class="btn" bindtap="getWriteOffCodeBox">核销码</text>
+  </view>
+</view>
+<!-- <view class="coupon-verify-wrap {{ verifyShow ? 'show' : ''  }}">
+  <view class="top-section">
+    <view class="cancel" bindtap="hideCouponVerify" hidden="{{ verifyData.success }}" >取消</view>
+    <view class="name">{{ appName }}</view>
+    <view class="title">{{ orderInfo.goods_info.goods_name }}</view>
+  </view>
+  <view class="division-line">
+    <view class="left-circle" style="background: {{ couponDetail.background }}"></view>
+    <view class="right-circle" style="background: {{ couponDetail.background }}"></view>
+  </view>
+  <view class="bottom-section">
+    <view class="verify-block" wx:if="{{ !verifyData.success }}">
+      <image class="qrcode" src="{{ verifyData.qrcodeUrl }}"></image>
+      <view class="code">
+        <view>核销码：</view>
+        <view>{{ orderInfo.verify_code }}</view>
+      </view>
+    </view>
+    <view class="success-block" wx:elif="{{ verifyData.success }}">
+      <view class="success-tip">
+        <icon class="success-tip-icon" type="success" size="20"></icon>
+        <text class="success-tip-text">核销成功!</text>
+      </view>
+      <view class="back-tip" bindtap="hideCouponVerify">>>>返回</view>
+    </view>
+  </view>
+</view> -->
+<modal hidden="{{hiddenmodalput}}" title="请输入本次核销次数" confirm-text="确认" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" catchtouchmove='true'>
+​    <input type='number' placeholder="请输入本次核销次数" maxlength='6' bindinput="addLabelInput" value="{{addLabelText}}" focus="{{labelFocus}}" cursor-spacing="80" style="background:#F5F5F5;height:76rpx;border-radius:10rpx;padding: 10rpx 10rpx"/>
+</modal>
+<view class="coupon-cerification-info {{ cerificationShow ? 'show' : ''  }}">
+  <view class="ceification-info-title" wx:if="{{orderInfo.verify_log.length > 0}}">
+    <text class="ceification-info-left">核销次数</text>
+    <text>核销时间</text>
+  </view>
+  <view style="min-height:300rpx;background: #fff;" wx:if="{{orderInfo.verify_log.length > 0}}">
+    <view class="ceification-info-line" wx:for="{{orderInfo.verify_log}}" wx:key="key" >
+      <text class="ceification-info-left">{{item.consume_times}}</text>
+      <text>{{item.add_time}}</text>
+    </view>
+  </view>
+  <view class="coupon-cerification-nodata" wx:if="{{orderInfo.verify_log.length == 0}}">- 暂无数据 -</view>
+  <view style="text-align:center">
+    <view class="ceification-info-back"  bindtap="hideCouponVerify">返回</view>
+  </view>
+</view>

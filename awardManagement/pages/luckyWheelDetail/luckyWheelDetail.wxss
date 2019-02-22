@@ -1,0 +1,800 @@
+page{
+  position: relative;
+}
+.luckyWheelDetail{
+ height: 100%;
+ padding-bottom: 80rpx;
+}
+.lucky-cantaniner{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -20;
+}
+.pagePrize{
+    position: absolute;
+    left: 5%;
+    top: 8px;
+    width: 175.5rpx;
+    height: 70.2rpx;
+    background-image: url(http://cdn.jisuapp.cn/static/webapp/images/pageDisc.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.pageMusic{
+    width: 70rpx;
+    height: 70rpx;
+    position: absolute;
+    top: 8px;
+    right: 5%;
+    text-align: center;
+    border-radius: 50%;
+    background: rgba(0,0,0,.4);
+    color: #fff;
+    
+}
+.pageMusic.active{
+ animation:roes 2s infinite linear; 
+}
+@keyframes roes{
+  0%{
+    transform: rotate(0deg)
+  }
+  100%{
+    transform: rotate(360deg)
+  }
+}
+.pageMusic text{
+  padding-top:20rpx;
+
+}
+.motive{
+    width: 702rpx;
+    height: 175.5rpx;
+    margin: 0 auto;
+    margin-top: 20rpx;
+}
+.motive image{
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.motive-square{
+   width:700rpx; 
+   margin: 0 auto;
+   height: 374rpx; 
+   /* width: 598rpx;
+  height: 300rpx;  */
+  margin-top: -58.5rpx;
+}
+.motive-square image{
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.wholeDiv{
+  text-align: center;
+  font-size: 26rpx;
+  width: 620rpx;
+  line-height: 60rpx;
+  height: 60rpx;
+  margin: 0 auto;
+  border-radius: 32.76rpx;
+  background:rgba(243,190,30,.3); 
+  margin-top: 16rpx;
+}
+.todayChance{
+    color: #6b3600;
+    display: inline-block;
+    text-align: center;
+}
+.todayChance label{
+    color: #ff090f;
+}
+.personNum{
+    color: #6b3600;
+    text-align: center;
+}
+.personNum label{
+   color: #ff090f;
+}
+#outDiv{
+    width: 562rpx;
+    height: 562rpx;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 50rpx;
+}
+#tip{
+    position:absolute;
+    left:212rpx;
+    top:161rpx;
+    width:136rpx;
+    height:187rpx;
+    z-index:10;
+
+}
+#outDiv .outer-cont{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#outDiv .outer-cont .img{
+    width: 100%;
+    height: 100%;
+}
+#outDiv .zp{
+    position: absolute;
+    width: 140rpx;
+    height: 117rpx;
+}
+#outDiv .zp label{
+    color: #ca1518;
+    font-family: "Microsoft YaHei";
+    font-size: 28rpx;
+    display: block;
+    height: 93rpx;
+    text-align: center;
+}
+#outDiv .zp image{
+    width:46.8rpx;
+    margin:0 auto;
+    height:46.8rpx;
+    display:block;
+    margin-top: -9rpx;
+
+}
+.zp0{
+    top: 267rpx;
+    left: 171rpx;
+    transform: rotate(28deg) translateY(-234rpx);
+}
+.zp1{
+    top: 246rpx;
+    left: 154rpx;
+    transform: rotate(68deg) translateY(-234rpx);
+}
+.zp2{
+    top: 215rpx;
+    left: 140rpx;
+    transform: rotate(110deg) translateY(-234rpx);
+}
+.zp3{
+    top: 166rpx;
+    left: 168rpx;
+    transform: rotate(155deg) translateY(-234rpx);
+}
+.zp4{
+    top: 175rpx;
+    left: 211rpx;
+    transform: rotate(199deg) translateY(-211rpx);
+}
+.zp5{
+    top: 175rpx;
+    left: 257rpx;
+    transform: rotate(243deg) translateY(-234rpx);
+}
+.zp6{
+    top: 271rpx;
+    left: 255rpx;
+    transform: rotate(301deg) translateY(-234rpx);
+}
+.zp7{
+    top: 283rpx;
+    left: 229rpx;
+    transform: rotate(340deg) translateY(-234rpx);
+}
+ .winList{
+    width: 608.4rpx;
+    height: 327.6rpx;
+    margin: 0 auto;
+    margin-top: 70.2rpx;
+ }
+ .winList .wintitle{
+    color: #fff;
+    height: 93.6rpx;
+    line-height: 93.6rpx;
+    text-align: center;
+    font-weight: bold;
+ }
+ .winList .winCon{
+    width: 100%;
+    border-radius: 11.7rpx;
+    background: #AE2C53;
+    text-align: center;
+    overflow: hidden;
+    height: 187rpx;
+    position: relative;
+  }
+  .winList .winCon .winconList{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 190rpx;
+  }
+  .winList .winCon .winconList view{
+    color: #fff;
+    height: 44rpx;
+    line-height: 44rpx;
+    font-size: 26rpx;  
+  }
+
+  .active-rule{
+    width: 608.4rpx;
+    margin: 0 auto;
+    height: auto;
+    margin-top: 23.4rpx;
+  }
+  .active-rule .active-rule-title{
+    color: #fff;
+    height: 93.6rpx;
+    line-height: 93.6rpx;
+    text-align: center;
+    font-weight: bold;
+  }
+  .active-rule .strip-content{
+    background: #A42B4A;
+    padding: 23.4rpx;
+    border-radius: 11.7rpx;
+  }
+  .active-rule .strip-content .prizeDisc{
+    padding: 0 8rpx;
+    font-size: 45rpx;
+  }
+  .active-rule .strip-content .strip-time{
+    padding: 10rpx 0;
+  }
+  .active-rule .strip-content .sharesTimes{
+    padding-bottom: 10rpx;
+    
+  }
+  .active-rule .strip-content view{
+    color: #fff;
+    line-height: 40rpx;
+    font-size: 26rpx;
+  }
+  /* 抽奖次数用完弹窗 */
+  .duraMaxDiv,.degreeDiv{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 1200;
+  }
+  .duraMaxDiv .duraMaxDiv-wrap,.degreeDiv .degreeDiv-wrap{
+  width: 538.2rpx;
+  height: 346.32rpx;
+  background: #fff;
+  border-radius: 9.36rpx;
+  margin: 0 auto;
+  margin-top: 444.6rpx;
+  }
+  .duraMaxDiv-wrap .duraMaxDiv-con,.degreeDiv-wrap .degreeDiv-con{
+  height: 229.32rpx;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 53.82rpx;
+  -moz-box-sizing:border-box; /* Firefox */
+  -webkit-box-sizing:border-box; /* Safari */
+  }
+   .duraMaxDiv-wrap .duraMaxDiv-con view{
+    line-height: 120rpx;
+    font-size:32.76rpx;
+  } 
+  .degreeDiv-wrap .degreeDiv-con view{
+    font-size: 32.76rpx;
+    line-height: 120rpx;
+  }
+  .duraMaxDiv .duraMaxDiv-wrap .duraMaxDiv-con .balance,.degreeDiv .degreeDiv-wrap .degreeDiv-con .balance{
+  color: #ff7100;
+ }
+ .duraMaxDiv .duraMaxDiv-wrap .duraMaxDiv-btns,.degreeDiv .degreeDiv-wrap .degreeDiv-btns{
+  height: 114.66rpx;
+  width: 100%;
+  border-top: 2.34rpx solid #e6e6e6;
+  font-size: 32rpx!important;
+ }
+ .duraMaxDiv .duraMaxDiv-wrap .duraMaxDiv-btns .duraMaxDiv-confirm,
+ .degreeDiv .degreeDiv-wrap .degreeDiv-btns .degreeDiv-confirm{
+  width: 266.76rpx;
+  float: left;
+  text-align: center;
+  line-height: 114.66rpx;
+  color: #ff7100;
+  border-left: 1px solid #e6e6e6;
+  font-size: 14px;
+  background-color: #fff;
+  padding:0;
+ }
+ .duraMaxDiv .duraMaxDiv-wrap .duraMaxDiv-btns .duraMaxDiv-cancel,
+ .degreeDiv .degreeDiv-wrap .degreeDiv-btns .degreeDiv-cancel{
+  width: 266.76rpx;
+  float: left;
+  text-align: center;
+  line-height: 114.66rpx;
+  color: #333333;
+  font-size: 14px;
+ }
+ /* 抽中奖品弹窗 */
+ .Congratulations_sick{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.8);
+  z-index: 1200;
+   
+}
+.Congratulations_sick .Congratulations_wrap{
+  width: 656rpx;
+  height: 702rpx;
+  margin: 0 auto;
+  margin-top: 210.6rpx;
+}
+.Congratulations_sick .Congratulations_wrap .Congratulations-con{
+  width: 100%;
+  height: 494rpx;
+  position: relative;
+}
+.Congratulations_sick .Congratulations_wrap .Congratulations-con image{
+  width: 100%;
+  height: 100%;
+}
+.Congratulations_sick .Congratulations_wrap .Congratulations-con label{
+  position:absolute;
+  display:block;
+  left:140rpx;
+  top:300.7rpx;
+  color:#fff;
+  font-size:40rpx;
+  font-weight:bold;
+  text-align: center;
+  width: 420rpx;
+  letter-spacing:2rpx;
+  word-break: break-all;
+}
+.Congratulations_sick .Congratulations_wrap .Congratulations-btns{
+  height: 60.84rpx;
+  width: 100%;
+  margin-top: 46.8rpx;
+}
+.Congratulations_sick .Congratulations_wrap .Congratulations-btns .btns{
+    width:195rpx;
+    float:left;
+    height:75rpx;
+    line-height:75rpx;
+    background:#FFE71D;
+    text-align:center;
+    margin-left:46.8rpx;
+    color:#bf1e2e;
+    border-radius:4rpx;
+    font-size:28.08rpx;
+    padding:0;
+
+}
+/* 我的中奖记录弹窗 */
+.record_sick{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.8);
+  z-index: 1200;
+}
+.record_sick .record_wrap{
+  width: 702rpx;
+  height: auto;
+  margin: auto;
+  margin-top: 80rpx;
+  position: relative;
+}
+.record_sick .record_wrap .img_con{
+  width:100%;
+  height:655rpx;
+  position:absolute;
+  left:-20rpx;
+  top:-67rpx;
+}
+.record_sick .record_wrap .record_header{
+  width: 631.8rpx;
+  height: 128.7rpx;
+  margin: 0 auto;
+  background-image: url(http://cdn.jisuapp.cn/static/webapp/images/prize_header.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.record_sick .record_wrap .record_content{
+    width:596.7rpx;
+    background:#f8f0d1;
+    margin:0 auto;
+    height:720rpx;
+    margin-top:-21rpx;
+    position: relative;
+    overflow: hidden;
+}
+.record_sick .record_wrap .record_content .content_title{
+  width: 100%;
+  height: 93.6rpx;
+  border-bottom: 2.34rpx dashed #e3dcb1;
+  position: relative;
+}
+.record_sick .record_wrap .record_content .content_title label{
+  width: 50%;
+  display: inline-block;
+  height: 100%;
+  font-weight: bold;
+  color: #890200;
+  text-align: center;
+  line-height: 93.6rpx;
+  float: left;
+}
+.record_sick .record_wrap .record_content .content_title .record_line{
+    width: 0px;
+    height: 58.5rpx;
+    border-left: 2.34rpx dashed #e3dcb1;
+    position: absolute;
+    left: 294.84rpx;
+    top: 23.4rpx;
+}
+.record_sick .record_wrap .record_content .prizeList{
+  height: 702rpx;
+  overflow: auto;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top:93.6rpx; 
+}
+ .record_sick .record_wrap .record_content .prizeList view{
+  height: 70.2rpx;
+  line-height: 70.2rpx;
+}
+.record_sick .record_wrap .record_content .prizeList view label{
+  text-align: center;
+  width: 50%;
+  height: 100%;
+  font-size: 26rpx;
+  color: #666666;
+  display: inline-block;
+} 
+
+.record_sick .record_wrap .record_content .record_fail{
+  text-align: center;
+  margin-top: 160rpx;
+  margin-bottom: 140.4rpx;
+}
+.record_sick .record_wrap .record_content .record_fail image{
+  width: 187.2rpx;
+  height: 81.9rpx;
+}
+.record_sick .record_wrap .record_content .record_fail view{
+  color: #cdc48d;
+  margin-top: 70.2rpx;
+}
+/* 未中奖和安慰奖弹窗 */
+.consolation_sick{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.8);
+  z-index: 1200;
+}
+.notwinning_sick{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.8);
+  z-index: 1200;
+   
+}
+.consolation_sick .consolation_wrap,.notwinning_sick .notwinning_wrap{
+  margin: 0 auto;
+  margin-top: 262.08rpx;
+  width: 538.2rpx;
+  height: 585rpx;
+  background: #FDFFDA;
+  border-bottom-left-radius: 11.7rpx;
+  border-bottom-right-radius: 11.7rpx;
+
+}
+.consolation_sick .consolation_wrap .consolation_title,
+.notwinning_sick .notwinning_wrap .notwinning_title{
+  height: 98.28rpx;
+  line-height: 98.28rpx;
+  text-align: center;
+  background: #FEE94E;
+  color: #7a2716;
+  font-weight: bold;
+  border-bottom: 1px dashed #e3dcb1;
+  position: relative;
+}
+.consolation_sick .consolation_wrap .consolation_title:before,.notwinning_sick .notwinning_wrap .notwinning_title:before{
+  content: '';
+    position: absolute;
+    top: 11.7rpx;
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+    z-index: -1;
+    background:#FEE94E;
+}
+.consolation_sick .consolation_wrap .consolation_title .conBefore,.notwinning_sick .notwinning_wrap .notwinning_title .conBefore{
+    width: 23.4rpx;
+    height: 23.4rpx;
+    border-radius: 50%;
+    background: rgba(0,0,0,.8);
+    position: absolute;
+    left: -11.7rpx;
+    top: 86.58rpx;
+}
+.consolation_sick .consolation_wrap .consolation_title .conAfter,.notwinning_sick .notwinning_wrap .notwinning_title .conAfter{
+    width: 23.4rpx;
+    height: 23.4rpx;
+    border-radius: 50%;
+    background: rgba(0,0,0,.8);
+    position: absolute;
+    right: -11.7rpx;
+    top: 86.58rpx;
+}
+.consolation_sick .consolation_wrap .consolation_con,.notwinning_sick .notwinning_wrap .notwinning_con{
+   text-align: center;
+  
+}
+.consolation_sick .consolation_wrap .consolation_con image,.notwinning_sick .notwinning_wrap .notwinning_con image{
+  width:155rpx;
+  height:85rpx;
+  margin-top: 65rpx;
+  margin-bottom:38rpx;
+}
+.consolation_sick .consolation_wrap .consolation_con view,.notwinning_sick .notwinning_wrap .notwinning_con view{
+  color: #954d29;
+  font-weight: 400;
+  font-size:30rpx;
+  padding: 10rpx 0;
+}
+.consolation_sick .consolation_wrap .consolation_btns,.notwinning_sick .notwinning_wrap .notwinning_btns{
+  width:195.2rpx;
+  height:75.2rpx;
+  margin: 0 auto;
+  margin-top: 50rpx;
+}
+.consolation_sick .consolation_wrap .consolation_btns .push,.notwinning_sick .notwinning_wrap .notwinning_btns .push{
+  width:195.2rpx;
+  height:75.2rpx;
+  line-height: 70.2rpx;
+  border-radius: 4.68rpx;
+  text-align: center;
+  background: #FEE94E;
+  color: #954d29;
+  float: left;
+  font-size:28.08rpx;
+  padding: 0;
+}
+.comfortCouponBtn{
+    display:flex;
+    margin-top:60rpx;
+}
+.comfortCouponBtn .push{
+    width:195.2rpx;
+    height:75.2rpx;
+    line-height: 70.2rpx;
+    border-radius: 4.68rpx;
+    text-align: center;
+    background: #FEE94E;
+    color: #954d29;
+    font-size:28.08rpx;
+    padding: 0;
+}
+/* 方盘 */
+#plateDiv{
+    
+    width: 561rpx;
+    height: 614rpx;
+    margin-left:10%;
+    position: relative;
+    margin-top:30rpx;
+}
+#plateDiv #plate_img{
+width:140rpx;
+height:143rpx;
+position:absolute;
+left:230rpx;
+top:235rpx;
+}
+#plateDiv .plate-cont{
+  width: 100%;
+  height: 100%;
+  
+}
+#plateDiv .plate-cont image{
+  width: 100%;
+  height: 100%;
+}
+#plateDiv .plate-cont .zf{
+ width: 140rpx;
+ height: 140rpx;
+ border-radius: 11.7rpx;
+ background: #FE7F3A;
+ position: absolute;
+ text-align: center;
+ font-size: 18.72rpx;
+ color: #fff;
+}
+/* #plateDiv .plate-cont .zf.active{
+  background: #ec6022;
+} */
+#plateDiv .plate-cont .zf image{
+  width: 65rpx;
+  height: 65rpx;
+  margin-top:13rpx;
+}
+#plateDiv .plate-cont .zf view{
+  font-size: 22rpx;
+  word-break: break-all;
+  line-height:21rpx;
+}
+#plateDiv .plate-cont .zf0{
+  left: 80rpx;
+  top: 85rpx;
+}
+#plateDiv .plate-cont .zf1{
+  left: 229rpx;
+  top: 85rpx;
+}
+#plateDiv .plate-cont .zf2{
+  left: 376rpx;
+  top: 85rpx;
+}
+#plateDiv .plate-cont .zf3{
+  left: 376rpx;
+  top: 233rpx;
+}
+#plateDiv .plate-cont .zf4{
+  left: 376rpx;
+  top: 380rpx;
+}
+#plateDiv .plate-cont .zf5{
+  left: 229rpx;
+  top: 380rpx;
+}
+#plateDiv .plate-cont .zf6{
+  left: 80rpx;
+  top: 380rpx;
+}
+#plateDiv .plate-cont .zf7{
+   left:80rpx;
+   top: 233rpx;
+}
+.structurePrize{
+      width: 100%;
+      margin: 0 auto;
+      height: 70.2rpx;
+      margin-top: 30rpx;
+      text-align: center;
+    }
+.structurePrize .lookPrize{
+      display: inline-block;
+      height: 74rpx;
+      width: 248.04rpx;
+      text-align: center;
+      background: #fed932;
+      line-height: 74rpx;
+      border-radius: 9.36rpx;
+      font-size: 32.76rpx;
+      font-weight: bold;
+      color: rgb(104,51,0);
+      /* margin-right: 23.4rpx; */
+      box-shadow: 0px 2px 2px rgba(38,38,38,.2);
+    }
+.structurePrize .exchangePrize{
+      display: inline-block;
+      width: 248.04rpx;
+      height: 74rpx;
+      text-align: center;
+      background: #fed932;
+      line-height: 74rpx;
+      border-radius: 9.36rpx;
+      font-size: 32.76rpx;
+      font-weight: bold;
+      color: rgb(104,51,0);
+      margin-left: 23.4rpx;
+      box-shadow: 0px 2px 2px rgba(38,38,38,.2);
+    }
+    /*兑换次数弹窗*/
+ .exchange{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 1200;
+  
+ }
+ .exchange .exchange-wrap{
+  width: 538.2rpx;
+  background: #fff;
+  border-radius: 9.36rpx;
+  margin: 0 auto;
+  margin-top: 351rpx;
+ }
+ .exchange .exchange-wrap .exchange-con{
+  padding-top: 58.5rpx;
+  margin-bottom: 37.44rpx;
+  font-size: 32.76rpx;
+  color: #999;
+ }
+ .exchange-con .exchangeCan{
+  width: 439.92rpx;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 35.1rpx;
+  color: #000;
+ }
+ .exchange-con .exchangeCan label{
+  color: #ff7100;
+ }
+ .exchange-con .exchangeLimit{
+ width: 439.92rpx;
+ color: #999;
+ padding: 11.7rpx 0;
+ margin: 0 auto;
+ border-bottom: 2.34rpx solid #D2D3D5;
+ }
+ .exchange-con .exchangeLimit input{
+  border: none;
+  outline: none;
+  width:160rpx;
+  color: #000;
+   display: inline-block;
+   overflow: inherit;
+ }
+ .exchange-con .exchangeLimit label{
+  color: #ff7100;
+  font-size: 28.08rpx;
+  cursor: pointer;
+ }
+ .exchange-con .exchangeRule{
+ width: 439.92rpx;
+ padding:28rpx 0 20rpx 0;
+ margin: 0 auto;
+ }
+ .exchange-con .exchangeBalance{
+ width: 439.92rpx;
+ padding-bottom: 11.7rpx;
+ margin: 0 auto;
+ }
+ .exchange .exchange-wrap .exchange-btns{
+  height: 114.66rpx;
+  width: 100%;
+  font-size: 35.1rpx;
+  border-top: 2.34rpx solid #D2D3D5;
+ }
+ .exchange .exchange-wrap .exchange-btns .exchange-confirm{
+  width: 266.76rpx;
+  float: left;
+  text-align: center;
+  line-height: 114.66rpx;
+  color: #ff7100;
+ }
+ .exchange .exchange-wrap .exchange-btns .exchange-cancel{
+  width: 266.76rpx;
+  float: left;
+  text-align: center;
+  line-height: 114.66rpx;
+  color: #333333;
+ }

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "拼团中心",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+  }
+}

@@ -1,0 +1,436 @@
+page {
+  height: 100%;
+  background: #f3f3f3;
+}
+/* 默认区域 */
+.normal-area {
+  background: linear-gradient(to right,rgba(255,174,0,1),rgba(255,113,0,1));
+  position: relative;
+}
+.normal-area .goods-complete-bg {
+  width: 100%;
+  height: 78rpx;
+  display: block;
+  position: absolute;
+  bottom: -2rpx;
+}
+.normal-area .goods-complete-succes {
+  width: 46rpx;
+  height: 46rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+.order-success text{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 20rpx;
+}
+/* 集集乐区域 */
+.collect-benefit-area {
+  background: #fff;
+  color:#818181;
+}
+.collect-item {
+  position: relative;
+  width: 100%;
+  overflow:hidden;
+}
+.collect-item .star-num {
+  margin: 30rpx 30rpx 50rpx 30rpx;
+  font-size: 26rpx;
+  color: #434343;
+}
+.collect-item .star-list {
+  margin: 0 auto 10rpx;
+  text-align: center;
+  font-size: 0;
+}
+.collect-item .star-list .star-item {
+  display: inline-block;
+  width: 70rpx;
+  height: 70rpx;
+  margin-right: 60rpx;
+  margin-bottom: 40rpx;
+}
+.collect-item .star-full {
+  position: absolute;
+  top: -30rpx;
+  right: -30rpx;
+  transform: rotate(-25deg);
+  padding: 8rpx;
+  border: 1px solid #fd888a;
+  border-radius: 50%;
+}
+.collect-item .star-full-text {
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 55rpx;
+  text-align: center;
+  color: #fd888a;
+  border: 1px solid #fd888a;
+  border-radius: 50%;
+}
+.tip-item {
+  line-height: 37rpx;
+  padding: 0 30rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+.tip-item > view {
+  line-height: 37rpx;
+  border-top: 1rpx solid #f3f3f3;
+  padding: 20rpx 0;
+}
+/* 按钮区域 */
+.btn-area{
+  text-align: center;
+  margin-top: 20rpx
+}
+.btn-area > view {
+  width: 178rpx;
+  line-height: 58rpx;
+  display: inline-block;
+  margin: 0 20rpx;
+  font-size: 26rpx;
+  text-align: center;
+  border-radius: 30rpx;
+  border: 1px solid #FFFFFF;
+  color: #fff;
+}
+
+.scratchWhole{
+  background:#ff7100;
+  padding: 0 0 40rpx 0;
+}
+.scratchArea{
+  width: 604rpx;
+  height: 300rpx;
+  margin: 0 auto;
+  background-image: url(http://cdn.jisuapp.cn/static/webapp/images/scratchCon.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+.scratch_wp{
+  margin: 19rpx auto 0;
+  width: 558rpx; 
+  height: 258rpx;
+}
+.scratch-canvas{
+  background: transparent;
+  position: relative;
+}
+.showArea{
+  position: absolute;
+  left:0;
+  top: 0; 
+  width: 556rpx;
+  height: 263rpx;
+  z-index: 5; 
+}
+.showArea .showTitle{
+  width: 100%;
+  font-size: 24rpx;
+  color: rgb(102,102,102);
+  text-align: center;
+  padding: 60rpx 0;
+  letter-spacing: 4rpx;
+}
+.showArea .showBtn{
+  width: 206rpx;
+  height: 70rpx;
+  background: #ff5b3f;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 9rpx;
+  text-align: center;
+  line-height: 70rpx;
+  margin: 0 auto;
+}
+/*未中奖*/
+.scratchFail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 604rpx;
+  height: 300rpx;
+  /* z-index: 2; */
+}
+.scratchFail image {
+  width: 100%;
+  height: 100%;
+}
+.scratchFail .failTitle{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.scratchFail .failTitle .failShare{
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  padding: 24rpx 40rpx;
+  cursor: pointer;
+  background: none;
+  line-height: 1.5;
+}
+.scratchFail .failTitle .failText{
+  text-align: center;
+  margin-top: 55rpx;
+  font-size: 32rpx;
+  color: rgb(102,102,102);
+
+}
+.scratchFail .failTitle .failBtn{
+  width: 206rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #ff5b3f;
+  text-align: center;
+  color: #fff;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  font-size: 24rpx;
+  cursor: pointer;
+}
+/*中奖*/
+.scratchWinning{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 604rpx;
+  height: 300rpx;
+  /* z-index: 2; */
+}
+.scratchWinning image{
+  width: 100%;
+  height: 100%;
+}
+.scratchWinning .winningTitle{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.scratchWinning .winningTitle .winningShare{
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  padding: 24rpx 40rpx 0px 40rpx;
+  cursor: pointer;
+  background: none;
+  line-height: 1.5;
+}
+.scratchWinning .winningTitle .winningText{
+  text-align: center;
+  color: #ff5b3f;
+  margin-top:30rpx;
+}
+.scratchWinning .winningTitle .winningText.winningValue{
+  margin-top: 25rpx;
+}
+.scratchWinning .winningTitle .winningBtn{
+  width: 206rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #ff5b3f;
+  text-align: center;
+  color: #fff;
+  border-radius:8rpx;
+  margin: 0 auto;
+  font-size: 24rpx;
+  cursor: pointer;
+  margin-top: 30rpx;
+}
+/*安慰奖*/
+.scratchComfort{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 604rpx;
+  height: 300rpx;
+}
+.scratchComfort image{
+  width: 100%;
+  height: 100%
+}
+.scratchComfort .comfortTitle{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.scratchComfort .comfortTitle .comfortShare{
+  font-size: 24rpx;
+  color: #999;
+  text-align: right;
+  padding: 24rpx 40rpx 10rpx 40rpx;
+  cursor: pointer;
+  background: none;
+  line-height: 1.5;
+}
+.scratchComfort .comfortTitle .comfortText{
+  color: rgb(102,102,102);
+  text-align: center;
+  letter-spacing: 2rpx;
+  line-height: 55rpx;
+  margin-top: 15rpx;
+}
+.scratchComfort .comfortTitle .comfortBtn{
+  width: 206rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #ff5b3f;
+  text-align: center;
+  color: #fff;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  font-size: 24rpx;
+  cursor: pointer;
+  margin-top: 16rpx;
+}
+
+/* 地址 */
+.buyer-information {
+  padding: 30rpx;
+  background: #fff;
+}
+.buyer-name-box {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+.buyer-name-box > text {
+  vertical-align: middle;
+  display: inline-block;
+}
+.buyer-name {
+  overflow: hidden;
+  max-width: 300rpx;
+  margin-right: 10rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.buyer-box {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 40rpx;
+  width: 630rpx;
+  vertical-align: middle;
+  display: inline-block
+}
+.buyer-information .icon-goods-location {
+  margin-right: 26rpx;
+  font-size: 34rpx;
+  vertical-align: middle;
+}
+.buyer-address {
+  font-size: 26rpx;
+  color: #666;
+  text-overflow: ellipsis;
+  display: -webkit-box; 
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; 
+  overflow: hidden;
+}
+.line{
+  width: 120rpx;
+  height: 1px;
+  background:#ccc;
+  display: inline-block;
+  vertical-align: middle;
+}
+.activity-box {
+  padding: 20rpx;
+  text-align: center;
+  background: #f3f3f3;
+  color: #CCCCCC;
+  font-size: 22rpx;
+}
+.activity-title {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 20rpx;
+}
+.order-price-box {
+  padding: 0 30rpx;
+  text-align: center;
+  height: 372rpx;
+}
+.order-price {
+  padding-top: 20rpx;
+  color: #fff;
+  font-size: 40rpx;
+}
+.order-success {
+  color: #fff;
+  font-size: 40rpx;
+  padding-top: 50rpx;
+}
+.scratch-activity {
+  margin-bottom: 40rpx;
+}
+.cash-delivery {
+  line-height: 28rpx;
+  width: 60rpx;
+  color: #fff;
+  background: #F2303E;
+  font-size: 22rpx;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  margin-right: 15rpx;
+  border-radius: 4rpx;
+}
+.come-on {
+  background: #ff7100;
+}
+
+/* 无推荐为时样式 */
+.no-recommend-box {
+  background: #fff;
+}
+.no-recommend-box .normal-area {
+  height: 280rpx;
+  text-align:center;
+}
+.no-recommend-box .btn-area {
+  margin-top: 0;
+  height: 130rpx;
+}
+.no-recommend-box .goods-complete-title {
+  font-size: 54rpx;
+  text-align: center;
+  color: #ff7100;
+  margin-top: 30rpx;
+}
+.no-recommend-box .slogan {
+  text-align: center;
+  color: #999;
+  margin: 10rpx 0 40rpx 0;
+  font-size: 26rpx;
+}
+.no-recommend-box .btn-area > view {
+  line-height: 70rpx;
+  font-size: 28rpx;
+  width: 335rpx;
+  border-radius: 35rpx;
+  border-color: #d2d2d2;
+  color: #666;
+  margin: 0 10rpx;
+}
+.no-recommend-box .btn-area .go-on-shopping {
+  border-color: #ff7100;
+  color: #ff7100;
+}
+.no-recommend-box .goods-complete-succes {
+  width: 125rpx;
+  height: 125rpx;
+  margin-top: 40rpx;
+}

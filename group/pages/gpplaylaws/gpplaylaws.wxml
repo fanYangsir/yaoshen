@@ -1,0 +1,189 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-share pageQRCodeData="{{pageQRCodeData}}"></component-share>
+<view class="collage-playlaws">
+  <view class="collage-section collage-play-category">
+    <block wx:if="{{activityType != 4}}">
+      <view class="collage-play-sort">
+        <view class="serial-number">
+          1
+        </view>
+        <view class="serial-intro">
+          <view class="title">团长开团</view>
+          <view>
+            <image src="http://cdn.jisuapp.cn//zhichi_frontend/static/webapp/images/group/start-immediately(ordinary).png" style="height:308rpx"></image>
+          </view>
+        </view>
+      </view>
+      <view class="collage-play-sort">
+        <view class="serial-number">
+          2
+        </view>
+        <view class="serial-intro">
+          <view class="title">选择成团人数</view>
+          <view>
+            <image src="http://cdn.jisuapp.cn//zhichi_frontend/static/webapp/images/group/select-num(ordinary).png" style="height:357rpx;"></image>
+          </view>
+        </view>
+      </view>
+      <view class="collage-play-sort">
+        <view class="serial-number">
+          3
+        </view>
+        <view class="serial-intro">
+          <view class="title">邀请好友参团</view>
+          <view>
+            <image src="http://cdn.jisuapp.cn//zhichi_frontend/static/webapp/images/group/invite-friends(ordinary).png" ></image>
+          </view>
+        </view>
+      </view>
+      <view class="collage-play-sort">
+        <view class="serial-number">
+          4
+        </view>
+        <view class="serial-intro">
+          <view class="title">在时限内达到成团人数，拼团成功</view>
+          <view>
+            <image src="http://cdn.jisuapp.cn//zhichi_frontend/static/webapp/images/group/groupSuccess(ordinary).png" ></image>
+          </view>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="collage-play-sort">
+        <view class="serial-number">
+          1
+        </view>
+        <view class="serial-intro">
+          <view class="title">团长开团</view>
+          <view>
+            <image src="http://cdn.jisuapp.cn//zhichi_frontend/static/webapp/images/group/join-draw(draw).png" style="height:308rpx;"></image>
+          </view>
+        </view>
+      </view>
+      <view class="collage-play-sort">
+        <view class="serial-number">
+          2
+        </view>
+        <view class="serial-intro">
+          <view class="title">活动结束前，邀请好友参团</view>
+          <view>
+            <image src="http://cdn.jisuapp.cn//zhichi_frontend/static/webapp/images/group/friends-join(draw).png" style="height:360rpx;"></image>
+          </view>
+        </view>
+      </view>
+      <view class="collage-play-sort">
+        <view class="serial-number">
+          3
+        </view>
+        <view class="serial-intro">
+          <view class="title">达到抽奖人数，自动开团</view>
+          <view>
+            <image src="http://cdn.jisuapp.cn//zhichi_frontend/static/webapp/images/group/automatic-lottery(draw).png" ></image>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="collage-section collage-play-intro">
+    <view class="title">
+      详细说明
+    </view>
+    <view class="collage-intro-step">
+      <block wx:if="{{activityType == 0}}">
+        <view>
+          1.活动期间，用户可以在拼团商品详情下单发起拼团。
+        </view>
+        <view>
+          2.用户支付成功，才算成功开团或参团，创建订单未支付不算有效参与拼团玩法。
+        </view>
+        <view>
+          3.先付款的成员先加入团，每位用户在同一团内可购买多件，但只占1个拼团人数，且不可重复参团。
+        </view>
+        <view>
+          <block wx:if="{{autoRefund == 1}}">
+          4.在规定时间内达到成团人数，则拼团成功，商家分别发货；未能在规定时间内达到成团人数，则拼团失败，系统自动退款。
+          </block>
+          <block wx:else>
+          4.在规定时间内达到最低成团人数，则拼团成功，商家分别发货；未能在规定时间内达到成团人数，则拼团失败，联系商家申请退款。
+          </block>
+        </view>
+      </block>
+      <block wx:elif="{{activityType == 1 }}">
+        <view>
+          1.活动期间，用户可以在拼团商品详情下单发起拼团。
+        </view>
+        <view>
+          2.用户支付成功，才算成功开团或参团，创建订单未支付不算有效参与拼团玩法。
+        </view>
+        <view>
+          3.新人团需小程序新用户（即24小时内首次登陆，且未参与过拼团的用户）方可参团，先付款的成员先加入团，每位用户在同一团可购买多件，但只占1个拼团人数，且不可重复参团。
+        </view>
+        <view>
+          <block wx:if="{{autoRefund == 1}}">
+          4.在规定时间内达到成团人数，则拼团成功，商家分别发货；未能在规定时间内达到成团人数，则拼团失败，系统自动退款。
+          </block>
+          <block wx:else>
+          4.在规定时间内达到最低成团人数，则拼团成功，商家分别发货；未能在规定时间内达到成团人数，则拼团失败，联系商家申请退款。
+          </block>
+        </view>
+      </block>
+      <block wx:if="{{activityType == 2 }}">
+        <view>
+          1.活动期间，用户可以在拼团商品详情下单发起拼团。
+        </view>
+        <view>
+          2.用户支付成功，才算成功开团或参团，创建订单未支付不算有效参与拼团玩法。
+        </view>
+        <view>
+          <block wx:if="{{refundMode == 1}}">
+          3.阶梯团参团人数越多，价格越低，支付差价将在确认收货后返还成储值金。每位用户在同一团内可购买多件，但只占1个拼团人数，且不可重复参团。
+          </block>
+          <block wx:else>
+          3.阶梯团参团人数越多，价格越低，支付差价将在确认收货后返还到支付账号。每位用户在同一团内可购买多件，但只占1个拼团人数，且不可重复参团
+          </block>
+        </view>
+        <view>
+          <block wx:if="{{autoRefund == 1}}">
+          4.在规定时间内达到最低成团人数，则拼团成功，商家分别发货；未能在规定时间内达到成团人数，则拼团失败，系统自动退款。
+          </block>
+          <block wx:else>
+          4.在规定时间内达到最低成团人数，则拼团成功，商家分别发货；未能在规定时间内达到成团人数，则拼团失败，联系商家申请退款。
+          </block>
+        </view>
+      </block>
+      <block wx:elif="{{activityType == 3}}">
+        <view>
+          1.帮帮团的理念是邀请好友帮助支付获得商品，拼团成功后，商家只给团长发货。
+        </view>
+        <view>
+          2.活动期间，用户可以在拼团商品详情下单发起拼团。
+        </view>
+        <view>
+          3.用户支付成功，才算成功帮助成团，创建订单未支付不算有效参与帮帮团，先付款的成员先加入团，用户不可重复参同一团。
+        </view>
+        <view>
+        <block wx:if="{{autoRefund == 1}}">
+          4.在规定时间内达到成团人数，则拼团成功，商家分别发货；未能在规定时间内达到成团人数，则拼团失败，系统自动退款。
+          </block>
+          <block wx:else>
+          4.在规定时间内达到最低成团人数，则拼团成功，商家分别发货；未能在规定时间内达到成团人数，则拼团失败，联系商家申请退款。
+          </block>
+       
+        </view>
+      </block>
+      <block wx:elif="{{activityType == 4 }}">
+        <view>
+          1.用户支付一定金额获得抽奖机会，当参加抽奖用户支付金额达到抽奖门槛，系统自动抽取1名中奖用户，其他未中奖用户将获得等额储值金。活动结束仍未达到抽奖门槛，系统自动退款。
+        </view>
+        <view>
+          2.活动期间，用户可以在拼团商品详情支付参与抽奖。购买数量越多，中奖概率越大。
+        </view>
+        <view>
+          3.用户支付成功，才算成功参与抽奖，创建订单未支付不算有效参团玩法。
+        </view>
+      </block>
+
+
+    </view>
+  </view>
+</view>

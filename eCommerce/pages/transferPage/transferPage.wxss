@@ -1,0 +1,332 @@
+page {
+  background-color: rgba(243,243,243,1);
+  font-size: 28rpx;
+  color: rgba(51,51,51,1);
+}
+.transfer-wrap {
+  padding: 0 30rpx;
+}
+.space-between{
+  display: flex;
+  justify-content: space-between;
+}
+.transfer-item{
+  padding: 30rpx 32rpx;
+  border-radius: 4rpx;
+}
+.transfer-item .item:last-child{
+  padding: 30rpx 0 0 0;
+  border-bottom: none;
+}
+.bg-white{
+  background-color: #fff;
+}
+.transfer-name{
+  font-size: 28rpx;
+}
+.transfer-name .account{
+  display: inline;
+  margin-left: 14rpx;
+}
+.no-join-price{
+  display: block;
+  margin-bottom: 26rpx;
+  display: inline-flex;
+  align-items: center;
+}
+.no-join-price .no-join-text{
+  display: inline;
+}
+.consumption-block{
+  margin-bottom: 26rpx;
+  background-color: #fff;
+}
+.coupon-desc{
+  font-size: 28rpx;
+}
+.discount-wrap{
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+.discount-wrap .discount-text{
+  color: rgba(153, 153, 153, 1);
+}
+.discount-price, .stored-value-price{
+  margin-top: 20rpx;
+  text-align:right;
+  margin-right:20rpx;
+  font-size: 28rpx;
+}
+.store-discount{
+  margin-bottom: 26rpx;
+}
+.vip-card{
+  position: relative;
+  padding: 26rpx 24rpx;
+  border-radius: 10rpx;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 30rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+.vip-card .card-img{
+  display: inline-block;
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  border: 2rpx solid #fff; 
+  background-color: #fff;
+}
+.vip-card .card-info{
+  display: inline-block;
+  width: 300rpx;
+  color: #fff;
+}
+.vip-card .card-info .card-name{
+  font-size: 24rpx;
+  margin-bottom: 5rpx;
+}
+.vip-card .card-info .card-mess{
+  font-size: 22rpx;
+}
+.vip-card .card-btn{
+  position: absolute;
+  right: 30rpx;
+  display: inline-block;
+  padding: 8rpx 20rpx;
+  text-align: center;
+  font-size: 22rpx;
+  background: rgba(255,168,0,1);
+  border-radius: 23rpx;
+  box-shadow: 1rpx 1rpx 1rpx rgba(255,157,18,1);
+  color: #fff;
+}
+.submit-btn{
+  line-height: 88rpx;
+  border-radius: 6rpx;
+  color: #fff;
+  font-size: 30rpx;
+  text-align: center;
+  margin-top: 40rpx;
+}
+.submit-btn[disabled]:not([type]){
+  color: rgba(255, 255, 255, 0.6);
+}
+.transfer-input{
+  padding: 22rpx 34rpx;
+  border-radius: 4rpx;
+}
+.transfer-input .input-price-block{
+  display: inline-flex;
+  align-items: center;
+}
+.transfer-input .input-text{
+  min-width: 160rpx;
+  font-size: 28rpx;
+  flex: 0 0 178rpx;
+  display: inline-flex;
+  align-items: center;
+}
+.transfer-input input{
+  text-align: right;
+  flex: 1;
+}
+.no-join-block{
+  background-color: #fff;
+  margin-bottom: 26rpx;
+}
+.vip-coupon-block .price{
+  display: inline-block;
+  margin-right: 8rpx;
+  font-size: 28rpx;
+}
+checkbox{
+  margin-left: 30rpx;
+  display: inline-flex;
+  align-items: center;
+}
+checkbox .wx-checkbox-input{
+  width: 25rpx;
+  height: 25rpx;
+}
+.stored-value-wrap, .vip-coupon{
+  padding: 30rpx 0;
+}
+.vip-coupon{
+  border-bottom: 1rpx solid #f3f3f3;
+}
+.vip-coupon .icon-rightarrow{
+  font-size: 12px;
+  color: #d5d5d5;
+}
+.vipCard-dialog{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 997;
+}
+.vipCard-dialog .content{
+  width: 632rpx;
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 12rpx;
+}
+.vipCard-dialog .top-block{
+  width: 100%;
+  height: 280rpx;
+  background-size: 100% 100%;
+  text-align: center;
+  position: relative;
+}
+.vipCard-dialog .top-block .text{
+  display: inline-block;
+  color: #fff;
+  font-weight: blod;
+  margin-top: 50rpx;
+  font-size: 32rpx;
+}
+.vipCard-dialog .top-block .text-block{
+  width: 230rpx;
+  height: 60rpx;
+  position: absolute;
+  top: calc(50% - 40rpx);
+  right: 65rpx;
+  text-align: center;
+}
+.vipCard-dialog .top-block .text-block .success-text:nth-child(1){
+  margin-bottom: 8rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+}
+.vipCard-dialog .top-block .text-block .success-text:nth-child(2){
+  font-size: 28rpx;
+}
+.vipCard-dialog .top-block .text-block .success-text{
+  color: #fff;
+
+}
+.vipCard-dialog .vip-info{
+  padding: 50rpx 70rpx;
+}
+.vipCard-dialog .vip-info .info-item{
+  margin-bottom: 50rpx;
+  display: flex;
+}
+.vipCard-dialog .vip-info .item-name{
+  font-size: 28rpx;
+  margin-right: 68rpx;
+  line-height:56rpx;
+}
+.vipCard-dialog .vip-info .item-right{
+  flex: 1;
+  height: 56rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+  padding-left: 10rpx;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.vipCard-dialog .vip-info input{
+  width: 100%;
+  font-size: 28rpx;
+  text-overflow: ellipsis;
+}
+.vipCard-dialog .vip-info .get-authorize{
+  position: absolute;
+  top: 6rpx;
+  right: 6rpx;
+  font-size: 24rpx;
+  padding: 4rpx 8rpx;
+  color: #fff;
+  border-radius: 2rpx;
+  line-height: 1.4;
+  z-index: 2;
+}
+.vipCard-dialog .vip-info picker{
+  line-height: 56rpx;
+  font-size:28rpx;
+  width: 100%;
+}
+.vipCard-dialog .vip-info .icon-rightarrow{
+  position: absolute;
+  top: 16rpx;
+  right: 2rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+.vipCard-dialog .content .icon-closed{
+  font-size: 50rpx;
+  position: absolute;
+  bottom: -91rpx;
+  left: calc(50% - 28rpx);
+  color: #fff;
+}
+.vipCard-dialog .interests-block{
+  width: 100%;
+  height: 280rpx;
+  background-color: #fff;
+  display: flex;
+}
+.vipCard-dialog .interests-block .interests-item{
+  flex: 1;
+  text-align: center;
+  font-size: 26rpx;
+}
+.vipCard-dialog .interests-item .icon{
+  width: 42rpx;
+  height: 42rpx;
+  display: inline-block;
+  margin: 63rpx 0 28rpx 0;
+}
+.vipCard-dialog .interests-item .text{
+  color: #666666;
+  font-size: 28rpx;
+}
+.vipCard-dialog .interests-item .count{
+  color: #FF7100;
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 15rpx;
+}
+.vipCard-dialog .save-btn{
+  width: 490rpx;
+  line-height: 80rpx;
+  background-color: #ff7100;
+  border-radius: 6rpx;
+  margin: 20rpx auto 0 auto;
+  text-align: center;
+  color: #fff;
+  font-size: 30rpx;
+}
+.input-price{
+  display: inline-block;
+  font-size: 38rpx;
+}
+.input-price-placeholder{
+  font-size: 28rpx;
+  color: #999;
+}
+.input-price-text{
+  font-size: 32rpx;
+  /* position: relative;
+  top: -4rpx; */
+}
+.price-limit{
+  text-align: right;
+  color: #999;
+  margin-top: 8rpx;
+}
+.discount-block, .stored-value-block{
+  text-align: right;
+}
+switch {
+  transform: scale(0.8);
+}

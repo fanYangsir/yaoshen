@@ -1,0 +1,91 @@
+page {
+  background: #f3f3f3;
+}
+.goods-complete-bg {
+  width: 100%;
+  height: 78rpx;
+  display: block;
+  position: absolute;
+  bottom: -2rpx;
+}
+.goods-complete-succes {
+  width: 46rpx;
+  height: 46rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+.btn-area > view {
+  width: 178rpx;
+  line-height: 58rpx;
+  display: inline-block;
+  margin: 0 20rpx;
+  font-size: 26rpx;
+  border-radius: 30rpx;
+  border: 1px solid #FFFFFF;
+  color: #fff;
+}
+.btn-area {
+  text-align: center;
+  margin-top: 30rpx;
+}
+.title {
+  color: #fff;
+  font-size: 40rpx;
+  padding-top: 50rpx;
+}
+.title text {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 20rpx;
+}
+.slogan {
+  color: #fff;
+  font-size: 26rpx;
+  margin-top: 20rpx;
+}
+.success-box {
+  background:#fff;
+  text-align: center;
+  height: 356rpx;
+  background: linear-gradient(to right,rgba(255,174,0,1),rgba(255,113,0,1));
+  position: relative;
+}
+.no-recommend-box {
+  background: #fff;
+}
+.no-recommend-box .success-box {
+  height: 280rpx;
+}
+.no-recommend-box .btn-area {
+  margin-top: 0;
+  height: 130rpx;
+}
+.no-recommend-box .goods-complete-title {
+  font-size: 42rpx;
+  text-align: center;
+  color: #ff7100;
+  margin-top: 30rpx;
+}
+.no-recommend-box .slogan {
+  text-align: center;
+  color: #999;
+  margin: 20rpx 0 40rpx 0;
+  font-size: 26rpx;
+}
+.no-recommend-box .btn-area > view {
+  line-height: 70rpx;
+  font-size: 28rpx;
+  width: 335rpx;
+  border-radius: 35rpx;
+  border-color: #d2d2d2;
+  color: #666;
+  margin: 0 10rpx;
+}
+.no-recommend-box .btn-area .comment-back-homepage,.no-recommend-box .btn-area .go-comment {
+  border-color: #ff7100;
+  color: #ff7100;
+}
+.no-recommend-box .goods-complete-succes {
+  width: 125rpx;
+  height: 125rpx;
+}

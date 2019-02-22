@@ -1,0 +1,43 @@
+<component-reward-point rewardPointObj="{{rewardPointObj}}"></component-reward-point>
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="makeCom-wrap" id="makeComment">
+  <view class="makeCom-item makeCom-goods-comment" wx:for="{{ goodsInfo }}" wx:key="" wx:for-index="goodsIndex" wx:key="">
+    <view>
+      <image class="makeCom-goods-cover" src="{{ item.cover }}"></image>
+      <view class="make-header-right">
+        <view class="goods-name">{{ item.goods_name }}</view>
+        <view class="makeCom-level-container">
+          <label style="{{submitData.goods[goodsIndex].info.level == 1 ? 'color:' + storeStyle.theme : ''}}" class="makeCom-level-span {{ submitData.goods[goodsIndex].info.level == 1 ? 'active' : '' }}" data-level="1" data-goods-index="{{ goodsIndex }}" bindtap="clickLevelSpan"><label class="ico-moon icon-tostoreGoodComment"></label>好评</label>
+          <label style="{{submitData.goods[goodsIndex].info.level == 2 ? 'color:' + storeStyle.theme : ''}}" class="makeCom-level-span {{ submitData.goods[goodsIndex].info.level == 2 ? 'active' : '' }}" data-level="2" data-goods-index="{{ goodsIndex }}" bindtap="clickLevelSpan"><label class="ico-moon icon-tostoreMiddleComment"></label>中评</label>
+          <label style="{{submitData.goods[goodsIndex].info.level == 3 ? 'color:' + storeStyle.theme : ''}}" class="makeCom-level-span {{ submitData.goods[goodsIndex].info.level == 3 ? 'active' : '' }}" data-level="3" data-goods-index="{{ goodsIndex }}" bindtap="clickLevelSpan"><label class="ico-moon icon-tostoreBadComment"></label>差评</label>
+        </view>
+      </view>
+    </view>
+    <textarea data-goods-index="{{ goodsIndex }}" bindinput="commentInput" class="makeCom-textarea" placeholder="评价商品给小伙伴们参考，建议10字以上" />
+    <view class="makeCom-pic-container">
+      <view wx:for="{{ submitData.goods[goodsIndex].info.img_arr }}" wx:key="" wx:for-item="imgUrl" class="makeCom-pic-wrap" wx:key="">
+        <image src="{{ imgUrl }}" mode="aspectFit"></image>
+        <label class="makeCom-remove-pic ico-moon icon-closes" bindtap="removePic" data-goods-index="{{ goodsIndex }}" data-pic-index="{{ index }}"></label>
+      </view>
+      <view wx:if="{{ submitData.goods[goodsIndex].info.img_arr.length < 3 }}" class="makeCom-upload-pic" bindtap="chooseImage" data-goods-index="{{ goodsIndex }}"><view class="ico-moon icon-goods-add-image"></view><text>添加图片</text></view>
+    </view>
+  </view>
+  <view class="makeCom-item" style="margin-top: 15rpx;">
+    <view class="shop-title"><text class="ico-moon icon-store2"></text><text>店铺评分</text></view>
+    <view class="evaluat-box">
+      <text class="evaluat-title">描述相符：</text>
+      <view class="makeCom-mark-container pull-right">
+        <label style="{{submitData.score >= 1 ? 'color:' + storeStyle.theme : ''}}" class="ico-moon icon-star{{ submitData.score >= 1 ? '' : '-empty' }}" data-score="1" bindtap="setDescScore"></label><label style="{{submitData.score >= 2 ? 'color:' + storeStyle.theme : ''}}" class="ico-moon icon-star{{ submitData.score >= 2 ? '' : '-empty' }}" data-score="2" bindtap="setDescScore"></label><label style="{{submitData.score >= 3 ? 'color:' + storeStyle.theme : ''}}" class="ico-moon icon-star{{ submitData.score >= 3 ? '' : '-empty' }}" data-score="3" bindtap="setDescScore"></label><label style="{{submitData.score >= 4 ? 'color:' + storeStyle.theme : ''}}" class="ico-moon icon-star{{ submitData.score >= 4 ? '' : '-empty' }}" data-score="4" bindtap="setDescScore"></label><label style="{{submitData.score >= 5 ? 'color:' + storeStyle.theme : ''}}" class="ico-moon icon-star{{ submitData.score >= 5 ? '' : '-empty' }}" data-score="5" bindtap="setDescScore"></label>
+      </view>
+    </view>
+    <view class="evaluat-box"  wx:if="{{goodsType != '1' && goodsType != '10'}}">
+      <text class="evaluat-title">物流服务：</text>
+      <view class="makeCom-mark-container  pull-right">
+        <label style="{{submitData.logistics_score >= 1 ? 'color:' + storeStyle.theme : ''}}" class="ico-moon icon-star{{ submitData.logistics_score >= 1 ? '' : '-empty' }}" data-score="1" bindtap="setLogisticsScore"></label><label style="{{submitData.logistics_score >= 2 ? 'color:' + storeStyle.theme : ''}}" class="ico-moon icon-star{{ submitData.logistics_score >= 2 ? '' : '-empty' }}" data-score="2" bindtap="setLogisticsScore"></label><label style="{{submitData.logistics_score >= 3 ? 'color:' + storeStyle.theme : ''}}" class="ico-moon icon-star{{ submitData.logistics_score >= 3 ? '' : '-empty' }}" data-score="3" bindtap="setLogisticsScore"></label><label style="{{submitData.logistics_score >= 4 ? 'color:' + storeStyle.theme : ''}}" class="ico-moon icon-star{{ submitData.logistics_score >= 4 ? '' : '-empty' }}" data-score="4" bindtap="setLogisticsScore"></label><label style="{{submitData.logistics_score >= 5 ? 'color:' + storeStyle.theme : ''}}" class="ico-moon icon-star{{ submitData.logistics_score >= 5 ? '' : '-empty' }}" data-score="5" bindtap="setLogisticsScore"></label>
+      </view>
+    </view>
+  </view>
+  <view class="submit-comment" style="{{'background:' + storeStyle.theme}}" bindtap="makeComment">发表评价</view>
+</view>
+
+

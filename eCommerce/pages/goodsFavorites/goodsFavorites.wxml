@@ -1,0 +1,60 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-goodsShoppingCart 
+  id="component-goodsShoppingCart"
+  bind:afterSelectedGoods="afterSelectedGoods"></component-goodsShoppingCart>
+<block wx:if="{{ !favoritesList.length && selectStatus == 0 && !search }}">
+  <view class="no-favorites-goods">
+    <text class="ico-moon icon-favorites"></text>
+    <view class="no-favorites-title">您暂时还未收藏商品</view>
+    <view class="no-favorites-btn" style="{{'background:' + storeStyle.theme }}" catchtap="goHomePage">去逛逛</view>
+  </view>
+</block>
+<block wx:else>
+  <view class="invalid-tips" hidden="{{ hideTips || !unSaleGoodsCount }}">
+    <text class="ico-moon icon-closes" catchtap="hideTips"></text>
+    <text>失效宝贝（{{ unSaleGoodsCount }}个）</text>
+    <text class="pull-right go-invalid-goods" catchtap="cleanUpGoods">前往清理</text>
+  </view>
+  <view>
+    <view class="favorites-header">
+      <view class="favorites-status-select"><picker range="{{ favoritesStatus }}" range-key="name" bindchange="selectFavoritesStatus" value="{{ selectStatus }}"><text class="select-status">{{ favoritesStatus[selectStatus].name }}</text><text class="ico-moon icon-downarrow"></text></picker></view>
+      <view class="favorites-search"><text class="ico-moon icon-search"></text><input type="text" confirm-type="search" bindconfirm="searchFavoritesGoods" placeholder="请输入搜索内容" /></view>
+      <text wx:if="{{ !showCheckedBox }}" class="favorites-operat" catchtap="favoritesOperat">管理</text>
+      <text wx:else="{{ showCheckedBox }}" class="favorites-operat" catchtap="favoritesComplete">完成</text>
+    </view>
+    <view class="favorites-content">
+      <view class="goods-list" wx:for="{{ favoritesList }}" wx:key="" bindtap="{{item.status != 1 && !showCheckedBox ? 'goGoodsDetail' : ''}}" data-id="{{ item.id }}">
+        <label wx:if="{{ showCheckedBox }}" class="favorites-check-box {{ item.selected ? 'checked ico-moon icon-success-tip' : '' }}" style="{{'color:' + storeStyle.theme }}" catchtap="selectGoods" data-index="{{ index }}"></label>
+        <image src="{{ item.cover }}"></image>
+        <view class="goods-detail-box">
+          <view class="goods-title">{{ item.title }}</view>
+          <view class="collect-number">{{ item.favorite_people_num }}人收藏</view>
+          <view wx:if="{{ item.reduce_price > 0 || item.stock <= 20 }}"><text class="goods-reduce-price" style="{{'color:' + storeStyle.theme + ';background:' + storeStyle.theme + '19'}}" wx:if="{{ item.reduce_price > 0 }}">比收藏时降价{{ item.reduce_price }}元</text><text wx:if="{{ item.stock <= 20 }}" class="almost-stock">库存紧张</text></view>
+          <view class="goods-price-box" wx:if="{{ item.status == 1 }}">
+            <text class="goods-invalid">失效</text>
+          </view>
+          <view class="goods-price-box" wx:else>
+            <text class="goods-price" style="{{'color:' + storeStyle.theme }}">￥{{ item.price }}</text>
+            <text class="pull-right ico-moon icon-addshoppingcart3" style="{{'color:' + storeStyle.theme }}" data-id="{{ item.id }}" catchtap="{{showCheckedBox ? '' : 'addShoppingCart'}}"></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="favorites-bottom" wx:if="{{ showCheckedBox }}">
+    <view class="select-all">
+      <label class="favorites-check-box {{ selectAll ? 'checked ico-moon icon-success-tip' : '' }}" style="{{'color:' + storeStyle.theme }}" bindtap="clickSelectAll"></label>
+      <text>全选</text>
+    </view>
+    <view class="pull-right delete-goods" style="{{'background:' + storeStyle.theme }}" catchtap="deleteGoods">一键删除</view>
+  </view>
+</block>
+<view class="reduce-price-mask" wx:if="{{ showReducePrice && reducePriceGoodsNum > 0 }}">
+  <view class="reduce-price-contain">
+    <view class="reduce-title">商品降价啦</view>
+    <view class="reduce-content">您收藏的商品降价啦</view>
+    <view class="reduce-content">快去瞧瞧吧</view>
+    <view class="check-reduce-price" catchtap="checkReducePrice">立即查看</view>
+    <view class="wait-reduce-price" catchtap="hideReducePrice">稍后查看</view>
+  </view>
+</view>

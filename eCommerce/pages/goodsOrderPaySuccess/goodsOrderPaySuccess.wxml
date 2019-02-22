@@ -1,0 +1,102 @@
+<component-reward-point rewardPointObj="{{rewardPointObj}}"></component-reward-point>
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view>
+  <view wx:if="{{ hasRecommendConfig }}" class="normal-area">
+    <view class="order-price-box" style="{{'background:' + storeStyle.theme}}">
+      <view class="order-success"><image class="goods-complete-succes" src="http://develop.zhichiwangluo.com/static/webapp/images/xcx-goods/goods-complete-success.png"></image><text>支付成功</text></view>
+      <view class="order-price">￥{{ orderInfo.order_total_price }}</view>
+      <view class="btn-area">
+        <view bindtap="goToHomepage">继续购物</view>
+        <view bindtap="goToOrderDetail">查看订单</view>
+      </view>
+    </view>
+    <image class="goods-complete-bg" src="http://develop.zhichiwangluo.com/static/webapp/images/xcx-goods/goods-complete-bg.png"></image>
+  </view>
+  <block wx:if="{{ !hasRecommendConfig }}">
+    <view class="no-recommend-box">
+      <view class="normal-area" style="{{'background:' + storeStyle.theme}}">
+        <image class="goods-complete-succes" src="http://develop.zhichiwangluo.com/static/webapp/images/xcx-goods/big-goods-complete-success.png"></image>
+        <image class="goods-complete-bg" src="http://develop.zhichiwangluo.com/static/webapp/images/xcx-goods/goods-complete-bg.png"></image>
+      </view>
+      <view class="goods-complete-title" style="{{'color:' + storeStyle.theme}}">￥{{ orderInfo.order_total_price }}</view>
+      <view class="slogan">支付成功</view>
+      <view class="btn-area">
+        <view class="go-on-shopping" bindtap="goToHomepage" style="{{'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme}}">继续购物</view>
+        <view bindtap="goToOrderDetail">查看订单</view>
+      </view>
+    </view>
+  </block>
+  <view wx:if="{{ status == 1 }}" class="collect-benefit-area">
+    <view class="activity-box">
+      <view class="line"></view>
+      <view class="activity-title">活动</view>
+      <view class="line"></view>
+    </view>
+    <view class="collect-item">
+      <view class="star-num">集集乐个数: {{ collectBenefitData.star_num }}</view>
+      <view class="star-list">
+        <block wx:for="{{ starData }}" wx:key="">
+          <image class="star-item" wx:if="{{ item == 'light' }}" src="{{ collectBenefitData.light_img }}"></image>
+          <image class="star-item" wx:elif="{{ item== 'dark' }}" src="{{ collectBenefitData.dark_img }}"></image>
+        </block>
+      </view>
+      <view class="star-full" wx:if="{{ collectBenefitData.star_num == collectBenefitData.collect_num }}">
+        <view class="star-full-text">满</view>
+      </view>
+    </view>
+    <view class="tip-item">
+      <view wx:if="{{ collectBenefitData.star_num == collectBenefitData.collect_num }}">
+        获得一张{{ collectBenefitData.coupon_title }}
+      </view>
+      <view wx:elif="{{ collectBenefitData.star_num != collectBenefitData.collect_num }}">
+        消费{{collectBenefitData.play_type == 0 ? '每满':'超过'}}{{ collectBenefitData.value }}元，累计一颗星，集满可获得{{ collectBenefitData.coupon_title }}一张
+      </view>
+    </view>
+  </view>
+  <!-- 刮刮乐 -->
+  <view class='scratchWhole' hidden='{{isWhole}}'>
+    <view class="activity-box scratch-activity">
+      <view class="line"></view>
+      <view class="activity-title">活动</view>
+      <view class="line"></view>
+    </view>
+    <view class="scratchArea">
+      <!-- 未中奖 -->
+      <view class="scratchFail" hidden='{{isFail}}'>
+        <image src="http://cdn.jisuapp.cn/static/webapp/images/scratchFail.png"></image>
+        <view class="failTitle">
+        <button class='failShare' open-type="share">分享</button>
+        <view class="failText">很遗憾没有中奖哦</view>
+       </view>
+      </view>
+      <!-- 中奖 -->
+      <view class="scratchWinning" hidden='{{isWinning}}'>
+        <image src="http://cdn.jisuapp.cn/static/webapp/images/scratchPrize.png"></image>
+        <view class="winningTitle">
+          <button class='winningShare' open-type="share">分享</button>
+          <view class="winningText">恭喜你获得了</view>
+          <view class="winningText winningValue">{{winingTitle}}</view>
+        </view>
+      </view>
+      <!-- 安慰奖 -->
+      <view class="scratchComfort" hidden='{{isComfort}}'>
+        <image src="http://cdn.jisuapp.cn/static/webapp/images/scratchComfort.png"></image>
+        <view class="comfortTitle">
+           <button class='comfortShare' open-type="share">分享</button>
+            <view wx:if="{{ifGetComfort}}" class="comfortText">已领取，在微信卡包中查看哦~</view>
+            <view wx:else class="comfortText" class="comfortText">又没中奖，送你一个小礼品</view>
+            <view wx:if="{{!ifWxCoupon && !ifGetComfort}}" class="comfortText">>在优惠券卡包进行查收哦~</view>
+        </view>
+      </view>
+      <view class="scratch_wp" hidden='{{hideCanvas}}' style="width: {{scratch.width}}px; height: {{scratch.height}}px;" >
+        <canvas class="scratch-canvas" style="width: {{scratch.width}}px;height: {{scratch.height}}px;" canvas-id="scratch" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" disable-scroll ="{{!isScroll}}">
+          <cover-view class="showArea" wx:if='{{isShowteam}}'>
+            <cover-view class="showTitle">赢取优惠大奖</cover-view>
+            <cover-view class="showBtn" bindtap='showAreaClick'>点我刮奖</cover-view>
+          </cover-view>
+        </canvas>
+      </view>
+    </view>
+  </view>
+</view>
+<component-recommend id="component-recommend"></component-recommend>

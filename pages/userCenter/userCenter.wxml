@@ -1,0 +1,81 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="content">
+  <view class="info-wrapper">
+    <view class="info-item" wx:if="{{ !cardId || (collectConfig.collect_username && collectConfig.collect_username !== '0') }}">
+      <view class="name {{ collectConfig.collect_username === '2' && cardId ? 'star' : '' }}" bindtap="openDebug">昵称</view>
+      <view class="right-block">
+        <input style="width: 400rpx" type="text" placeholder="请填写昵称" value="{{ userInfo.nickname }}" data-type="nickname" bindinput="inputUserInfo" />
+        <image class="cover-thumb" src="{{ userInfo.cover_thumb }}" bindtap="choosePhoto"/>
+        <view class="ico-moon icon-rightarrow"></view>
+      </view>
+    </view>
+    <view class="info-item" wx:if="{{ !cardId || (collectConfig.collect_phone && collectConfig.collect_phone !== '0') }}">
+      <view class="name {{ collectConfig.collect_phone === '2' && cardId ? 'star' : '' }}">手机号</view>
+      <view class="right-block">
+        <input type="number" disabled="true" placeholder="请授权手机号码" value="{{ userInfo.phone }}" bindtap="bindCellphonePage" />
+        <view class="ico-moon icon-rightarrow"></view>
+      </view>
+    </view>
+    <view class="info-item" wx:if="{{ !cardId || (collectConfig.collect_sex && collectConfig.collect_sex !== '0') }}">
+      <view class="name {{ collectConfig.collect_sex === '2' && cardId ? 'star' : '' }}">性别</view>
+      <view class="right-block">
+        <radio-group class="radio-group" bindchange="selectedSex">
+          <label class="radio">
+            <radio value="0" color="#FF7100" checked="{{ userInfo.sex == 0 }}" />
+            男
+          </label>
+          <label class="radio">
+            <radio value="1" color="#FF7100" checked="{{ userInfo.sex == 1 }}" />
+            女
+          </label>
+        </radio-group>
+      </view>
+    </view>
+    <view class="info-item birthday-info" wx:if="{{ !cardId || (collectConfig.collect_birthday && collectConfig.collect_birthday !== '0') }}">
+      <view class="name {{ collectConfig.collect_birthday === '2' && cardId ? 'star' : '' }}">生日</view>
+      <view class="right-block">
+        <picker wx:if="{{ isCantChangeBir }}" disabled="true" mode="date" class="birthday-picker" value="{{ userInfo.birthday }}" start="1900-01-01" end="{{ todayDate }}" bindchange="bindBirthdayChange">
+          <view class="picker">{{ !userInfo.birthday ? '请选择出生日期' : userInfo.birthday }}</view>
+        </picker>
+        <picker wx:else mode="date" class="birthday-picker" value="{{ userInfo.birthday }}" start="1900-01-01" end="{{ todayDate }}" bindchange="bindBirthdayChange">
+          <view class="picker">{{ !userInfo.birthday ? '请选择出生日期' : userInfo.birthday }}</view>
+        </picker>
+        <view wx:if="{{ !isCantChangeBir }}" class="ico-moon icon-rightarrow"></view>
+        <view class="comment">注:生日保存之后不允许修改，请正确填写</view>
+      </view>
+    </view>
+    <view class="info-item" wx:if="{{ collectConfig.collect_weixin_id && collectConfig.collect_weixin_id !== '0' }}">
+      <view class="name {{ collectConfig.collect_weixin_id === '2' && cardId ? 'star' : '' }}">微信号</view>
+      <view class="right-block">
+        <input type="text" placeholder="请填写微信号" value="{{ userInfo.weixin_code }}" data-type="weixinCode" bindinput="inputUserInfo" />
+      </view>
+    </view>
+    <view class="info-item" wx:if="{{ collectConfig.collect_email && collectConfig.collect_email !== '0' }}">
+      <view class="name {{ collectConfig.collect_email === '2' && cardId ? 'star' : '' }}">邮箱</view>
+      <view class="right-block">
+        <input type="text" placeholder="请填写邮箱" value="{{ userInfo.email }}" data-type="email" bindchange="inputUserInfo" />
+      </view>
+    </view>
+    <view class="info-item" wx:if="{{ collectConfig.collect_company && collectConfig.collect_company !== '0' }}">
+      <view class="name {{ collectConfig.collect_company === '2' && cardId ? 'star' : '' }}">公司</view>
+      <view class="right-block">
+        <input type="text" placeholder="请填写公司" value="{{ userInfo.company }}" data-type="company" bindinput="inputUserInfo" />
+      </view>
+    </view>
+    <view class="info-item" wx:if="{{ collectConfig.collect_region && collectConfig.collect_region !== '0' }}">
+      <view class="name {{ collectConfig.collect_region === '2' && cardId ? 'star' : '' }}">所在地</view>
+      <view class="right-block">
+        <picker mode="region" bindchange="bindCityChange" value="{{userCityArr}}">
+          <view class="picker" style="color: {{userCityArr[0] === '' ? '#999' : '#000'}}">
+            {{ userCityArr[0] === '' ? '请填写所在城市' : userCityArr[0] + userCityArr[1] + userCityArr[2] }}
+          </view>
+        </picker>
+        <view class="ico-moon icon-rightarrow"></view>
+      </view>
+    </view>
+  </view>
+  <view class="tip">请完善个人信息，以便我们为你提供更好的会员服务</view>
+  <form report-submit="true" bindsubmit="saveUserInfo">
+    <button class="save-btn" formType="submit">{{ cardId ? '立即领取' : '保存' }}</button>
+  </form>
+</view>

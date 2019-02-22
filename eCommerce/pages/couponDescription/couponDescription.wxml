@@ -1,0 +1,23 @@
+<view class="coupon-desc">
+  <view class="top-block" style="background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/coupon-desc-head.png)">
+    <view class="tip">买单享优惠</view>
+    <view class="tip">赶快参与吧</view>
+  </view>
+  <view class="coupon-wrappr">
+    <view class="coupon-item" wx:for="{{ artivityList }}" wx:key="{{ index }}" >
+      <view class="title">
+        {{ item.activity_title }}
+        <view class="status {{ item.expired === 0 ? 'active' : '' }}">{{ item.expired === -1 ? '未开始' : item.expired === 0 ? '进行中' : item.expired === 1 ? '已结束' : '' }}</view>
+      </view>
+      <view class="detail">
+        <view class="left">优惠规则：</view>
+        <view class="right">
+          <view class="detail-item" wx:for="{{ item.rule_titles }}" wx:for-item="rule" wx:for-index="ruleIndex" wx:key="{{ ruleIndex }}">{{ ruleIndex === item.rule_titles.length - 1 ? rule : rule + '，' }}</view>
+        </view>
+      </view>
+      <view class="detail">使用时间：每天{{ item.activity_enable_time_from }}~{{ item.activity_enable_time_from > item.activity_enable_time_to ? '次日' + item.activity_enable_time_to : item.activity_enable_time_to }}</view>
+      <!-- <view class="detail">使用规则：仅到店使用;除XXX外，全场通用</view> -->
+      <view class="detail">有效日期：{{ item.activity_start_date }} 至 {{ item.activity_end_date }}</view>
+    </view>
+  </view>
+</view>

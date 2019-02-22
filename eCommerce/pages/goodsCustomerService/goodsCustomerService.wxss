@@ -1,0 +1,107 @@
+page {
+  background: #f3f3f3;
+}
+.goods-customer-contain {
+  margin-top: 10rpx;
+}
+.goods-customer-header {
+  padding: 0 30rpx;
+  background: #fff;
+  font-size: 26rpx;
+  padding-bottom: 20rpx;
+}
+.goods-customer-header > view {
+  border-bottom: 1rpx solid #f3f3f3;
+  line-height: 60rpx;
+}
+.customer-add-time {
+  color: #999999;
+}
+.goods-customer-content {
+  background: #FAFAFA;
+  padding: 20rpx 30rpx;
+}
+.goods-customer-bottom {
+  background: #fff;
+}
+.goods-customer-content image {
+  width: 140rpx;
+  height: 140rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+.goods-detail-box {
+  display: inline-block;
+  width: 508rpx;
+  margin-left: 40rpx;
+  vertical-align: top;
+  height: 140rpx;
+}
+.goods-title {
+  color: #333;
+  font-size: 26rpx;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  display: -webkit-box; 
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; 
+  margin-bottom: 6rpx;
+  word-break: break-all;
+}
+.goods-model {
+  color: #999;
+  font-size: 22rpx;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.goods-price-box {
+  color: #333;
+  font-size: 28rpx;
+}
+.goods-num {
+  font-size: 22rpx;
+}
+.order-status-explain {
+  color: #F2303E;
+  font-size: 26rpx;
+  display: inline-block;
+}
+.order-status-explain > text {
+  display: inline-block;
+  vertical-align: middle;
+}
+.order-status-explain .icon-goods-after-sale {
+  font-size: 30rpx;
+  margin-right: 8rpx;
+}
+.order-refund-price {
+  color: #F2303E;
+  font-size: 26rpx;
+  margin-top: 4rpx;
+}
+.order-refund-box {
+  padding: 0 30rpx;
+  line-height: 74rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+.customer-btn-box {
+  line-height: 76rpx;
+  text-align: right;
+  padding: 0 10rpx;
+  height: 80rpx;
+}
+.customer-btn {
+  padding: 0 28rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  color: #666;
+  border-radius: 25rpx;
+  border: 1rpx solid #D2D2D2;
+  display: inline-block;
+  margin-right: 20rpx;
+}
+.waiting-color {
+  color: #ff7100;
+}

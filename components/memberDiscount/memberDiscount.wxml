@@ -1,0 +1,104 @@
+<view class="member-discount" wx:if="{{isVisibled}}" data-type="close" bindtap="hiddenDialog">
+  <view class="discount-wrapper">
+    <view class="title">
+      <text class="title-text">请选择{{ selectedDiscount.type !== 'combine' ? '会员优惠' : 
+                                        selectedDiscount.discount_type === 'vip' || selectedDiscount.discount_type === 'paid_vip' || selectedDiscount.discount_type === 'vip_benefit_day' ? '会员卡优惠' :
+                                        selectedDiscount.discount_type === 'coupon' ? '优惠券优惠' :
+                                        selectedDiscount.discount_type === 'integral' ? '积分优惠' : '会员优惠'}}</text>
+      <view class="ico-moon icon-closes" data-type="close" bindtap="hiddenDialog"></view>
+    </view>
+    <!-- 自定义优惠时，不显示提示 -->
+    <view class="tip-mess" style="{{'color:' + storeStyle.theme + ';background-color:' + storeStyle.theme + '33'}}" wx:if="{{ isShowTip && tipName !== '' }}">           
+      <text class="ico-moon icon-remind"></text>
+      <text>只能选用会员卡或优惠券其中一种，作为会员优惠使用。</text>
+      <view class="ico-moon icon-closes" bindtap="isShowTipChange"></view>
+    </view>
+    <view class="tab">
+      <view class="tab-bar" wx:if="{{ isShowTarbar }}">
+        <view class="tab-item {{item.label === currentTab ? 'active' : ''}}" wx:for="{{discountType}}" wx:key="{{item.label}}" wx:if="{{discountType.length > 1}}" hidden="{{ item.value.length < 1 }}" data-label ="{{item.label}}" bindtap="checkType">
+          <text style="{{item.label === currentTab ? ('color:' + storeStyle.theme + ';border-color:' + storeStyle.theme) : ''}}">{{item.label === 'coupon' ? '优惠券' : item.label === 'vip' ? '会员卡' : item.label === 'integral' ? '积分' : ''}}</text>
+        </view>
+      </view>
+      <scroll-view scroll-y class="my-coupon my-discount" hidden="{{currentTab !== 'coupon'}}">
+        <view wx:for="{{discountType}}" wx:for-item="type" wx:for-index="typeIndex" wx:key="{{typeIndex}}" wx:if="{{type.label === 'coupon'}}">
+          <view class="coupon-item" wx:for="{{type.value}}" wx:key="{{index}}" style="border-top: 8rpx solid {{ currentDiscount.type === 'coupon' && currentDiscount.index === index ? '#FF4D65' : '#d9d9d9' }};" data-type="coupon" data-index="{{index}}" bindtap="selectedDiscount">
+            <view class="info" style="color: {{ currentDiscount.type === 'coupon' && currentDiscount.index === index ? '#666' : '#ccc' }}">
+              <view class="coupon-title text-overflow" style="color: {{ currentDiscount.type === 'coupon' && currentDiscount.index === index ? '#333' : '#ccc' }}">{{item.title}}</view> 
+              <view class="use-condition" wx:if="{{ item.type == 0 }}">使用条件：满{{ item.condition }}元，减{{ item.value }}元</view>
+              <view class="use-condition" wx:if="{{ item.type == 1 }}">使用条件: 打{{ item.value }}折</view>
+              <view class="use-condition" wx:if="{{ item.type == 2 }}">使用条件：可抵扣{{ item.value }}元</view>
+              <view class="use-condition" wx:if="{{ item.type == 3 }}">
+                <text wx:if="{{ item.extra_condition == '' }}" >使用条件: 直接兑换{{ item.coupon_goods_info.title }} </text>
+                <text wx:elif="{{ item.extra_condition.price }}" >使用条件: 消费满{{ item.extra_condition.price }}元可兑换{{ item.coupon_goods_info.title }}</text>
+                <text wx:elif="{{ item.extra_condition.goods_id }}" >使用条件: 购买{{ item.condition_goods_info.title }}可兑换{{ item.coupon_goods_info.title }}</text>
+              </view>
+              <view class="use-condition" wx:if="{{ item.type == 4 }}">使用条件: 储值金可充值{{ item.value }}元</view>
+              <view class="use-condition" wx:if="{{ item.type == 5 }}">使用条件: {{ item.extra_condition }}</view>
+              <view class="ico-moon icon-success-tip" wx:if="{{ currentDiscount.type === 'coupon' && currentDiscount.index === index }}"></view>
+              <view class="icon-no-use" hidden="{{ currentDiscount.type === 'coupon' && currentDiscount.index === index }}"></view>
+              <view class="background-word-area" style="border: 2rpx solid {{ currentDiscount.type === 'coupon' && currentDiscount.index === index ? '#FF4D65' : '#ccc' }};">
+                <view class="background-circle" style="background: {{ currentDiscount.type === 'coupon' && currentDiscount.index === index ? '#FF4D65' : '#ccc' }};"></view>
+                <view class="background-word" wx:if="{{ item.type == 0 }}">减</view>
+                <view class="background-word" wx:if="{{ item.type == 1 }}">折</view>
+                <view class="background-word" wx:if="{{ item.type == 2 }}">代</view>
+                <view class="background-word" wx:if="{{ item.type == 3 }}">兑</view>
+                <view class="background-word" wx:if="{{ item.type == 4 }}">储</view>
+                <view class="background-word" wx:if="{{ item.type == 5 }}">通</view>
+              </view>
+              <view class="time-block">
+                <!-- <view class="effective-time">有效期 {{ item.start_use_date }}至{{ item.end_use_date }}</view> -->
+                <view class="effective-time" style="color: {{ currentDiscount.type === 'coupon' && currentDiscount.index === index ? '#999' : '#ccc' }}">{{ item.active_title }}</view>
+                <view class="maturity-time" wx:if="{{ item.expire_day_count }}" style="color: {{ currentDiscount.type === 'coupon' && currentDiscount.index === index ? '#FF4D65' : '#ccc' }};">{{ item.expire_day_count }}天后即将过期 </view>
+              </view> 
+            </view>
+          </view>
+          <view class="empty" wx:if="{{ type.value.length === 0 }}">
+            <image src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/empty.png" />  
+            暂无任何数据
+          </view>
+        </view>
+      </scroll-view>
+      <scroll-view scroll-y class="my-card my-discount" hidden="{{currentTab !== 'vip'}}">
+        <view wx:for="{{discountType}}" wx:for-item="type" wx:for-index="typeIndex" wx:key="{{typeIndex}}" wx:if="{{type.label === 'vip'}}">
+          <view class="card-item" wx:for="{{type.value}}" wx:key="{{index}}" data-type="vip" data-index="{{index}}" bindtap="selectedDiscount" style="background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/vip-card-default.png)">
+            <view class="card-img-block" style="border: 6rpx solid {{item.logo ? '#ffc790' : '#fff' }};">
+              <image wx:if="{{item.logo}}" class="card-img" src="{{item.logo}}"/>
+              <image wx:else class="app-logo-img" src="{{appLogo}}"/>
+            </view>
+            <view class="card-info">
+              <view class="card-name text-overflow">{{ item.app_name + ' ' + item.name }} </view>
+              <view class="card-mess text-overflow" wx:if="{{ item.discount != 0 }}">可享 {{ item.discount }}折</view>
+            </view>
+            <view class="card-btn">{{ currentDiscount.type === 'vip' && currentDiscount.index === index ? '使用中' : '立即使用' }}</view>
+          </view> 
+          <view class="empty" wx:if="{{ type.value.length === 0 }}">
+            <image src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/empty.png" />  
+            暂无任何数据
+          </view>
+        </view> 
+      </scroll-view>
+      <scroll-view scroll-y class="my-integral my-discount" hidden="{{currentTab !== 'integral'}}">
+        <view wx:for="{{discountType}}" wx:for-item="type" wx:for-index="typeIndex" wx:key="{{typeIndex}}" wx:if="{{type.label === 'integral'}}">
+          <view class="integral-item" wx:for="{{type.value}}" wx:key="{{index}}" style="border-top: 8rpx solid {{ currentDiscount.type === 'integral' && currentDiscount.index === index ? '#FF4D65' : '#d9d9d9' }};" data-type="integral" data-index="{{index}}" bindtap="selectedDiscount">
+            <view class="info" style="color: {{ currentDiscount.type === 'integral' && currentDiscount.index === index ? '#333' : '#ccc' }}">
+              <view class="integral-title">积分抵扣 <text class="red-text" style="color: {{ currentDiscount.type === 'integral' && currentDiscount.index === index ? '#FF4D65' : '#ccc' }};">{{item.max_can_use_integral}}积分可用</text></view> 
+              <view class="use-condition">积分使用 : 100积分 抵1元</view>
+              <view class="ico-moon icon-success-tip" wx:if="{{ currentDiscount.type === 'integral' && currentDiscount.index === index }}"></view>
+              <view class="icon-no-use" hidden="{{ currentDiscount.type === 'integral' && currentDiscount.index === index }}"></view>
+              <view class="background-word-area" style="border: 2rpx solid {{ currentDiscount.type === 'integral' && currentDiscount.index === index ? '#FF4D65' : '#ccc' }};">
+                <view class="background-circle" style="background: {{ currentDiscount.type === 'integral' && currentDiscount.index === index ? '#FF4D65' : '#ccc' }};"></view>
+                <view class="background-word">积</view>
+              </view>
+            </view>
+          </view>
+          <view class="empty" wx:if="{{ type.value.length === 0 }}">
+            <image src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/empty.png" />  
+            暂无任何数据
+          </view>
+        </view>
+      </scroll-view>
+
+      <view class="no-use-btn" bindtap="noUseDiscount">不使用该优惠</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的拼团",
+  "usingComponents": {
+    "component-reward-point": "\/components\/rewardPointModal\/rewardPointModal",
+    "component-getUserInfo": "/components/getUserInfo/getUserInfo",
+    "component-sinkingModal": "/components/sinkingModal/sinkingModal"
+  }
+}

@@ -1,0 +1,582 @@
+@charset 'utf-8';
+@import "../../utils/font_icon.wxss";
+
+.recommend-box .recommend-title {
+  position: relative;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 88rpx;
+  background: #fff;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.recommend-box .recommend-title::before {
+  position: absolute;
+  top: 44rpx;
+  left: 180rpx;
+  content: '';
+  height: 2rpx;
+  width: 100rpx;
+  background: #e5e5e5;
+  z-index: 1;
+}
+
+.recommend-box .recommend-title::after {
+  position: absolute;
+  top: 44rpx;
+  right: 180rpx;
+  content: '';
+  height: 2rpx;
+  width: 100rpx; 
+  background: #e5e5e5;
+  z-index: 1;
+}
+
+.recommend-wrap {
+  -webkit-overflow-scrolling: touch;
+  font-size: 28rpx;
+  background: #eee;
+  word-break: break-all;
+  overflow: hidden;
+}
+
+.recommend-box {
+  background: #fff;
+  margin-bottom: 15rpx;
+}
+
+.recommend-box .recommmend-list {
+  padding: 0 30rpx;
+  background: #fff;
+  margin-top: 10rpx;
+}
+
+.recommmend-list .recommend-item {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  padding: 18rpx 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.recommend-item .img-wrap {
+  width: 168rpx;
+  height: 128rpx;
+  background: #eee;
+  margin-left: 36rpx;
+}
+
+.recommend-item .recommend-article {
+  position: relative;
+  height: 150rpx;
+  font-size: 28rpx;
+  color: #333;
+  width: 70%;
+}
+
+.goods-list .recommend-item .recommend-article {
+  width: 100%;
+}
+
+.recommmend-list .recommend-item .img-wrap {
+  width: 227rpx;
+  height: 150rpx;
+  position: relative;
+}
+
+.recommmend-list .recommend-item .img-wrap .icon-wrap {
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.recommmend-list .recommend-item .img-wrap .icon-wrap icon {
+  display: inline;
+  padding: 15rpx;
+  background: rgba(0, 0, 0, .5);
+  border-radius: 50%;
+  font-size: 18rpx;
+}
+
+.recommend-item .recommend-article .recommend-content {
+  font-size: 30rpx;
+  font-weight: bold;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: #333;
+}
+.recommend-box .recommend-goods-title {
+  color: #333;
+  font-size: 26rpx;
+  margin-bottom: 15rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.recommend-box .recommend-goods-price {
+  color: #FF7100;
+  font-size: 34rpx;
+  width: 200rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-bottom: 5rpx;
+}
+
+.recommend-box .recommend-goods-sales {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.recommend-box .recommend-key-words {
+  position: absolute;
+  bottom: 22rpx;
+  color: #999;
+  font-size: 22rpx;
+  margin-top: 20rpx;
+  width: 300rpx;
+}
+
+.recommend-box .recommend-key-words text:first-child {
+  margin-right: 20rpx;
+}
+
+image {
+  height: 100%;
+  width: 100%;
+}
+
+.ticket-list {
+  margin-top: 23rpx;
+}
+
+.recommend-box .ticket {
+  padding-bottom: 40rpx;
+}
+
+.ticket .top-section {
+  width: 100%;
+  height: 130rpx;
+  margin: 0 auto;
+  position: relative;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #FFE8D6;
+}
+
+.ticket .recommmend-list {
+  padding-top: 20rpx;
+}
+
+.ticket image {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 20rpx;
+}
+
+.ticket .detail-info {
+  width: 410rpx;
+  display: inline-block;
+  vertical-align: middle;
+  height: 130rpx;
+  border-right: 1px dashed #FFD4B2;
+  position: relative;
+}
+
+.ticket .detail-info::before {
+  content: '';
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  border-left: 1px solid #FFD4B2;
+  border-bottom: 1px solid #FFD4B2;
+  display: inline-block;
+  position: absolute;
+  right: -12rpx;
+  top: -12rpx;
+  z-index: 1;
+  background: #fff;
+  transform: rotate(-45deg);
+}
+
+.ticket .detail-info::after {
+  content: '';
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  border-right: 1px solid #FFD4B2;
+  border-top: 1px solid #FFD4B2;
+  display: inline-block;
+  position: absolute;
+  right: -12rpx;
+  bottom: -12rpx;
+  z-index: 1;
+  background: #fff;
+  transform: rotate(-45deg);
+}
+
+.ticket .detail-info .name {
+  color: #333;
+  font-size: 26rpx;
+  margin-bottom: 10rpx;
+  margin-top: 30rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ticket .detail-info .use-condition {
+  color: #666;
+  font-size: 24rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ticket .background-word-area {
+  position: absolute;
+  right: -64rpx;
+  top: -80rpx;
+  padding: 10rpx;
+  border: 1px solid #ff4d64;
+  border-radius: 50%;
+  color: #fff;
+  opacity: 0.1;
+}
+
+.ticket .background-circle {
+  width: 185rpx;
+  height: 185rpx;
+  line-height: 185rpx;
+  background-color: #ff4d64;
+  border-radius: 50%;
+}
+
+.ticket .background-word {
+  position: absolute;
+  bottom: 50rpx;
+  left: 50rpx;
+  font-size: 66rpx;
+  line-height: 66rpx;
+}
+
+.ticket .receive-btn {
+  font-size: 24rpx;
+  width: 130rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 25rpx;
+  color: #FF7100;
+  display: inline-block;
+  margin-left: 20rpx;
+  border: 1px solid #FF7100;
+}
+
+.ticket .top-section .right {
+  float: left;
+}
+
+.ticket .bottom-section {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  height: 54rpx;
+  line-height: 54rpx;
+  text-indent: 1em;
+  background: #fff;
+  font-size: 18rpx;
+  color: #999;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.2), 5px 0px 5px -5px rgba(0, 0, 0, 0.2), -5px 0px 5px -5px rgba(0, 0, 0, 0.2);
+}
+
+.ticket .bottom-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 9rpx;
+  width: calc(100% - 20rpx);
+  border-top: 1px dashed #dbdbdb;
+}
+
+.ticket .bottom-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 22px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  z-index: -1;
+}
+
+.ticket.has-receive .top-section {
+  border-color: #ccc !important;
+}
+
+.ticket.has-receive .background-word-area {
+  border-color: #ccc !important;
+}
+
+.ticket.has-receive .background-circle {
+  background-color: #ccc !important;
+}
+
+.ticket.has-receive .receive-btn {
+  background-color: #ccc !important;
+}
+
+/* more-operations */
+.more-operations icon {
+  display: inline;
+  font-size: 84rpx;
+  line-height: 1;
+}
+
+.more-operations {
+  background: #fff;
+}
+
+.more-operations>view {
+  display: flex;
+  justify-content: center;
+}
+
+.more-operations>view>view {
+  box-sizing: border-box;
+  flex: 1;
+  overflow: hidden;
+  text-align: center;
+  margin: 30rpx 0;
+  vertical-align: middle;
+}
+
+.more-operations>view>view button {
+  background: #fff;
+  line-height: 1;
+}
+
+.more-operations .operations2>view:nth-last-child(1) {
+  border-left: 1px solid #f5f5f5;
+}
+
+.more-operations>view>view .icon-wrap {
+  display: inline-block;
+  margin-right: 35rpx;
+  line-height: 1;
+}
+
+.more-operations>.operations3 .name {
+  line-height: 1;
+  margin-top: 12rpx
+}
+
+.more-operations .operations3>view .icon-wrap {
+  display: block;
+  margin-right: 0;
+  height: 70rpx;
+}
+
+.more-operations>view>view .icon-wrap image {
+  height: 50rpx;
+  width: 50rpx;
+  margin-top: 15rpx
+}
+
+.more-operations .operations1>view image {
+  width: 100%;
+  height: 100%;
+}
+
+.more-operations>view .name {
+  display: inline-block;
+  vertical-align: top;
+  color: #333;
+  font-size: 24rpx;
+  height: 67rpx;
+  line-height: 67rpx;
+  margin-top: 10rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+
+/* iconColor  */
+
+
+.icon-news-callphone:before {
+  color: #51b55f;
+}
+
+.icon-news-storage:before {
+  color: #3091f2;
+}
+
+.icon-news-bigpicture:before {
+  color: #eb4e4e;
+}
+
+.icon-news-business:before {
+  color: #0dbcd7;
+}
+
+.icon-news-coupon:before {
+  color: #eb4e4e;
+}
+
+.icon-news-custom:before {
+  color: #3091f2;
+}
+
+.icon-news-extension:before {
+  color: #0dbcd7;
+}
+
+.icon-news-goldegg:before {
+  color: #7181d9;
+}
+
+.icon-news-to-page:before {
+  color: #3091f2;
+}
+
+.icon-news-goodsdetail:before {
+  color: #3091f2;
+}
+
+.icon-news-jump:before {
+  color: #3091f2;
+}
+
+.icon-news-kill:before {
+  color: #faa322;
+}
+
+.icon-news-payment:before {
+  color: #51b55f;
+}
+
+.icon-news-popup:before {
+  color: #0dbcd7;
+}
+
+.icon-news-refreshlist:before {
+  color: #7181d9;
+}
+
+.icon-news-refreshpage:before {
+  color: #0dbcd7;
+}
+
+.icon-news-scratch:before {
+  color: #eb4e4e;
+}
+
+.icon-news-sharecircle:before {
+  color: #51b55f;
+}
+
+.icon-news-sharefriends:before {
+  color: #eb4e4e;
+}
+
+.icon-news-top:before {
+  color: #51b55f;
+}
+
+.icon-shopping-scan:before {
+  color: #51b55f; 
+}
+
+.more-operations .icon-shopping-scan {
+  font-size: 54rpx;
+  line-height: 84rpx;
+}
+
+.icon-news-turntable:before {
+  color: #faa322;
+}
+
+.icon-news-wifi:before {
+  color: #7181d9;
+}
+
+.icon-news-community {
+  color: #FAA527;
+}
+
+.icon-news-video-play {
+  color: #fff;
+}
+
+.icon-news-news {
+  color: #3091f2;
+}
+
+.icon-news-topic {
+  color: #FAA527;
+}
+
+.icon-news-videodetail {
+  color: #3091f2;
+}
+
+/* /iconColor  */
+
+.recommend-box .goods-list {
+  background: #f3f3f3;
+}
+
+.recommend-box .goods-list>.recommend-item {
+  display: inline-block;
+  width: 50%;
+  height: auto;
+  background: #f3f3f3;
+  padding: 0;
+  margin-top: 10rpx;
+}
+
+.recommend-box .goods-list>.recommend-item .img-wrap {
+  margin: 0;
+  height: 370rpx;
+  width: 100%;
+}
+
+.recommend-box .goods-list>.recommend-item>view {
+  width: 95%;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.recommend-box .goods-list>.recommend-item .recommend-article {
+  box-sizing: border-box;
+  padding: 10rpx 20rpx;
+  height: auto;
+}
+
+.recommend-box .news-share-button {
+   padding:0;
+   text-align: left;
+   background: transparent;
+ }
+
+.recommend-box .contact-button {
+  position: relative;
+}

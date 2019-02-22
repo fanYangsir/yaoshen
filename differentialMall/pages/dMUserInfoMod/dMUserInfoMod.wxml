@@ -1,0 +1,29 @@
+<view class="userInfoMod-main-wrap">
+  <view class="user-info user-nickname-wrap">
+    <view>
+      <text class="info-title">昵称</text>
+      <input type="text" value="{{userCenterInfo.nickname}}" bindinput="userInfoInputHandler" data-type="nickname"></input>
+    </view>
+    <view>
+      <image src="{{userCenterInfo.coverThumb}}" mode="aspectFill" bindtap="chooseCoverThumb"></image>
+      <text class="ico-moon icon-rightarrow"></text>
+    </view>
+  </view>
+  <view class="user-info user-phone-wrap">
+    <view>
+      <text class="info-title">手机号</text>
+      <input type="number" placeholder="请输入手机号" placeholder-class="input-pla" value="{{userCenterInfo.phone}}" bindinput="userInfoInputHandler" data-type="phone" maxlength='11'></input>
+    </view>
+    <text class="ico-moon icon-rightarrow"></text>
+  </view>
+</view>
+
+
+<button class="userInfoMod-save-btn" bindtap="saveUserInfo">保存</button>
+
+<!-- toast start -->
+<view class="toast-wrap {{toastInfo.isShow ? 'show' : ''}}">
+  <text>{{toastInfo.tipTxt}}</text>
+</view>
+<!-- toast end -->
+

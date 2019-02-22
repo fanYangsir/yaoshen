@@ -1,0 +1,130 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+
+<view class="couponsMall-main-wrap" id="couponsMall">
+  <!-- 搜索 start -->
+  <view class="couponsMall-search-wrap">
+    <view class="search-location" catchtap="turnToPage" data-url="../dMMerchantLocation/dMMerchantLocation" data-is-redirect="false">
+      <text class="ico-moon icon-fesadress"></text>
+      <text class="location-txt">{{locationCity.city}}</text>
+      <text class="ico-moon icon-downarrow"></text>
+    </view>
+    <view class="search-input">
+      <text class="ico-moon icon-search"></text>
+      <input type="text" placeholder="输入商家名称" placeholder-class="search-input-pla" bindinput="searchInputHandler" bindblur="searchBlurHandler" value="{{searchContent.inputContent}}"></input>
+    </view>
+  </view>
+  <!-- 搜索 end -->
+
+  <!-- 导航 start -->
+  <view class="couponsMall-top-nav-wrap">
+    <view class="couponsMall-top-nav" style="height:{{searchContent.isInput ? 0 : 86}}rpx;">
+      <view class="nav-has-sub {{isHideMoreNav?'':'active'}}" catchtap="toggleMoreNavHander">
+        <text>{{firstCategory.cateTxt}}</text>
+        <text class="ico-moon icon-filter-{{isHideMoreNav?'down':'up'}}"></text>
+      </view>
+      <view class="{{secondCategory.cateIndex === 4 ? 'active' : ''}}" data-index="4" bindtap="selectSecondCategory">智能排序</view>
+      <view class="{{secondCategory.cateIndex === 5 ? 'active' : ''}} {{firstCategory.cateIndex === 2 ? 'disabled' : ''}}" data-index="5" bindtap="selectSecondCategory">距离优先</view>
+    </view>
+    <view class="couponsMall-top-sub-nav" style="height:{{isHideMoreNav ? '0' : '264rpx'}};">
+      <view class="{{firstCategory.cateIndex === 1 ? 'active' : ''}}" data-index="1" bindtap="selectFirstCategory">
+        <text class="ico-moon icon-gou"></text>
+        <text>最受欢迎</text>
+      </view>
+      <view class="{{firstCategory.cateIndex === 2 ? 'active' : ''}}" data-index="2" bindtap="selectFirstCategory">
+        <text class="ico-moon icon-gou"></text>
+        <text>离我最近</text>
+      </view>
+      <view class="{{firstCategory.cateIndex === 3 ? 'active' : ''}}" data-index="3" bindtap="selectFirstCategory">
+        <text class="ico-moon icon-gou"></text>
+        <text>我常光顾</text>
+      </view>
+    </view>
+  </view>
+  <view class="top-nav-mask" hidden="{{isHideMoreNav}}"></view>
+  <!-- 导航 end -->
+
+  <!-- 商家列表 start -->
+  <view class="couponsMall-content-wrap">
+    <view class="merchants-list" style="margin-top:{{searchContent.isInput ? 102 : 186}}rpx;margin-bottom:{{isIpx ? '60rpx' : '0'}};">
+      <block wx:for="{{merchantsList}}" wx:key="merchantsList" wx:for-item="merchant">
+        <!-- 商家信息 start-->
+        <view class="merchant-item">
+          <view class="merchant-info" catchtap="turnToPage" data-url="../dMMerchantDetail/dMMerchantDetail?id={{merchant.app_id}}" data-is-redirect="false">
+            <view class="merchant-img-wrap">
+              <image class="merchant-img {{merchant.logo == 'http://cdn.jisuapp.cn/zhichi_frontend/static/invitation/images/logo.png' ? 'logo-img' : ''}}" src="{{merchant.logo}}" mode="{{merchant.logo == 'http://cdn.jisuapp.cn/zhichi_frontend/static/invitation/images/logo.png' ? 'aspectFit' : 'aspectFill'}}"></image>
+            </view>
+            <view class="merchant-detail thin-bd-b">
+              <view class="merchant-detail-top">
+                <text class="merchant-name">{{merchant.app_name}}</text>
+                <text class="ico-moon icon-{{merchant.is_collection === 0 ? 'dmstar-empty' : 'dmstar'}}" catchtap="toggleFavoriteMerchant" data-is-favorite="{{merchant.is_collection}}" data-id="{{merchant.app_id}}" data-index="{{index}}"></text>
+              </view>
+              <view class="merchant-detail-bottom" wx:if="{{merchant.longitude && merchant.latitude}}">
+                <text class="merchant-type" style="opacity:{{merchant.industry_name ? 1 : 0}};">{{merchant.industry_name}}</text>
+                <text class="merchant-distance">{{merchant.distance}}</text>
+              </view>
+            </view>
+          </view>
+          <!-- 优惠券列表 start-->
+          <view class="merchant-coupons-list">
+            <block wx:for="{{merchant.coupon_list}}" wx:key="couponsList">
+              <view class="coupon-item" catchtap="turnToPage" data-url="../dMCouponDetail/dMCouponDetail?type=2&cId={{item.id}}&mId={{item.app_id}}" data-is-redirect="false">
+                <view class="coupon-info">
+                  <text class="coupon-mark">劵</text>
+                  <view class="coupon-name-exchange">
+                    <text class="coupon-name">{{item.title}}</text>
+                    <text class="coupon-exchange-num" wx:if="{{item.type == 0}}">满{{ item.condition }}元，减{{ item.value }}元</text>
+                    <text class="coupon-exchange-num" wx:if="{{item.type == 1}}">打{{ item.value }}折</text>
+                    <text class="coupon-exchange-num" wx:if="{{item.type == 2}}">可抵扣{{ item.value }}元</text>
+                    <view class="coupon-exchange-num" wx:if="{{item.type == 3 && item.extra_condition == '' }}">使用条件: 直接兑换{{ item.coupon_goods_info.title }} </view>
+                    <view class="coupon-exchange-num" wx:elif="{{item.type == 3 && item.extra_condition.price }}">使用条件: 消费满{{ item.extra_condition.price }}元可兑换{{ item.coupon_goods_info.title }}</view>
+                    <view class="coupon-exchange-num" wx:elif="{{item.type == 3 && item.extra_condition.goods_id }}">使用条件: 购买{{ item.condition_goods_info.title }}可兑换{{ item.coupon_goods_info.title }}</view>
+                    <text class="coupon-exchange-num" wx:if="{{item.type == 4}}">储值金可充值{{ item.value }}元</text>
+                    <text class="coupon-exchange-num" wx:if="{{item.type == 5}}">{{ item.extra_condition }}</text>
+                    <text class="coupon-exchange-num" wx:if="{{item.type == 6}}">可使用{{ item.value }}次</text>
+                  </view>
+                </view>
+                <view class="coupon-exchange">
+                  <view class="exchange-diff">
+                    <text>微分</text>
+                    <text>{{item.exchange_condition.integral}}</text>
+                  </view>
+                  <view class="exchange-btn" catchtap="exchangeBtnHandler" data-id="{{item.id}}" data-mid="{{item.app_id}}">立即兑换</view>
+                </view>
+              </view>
+            </block>
+          </view>
+          <!-- 优惠券列表 end-->
+        </view>
+        <!-- 商家信息 end-->
+      </block>
+      <view class="merchants-reach-bottom-wrap" wx:if="{{merchantsList.length > 2 && merchantsLoadingData.isMore == 0}}">
+        <text class="tip-text"> ~ 到底啦 ~</text>
+      </view>
+      <view class="merchants-no-data-wrap" wx:if="{{merchantsList && merchantsList.length === 0}}">
+        <image src="{{merchantsListNullTip.tipImg}}" wx:if="{{merchantsListNullTip.tipImg != ''}}"></image>
+        <text>{{merchantsListNullTip.tipTxt}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 商家列表 end -->
+</view>
+
+<!-- 底部tabbar start -->
+<view class="couponsMall-tabbar-wrap" style="height:{{isIpx ? 140 : 80}}rpx;">
+  <view class="tabbar active">
+    <image src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/icon_couponMall_active.png" mode="aspectFit"></image>
+    <text>微分商城</text>
+  </view>
+  <view class="tabbar" catchtap="turnToPage" data-url="../dMUserCenter/dMUserCenter" data-is-redirect="true">
+    <image src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/xcx-differentialMall/icon_userCenter.png" mode="aspectFit"></image>
+    <text>我的</text>
+  </view>
+</view>
+<!-- 底部tabbar end -->
+
+<!-- toast start -->
+<view class="toast-wrap {{toastInfo.isShow ? 'show' : ''}}">
+  <text>{{toastInfo.tipTxt}}</text>
+</view>
+<!-- toast end -->
+

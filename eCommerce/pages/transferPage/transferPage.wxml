@@ -1,0 +1,203 @@
+<component-getUserInfo showGetUserInfo="{{ showGetUserInfo }}"></component-getUserInfo>
+<component-memberDiscount 
+  id="component-memberDiscount"
+  discountType="{{ memberDiscount }}"
+  franchisee="{{ franchisee }}"
+  bind:afterSelectedDiscount="afterSelectedBenefit"></component-memberDiscount>
+<view class="transfer-wrap">
+  <view class="transfer-item space-between" style="padding: 30rpx 32rpx 30rpx 26rpx;">
+    <view class="transfer-name">
+      付款给
+      <text class="account">{{ appTitle }}</text>
+    </view>
+    <view class="coupon-desc" wx:if="{{ storeBenefitActivityList.length }}" bindtap="goToCouponDesc" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+      优惠说明
+    </view>
+  </view>
+  <view class="transfer-input consumption-block">
+    <view class="space-between">
+      <view class="input-text">消费金额</view>
+      <view class="input-price-block">
+        <input value="{{ inputPrice !== '' ? '¥ ' + inputPrice : '' }}" class="input-price" type="digit" placeholder-class="input-price-placeholder" placeholder="请输入金额" bindinput="inputPrice" bindblur="priceBlur" data-type="price"/>
+      </view>
+    </view>
+    <view class="price-limit" wx:if="{{ isShowPriceLimitTip }}">价格区间仅支持0.01~9999.00元</view>
+  </view>
+  <checkbox-group bindchange="isShowNoJoinPriceChange" wx:if="{{ transferConfig.least_cost == 1 }}">
+    <label class="no-join-price">
+      <checkbox value="noJoinPrice" style="border-color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}" checked="{{ isShowNoJoinPrice }}" color="{{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}" />
+      <view class="no-join-text" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+        输入不参与优惠金额
+      </view>
+    </label>
+  </checkbox-group>
+  <view class="transfer-input space-between no-join-block" wx:if="{{ isShowNoJoinPrice }}" >
+    <view class="input-text">不参与金额</view>
+    <view class="input-price-block">
+      <input value="{{ noJoinPrice !== '' ? '¥ ' + noJoinPrice : '' }}" class="input-price" style="font-size: 32rpx" type="digit" placeholder-class="input-price-placeholder" placeholder="请输入金额" bindinput="noJoinPriceInput" bindblur="priceBlur" data-type="no-join-price"/>
+    </view>
+  </view>
+  <view class="transfer-item bg-white store-discount" wx:if="{{ currentStoreBenefitInfo.activity_title || vipCardInfo.isShow || !no_use_benefit || (transferConfig.use_balance_enable !== '0' && franchisee === '' && userInfo.balance != 0 && userInfo.balance) || (!noUseVipBenefit && transferConfig.vip_card_benefit_enable == 1) || (!noUseCouponBenefit && transferConfig.coupon_benefit_enable == 1) || (!noUseIntegralBenefit && transferConfig.integral_benefit_enable == 1) }}" style="padding: {{ !currentStoreBenefitInfo.activity_title && vipCardInfo.isShow ? '30' : '0'}}rpx 34rpx 30rpx 34rpx">
+    <view class="item space-between discount-wrap" wx:if="{{ currentStoreBenefitInfo.activity_title }}">
+      <text style="font-size: 28rpx">店铺满减</text>
+      <view class="discount-block">
+        <view class="discount-text" hidden="{{ !isShowStoreBenefitInfo }}">
+          <text style="font-size: 28rpx" wx:for="{{ currentStoreBenefitInfo.rule_titles }}" wx:key="{{ index }}">{{ index === 0 ? item : ', ' + item }}</text>
+        </view>
+        <switch checked="{{useStoreBenefit}}" bindchange="ifUseStoreBenefit" wx:if="{{ !isShowStoreBenefitInfo }}"/>
+        <view class="discount-price" wx:if="{{ useStoreBenefit && store_benefit_info.discount_price && store_benefit_info.discount_price != 0 }}" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">-¥ {{ store_benefit_info_discount_price }}</view>
+      </view>
+    </view>
+    <view class="vip-card" wx:if="{{ vipCardInfo.isShow }}" style="background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/vip-card-small.png);">
+      <image class="card-img" src="{{ vipCardInfo.logo ? vipCardInfo.logo : 'http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/default-vip-card-logo.png' }}" />
+      <view class="card-info">
+        <view class="card-name">{{ vipCardInfo.app_name  + ' ' + vipCardInfo.title }}</view>
+        <view class="card-mess" wx:if="{{ vipCardInfo.discount != 0 }}">开卡可享 {{ vipCardInfo.discount }}折</view>
+        <view class="card-mess" wx:elif="{{ vipCardInfo.coupon_list && vipCardInfo.coupon_list != '' }}">开卡可享 赠送优惠券</view>
+        <view class="card-mess" wx:elif="{{ vipCardInfo.integral != 0 }}">开卡可享 赠送{{ vipCardInfo.integral }}积分</view>
+      </view>
+      <view class="card-btn" bindtap="handleVipCard">立即开卡</view>
+    </view>
+    <!-- 唯一会员优惠 -->
+    <view class="item space-between vip-coupon" bindtap="showMemberDiscount" wx:if="{{ !no_use_benefit }}">
+      <view style="font-size: 28rpx">会员优惠</view>
+      <view class="vip-coupon-block">
+        <view class="price" wx:if="{{ selected_benefit_discount_cut_price && selected_benefit_discount_cut_price !== '0.00' }}" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+          -¥ {{ selected_benefit_discount_cut_price }}
+        </view>
+        <view class="price" wx:if="{{ selected_benefit_discount_cut_price && selected_benefit_discount_cut_price === '0.00' }}" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+          未使用
+        </view>
+        <view class="ico-moon icon-rightarrow"></view>
+      </view>
+    </view>
+    <!-- 自定义会员优惠 -->
+    <view class="item space-between vip-coupon" data-type="vip" bindtap="showMemberDiscount" wx:if="{{ !noUseVipBenefit && transferConfig.vip_card_benefit_enable == 1  }}">
+      <view style="font-size: 28rpx">会员卡优惠</view>
+      <view class="vip-coupon-block">
+        <view class="price" wx:if="{{ combineBenefit.vip_benefit && combineBenefit.vip_benefit_discount_price !== '0.00' }}" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+          -¥ {{ combineBenefit.vip_benefit_discount_price }}
+        </view>
+        <view class="price" wx:if="{{ combineBenefit.vip_benefit && combineBenefit.vip_benefit_discount_price === '0.00' }}" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+          未使用
+        </view>
+        <view class="ico-moon icon-rightarrow"></view>
+      </view>
+    </view>
+    <view class="item space-between vip-coupon" data-type="coupon" bindtap="showMemberDiscount" wx:if="{{ !noUseCouponBenefit && transferConfig.coupon_benefit_enable == 1  }}">
+      <view style="font-size: 28rpx">优惠券减免</view>
+      <view class="vip-coupon-block">
+        <view class="price" wx:if="{{ combineBenefit.coupon_benefit_discount_price && combineBenefit.coupon_benefit_discount_price !== '0.00' }}" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+          -¥ {{ combineBenefit.coupon_benefit_discount_price }}
+        </view>
+        <view class="price" wx:if="{{ combineBenefit.coupon_benefit_discount_price && combineBenefit.coupon_benefit_discount_price === '0.00' }}" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+          未使用
+        </view>
+        <view class="ico-moon icon-rightarrow"></view>
+      </view>
+    </view>
+    <view class="item space-between vip-coupon" data-type="integral" bindtap="showMemberDiscount" wx:if="{{ !noUseIntegralBenefit && transferConfig.integral_benefit_enable == 1 }}">
+      <view style="font-size: 28rpx">积分抵扣</view>
+      <view class="vip-coupon-block">
+        <view class="price" wx:if="{{ combineBenefit.integral_benefit && combineBenefit.integral_benefit.discount_price !== '0.00' }}" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+          -¥ {{ combineBenefit.integral_benefit.discount_price }}
+        </view>
+        <view class="price" wx:if="{{ combineBenefit.integral_benefit && combineBenefit.integral_benefit.discount_price === '0.00' }}" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+          未使用
+        </view>
+        <view class="ico-moon icon-rightarrow"></view>
+      </view>
+    </view>
+    <view class="item space-between stored-value-wrap" wx:if="{{ transferConfig.use_balance_enable !== '0' && franchisee === '' && userInfo.balance != 0 && userInfo.balance }}">
+      <text style="font-size: 28rpx">储值抵扣</text>
+      <view class="stored-value-block">
+        <switch checked bindchange="ifUseBalance" checked="{{ useBalance }}"/>
+        <view class="stored-value-price" hidden="{{ !useBalance || use_balance_price == 0 }}" style="color: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+          -¥ {{ use_balance_price }}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="transfer-input space-between bg-white">
+    <view class="input-text">备注</view>
+    <input style="font-size: 28rpx; text-overflow: ellipsis;" value="{{ remark }}" maxlength="30" placeholder-class="input-price-placeholder" placeholder="请填写备注信息" bindinput="inputRemark"/>
+  </view>
+  <button class="submit-btn" disabled="{{ (totalPayment === '' || requesting) ? true : false }}" bindtap="confirmPay" style="background: {{ transferConfig.background_color !== '' ? transferConfig.background_color : '#FF7100' }}">
+    {{ totalPayment === '' ? '' : totalPayment + '元  ' }}确认支付
+  </button>
+
+  <!-- <view class="vipCard-dialog" wx:if="{{ isShowVipCardDialog }}" bindtap="closeVipCardDialog" data-type="shadow">
+    <view class="content" wx:if="{{ !ifUserInfo }}">
+      <view class="top-block" style="background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/vip-card-dialog-head2.png);">
+        <text class="text">请填写会员信息</text>
+      </view>
+      <view class="vip-info">
+        <view class="info-item" wx:if="{{ userInfoCollectConfig.collect_username == 1 }}">
+          <view class="item-name">姓名</view>
+          <view class="item-right">
+            <input type="text" placeholder="请填写姓名" maxlength="10" value="{{ userInfo.nickname }}" data-type="name" bindinput="inputUserInfo"/>
+          </view>
+        </view>
+        <view class="info-item" wx:if="{{ userInfoCollectConfig.collect_phone == 1 }}">
+          <view class="item-name">电话</view>
+          <view class="item-right">
+            <input type="number" disabled="true" placeholder="请授权手机号码" value="{{ userInfo.phone }}" data-type="phone" bindinput="inputUserInfo"/>
+            <button class="get-authorize" wx:if="{{ isGetPhoneNumber }}" style="background-color: #D2D2D2">已授权</button>
+            <button class="get-authorize" wx:if="{{ !isGetPhoneNumber }}" style="background-color: #FF7100" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获得授权</button>
+          </view>
+        </view>
+        <view class="info-item" wx:if="{{ userInfoCollectConfig.collect_birthday == 1 }}">
+          <view class="item-name">生日</view>
+          <view class="item-right">
+            <picker mode="date" value="{{ userInfo.birthday }}" start="1900-01-01" end="{{ todayDate }}" bindchange="bindBirthdayChange">
+              <view class="picker" style="color: {{ userInfo.birthday === '' ? '#999' : '#000' }}">
+                {{ userInfo.birthday === '' ? '请选择生日信息' : userInfo.birthday }}
+              </view>
+            </picker>  
+            <view class="ico-moon icon-rightarrow"></view>
+          </view>
+        </view>
+        <view class="info-item" wx:if="{{ userInfoCollectConfig.collect_region == 1 }}">
+          <view class="item-name">城市</view>
+          <view class="item-right">
+            <picker mode="region" bindchange="bindCityChange" value="{{userCityArr}}">
+              <view class="picker" style="color: {{userCityArr[0] === '' ? '#999' : '#000'}}">
+              {{ userCityArr[0] === '' ? '请填写所在城市' : userCityArr[0] + userCityArr[1] + userCityArr[2] }}
+              </view>
+            </picker>
+            <view class="ico-moon icon-rightarrow"></view>
+          </view>
+        </view>
+
+        <view class="save-btn" bindtap="saveUserInfo">立即领取</view>
+      </view>
+      <view class="ico-moon icon-closed" data-type="shadow"></view>
+    </view>  
+    <view class="content" wx:if="{{ ifUserInfo }}">
+      <view class="top-block" style="background-image: url(http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/vip-card-dialog-head.png);">
+        <view class="text-block">
+          <view class="success-text">注册会员成功</view>
+          <view class="success-text">恭喜获得以下权益</view>
+        </view>
+      </view>
+      <view class="interests-block">
+        <view class="interests-item" wx:if="{{ vipCardInfo.discount }}">
+          <image class="icon" src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/discount-icon.svg" />
+          <view class="count">{{ vipCardInfo.discount }}折</view>
+          <view class="text">会员折扣</view>
+        </view>
+        <view class="interests-item" wx:if="{{ vipCardInfo.coupon_list && vipCardInfo.coupon_list[0].num }}">
+          <image class="icon" src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/coupon-icon.svg" />
+          <view class="count">{{ vipCardInfo.coupon_list[0].num }}张</view>
+          <view class="text">会员赠送</view>
+        </view>
+        <view class="interests-item" wx:if="{{ vipCardInfo.integral && vipCardInfo.integral != 0 }}">
+          <image class="icon" src="http://www.zhichiwangluo.com/zhichi_frontend/static/webapp/images/transfer/integral-icon.svg" />
+          <view class="count">{{ vipCardInfo.integral }}+</view>
+          <view class="text">积分赠送</view>
+        </view>        
+      </view>
+      <view class="ico-moon icon-closed" data-type="shadow"></view>
+    </view>
+  </view> -->
+</view>

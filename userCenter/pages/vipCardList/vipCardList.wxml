@@ -1,0 +1,31 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="page">
+  <view class="vip-banner">
+    <image src="http://cdn.jisuapp.cn/static/webapp/images/franchisee/vip-banner.jpg" mode="aspectFill"></image>
+  </view>
+  <view class="vip-list">
+    <block wx:for="{{vipList}}" wx:key="">
+      <view class="vip-item"  style="background: {{ item.background_type == 1 ? item.background : 'url('+item.background+')' }};background-size:cover;background-position:center center;" data-appid="{{item.app_id}}" data-id="{{item.id}}" data-isPaidCard="{{item.is_paid_vip}}" bindtap="turnToVipCard">
+        <view class="vip-item-cover">
+          <image src="{{ item.logo }}" mode="aspectFill"></image>
+        </view>
+        <view class="vip-item-info">
+          <view class="vip-item-title">{{item.app_name}} {{item.title}}</view>
+          <view wx:if="{{ item.discount != 0 }}" class="vip-item-rights">可享 {{ item.discount }}折</view>
+          <view wx:elif="{{ item.coupon_list && item.coupon_list != '' }}" class="vip-item-rights">可享 赠送优惠券</view>
+          <view wx:elif="{{ item.integral != 0 }}" class="vip-item-rights">可享 赠送{{ item.integral }}积分</view>
+          <view wx:elif="{{ item.birthday_coupon_list && item.birthday_coupon_list != '' }}" class="vip-item-rights">生日 赠送优惠券</view>
+          <view wx:elif="{{ item.is_free_postage && item.is_free_postage == 1 }}" class="vip-item-rights">可享 包邮</view>
+        </view>
+        <view class="vip-item-bottom">有效日期: {{ item.expired_time == -1 ? '永久有效' : item.expired_time }}</view>
+      </view>
+    </block>
+  </view>
+  <view class="no-receive-card" wx:if="{{ vipList.length == 0 }}">
+    <view class="tip-area">
+      <image class="tip-img" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/no-vip.png"></image>
+      <text class="tip-text-1">暂无可用会员卡</text>
+      <text class="tip-text-2">获取方式，可留意店家消息</text>
+    </view>
+  </view>
+</view>

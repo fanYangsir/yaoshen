@@ -1,0 +1,293 @@
+@charset 'utf-8';
+@import "/utils/font_icon.wxss";
+page{
+  font-size: 24rpx;
+}
+.member-discount{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 997;
+}
+
+.discount-wrapper{
+  width: 714rpx;
+  max-height: 930rpx;
+  position: absolute;
+  bottom: 0;
+  background-color: #fff;
+  padding: 0 20rpx;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.discount-wrapper .title{
+  display: flex;
+  justify-content: space-between;
+  margin: 36rpx 0 26rpx 0;
+}
+.discount-wrapper .icon-close-btn{
+  font-size: 44rpx;
+  line-height: 34rpx;
+  color: #d5d5d5;
+}
+.discount-wrapper .title .title-text{
+  font-size: 32rpx;
+  line-height: 34rpx;
+}
+.discount-wrapper .title .icon-closes{
+  border: 1rpx solid #d2d2d2;
+  border-radius: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #D2D2D2;
+  font-size: 24rpx;
+}
+.tip-mess{
+  width: 690rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+  line-height: 60rpx;
+  margin: 0 -20rpx 10rpx -20rpx;
+  padding: 0 20rpx;
+  background-color: #FFFAEE;
+  color: #FF7100;
+  font-size: 22rpx;
+  border-top-right-radius: 30rpx;
+  border-bottom-right-radius: 30rpx;
+}
+.tip-mess .icon-remind{
+  font-size: 30rpx;
+  margin-right: 5rpx;
+}
+.tip-mess .icon-closes{
+  position: absolute;
+  right: 20rpx;
+  width:50rpx;
+  text-align:center;
+}
+
+.tab-bar{
+  display: flex;
+  width: 100%;
+  line-height: 80rpx;
+}
+.tab-bar .tab-item{
+  flex: 1;
+  text-align: center;
+}
+.tab-bar .tab-item.active text{
+  color: #FF7100;
+  border-bottom: 2rpx solid #FF7100;
+  display:inline-block;
+  padding:0 10rpx;
+}
+.my-discount{
+  width: calc(100% + 50rpx);
+  margin: 0 -25rpx;
+  padding: 24rpx 25rpx;
+  background-color: #F7F7F7;
+  box-sizing: border-box;
+  padding: 20rpx 25rpx 0 25rpx;
+}
+.my-coupon{
+  height: 570rpx;
+}
+.my-card, .my-integral{
+  height: 580rpx;
+}
+.coupon-item{
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  margin-bottom: 25rpx;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 2rpx 4rpx 12rpx rgba(0,0,0,0.1)
+}
+.coupon-item .info{
+  padding: 57rpx 27rpx 0 27rpx;
+}
+.coupon-item .info .coupon-title{
+  width: 560rpx;
+  font-size: 32rpx;
+  margin-bottom: 26rpx;
+}
+.text-overflow{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.use-condition{
+  width: 560rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.integral-item .info .icon-success-tip, .coupon-item .info .icon-success-tip{
+  position: absolute;
+  right: 30rpx;
+  top: calc(50% - 32rpx);
+  font-size: 44rpx;
+  color: #FF4D65;
+}
+.integral-item .info .icon-no-use, .coupon-item .info .icon-no-use{
+  position: absolute;
+  right: 30rpx;
+  top: calc(50% - 32rpx);
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  border: 2rpx solid #d9d9d9;
+}
+.coupon-item .time-block{
+  display: flex;
+  justify-content: space-between;
+  line-height: 58rpx;
+  margin-top: 30rpx;
+  position: relative;
+}
+.coupon-item .effective-time{
+  font-size: 24rpx;
+}
+.coupon-item .maturity-time{
+  font-size: 22rpx;
+  /* color: #FF4D64; */
+}
+.coupon-item .time-block:before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 4rpx;
+  width: calc(100% - 10rpx);
+  border-top: 2rpx dashed #dbdbdb;
+}
+.card-item{
+  position: relative;
+  padding: 50rpx 31rpx;
+  border-radius: 10rpx;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom:20rpx;
+}
+.card-item .card-img-block{
+  display: inline-block;
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 10rpx;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.card-item .card-img{
+  width: 60rpx;
+  height: 50rpx; 
+  display: inline-block;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.app-logo-img{
+  width: 80rpx;
+  height: 80rpx; 
+  display: inline-block;
+  position: relative;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.card-item .card-info{
+  display: inline-block;
+  width: 300rpx;
+  color: #fff;
+}
+.card-item .card-info .card-name{
+  width: 400rpx;
+  font-size: 26rpx;
+  margin-bottom: 17rpx;
+}
+.card-item .card-info .card-mess{
+  width: 400rpx;
+  font-size: 24rpx;
+}
+.card-item .card-btn{
+  position: absolute;
+  right: 30rpx;
+  display: inline-block;
+  padding: 8rpx 20rpx;
+  text-align: center;
+  font-size: 22rpx;
+  background: rgba(255,168,0,1);
+  border-radius: 23rpx;
+  box-shadow: 1rpx 1rpx 1rpx rgba(255,157,18,1);
+  color: #fff;
+}
+.integral-item{
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  margin-bottom: 25rpx;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 2rpx 4rpx 12rpx rgba(0,0,0,0.1);
+}
+.integral-item .info{
+  padding: 50rpx 27rpx 30rpx 27rpx
+}
+.integral-item .info .integral-title{
+  font-size: 32rpx;
+  margin-bottom: 26rpx;
+}
+.integral-item .info .integral-title .red-text{
+  font-size: 26rpx;
+}
+.background-word-area{
+  position: absolute;
+  right: -64rpx;
+  top: -70rpx;
+  padding: 10rpx;
+  border-radius: 50%;
+  color: #fff;
+  opacity: 0.1;
+}
+.background-word-area .background-circle{
+  width: 180rpx;
+  height: 180rpx;
+  line-height: 180rpx;
+  border-radius: 50%;
+}
+.background-word-area .background-word{
+  position: absolute;
+  bottom: 50rpx;
+  left: 50rpx;
+  font-size: 64rpx;
+  line-height: 64rpx;
+}
+.no-use-btn{
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #333333;
+  background-color: #fff;
+  margin: 0 -30rpx;
+  position: relative;
+}
+.empty{
+  width: calc(100% - 40rpx);
+  padding: 20rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #D2D2D2;
+}
+.empty image{
+  width: 157rpx;
+  height: 157rpx;
+  display: block;
+  margin: 126rpx auto 35rpx auto;
+}

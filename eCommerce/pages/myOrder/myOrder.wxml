@@ -1,0 +1,1491 @@
+<component-reward-point rewardPointObj="{{rewardPointObj}}"></component-reward-point>
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-sinkingModal></component-sinkingModal>
+
+<view class="myOrder-wrap page" id="myOrder">
+  <view class="flex-box myOrder-tab-list" wx:if="{{ goodsTypeList.length > 1 }}">
+    <scroll-view scroll-x="true" style="width:100%">
+      <block wx:for="{{ goodsTypeList }}" wx:key="">
+        <view style="{{currentGoodsType == 0 ? 'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme : ''}}" wx:if="{{ item == 0 }}" class="MeanTab {{ currentGoodsType == 0 ? 'active' : '' }}" data-index="{{ index }}" bindtap="clickMeanTab" data-goods-type="{{ item }}" >电商</view>
+        <view style="{{currentGoodsType == 1 ? 'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme : ''}}" wx:elif="{{ item == 1 }}" class="MeanTab {{ currentGoodsType == 1 ? 'active' : '' }}" data-index="{{ index }}" bindtap="clickMeanTab" data-goods-type="{{ item }}" >预约</view>
+        <view style="{{currentGoodsType == 2 ? 'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme : ''}}" wx:elif="{{ item == 2 }}" class="MeanTab {{ currentGoodsType == 2 ? 'active' : '' }}" data-index="{{ index }}" bindtap="clickMeanTab" data-goods-type="{{ item }}" >外卖</view>
+        <view style="{{currentGoodsType == 3 ? 'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme : ''}}" wx:elif="{{ item == 3 }}" class="MeanTab {{ currentGoodsType == 3 ? 'active' : '' }}" data-index="{{ index }}" bindtap="clickMeanTab" data-goods-type="{{ item }}" >到店</view>
+        <view style="{{currentGoodsType == 5 ? 'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme : ''}}" wx:elif="{{ item == 5 }}" class="MeanTab {{ currentGoodsType == 5 ? 'active' : '' }}" data-index="{{ index }}" bindtap="clickMeanTab" data-goods-type="{{ item }}" >当面付</view>
+        <view style="{{currentGoodsType == 6 ? 'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme : ''}}" wx:elif="{{ item == 6 }}" class="MeanTab {{ currentGoodsType == 6 ? 'active' : '' }}" data-index="{{ index }}" bindtap="clickMeanTab" data-goods-type="{{ item }}" >排号</view>
+        <view style="{{currentGoodsType == 8 || currentGoodsType == 9 ? 'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme : ''}}" wx:elif="{{ item == 9 }}" class="MeanTab {{ currentGoodsType == 8 || currentGoodsType == 9 ? 'active' : '' }}" data-index="{{ index }}" bindtap="clickMeanTab" data-goods-type="{{ item }}" >其他</view>
+        <view style="{{currentGoodsType == 10 ? 'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme : ''}}" wx:elif="{{ item == 10 }}" class="MeanTab {{ currentGoodsType == 10 ? 'active' : '' }}" data-index="{{ index }}" bindtap="clickMeanTab" data-goods-type="{{ item }}" >行业预约</view>
+        <view style="{{currentGoodsType == 21 ? 'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme : ''}}" wx:elif="{{ item == 21 }}" class="MeanTab {{ currentGoodsType == 21 ? 'active' : '' }}" data-index="{{ index }}" bindtap="clickMeanTab" data-goods-type="{{ item }}">社区团购</view>
+      </block>
+    </scroll-view>
+    <block>
+      <view class="flex-box tab-list-submenu" wx:if="{{ currentGoodsType == 0 }}" data-goods-type="0" bindtap="clickSubmenuTab">
+        <view style="{{currentTabIndex == 0 ? 'color:' + storeStyle.theme : ''}}" class="flex-sub-box-5 {{ currentTabIndex == 0 ? 'active' : '' }}" data-index="0" >全部</view>
+        <view style="{{currentTabIndex == 1 ? 'color:' + storeStyle.theme : ''}}" class="flex-sub-box-5 {{ currentTabIndex == 1 ? 'active' : '' }}" data-index="1" >待付款</view>
+        <view style="{{currentTabIndex == 2 ? 'color:' + storeStyle.theme : ''}}" class="flex-sub-box-5 {{ currentTabIndex == 2 ? 'active' : '' }}" data-index="2" >待发货</view>
+        <view style="{{currentTabIndex == 3 ? 'color:' + storeStyle.theme : ''}}" class="flex-sub-box-5 {{ currentTabIndex == 3 ? 'active' : '' }}" data-index="3" >待收货</view>
+        <view style="{{currentTabIndex == 4 ? 'color:' + storeStyle.theme : ''}}" class="flex-sub-box-5 {{ currentTabIndex == 4 ? 'active' : '' }}" data-index="4" >待评价</view>
+      </view>
+      <view class="flex-box tab-list-submenu" wx:if="{{ currentGoodsType == 1 }}" data-goods-type="1" bindtap="clickSubmenuTab">
+        <view class="flex-sub-box-5 {{ currentTabIndex == 0 ? 'active' : '' }}" data-index="0" >全部</view>
+        <view class="flex-sub-box-5 {{ currentTabIndex == 1 ? 'active' : '' }}" data-index="1" >待付款</view>
+        <view class="flex-sub-box-5 {{ currentTabIndex == 2 ? 'active' : '' }}" data-index="2" >待确认</view>
+        <view class="flex-sub-box-5 {{ currentTabIndex == 3 ? 'active' : '' }}" data-index="3" >待消费</view>
+        <view class="flex-sub-box-5 {{ currentTabIndex == 4 ? 'active' : '' }}" data-index="4" >待评价</view>
+      </view>
+       <view class="tostore-list-submenu" wx:if="{{ currentGoodsType == 3 }}" data-goods-type="3" bindtap="clickSubmenuTab">
+        <view class="tostore-sub-box {{ currentTabIndex == 0 ? 'active' : '' }}" data-index="0" >全部</view>
+        <view class="tostore-sub-box {{ currentTabIndex == 1 ? 'active' : '' }}" data-index="1" >待付款</view>
+        <view class="tostore-sub-box {{ currentTabIndex == 2 ? 'active' : '' }}" data-index="2" >待确认</view>
+        <view class="tostore-sub-box {{ currentTabIndex == 3 ? 'active' : '' }}" data-index="3" >商家已确认</view>
+        <view class="tostore-sub-box {{ currentTabIndex == 4 ? 'active' : '' }}" data-index="4" >待评价</view>
+        <view class="tostore-sub-box {{ currentTabIndex == 5 ? 'active' : '' }}" data-index="5" >退款</view>
+        <view class="tostore-sub-box {{ currentTabIndex == 6 ? 'active' : '' }}" data-index="6" >已关闭</view>
+      </view>
+      <view class="flex-box tab-list-submenu" wx:if="{{ currentGoodsType == 5 }}" data-goods-type="5" bindtap="clickSubmenuTab">
+        <view class="flex-sub-box-4 {{ currentTabIndex == 0 ? 'active' : '' }}" data-index="0" >全部</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 1 ? 'active' : '' }}" data-index="1" >待支付</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 2 ? 'active' : '' }}" data-index="2" >已完成</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 3 ? 'active' : '' }}" data-index="3" >已关闭</view>
+      </view>
+      <view class="flex-box tab-list-submenu" wx:if="{{ currentGoodsType == 2 }}" data-goods-type="2" bindtap="clickSubmenuTab">
+        <view class="flex-sub-box-4 {{ currentTabIndex == 0 ? 'active' : '' }}" data-index="0" >全部</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 1 ? 'active' : '' }}" data-index="1" >待付款</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 2 ? 'active' : '' }}" data-index="2" >已完成</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 3 ? 'active' : '' }}" data-index="3" >已关闭</view>
+      </view> 
+      <view class="flex-box tab-list-submenu" wx:if="{{ currentGoodsType == 6 }}" data-goods-type="6" bindtap="clickSubmenuTab">
+        <view class="flex-sub-box-4 {{ currentTabIndex == 0 ? 'active' : '' }}" data-index="0" >全部</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 1 ? 'active' : '' }}" data-index="1" >待使用</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 2 ? 'active' : '' }}" data-index="2" >已使用</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 3 ? 'active' : '' }}" data-index="3" >已失效</view>
+      </view>
+       <view class="flex-box tab-list-submenu" wx:if="{{ currentGoodsType == 10 }}" data-goods-type="10" bindtap="clickSubmenuTab">
+         <view class="flex-sub-box-5 {{ currentTabIndex == 0 ? 'active' : '' }}" data-index="0" >全部</view>
+         <view class="flex-sub-box-5 {{ currentTabIndex == 1 ? 'active' : '' }}" data-index="1" >待付款</view>
+         <view class="flex-sub-box-5 {{ currentTabIndex == 2 ? 'active' : '' }}" data-index="2" >待确认</view>
+         <view class="flex-sub-box-5 {{ currentTabIndex == 3 ? 'active' : '' }}" data-index="3" >待消费</view>
+         <view class="flex-sub-box-5 {{ currentTabIndex == 4 ? 'active' : '' }}" data-index="4" >待评价</view>
+      </view> 
+      <view class="flex-box tab-list-submenu" wx:if="{{ currentGoodsType == 8 }}" data-goods-type="8" bindtap="clickSubmenuTab">
+        <view class="flex-sub-box-4 {{ currentTabIndex == 0 ? 'active' : '' }}" data-index="0" >全部</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 1 ? 'active' : '' }}" data-index="1" >待付款</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 2 ? 'active' : '' }}" data-index="2" >已付款</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 3 ? 'active' : '' }}" data-index="3" >已关闭</view>
+      </view> 
+      <view class="flex-box tab-list-submenu" wx:if="{{ currentGoodsType == 9 }}" data-goods-type="9" bindtap="clickSubmenuTab">
+        <view class="flex-sub-box-4 {{ currentTabIndex == 0 ? 'active' : '' }}" data-index="0" >全部</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 1 ? 'active' : '' }}" data-index="1" >待付款</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 2 ? 'active' : '' }}" data-index="2" >已付款</view>
+        <view class="flex-sub-box-4 {{ currentTabIndex == 3 ? 'active' : '' }}" data-index="3" >已关闭</view>
+      </view> 
+      <!-- 社区团购 -->
+      <view class="tostore-list-submenu" wx:if="{{ currentGoodsType == 21 }}" data-goods-type="21" bindtap="clickSubmenuTab">
+        <view class="tostore-sub-box {{ currentTabIndex == 0 ? 'active' : '' }}" data-index="0">全部</view>
+        <view class="tostore-sub-box {{ currentTabIndex == 1 ? 'active' : '' }}" data-index="1">待付款</view>
+        <view class="tostore-sub-box {{ currentTabIndex == 2 ? 'active' : '' }}" data-index="2">待发货</view>
+        <view class="tostore-sub-box {{ currentTabIndex == 3 ? 'active' : '' }}" data-index="3">配送中</view> 
+        <view class="tostore-sub-box {{ currentTabIndex == 4 ? 'active' : '' }}" data-index="4">待提货</view>
+        <view class="tostore-sub-box {{ currentTabIndex == 5 ? 'active' : '' }}" data-index="5">待评价</view>
+      </view>
+    </block> 
+  </view>
+  <view class="flex-box myOrder-tab-list" wx:elif="{{ goodsTypeList.length == 1 && (goodsTypeList[0] == 0) }}">
+    <view class="flex-sub-box-5 {{ currentTabIndex == 0 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="0" >全部</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 1 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="1" >待付款</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 2 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="2" >待发货</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 3 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="3" >待收货</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 4 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="4" >待评价</view>
+  </view>
+   <view class="flex-box myOrder-tab-list" wx:elif="{{ goodsTypeList.length == 1 && (goodsTypeList[0] == 1) }}">
+    <view class="flex-sub-box-5 {{ currentTabIndex == 0 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="0" >全部</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 1 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="1" >待付款</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 2 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="2" >待确认</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 3 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="3" >待消费</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 4 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="4" >待评价</view>
+  </view>
+  <view class="tostore-list-submenu myOrder-tab-list" wx:elif="{{ goodsTypeList.length == 1 && goodsTypeList[0] == 3 }}">
+    <view class="tostore-sub-box {{ currentTabIndex == 0 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="0" >全部</view>
+    <view class="tostore-sub-box {{ currentTabIndex == 1 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="1" >待付款</view>
+    <view class="tostore-sub-box {{ currentTabIndex == 2 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="2" >待确认</view>
+    <view class="tostore-sub-box {{ currentTabIndex == 3 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="3" >商家已确认</view>
+    <view class="tostore-sub-box {{ currentTabIndex == 4 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="4" >待评价</view>
+    <view class="tostore-sub-box {{ currentTabIndex == 5 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="5" >退款</view>
+    <view class="tostore-sub-box {{ currentTabIndex == 6 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="6" >已关闭</view>
+  </view>
+  <view class="flex-box myOrder-tab-list" wx:elif="{{ goodsTypeList.length == 1 && goodsTypeList[0] == 5 }}">
+    <view class="flex-sub-box-4 {{ currentTabIndex == 0 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="0" >全部</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 1 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="1" >待支付</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 2 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="2" >已完成</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 3 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="3" >已关闭</view>
+  </view>
+  <view class="flex-box myOrder-tab-list" wx:elif="{{ goodsTypeList.length == 1 && goodsTypeList[0] == 2 }}">
+    <view class="flex-sub-box-4 {{ currentTabIndex == 0 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="0" >全部</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 1 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="1" >待付款</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 2 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="2" >已完成</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 3 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="3" >已关闭</view>
+  </view>
+  <view class="flex-box myOrder-tab-list" wx:elif="{{ goodsTypeList.length == 1 && goodsTypeList[0] == 6 }}">
+    <view class="flex-sub-box-4 {{ currentTabIndex == 0 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="0" >全部</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 1 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="1" >待使用</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 2 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="2" >已使用</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 3 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="3" >已失效</view>
+  </view>
+  <view class="flex-box myOrder-tab-list" wx:elif="{{ goodsTypeList.length == 1 && (goodsTypeList[0] == 10) }}">
+    <view class="flex-sub-box-5 {{ currentTabIndex == 0 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="0" >全部</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 1 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="1" >待付款</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 2 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="2" >待确认</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 3 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="3" >待消费</view>
+    <view class="flex-sub-box-5 {{ currentTabIndex == 4 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="4" >待评价</view>
+  </view>
+  <view class="flex-box myOrder-tab-list" wx:elif="{{ goodsTypeList.length == 1 && goodsTypeList[0] == 8 }}">
+    <view class="flex-sub-box-4 {{ currentTabIndex == 0 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="0" >全部</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 1 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="1" >待付款</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 2 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="2" >已付款</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 3 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="3" >已关闭</view>
+  </view>
+  <view class="flex-box myOrder-tab-list" wx:elif="{{ goodsTypeList.length == 1 && goodsTypeList[0] == 9 }}">
+    <view class="flex-sub-box-4 {{ currentTabIndex == 0 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="0" >全部</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 1 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="1" >待付款</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 2 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="2" >已付款</view>
+    <view class="flex-sub-box-4 {{ currentTabIndex == 3 ? 'active' : '' }}" bindtap="clickOrderTab" data-index="3" >已关闭</view>
+  </view>
+  <view class="myOrder-content-body" wx:if="{{ goodsTypeList.length > 1 }}">
+    <view class="scrollContainer" hidden="{{ currentGoodsType != 0 }}">
+      <scroll-view class="myOrder-ebusiness myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+        <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="">
+          <view class="dialog-block-item">
+            <text style="{{'color:' + storeStyle.theme}}" class="cash-delivery" wx:if="{{item.is_pay_on_delivery == 1}}">货到付款</text><text class="add-time">{{ item.add_time }}</text>
+            <text style="{{'color:' + storeStyle.theme}}" wx:if="{{ item.status == 0 }}" class="pull-right myOrder-order-status">待付款</text>
+            <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 1 }}" class="pull-right myOrder-order-status">待发货</text>
+            <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 2 }}" class="pull-right myOrder-order-status">待收货</text>
+            <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 3 }}" class="pull-right myOrder-order-status">待评价</text>
+            <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 4 }}" class="pull-right myOrder-order-status">{{item.is_pay_on_delivery == 1 ? '审核中' : '退款审核中'}}</text>
+            <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 5 }}" class="pull-right myOrder-order-status">正在退款中</text>
+            <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 6 }}" class="pull-right myOrder-order-status">已完成</text>
+            <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 7 }}" class="pull-right myOrder-order-status">已关闭</text>
+          </view>
+          <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+          <view class="myOrder-goods-list" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="eBusiness">
+            <view wx:for="{{ item.goods_info }}" wx:for-item="goods" wx:key="">
+              <view class="dialog-block-item" >
+                <view class="myOrder-goods-tips" wx:if="{{goods.use_integral}}">
+                  <view class="myOrder-goods-tips-top">积</view>
+                  <view class="myOrder-goods-tips-left"></view>
+                  <view class="myOrder-goods-tips-right"></view>
+                </view>
+                <image class="myOrder-goods-cover" src="{{ goods.cover }}"></image>
+                <view class="myOrder-goods-title"><text wx:if="{{ goods.is_benefit_goods }}" class="goods-gift">赠品</text>{{ goods.goods_name }}</view>
+                <view wx:if="{{ !goods.is_benefit_goods }}" class="myOrder-goods-right">
+                  <view>
+                    <block wx:if="{{goods.use_integral == 0}}">
+                      <text class="myOrder-goods-price">¥ {{ goods.price }}</text>
+                    </block>
+                    <block wx:else>
+                      <text class="myOrder-goods-price" wx:if="{{goods.price !='0.00' || !goods.use_integral || (goods.use_integral == 0)}}">¥ {{ goods.price }}</text>
+                      <text wx:if="{{goods.use_integral && goods.use_integral != 0 && goods.price !='0.00'}}">+</text>
+                      <text wx:if="{{goods.use_integral}}">{{goods.use_integral}}积分</text>
+                    </block>
+                  </view>
+                  <view>×<text class="myOrder-goods-count">{{ goods.num }}</text></view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="dialog-block-item myOrder-total-item">
+            <text wx:if="{{item.is_integral != '1'}}">合计：<text class="myOrder-pay-price" style="{{'color:' + storeStyle.theme}}">¥ {{ item.original_price }}</text></text>
+            <text wx:if="{{item.is_integral == '1'}}">合计：<text class="myOrder-pay-price" wx:if="{{(item.original_price != 0 && item.original_price != '0.00') || !item.total_integral || item.total_integral == 0}}" style="{{'color:' + storeStyle.theme}}">¥ {{ item.original_price }}</text><text class="myOrder-pay-price" style="{{'color:' + storeStyle.theme}}" wx:if="{{item.total_integral && item.total_integral != 0 && item.original_price != 0 && item.original_price != '0.00'}}">+</text><text style="{{'color:' + storeStyle.theme}}" class="myOrder-pay-price" wx:if="{{item.total_integral}}">{{item.total_integral}}积分</text></text>
+          </view>
+          <view class="myOrder-list-bottom" wx:if="{{ item.status == 0 }}">
+            <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+            <text class="btn btn-orange myOrder-pay-directly" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="eBusiness" style="{{'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme}}">支付</text>
+          </view>
+          <view class="myOrder-list-bottom" wx:elif="{{ item.status == 1 }}">
+            <!-- <text class="btn myOrder-apply-drawback" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:12px;border-radius: 4px;" wx:if="{{!item.timeDiff}}">申请退款</text> -->
+            <text wx:if="{{ item.is_pay_on_delivery == 1 }}" class="btn myOrder-cancel-order" data-delivery="{{item.is_pay_on_delivery}}" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+          </view>
+          <view class="myOrder-list-bottom" wx:elif="{{ item.status == 2 }}">
+            <!-- <text class="btn myOrder-apply-drawback" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:12px;border-radius: 4px;" wx:if="{{!item.timeDiff}}">申请退款</text> -->
+            <text wx:if="{{ item.is_pay_on_delivery == 1 }}" class="btn myOrder-cancel-order" data-delivery="{{item.is_pay_on_delivery}}" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+            <text class="btn btn-orange myOrder-sure-receipt" bindtap="sureReceipt" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="{{'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme}}">确认收货</text>
+          </view>
+          <view class="myOrder-list-bottom" wx:elif="{{ item.status == 3 }}">
+            <!-- <text class="btn myOrder-apply-drawback" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:12px;border-radius: 4px;" wx:if="{{!item.timeDiff}}">申请退款</text> -->
+            <text class="btn myOrder-check-logistics" bindtap="checkLogistics" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" wx:if="{{ item.is_self_delivery == 0}}" >查看物流</text>
+            <text class="btn btn-orange myOrder-make-comment" bindtap="makeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="{{'color:' + storeStyle.theme + ';border-color:' + storeStyle.theme}}">去评价</text>
+          </view>
+          <view class="myOrder-list-bottom" wx:elif="{{ item.status == 6 }}">
+            <!-- <text class="btn myOrder-apply-drawback" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:12px;border-radius: 4px;" wx:if="{{!item.timeDiff}}">申请退款</text> -->
+            <text class="btn myOrder-check-logistics" bindtap="checkLogistics" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" wx:if="{{item.is_self_delivery == 0}}">查看物流</text>
+          </view>
+        </view>
+        <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+      </scroll-view>
+    </view>
+    <view class="scrollContainer" hidden="{{ currentGoodsType != 1 }}">
+      <scroll-view class="myOrder-appointment myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+        <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="">
+          <view class="dialog-block-item">
+            <text class="dialog-block-time">{{ item.add_time }}</text>
+            <text wx:if="{{ item.status == 0 }}" class="pull-right myOrder-order-status">待付款</text>
+            <text wx:elif="{{ item.status == 1 }}" class="pull-right myOrder-order-status">等待商家确认</text>
+            <text wx:elif="{{ item.status == 2 }}" class="pull-right myOrder-order-status">待消费</text>
+            <text wx:elif="{{ item.status == 3 }}" class="pull-right myOrder-order-status">待评价</text>
+            <text wx:elif="{{ item.status == 4 }}" class="pull-right myOrder-order-status">退款审核中</text>
+            <text wx:elif="{{ item.status == 5 }}" class="pull-right myOrder-order-status">正在退款中</text>
+            <text wx:elif="{{ item.status == 6 }}" class="pull-right myOrder-order-status">已消费</text>
+            <text wx:elif="{{ item.status == 7 }}" class="pull-right myOrder-order-status">已关闭</text>
+          </view>
+          <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+          <view class="myOrder-goods-list" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">
+            <view wx:for="{{ item.goods_info }}" wx:for-item="goods" wx:key="">
+              <view class="dialog-block-item">
+                <view class="myOrder-goods-tips" wx:if="{{goods.use_integral}}">
+                  <view class="myOrder-goods-tips-top">积</view>
+                  <view class="myOrder-goods-tips-left"></view>
+                  <view class="myOrder-goods-tips-right"></view>
+                </view>
+                <image class="myOrder-goods-cover" src="{{ goods.cover }}"></image>
+                <view class="myOrder-goods-title">{{ goods.goods_name }}</view>
+                <view class="myOrder-goods-right">
+                  <view>
+                    <block wx:if="{{goods.use_integral == 0}}">
+                      <text class="myOrder-goods-price">¥ {{ goods.price }}</text>
+                    </block>
+                    <block wx:else>
+                      <text class="myOrder-goods-price" wx:if="{{goods.price !='0.00' || !goods.use_integral || (goods.use_integral == 0)}}">¥ {{ goods.price }}</text>
+                      <text wx:if="{{goods.use_integral && goods.use_integral != 0 && goods.price !='0.00'}}">+</text>
+                      <text wx:if="{{goods.use_integral}}">{{goods.use_integral}}积分</text>
+                    </block>
+                  </view>
+                  <view>×<text class="myOrder-goods-count">{{ goods.num }}</text></view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="dialog-block-item myOrder-total-item">
+            <!-- <text class="myOrder-list-count">共 {{ item.goods_num }} 件</text> -->
+            <text wx:if="{{item.is_integral != '1'}}">合计：<text class="myOrder-pay-price">¥ {{ item.total_price }}</text></text>
+            <text wx:if="{{item.is_integral == '1'}}">合计：<text class="myOrder-pay-price" wx:if="{{(item.original_price != '0.00' && item.original_price != 0) || !item.total_integral || item.total_integral == 0}}">¥ {{ item.original_price }}</text><text class="myOrder-pay-price" wx:if="{{item.total_integral && item.total_integral != 0 && item.original_price != 0 && item.original_price != '0.00'}}">+</text><text class="myOrder-pay-price" wx:if="{{item.total_integral}}">{{item.total_integral}}积分</text></text>
+            <!-- <text>合计：<text class="myOrder-pay-price" wx:if="{{item.original_price != '0.00'}}">¥ {{ item.original_price }}</text><text wx:if="{{item.total_integral && item.total_integral != 0 && item.original_price != '0.00'}}" class="myOrder-pay-price">+</text><text wx:if="{{item.total_integral}}" class="myOrder-pay-price">{{item.total_integral}}积分</text></text> -->
+          </view>
+          <view class="myOrder-list-bottom" wx:if="{{ item.status == 0 }}">
+            <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+            <text class="btn btn-orange myOrder-pay-directly" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">支付</text>
+          </view>
+          <view class="myOrder-list-bottom" wx:elif="{{ item.status == 1 }}">
+            <text class="btn myOrder-verification-code" bindtap="getWriteOffCodeBox" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">核销码</text>
+            <text class="btn myOrder-apply-drawback" bindtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" wx:if="{{!item.timeDiff}}">申请退款</text>
+          </view>
+          <view class="myOrder-list-bottom" wx:elif="{{ item.status == 2 }}">
+            <text class="btn myOrder-apply-drawback" bindtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" wx:if="{{!item.timeDiff}}">申请退款</text>
+            <text class="btn btn-orange myOrder-sure-receipt" bindtap="sureReceipt" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">确认消费</text>
+          </view>
+          <view class="myOrder-list-bottom" wx:elif="{{ item.status == 3 }}">
+            <text class="btn btn-orange myOrder-make-comment" bindtap="makeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">去评价</text>
+          </view>
+        </view>
+        <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+      </scroll-view>
+    </view>
+    <view class="scrollContainer" hidden="{{ currentGoodsType != 2 }}">
+      <scroll-view class="myOrder-takeout myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" style="margin-bottom: 16rpx;{{ item.status == 3 || item.status == 1 ? 'padding-bottom:0rpx;' : ''}}" wx:for="{{ orderLists }}" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="takeout" wx:key="">
+            <!-- <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view> -->
+            <view class="myOrder-goods-list">
+              <view wx:for="{{ item.goods_info }}" wx:for-item="goods" wx:if="{{ index == 0 }}" wx:key="">
+                <view class="dialog-block-item">
+                  <image class="myOrder-goods-cover"  wx:if="{{ item.sub_shop_info.name }}" src="{{ item.sub_shop_info.logo }}" mode="aspectFill"></image>
+                  <image class="myOrder-goods-cover"  wx:else src="{{ takeoutInfo.cover }}" mode="aspectFill"></image>
+                  <view class="myOrder-takeout-Info">
+                    <view style="font-size: 30rpx;font-weight: 400;height: 30rpx;">{{ item.sub_shop_info.name || takeoutInfo.title }}
+                      <text wx:if="{{ item.status == 0 }}" class="takeout-order-status pull-right" style="font-size:26rpx;font-weight: normal;">待付款</text>
+                      <text wx:elif="{{ item.status == 8 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">待接单</text>
+                      <text wx:elif="{{ item.status == 1 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">待配送</text>
+                      <text wx:elif="{{ item.status == 2 && (item.take_out_info.deliver_type == 0 || item.take_out_info.deliver_type == '')}}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">配送中</text>
+                      <text wx:elif="{{ item.status == 2 && (item.take_out_info.deliver_type == 3 || item.take_out_info.deliver_type == 1)}}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">{{transportStatus[item.take_out_transport_order.status]}}</text>
+                      <text wx:elif="{{ item.status == 3 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">待评价</text>
+                      <text wx:elif="{{ item.status == 4 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">退款审核中</text>
+                      <text wx:elif="{{ item.status == 5 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">正在退款中</text>
+                      <text wx:elif="{{ item.status == 6 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">已完成</text>
+                      <text wx:elif="{{ item.status == 7 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">已关闭</text>
+                    </view>
+                    <view style="font-size: 22rpx;margin-top: 12rpx;margin-bottom:32rpx;color: #999;">{{ item.add_time }}</view>
+                  </view>
+                   <map wx:if="{{item.transport && item.transport.statusCode >= 2}}" catchtap="mapDetail" data-lat="{{item.transport.transporterLat}}" data-lng="{{item.transport.transporterLng}}" style="margin: 10rpx auto;" longitude="{{item.transport.transporterLng}}" latitude="{{item.transport.transporterLat}}" scale="18" markers="{{marker}}" show-location="{{true}}"></map>
+                  <view class="takeout-goods-detail">
+                    <view class="myOrder-takeout-title">{{ goods.goods_name + (goodsNum > 1 ? '等': '')+goodsNum}}件商品<text class="pull-right" style="font-weight: 500;color: #333;"><text style="margin: 0 3px;font-size: 22rpx;font-weight: normal;">¥</text>{{ item.total_price }}</text></view>
+                  </view>
+                  <view wx:if="{{ item.status == 0 }}" style="text-align: right;">
+                    <text class="btn myOrder-apply-drawback" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;margin-right:23rpx;">取消订单</text>
+                    <text class="btn btn-orange myOrder-make-comment" catchtap="payOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-price="{{item.total_price}}" style="padding: 0px 10px;font-size: 24rpx;">去支付</text>
+                  </view>
+                  <view class="myOrder-list-bottom" wx:if="{{ (item.status == 1 && !item.take_out_info.transport_shop_id) || item.status == 8}}">
+                    <text class="btn myOrder-apply-drawback" catchtap="toCancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-deliver="{{item.take_out_info.deliver_type}}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;">取消订单</text>
+                  </view>
+                  <view wx:if="{{ item.status == 3 }}" style="text-align: right;">
+                    <text class="btn myOrder-apply-drawback" catchtap="orderDelete" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;margin-right:16rpx;">删除订单</text>
+                    <text class="btn btn-orange myOrder-make-comment" catchtap="takeoutMakeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding: 0px 10px;font-size: 24rpx;">去评价</text>
+                  </view>
+                  <view wx:if="{{ item.status == 4 }}" style="text-align: right;">
+                    <text class="btn myOrder-apply-drawback" catchtap="cancelRefund" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;">撤销申请</text>
+                  </view>
+                  <view wx:if="{{ item.status == 5 }}" style="text-align: right;">
+                    <text class="btn myOrder-apply-drawback" catchtap="receiveDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;">收到退款</text>
+                  </view>
+                  <view wx:if="{{ item.status == 6 || item.status == 7}}" style="text-align: right;">
+                    <text class="btn myOrder-apply-drawback" catchtap="orderDelete" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;">删除订单</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+    </view>
+    <view class="scrollContainer" hidden="{{ currentGoodsType != 3 }}">
+      <scroll-view class="myOrder-tostore myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+        <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="tostore">
+          <view class="dialog-block-item myOrder-tostore-top">
+            <text class="dialog-block-time">下单时间: {{ item.add_time }}</text>
+            <text class="pull-right tostore-see-detail">查看详情</text>
+          </view>
+          <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+          <view class="myOrder-goods-list">
+            <view wx:for="{{ item.goods_info }}" wx:for-item="goods" wx:if="{{ index == 0 }}" wx:key="">
+              <view class="dialog-block-item">
+                <view class="myOrder-goods-tips" wx:if="{{goods.use_integral}}">
+                  <view class="myOrder-goods-tips-top">积</view>
+                  <view class="myOrder-goods-tips-left"></view>
+                  <view class="myOrder-goods-tips-right"></view>
+                </view>
+                <image class="myOrder-goods-cover" src="{{ goods.cover }}" mode="aspectFill"></image>
+                <view class="tostore-goods-detail">
+                  <view class="myOrder-tostore-title">
+                    <view style="font-size: 28rpx;">{{ goods.goods_name }}</view>
+                    <view wx:if="{{ goods.model_value.length}}" style="color: #999;margin-top: 8rpx;line-height: 32rpx;">
+                      <view wx:for="{{ goods.model_name }}" wx:key="">{{ item }} : {{ goods.model_value[index] }}</view>
+                    </view>
+                  </view>
+                  <view class="tostorePrice-num">
+                    <view style="font-size: 30rpx">
+                      <block wx:if="{{goods.use_integral == 0}}">
+                        <text>¥ {{ goods.price }}</text>
+                      </block>
+                      <block wx:else>
+                        <text wx:if="{{goods.price !='0.00' || !goods.use_integral || (goods.use_integral == 0)}}">¥ {{ goods.price }}</text>
+                        <text wx:if="{{goods.use_integral && goods.use_integral != 0 && goods.price !='0.00'}}">+</text>
+                        <text wx:if="{{goods.use_integral}}">{{goods.use_integral}}积分</text>
+                      </block>
+                    </view>
+                    <view style="color: #999;">×{{ goods.num }}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="myOrder-list-bottom">
+            <view>
+              <label wx:if="{{ item.tostore_data.formatted_queue_num }}" class="pull-left">取餐号：<text>{{ item.tostore_data.formatted_queue_num }}</text></label>
+              <label>
+                <text class="myOrder-list-count">共{{ item.goods_num }}件</text>
+                  <block wx:if="{{item.is_integral != '1'}}">
+                    <text>¥ {{ item.total_price }}</text>
+                  </block>
+                  <block wx:else>
+                    <text wx:if="{{(item.original_price != '0.00' && item.original_price != 0) || !item.total_integral || item.total_integral == 0}}">¥ {{ item.original_price }}</text>
+                    <text wx:if="{{item.original_price != '0.00' && item.original_price != 0 && item.total_integral && item.total_integral != 0}}">+</text>
+                    <text wx:if="{{item.total_integral && item.total_integral != 0}}">{{item.total_integral}}积分</text>
+                  </block>
+                <text wx:if="{{ item.status == 0 }}" class="tostore-order-status">待付款</text>
+                <text wx:elif="{{ item.status == 1 }}" class="tostore-order-status">等待商家确认</text>
+                <text wx:elif="{{ item.status == 2 }}" class="tostore-order-status">商家已确认</text>
+                <text wx:elif="{{ item.status == 3 }}" class="tostore-order-status">待评价</text> 
+                <text wx:elif="{{ item.status == 4 }}" class="tostore-order-status">退款审核中</text>
+                <text wx:elif="{{ item.status == 5 }}" class="tostore-order-status">正在退款中</text>
+                <text wx:elif="{{ item.status == 6 }}" class="tostore-order-status">已完成</text>
+                <text wx:elif="{{ item.status == 7 }}" class="tostore-order-status">已关闭</text>
+              </label>
+            </view>
+          </view>
+        </view>
+        <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+      </scroll-view>
+    </view>
+    <view class="scrollContainer" hidden="{{ currentGoodsType != 5 }}">
+      <scroll-view class="myOrder-transfer myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+        <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="transfer">
+          <view class="dialog-block-item">
+            <text class="dialog-block-time">{{ item.add_time }}</text>
+            <text wx:if="{{ item.status == 0 }}" class="pull-right myOrder-order-status">待付款</text>
+            <text wx:elif="{{ item.status == 6 }}" class="pull-right myOrder-order-status">已完成</text>
+            <text wx:elif="{{ item.status == 7 }}" class="pull-right myOrder-order-status">已关闭</text>
+          </view>
+          <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+          <view class="myOrder-goods-list">
+            <view wx:for="{{ item.goods_info }}" wx:key="" wx:for-item="goods" wx:if="{{ index == 0 }}">
+              <view class="dialog-block-item">
+                <!-- <view class="myOrder-goods-cover transfer-order-cover"><span class="ico-moon icon-store"></span></view> -->
+                <view class="myOrder-goods-cover transfer-order-cover">
+                  <image src="{{ item.app_info.app_logo }}"></image>
+                </view>
+                <view class="myOrder-goods-title">当面付订单</view>
+                <view class="myOrder-goods-right">
+                  <view>¥ <text class="myOrder-goods-price">{{ goods.price }}</text></view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="myOrder-list-bottom" wx:if="{{ item.status == 0 }}">
+            <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+            <text class="btn btn-orange myOrder-pay-directly" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"  data-type="transfer">支付</text>
+          </view>
+        </view>
+        <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+      </scroll-view>
+    </view>
+    <view class="scrollContainer" hidden="{{ currentGoodsType != 6 }}">
+      <scroll-view class="myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+        <view class="myOrder-list-wrap row-number-box" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="rowNumber">
+          <view class="take-num-time">
+            <text>取号时间：{{ item.add_time }}</text>
+            <text class="pull-right ico-moon icon-rightarrow"></text>
+          </view>
+          <view class="myOrder-row-number-shop"><image src="{{ item.app_info.app_logo }}"></image><text>{{ item.app_info.app_name }}</text></view>
+          <view class="row-num-content"><text class="ico-moon icon-mine-row-number"></text>我的排号：{{ item.line_up_data.queue_num_name }}</view>
+          <view class="row-num-content"><text class="ico-moon icon-row-number-type"></text>排号类型：{{ item.line_up_data.line_up_type_data.name }}</view>
+          <view class="row-num-content"><text class="ico-moon icon-row-number-wait"></text>预计等待：{{ item.line_up_data.prepare_wait_time > 0 ? (item.line_up_data.prepare_wait_time > toStoreSetting.max_display_time ? '>' + toStoreSetting.max_display_time : item.line_up_data.prepare_wait_time) + '分钟' : '无需等待' }}</view>
+          <view class="myOrder-rowNum-bottom">
+            <text class="myOrder-list-price"><text class="ico-moon icon-row-number-fee"></text>排号费：¥ {{ item.original_price }}</text>
+            <text wx:if="{{ item.status == 0 }}" class="rowNum-order-status">待付款</text>
+            <text wx:elif="{{ item.status == 2 }}" class="rowNum-order-status">待使用</text>
+            <text wx:elif="{{ item.status == 4 }}" class="rowNum-order-status">退款申请中</text> 
+            <text wx:elif="{{ item.status == 5 }}" class="rowNum-order-status">退款中</text> 
+            <text wx:elif="{{ item.status == 6 }}" class="rowNum-order-status used-rowNum-order">已使用</text>
+            <text wx:elif="{{ item.status == 7 }}" class="rowNum-order-status">已失效</text>
+          </view>
+        </view>
+        <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+      </scroll-view>
+    </view>
+    <view class="scrollContainer" hidden="{{ currentGoodsType != 10 }}">
+      <scroll-view class="newAppointment myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+        <view class="newAppointment-list-wrap" wx:for="{{ orderLists }}" wx:key="index">
+          <view class="newAppointment-status">
+            <text wx:if="{{ item.status == 0 }}" >待付款</text>
+            <text wx:elif="{{ item.status == 1 }}" >等待商家确认</text>
+            <text wx:elif="{{ item.status == 2 }}" >待消费</text>
+            <text wx:elif="{{ item.status == 3 }}" >待评价</text>
+            <text wx:elif="{{ item.status == 4 }}" >退款审核中</text>
+            <text wx:elif="{{ item.status == 5 }}" >正在退款中</text>
+            <text wx:elif="{{ item.status == 6 }}" >已完成</text>
+            <text wx:elif="{{ item.status == 7 }}" >已关闭</text>
+          </view>
+          <view class="newAppointment-goods-list" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="newAppoint">
+            <view>
+              <view class='appointment-info'>
+                <image src='{{ item.goods_info[0].cover }}'></image>
+                <view class='des'>
+                  <view class='serve-title'>
+                    <text>{{ item.goods_info[0].goods_name }}</text>
+                    <view class='ico-moon icon-rightarrow'></view>
+                  </view>
+                  <view class='section'>
+                     <view class='area' wx:for="{{item.newAppointmentData.serveInfo}}" wx:for-item="wrap" wx:key="index">
+                      <text>{{wrap.label}}：</text>{{wrap.value}}
+                    </view>
+                    <view class="area" wx:if='{{item.newAppointmentData.providerList.length}}'>
+                      <text>{{item.newAppointmentData.providerTitle}}：</text>
+                      <block wx:for='{{item.newAppointmentData.providerList}}' wx:for-item='wrap' wx:key="index">
+                          {{ wrap.name }}
+                      </block>
+                    </view>
+                    <view class='duration'><text>时间：</text>{{item.newAppointmentData.duration}}分钟</view>
+                    <view class='arrival-time'><text>到店时间：</text><text class="{{item.status == 3 || item.status ==6 ?'':'arrival-detail-time'}}">{{item.newAppointmentData.toStoreTime +'-'+ item.newAppointmentData.toStoreTimeEnd}}</text></view>
+                    <view class='price'><text>价格：</text>￥ {{ item.goods_info[0].price }} x {{ item.goods_info[0].num }}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="newAppointment-list-bottom" wx:if="{{ item.status == 0 }}">
+            <text class="btn myOrder-pay-directly" bindtap="goToOrderDetail" data-type="newAppoint" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">支付</text>
+          </view>
+          <view class="newAppointment-list-bottom" wx:elif="{{ item.status == 1 }}">
+            <text class="btn myOrder-verification-code" bindtap="toSeeQrcode" data-enddate="{{item.newAppointmentData.endDate}}" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"><text class='ico-moon icon-new-appointment-qrcode'></text>查看券码</text>
+          </view>
+          <view class="newAppointment-list-bottom" wx:elif="{{ item.status == 2 }}">
+            <text class="btn myOrder-verification-code" bindtap="toSeeQrcode" data-enddate="{{item.newAppointmentData.endDate}}" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"><text class='ico-moon icon-new-appointment-qrcode'></text>查看券码</text>
+          </view>
+          <view class="newAppointment-list-bottom grade" wx:elif="{{ item.status == 3 }}">
+            <view>
+              <view wx:for="{{[1,2,3,4,5]}}" wx:key="index" class="ico-moon icon-star"></view>
+            </view>
+            <text class="btn myOrder-make-comment" bindtap="makeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">评分</text>
+          </view>
+          <view class="newAppointment-list-bottom grade" wx:elif="{{ item.status == 6 }}">
+            <!-- 暂时关闭
+             <view  class="graded">
+              <text>我评</text>
+              <view wx:for="{{[1,2,3,4,5]}}" wx:key="index"  class="ico-moon icon-star {{index < 3?'orange':''}}"></view>
+            </view> -->
+          </view>
+        </view>
+        <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+      </scroll-view>
+    </view>
+    <view class="scrollContainer" hidden="{{ currentGoodsType != 8 }}">
+      <scroll-view class="myOrder-transfer myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+        <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="" data-id="{{ item.order_id }}" data-type="">
+        </view>
+        <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+      </scroll-view>
+    </view>
+    <view class="scrollContainer" hidden="{{ currentGoodsType != 9 }}">
+      <scroll-view class="myOrder-transfer myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+        <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="" data-id="{{ item.order_id }}" data-type="">
+          <view wx:if="{{item.goods_type == '9'}}">
+            <view class="dialog-block-item border-none">
+              <text class="dialog-block-time">{{ item.add_time }}</text>
+              <text wx:if="{{ item.status == 0 }}" class="pull-right myOrder-order-status">待付款</text>
+              <text wx:if="{{ item.status == 1 }}" class="pull-right myOrder-order-status">已付款</text>
+              <text wx:if="{{ item.status == 7 }}" class="pull-right myOrder-order-status">已关闭</text>
+            </view>
+            <view class="paid-card-block" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="ExchangeCoupon">
+              <view class="img-block">
+                <image class="order-img" src="{{ item.goods_info.logo }}" alt="" />
+              </view>
+              <view class="block-right">
+                <view class="block-right-item">
+                  <view class="paid-card-name">{{ item.goods_info.goods_name }}</view>
+                  <view class="paid-card-price">{{ item.goods_info.price }}</view>
+                </view>
+                <view class="block-right-item">
+                  <view class="paid-card-combo">
+                    <text wx:if="{{ item.goods_info.expire }}">{{ item.goods_info.expire }}</text>
+                  </view>
+                  <view class="paid-card-num">x1</view>
+                </view>
+                <view class="total-calculation">合计: 
+                  <text class="price">¥{{ item.total_price }}</text>
+                </view>
+              </view>
+            </view>
+            <view class="myOrder-list-bottom" wx:if="{{ item.status == 0 }}">
+              <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+              <text class="btn btn-orange myOrder-pay-directly" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"  data-type="transfer">支付</text>
+            </view>
+            <view class="myOrder-list-bottom" wx:if="{{ item.status == 1 }}">
+              <text  wx:if="{{item.coupon_type == 6 && item.un_verify_times != 0  && item.can_verify == 1}}" class="btn btn-grey myOrder-pay-directly" bindtap="goToUseStamps" data-franchisee="{{ item.app_id }}" data-couponId="{{ item.user_coupon_id }}"  data-type="transfer" data-untimes="{{item.un_verify_times}}">核销码</text>
+            </view>
+            <view class="paid-card-bottom" wx:if="{{ item.status != 1 &&  item.status != 0}}">
+              <view class="order-id">订单号: {{ item.buyer_id }}</view>
+            </view>
+          </view>
+          <view wx:if="{{item.goods_type == '8'}}">
+            <view class="dialog-block-item border-none">
+              <text>{{ item.add_time }}</text>
+              <text wx:if="{{ item.status == 0 }}" class="pull-right myOrder-order-status">待付款</text>
+              <text wx:if="{{ item.status == 1 }}" class="pull-right myOrder-order-status">已付款</text>
+              <text wx:elif="{{ item.status == 7 }}" class="pull-right myOrder-order-status">已关闭</text>
+            </view>
+            <view class="paid-card-block">
+              <view class="img-block">
+                <image class="order-img" src="{{ item.goods_info.cover }}" alt="" />
+              </view>
+              <view class="block-right">
+                <view class="block-right-item">
+                  <view class="paid-card-name">{{ item.goods_info.goods_name }}</view>
+                  <view class="paid-card-price">{{ item.goods_info.price }}</view>
+                </view>
+                <view class="block-right-item">
+                  <view class="paid-card-combo">
+                    <text wx:if="{{ item.goods_info.num > 1 }}">{{ item.goods_info.cNum }}个月组合套餐</text>
+                  </view>
+                  <view class="paid-card-num">x{{ item.goods_info.num }}</view>
+                </view>
+                <view class="total-calculation">合计: 
+                  <text class="price">¥{{ item.total_price }}</text>
+                </view>
+              </view>
+            </view>
+            <view class="myOrder-list-bottom" wx:if="{{ item.status == 0 }}">
+              <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+              <text class="btn btn-orange myOrder-pay-directly" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"  data-type="transfer">支付</text>
+            </view>
+            <view class="paid-card-bottom" wx:if="{{ item.status != 0 }}">
+              <view class="order-id">订单号: {{ item.buyer_id }}</view>
+            </view>
+          </view>
+        </view>
+        <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+      </scroll-view>
+    </view>
+    <!-- 社区团购 -->
+    <view class="scrollContainer" hidden="{{ currentGoodsType != 21 }}">
+      <scroll-view class="myOrder-ebusiness myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+        <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="">
+          <view class="dialog-block-item">
+            <text class="cash-delivery" wx:if="{{item.is_pay_on_delivery == 1}}">货到付款</text><text class="add-time">{{ item.add_time }}</text>
+            <text wx:if="{{ item.status == 0 }}" class="pull-right myOrder-order-status">待付款</text>
+            <text wx:elif="{{ item.status == 1 }}" class="pull-right myOrder-order-status">待发货</text>
+            <text wx:elif="{{ item.status == 2 }}" class="pull-right myOrder-order-status">配送中</text>
+            <text wx:elif="{{ item.status == 3 }}" class="pull-right myOrder-order-status">待评价</text>
+            <text wx:elif="{{ item.status == 4 }}" class="pull-right myOrder-order-status">{{item.is_pay_on_delivery == 1 ? '审核中' : '退款审核中'}}</text>
+            <text wx:elif="{{ item.status == 5 }}" class="pull-right myOrder-order-status">正在退款中</text>
+            <text wx:elif="{{ item.status == 6 }}" class="pull-right myOrder-order-status">已完成</text>
+            <text wx:elif="{{ item.status == 7 }}" class="pull-right myOrder-order-status">已关闭</text>
+            <text wx:elif="{{ item.status == 10 }}" class="pull-right myOrder-order-status">待提货</text>
+          </view>
+          <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+          <view class="myOrder-goods-list" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="communityGroup">
+            <view wx:for="{{ item.goods_info }}" wx:for-item="goods" wx:key="">
+              <view class="dialog-block-item">
+                <image class="myOrder-goods-cover" src="{{ goods.cover }}"></image>
+                <view class="myOrder-goods-title"><text wx:if="{{ goods.is_benefit_goods }}" class="goods-gift">赠品</text>{{ goods.goods_name }}</view>
+                <view wx:if="{{ !goods.is_benefit_goods }}" class="myOrder-goods-right">
+                  <view><text class="myOrder-goods-price" wx:if="{{goods.price !='0.00'}}">¥ {{ goods.price }}</text><text wx:if="{{goods.use_integral && goods.use_integral != 0 && goods.price !='0.00'}}">+</text><text wx:if="{{goods.use_integral}}">{{goods.use_integral}}积分</text></view>
+                  <view>×<text class="myOrder-goods-count">{{ goods.num }}</text></view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="dialog-block-item myOrder-total-item">
+            <text>合计：<text class="myOrder-pay-price">¥ {{ item.original_price }}</text></text>
+          </view>
+          <view class="myOrder-list-bottom" wx:if="{{ item.status == 0 }}">
+            <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+            <text class="btn btn-orange myOrder-pay-directly" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="communityGroup">支付</text>
+          </view>
+          <view class="myOrder-list-bottom" wx:elif="{{ item.status == 1 }}">
+            <!-- <text wx:if="{{ item.is_pay_on_delivery == 1 }}" class="btn myOrder-cancel-order" data-delivery="{{item.is_pay_on_delivery}}" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text> -->
+            <!-- <text class="btn myOrder-cancel-order" data-delivery="{{item.is_pay_on_delivery}}" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">{{item.is_pay_on_delivery == 1 ? '取消订单' : '申请退款'}}</text> -->
+          </view>
+          <view class="myOrder-list-bottom" wx:elif="{{ item.status == 2 }}">
+            <!-- <text wx:if="{{ item.is_pay_on_delivery == 1 }}" class="btn myOrder-cancel-order" data-delivery="{{item.is_pay_on_delivery}}" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text> -->
+            <!-- <text class="btn btn-orange myOrder-sure-receipt" bindtap="sureReceipt" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">确认收货</text> -->
+            <!-- <text class="btn myOrder-cancel-order" data-delivery="{{item.is_pay_on_delivery}}" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">{{item.is_pay_on_delivery == 1 ? '取消订单' : '申请退款'}}</text> -->
+          </view>
+          <view class="myOrder-list-bottom" wx:elif="{{ item.status == 3 }}">
+            <!-- <text class="btn myOrder-check-logistics" bindtap="checkLogistics" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" wx:if="{{ item.is_self_delivery == 0}}" >查看物流</text> -->
+            <text class="btn btn-orange myOrder-make-comment" bindtap="makeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">去评价</text>
+          </view>
+          <view class="myOrder-list-bottom" wx:elif="{{ item.status == 10 }}">
+            <!-- <text class="btn myOrder-cancel-order" data-delivery="{{item.is_pay_on_delivery}}" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">{{item.is_pay_on_delivery == 1 ? '取消订单' : '申请退款'}}</text> -->
+            <text class="btn myOrder-verification-code" bindtap="getWriteOffCodeBox" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">核销码</text>
+            <text class="btn btn-orange myOrder-sure-receipt" bindtap="sureReceipt" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">确认收货</text>
+          </view>
+        </view>
+        <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+      </scroll-view>
+    </view>
+  </view>
+  <view class="myOrder-content-body lengthOneBody" wx:elif="{{ goodsTypeList.length == 1 }}" >
+    <block wx:if="{{ currentGoodsType == 2 }}">
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 0 }}">
+        <scroll-view class="myOrder-takeout myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" style="margin-bottom: 16rpx;{{ item.status == 3 || item.status == 1 ? 'padding-bottom:0rpx;' : ''}}" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="takeout">
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list">
+              <view wx:for="{{ item.goods_info }}" wx:key="" wx:for-item="goods" wx:if="{{ index == 0 }}">
+                <view class="dialog-block-item">
+                  <image class="myOrder-goods-cover" src="{{ takeoutInfo.cover }}" mode="aspectFill"></image>
+                  <view class="myOrder-takeout-Info">
+                    <view style="font-size: 30rpx;font-weight: 400;height: 30rpx;">{{ takeoutInfo.title }}
+                      <text wx:if="{{ item.status == 0 }}" class="takeout-order-status pull-right" style="font-size:26rpx;font-weight: normal;color；#ff7100;" >待付款</text>
+                      <text wx:elif="{{ item.status == 8 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">待接单</text>
+                      <text wx:elif="{{ item.status == 1 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">待配送</text>
+                      <text wx:elif="{{ item.status == 2 && (item.take_out_info.deliver_type == 0 || item.take_out_info.deliver_type == '') }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">配送中</text>
+                      <text wx:elif="{{ item.status == 2 && (item.take_out_info.deliver_type == 3 || item.take_out_info.deliver_type == 1)}}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">{{transportStatus[item.take_out_transport_order.status]}}</text>
+                      <text wx:elif="{{ item.status == 3 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">待评价</text>
+                      <text wx:elif="{{ item.status == 4 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal; color:#F2303E;" >退款审核中</text>
+                      <text wx:elif="{{ item.status == 5 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;color:#F2303E;">正在退款中</text>
+                      <text wx:elif="{{ item.status == 6 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">已完成</text>
+                      <text wx:elif="{{ item.status == 7 }}" class="takeout-order-status pull-right" style="font-size: 26rpx;font-weight: normal;">已关闭</text></view>
+                    <view style="font-size: 22rpx;margin-top: 12rpx;margin-bottom:32rpx;color: #999;">{{ item.add_time }}</view>
+                  </view>
+                  <map wx:if="{{item.transport && item.transport.statusCode >= 2}}" catchtap="mapDetail" data-lat="{{item.transport.transporterLat}}" data-lng="{{item.transport.transporterLng}}" style="margin: 10rpx auto;" longitude="{{item.transport.transporterLng}}" latitude="{{item.transport.transporterLat}}" scale="18" markers="{{marker}}" show-location="{{true}}"></map>
+                  <view class="takeout-goods-detail">
+                    <view class="myOrder-takeout-title">{{ goods.goods_name + (goodsNum > 1 ? '等': ' ')+goodsNum}}件商品<text class="pull-right" style="font-weight: 500;color: #333;"><text style="margin: 0 3px;font-size: 22rpx;font-weight: normal;">¥</text>{{ item.total_price }}</text></view>
+                  </view>
+                  <view wx:if="{{ item.status == 0 }}" style="text-align: right;">
+                    <text class="btn myOrder-apply-drawback" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;margin-right:23rpx;">取消订单</text>
+                    <text class="btn btn-orange myOrder-make-comment" catchtap="payOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-price="{{item.total_price}}" style="padding: 0px 10px;font-size: 24rpx;">去支付</text>
+                  </view>
+                  <view class="myOrder-list-bottom" wx:if="{{ (item.status == 1 && !item.take_out_info.transport_shop_id) || item.status == 8}}">
+                    <!-- <text class="btn myOrder-apply-drawback" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:12px;border-radius: 4px;">申请退款</text> -->
+                    <text class="btn myOrder-apply-drawback" catchtap="toCancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-deliver="{{item.take_out_info.deliver_type}}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;">取消订单</text>
+                  </view>
+                  <view wx:if="{{ item.status == 3 }}" style="text-align: right;">
+                    <text class="btn myOrder-apply-drawback" catchtap="orderDelete" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;margin-right:16rpx;">删除订单</text>
+                    <!-- <text class="btn myOrder-apply-drawback" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:12px;border-radius: 4px;" wx:if="{{!item.timeDiff}}">申请退款</text> -->
+                    <text class="btn btn-orange myOrder-make-comment" catchtap="takeoutMakeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding: 0px 10px;font-size: 24rpx;">去评价</text>
+                  </view>
+                  <view wx:if="{{ item.status == 4 }}" style="text-align: right;">
+                    <text class="btn myOrder-apply-drawback" catchtap="cancelRefund" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;">撤销申请</text>
+                  </view>
+                  <view wx:if="{{ item.status == 5 }}" style="text-align: right;">
+                    <text class="btn myOrder-apply-drawback" catchtap="receiveDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;">收到退款</text>
+                  </view>
+                  <view wx:if="{{ item.status == 6 || item.status == 7}}" style="text-align: right;">
+                    <text class="btn myOrder-apply-drawback" catchtap="orderDelete" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:24rpx;border-radius: 4px;">删除订单</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 1 }}">
+        <scroll-view class="myOrder-takeout myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" style="margin-bottom: 16rpx;{{ item.status == 3 || item.status == 1 ? 'padding-bottom:0rpx;' : ''}}" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="takeout">
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list">
+              <view wx:for="{{ item.goods_info }}" wx:key="" wx:for-item="goods" wx:if="{{ index == 0 }}">
+                <view class="dialog-block-item">
+                  <image class="myOrder-goods-cover" src="{{ takeoutInfo.cover }}" mode="aspectFill"></image>
+                  <view class="myOrder-takeout-Info">
+                    <view style="font-size: 30rpx;font-weight: 400;height: 30rpx;">{{ takeoutInfo.title }}
+                      <text class="takeout-order-status pull-right" style="font-size:26rpx;font-weight: normal;">待付款</text>
+                    </view>
+                    <view style="font-size: 22rpx;margin-top: 12rpx;margin-bottom:32rpx;">{{ item.add_time }}</view>
+                  </view>
+                  <map wx:if="{{item.transport  && item.transport.statusCode >= 2}}" catchtap="mapDetail" data-lat="{{item.transport.transporterLat}}" data-lng="{{item.transport.transporterLng}}" style="margin: 10rpx auto;" longitude="{{item.transport.transporterLng}}" latitude="{{item.transport.transporterLat}}"
+                    scale="18" markers="{{marker}}" show-location="{{true}}"></map>
+                  <view class="takeout-goods-detail">
+                    <view class="myOrder-takeout-title">{{ goods.goods_name + (goodsNum > 1 ? '等': '')+goodsNum}}件商品<text class="pull-right" style="font-weight: 500;color: #333;"><text style="margin: 0 3px;font-size: 22rpx;font-weight: normal;">¥</text>{{ item.total_price }}</text></view>
+                  </view>
+                  <view class="myOrder-list-bottom" wx:if="{{ item.status == 1 }}">
+                    <text class="btn myOrder-apply-drawback" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:12px;border-radius: 4px;" wx:if="{{!item.timeDiff}}">申请退款</text>
+                  </view>
+                  <view wx:if="{{ item.status == 3 }}" style="text-align: right;"><text class="btn btn-orange myOrder-make-comment" catchtap="takeoutMakeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding: 0px 10px;font-size: 24rpx;">立即评价</text></view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 2 }}">
+        <scroll-view class="myOrder-takeout myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" style="margin-bottom: 16rpx;{{ item.status == 3 || item.status == 1 ? 'padding-bottom:0rpx;' : ''}}" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="takeout">
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list">
+              <view wx:for="{{ item.goods_info }}" wx:key="" wx:for-item="goods" wx:if="{{ index == 0 }}">
+                <view class="dialog-block-item">
+                  <image class="myOrder-goods-cover" src="{{ takeoutInfo.cover }}" mode="aspectFill"></image>
+                  <view class="myOrder-takeout-Info">
+                    <view style="font-size: 30rpx;font-weight: 400;height: 30rpx;">{{ takeoutInfo.title }}
+                      <text class="takeout-order-status pull-right" style="font-size:26rpx;font-weight: normal;">已完成</text></view>
+                    <view style="font-size: 22rpx;margin-top: 12rpx;margin-bottom:32rpx;">{{ item.add_time }}</view>
+                  </view>
+                  <map wx:if="{{item.transport && item.transport.statusCode >= 2}}" catchtap="mapDetail" data-lat="{{item.transport.transporterLat}}" data-lng="{{item.transport.transporterLng}}" style="margin: 10rpx auto;" longitude="{{item.transport.transporterLng}}" latitude="{{item.transport.transporterLat}}"
+                    scale="18" markers="{{marker}}" show-location="{{true}}"></map>
+                  <view class="takeout-goods-detail 1">
+                    <view class="myOrder-takeout-title">{{ goods.goods_name + (goodsNum > 1 ? '等': '')+goodsNum}}件商品<text class="pull-right" style="font-weight: 500;color: #333;"><text style="margin: 0 3px;font-size: 22rpx;font-weight: normal;">¥</text>{{ item.total_price }}</text></view>
+                  </view>
+                  <view class="myOrder-list-bottom" wx:if="{{ item.status == 1 }}">
+                    <text class="btn myOrder-apply-drawback" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:12px;border-radius: 4px;" wx:if="{{!item.timeDiff}}">申请退款</text>
+                  </view>
+                  <view wx:if="{{ item.status == 3 }}" style="text-align: right;"><text class="btn btn-orange myOrder-make-comment" catchtap="takeoutMakeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding: 0px 10px;font-size: 24rpx;">立即评价</text></view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 3 }}">
+        <scroll-view class="myOrder-takeout myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" style="margin-bottom: 16rpx;{{ item.status == 3 || item.status == 1 ? 'padding-bottom:0rpx;' : ''}}" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="takeout">
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list">
+              <view wx:for="{{ item.goods_info }}" wx:key="" wx:for-item="goods" wx:if="{{ index == 0 }}">
+                <view class="dialog-block-item">
+                  <image class="myOrder-goods-cover" src="{{ takeoutInfo.cover }}" mode="aspectFill"></image>
+                  <view class="myOrder-takeout-Info">
+                    <view style="font-size: 15px;font-weight: 400;height: 30rpx;">{{ takeoutInfo.title }}
+                      <text class="takeout-order-status pull-right" style="font-size:26rpx;font-weight: normal;">已关闭</text></view>
+                    <view style="font-size: 22rpx;margin-top: 12rpx;margin-bottom:32rpx;" class="dialog-block-time">{{ item.add_time }}</view>
+                  </view>
+                  <map wx:if="{{item.transport && item.transport.statusCode >= 2}}" catchtap="mapDetail" data-lat="{{item.transport.transporterLat}}" data-lng="{{item.transport.transporterLng}}" data-lat="{{item.transport.transporterLat}}" data-lng="{{item.transport.transporterLng}}" style="margin: 10rpx auto;" longitude="{{item.transport.transporterLng}}" latitude="{{item.transport.transporterLat}}"
+                    scale="18" markers="{{marker}}" show-location="{{true}}"></map>
+                  <view class="takeout-goods-detail">
+                    <view class="myOrder-takeout-title">{{ goods.goods_name + (goodsNum > 1 ? '等': '')+goodsNum}}件商品<text class="pull-right" style="font-weight: 500;color: #333;"><text style="margin: 0 3px;font-size: 22rpx;font-weight: normal;">¥</text>{{ item.total_price }}</text></view>
+                  </view>
+                  <view class="myOrder-list-bottom" wx:if="{{ item.status == 1 }}">
+                    <text class="btn myOrder-apply-drawback" catchtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding:1px 10px;font-size:12px;border-radius: 4px;" wx:if="{{!item.timeDiff}}">申请退款</text>
+                  </view>
+                  <view wx:if="{{ item.status == 3 }}" style="text-align: right;"><text class="btn btn-orange myOrder-make-comment" catchtap="takeoutMakeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" style="padding: 0px 10px;font-size: 24rpx;">立即评价</text></view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+    </block>
+    <block wx:elif="{{ currentGoodsType == 3 }}">
+      <view class="scrollContainer">
+        <scroll-view class="myOrder-tostore myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="tostore">
+            <view class="dialog-block-item myOrder-tostore-top tostore-see-detail">
+              <text class="dialog-block-time">下单时间: {{ item.add_time }}</text>
+              <text class="pull-right">查看详情</text>
+            </view>
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list">
+              <view wx:for="{{ item.goods_info }}" wx:key="" wx:for-item="goods" wx:if="{{ index == 0 }}">
+                <view class="dialog-block-item">
+                  <image class="myOrder-goods-cover" src="{{ goods.cover }}" mode="aspectFill"></image>
+                  <view class="tostore-goods-detail">
+                    <view class="myOrder-tostore-title">
+                      <view style="font-size: 28rpx;">{{ goods.goods_name }}</view>
+                      <view wx:if="{{ goods.model_value.length}}" style="color: #999;margin-top: 8rpx;">
+                        <view wx:for="{{ goods.model_name }}" wx:key="">{{ item }} : {{ goods.model_value[index] }}</view>
+                      </view>
+                    </view>
+                    <view class="tostorePrice-num">
+                      <view style="font-size: 30rpx">
+                        <block wx:if="{{goods.use_integral == 0}}">
+                          <text class="myOrder-goods-price">¥ {{ goods.price }}</text>
+                        </block>
+                        <block wx:else>
+                          <text wx:if="{{goods.price !='0.00' || !goods.use_integral || (goods.use_integral == 0)}}">¥ {{ goods.price }}</text>
+                          <text wx:if="{{goods.use_integral && goods.use_integral != 0 && goods.price !='0.00'}}">+</text>
+                          <text wx:if="{{goods.use_integral}}">{{goods.use_integral}}积分</text>
+                        </block>
+                      </view>
+                      <view style="color: #999;">×{{ goods.num }}</view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="myOrder-tostore-bottom">
+              <label wx:if="{{ item.tostore_data.formatted_queue_num }}" class="pull-left">取餐号：<text>{{ item.tostore_data.formatted_queue_num }}</text></label>
+              <text class="myOrder-list-count">共{{ item.goods_num }}件</text>
+              <block wx:if="{{item.is_integral != '1'}}">
+                <text>¥ {{ item.total_price }}</text>
+              </block>
+              <block wx:else>
+              <text wx:if="{{(item.original_price != '0.00' && item.original_price != 0) || !item.total_integral || item.total_integral == 0}}">¥ {{ item.original_price }}</text>
+              <text wx:if="{{item.original_price != '0.00' && item.original_price != 0 && item.total_integral && item.total_integral != 0}}">+</text>
+              <text wx:if="{{item.total_integral && item.total_integral != 0}}">{{item.total_integral}}积分</text>
+              </block>
+              <text wx:if="{{ item.status == 0 }}" class="tostore-order-status">待付款</text>
+              <text wx:elif="{{ item.status == 1 }}" class="tostore-order-status">等待商家确认</text>
+              <text wx:elif="{{ item.status == 2 }}" class="tostore-order-status">商家已确认</text>
+               <text wx:elif="{{ item.status == 3 }}" class="tostore-order-status">待评价</text> 
+              <text wx:elif="{{ item.status == 4 }}" class="tostore-order-status">退款审核中</text>
+              <text wx:elif="{{ item.status == 5 }}" class="tostore-order-status">正在退款中</text>
+              <text wx:elif="{{ item.status == 6 }}" class="tostore-order-status">已完成</text>
+              <text wx:elif="{{ item.status == 7 }}" class="tostore-order-status">已关闭</text>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+    </block>
+    <block wx:elif="{{ currentGoodsType == 5 }}">
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 0 }}">
+        <scroll-view class="myOrder-transfer myOrder-all myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="transfer">
+            <view class="dialog-block-item">
+              <text class="dialog-block-time">{{ item.add_time }}</text>
+              <text wx:if="{{ item.status == 0 }}" class="pull-right myOrder-order-status">待支付</text>
+              <text wx:elif="{{ item.status == 6 }}" class="pull-right myOrder-order-status">已完成</text>
+              <text wx:elif="{{ item.status == 7 }}" class="pull-right myOrder-order-status">已关闭</text>
+            </view>
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list">
+              <view wx:for="{{ item.goods_info }}" wx:key="" wx:for-item="goods" wx:if="{{ index == 0 }}">
+                <view class="dialog-block-item">
+                  <!-- <view class="myOrder-goods-cover transfer-order-cover"><span class="ico-moon icon-store"></span></view> -->
+                  <view class="myOrder-goods-cover transfer-order-cover">
+                    <image src="{{ item.app_info.app_logo }}"></image>
+                  </view>
+                  <view class="myOrder-goods-title">当面付订单</view>
+                  <view class="myOrder-goods-right">
+                    <view>¥ <text class="myOrder-goods-price">{{ goods.price }}</text></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="myOrder-list-bottom" wx:if="{{ item.status == 0 }}">
+              <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+              <text class="btn myOrder-pay-directly" catchtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"  data-type="transfer">支付</text>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 1 }}">
+        <scroll-view class="myOrder-transfer myOrder-toPay myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="transfer">
+            <view class="dialog-block-item">
+              <text>{{ item.add_time }}</text>
+              <text class="pull-right myOrder-order-status">待支付</text>
+            </view>
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list">
+              <view wx:for="{{ item.goods_info }}" wx:key="" wx:for-item="goods" wx:if="{{ index == 0 }}">
+                <view class="dialog-block-item">
+                  <!-- <view class="myOrder-goods-cover transfer-order-cover"><span class="ico-moon icon-store"></span></view> -->
+                  <view class="myOrder-goods-cover transfer-order-cover">
+                    <image src="{{ item.app_info.app_logo }}"></image>
+                  </view>
+                  <view class="myOrder-goods-title">当面付订单</view>
+                  <view class="myOrder-goods-right">
+                    <view>¥ <text class="myOrder-goods-price">{{ goods.price }}</text></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="myOrder-list-bottom">
+              <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+              <text class="btn myOrder-pay-directly" catchtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"  data-type="transfer">支付</text>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 2 }}">
+        <scroll-view class="myOrder-transfer myOrder-complete myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="transfer">
+            <view class="dialog-block-item">
+              <text>{{ item.add_time }}</text>
+              <text class="pull-right myOrder-order-status">已完成</text>
+            </view>
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list">
+              <view wx:for="{{ item.goods_info }}" wx:key="" wx:for-item="goods" wx:if="{{ index == 0 }}">
+                <view class="dialog-block-item">
+                  <!-- <view class="myOrder-goods-cover transfer-order-cover"><span class="ico-moon icon-store"></span></view> -->
+                  <view class="myOrder-goods-cover transfer-order-cover">
+                    <image src="{{ item.app_info.app_logo }}"></image>
+                  </view>
+                  <view class="myOrder-goods-title">当面付订单</view>
+                  <view class="myOrder-goods-right">
+                    <view>¥ <text class="myOrder-goods-price">{{ goods.price }}</text></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <!-- <view class="myOrder-list-bottom"></view> -->
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 3 }}">
+        <scroll-view class="myOrder-transfer myOrder-closed myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="transfer">
+            <view class="dialog-block-item">
+              <text class="dialog-block-time">{{ item.add_time }}</text>
+              <text class="pull-right myOrder-order-status">已关闭</text>
+            </view>
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list">
+              <view wx:for="{{ item.goods_info }}" wx:key="" wx:for-item="goods" wx:if="{{ index == 0 }}">
+                <view class="dialog-block-item">
+                  <!-- <view class="myOrder-goods-cover transfer-order-cover"><span class="ico-moon icon-store"></span></view> -->
+                  <view class="myOrder-goods-cover transfer-order-cover">
+                    <image src="{{ item.app_info.app_logo }}"></image>
+                  </view>
+                  <view class="myOrder-goods-title">当面付订单</view>
+                  <view class="myOrder-goods-right">
+                    <view>¥ <text class="myOrder-goods-price">{{ goods.price }}</text></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <!-- <view class="myOrder-list-bottom"></view> -->
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+    </block>
+    <block wx:elif="{{ currentGoodsType == 6 }}">
+      <view class="scrollContainer">
+        <scroll-view class="myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap row-number-box" wx:for="{{ orderLists }}" wx:key="" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="rowNumber">
+            <view class="take-num-time">
+              <text>取号时间：{{ item.add_time }}</text>
+              <text class="pull-right ico-moon icon-rightarrow"></text>
+            </view>
+            <view class="myOrder-row-number-shop"><image src="{{ item.app_info.app_logo }}"></image><text>{{ item.app_info.app_name }}</text></view>
+            <view class="row-num-content"><text class="ico-moon icon-mine-row-number"></text>我的排号：{{ item.line_up_data.queue_num_name }}</view>
+            <view class="row-num-content"><text class="ico-moon icon-row-number-type"></text>排号类型：{{ item.line_up_data.line_up_type_data.name }}</view>
+            <view class="row-num-content last-row-num-content"><text class="ico-moon icon-row-number-wait"></text>预计等待：{{ item.line_up_data.prepare_wait_time > 0 ? (item.line_up_data.prepare_wait_time > toStoreSetting.max_display_time ? '>' + toStoreSetting.max_display_time : item.line_up_data.prepare_wait_time) + '分钟' : '无需等待' }}</view>
+            <view class="myOrder-rowNum-bottom">
+              <text class="myOrder-list-price"><text class="ico-moon icon-row-number-fee"></text>排号费：¥ {{ item.original_price }}</text>
+              <text wx:if="{{ item.status == 0 }}" class="rowNum-order-status">待付款</text>
+              <text wx:elif="{{ item.status == 2 }}" class="rowNum-order-status">待使用</text>
+              <text wx:elif="{{ item.status == 4 }}" class="rowNum-order-status">退款申请中</text> 
+              <text wx:elif="{{ item.status == 5 }}" class="rowNum-order-status">退款中</text> 
+              <text wx:elif="{{ item.status == 6 }}" class="rowNum-order-status used-rowNum-order">已使用</text>
+              <text wx:elif="{{ item.status == 7 }}" class="rowNum-order-status">已失效</text>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+    </block>
+    <block wx:elif="{{ currentGoodsType == 10 }}">
+      <scroll-view class="newAppointment myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+        <view class="newAppointment-list-wrap" wx:for="{{ orderLists }}" wx:key="index">
+          <view class="newAppointment-status">
+            <text wx:if="{{ item.status == 0 }}" >待付款</text>
+            <text wx:elif="{{ item.status == 1 }}" >等待商家确认</text>
+            <text wx:elif="{{ item.status == 2 }}" >待消费</text>
+            <text wx:elif="{{ item.status == 3 }}" >待评价</text>
+            <text wx:elif="{{ item.status == 4 }}" >退款审核中</text>
+            <text wx:elif="{{ item.status == 5 }}" >正在退款中</text>
+            <text wx:elif="{{ item.status == 6 }}" >已完成</text>
+            <text wx:elif="{{ item.status == 7 }}" >已关闭</text>
+          </view>
+          <view class="newAppointment-goods-list" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="newAppoint">
+            <view>
+              <view class='appointment-info'>
+                <image src='{{ item.goods_info[0].cover }}'></image>
+                <view class='des'>
+                  <view class='serve-title'>
+                    <text>{{ item.goods_info[0].goods_name }}</text>
+                    <view class='ico-moon icon-rightarrow'></view>
+                  </view>
+                  <view class='section'>
+                    <view class='area' wx:for="{{item.newAppointmentData.serveInfo}}" wx:for-item="wrap" wx:key="index">
+                      <text>{{wrap.label}}：</text>{{wrap.value}}
+                    </view>
+                    <view class="area" wx:if='{{item.newAppointmentData.providerList.length}}'>
+                      <text>{{item.newAppointmentData.providerTitle}}：</text>
+                      <block wx:for='{{item.newAppointmentData.providerList}}' wx:for-item='wrap' wx:key="index">
+                          {{ wrap.name }}
+                      </block>
+                    </view>
+                    <view class='duration'><text>时间：</text>{{item.newAppointmentData.duration}}分钟</view>
+                    <view class='arrival-time'><text>到店时间：</text><text class="{{item.status == 3 || item.status ==6 ?'':'arrival-detail-time'}}">{{item.newAppointmentData.toStoreTime +'-'+ item.newAppointmentData.toStoreTimeEnd}}</text></view>
+                    <view class='price'><text>价格：</text>￥ {{ item.goods_info[0].price }} x {{ item.goods_info[0].num }}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="newAppointment-list-bottom" wx:if="{{ item.status == 0 }}">
+            <text class="btn myOrder-pay-directly" bindtap="goToOrderDetail" data-type="newAppoint" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">支付</text>
+          </view>
+          <view class="newAppointment-list-bottom" wx:elif="{{ item.status == 1 }}">
+            <text class="btn myOrder-verification-code" bindtap="toSeeQrcode" data-enddate="{{item.newAppointmentData.endDate}}" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"><text class='ico-moon icon-new-appointment-qrcode'></text>查看券码</text>
+          </view>
+          <view class="newAppointment-list-bottom" wx:elif="{{ item.status == 2 }}">
+            <text class="btn myOrder-verification-code" bindtap="toSeeQrcode" data-enddate="{{item.newAppointmentData.endDate}}" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"><text class='ico-moon icon-new-appointment-qrcode'></text>查看券码</text>
+          </view>
+          <view class="newAppointment-list-bottom grade" wx:elif="{{ item.status == 3 }}">
+            <view>
+              <view wx:for="{{[1,2,3,4,5]}}" wx:key="index" class="ico-moon icon-star"></view>
+            </view>
+            <text class="btn myOrder-make-comment" bindtap="makeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">评分</text>
+          </view>
+          <view class="newAppointment-list-bottom grade" wx:elif="{{ item.status == 6 }}">
+            <!-- 暂时关闭
+             <view  class="graded">
+              <text>我评</text>
+              <view wx:for="{{[1,2,3,4,5]}}" wx:key="index" class="ico-moon icon-star {{index < 3?'orange':''}}"></view>
+            </view> -->
+          </view>
+        </view>
+        <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+      </scroll-view>
+    </block>
+    <block wx:elif="{{ currentGoodsType == 8 }}">
+      <view class="scrollContainer">
+        <scroll-view class="myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="" data-id="{{ item.order_id }}" data-type="">
+            <view class="dialog-block-item border-none">
+              <text>{{ item.add_time }}</text>
+              <text wx:if="{{ item.status == 0 }}" class="pull-right myOrder-order-status">待付款</text>
+              <text wx:if="{{ item.status == 1 }}" class="pull-right myOrder-order-status">已付款</text>
+              <text wx:elif="{{ item.status == 7 }}" class="pull-right myOrder-order-status">已关闭</text>
+            </view>
+            <view class="paid-card-block">
+              <view class="img-block">
+                <image class="order-img" src="{{item.goods_info.cover}}" alt="" />
+              </view>
+              <view class="block-right">
+                <view class="block-right-item">
+                  <view class="paid-card-name">{{ item.goods_info.goods_name }}</view>
+                  <view class="paid-card-price">{{ item.goods_info.price }}</view>
+                </view>
+                <view class="block-right-item">
+                  <view class="paid-card-combo">
+                    <text wx:if="{{ item.goods_info.num > 1 }}">{{ item.goods_info.cNum }}个月组合套餐</text>
+                  </view>
+                  <view class="paid-card-num">x{{ item.goods_info.num }}</view>
+                </view>
+                <view class="total-calculation">合计: 
+                  <text class="price">¥{{ item.total_price }}</text>
+                </view>
+              </view>
+            </view>
+            <view class="myOrder-list-bottom" wx:if="{{ item.status == 0 }}">
+              <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+              <text class="btn btn-orange myOrder-pay-directly" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"  data-type="transfer">支付</text>
+            </view>
+            <view class="paid-card-bottom" wx:if="{{ item.status != 0 }}">
+              <view class="order-id">订单号: {{ item.buyer_id }}</view>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+    </block>
+    <block wx:elif="{{ currentGoodsType == 9 }}">
+      <view class="scrollContainer">
+        <scroll-view class="myOrder-content-container" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="" data-id="{{ item.order_id }}" data-type="">
+            <view  wx:if="{{item.goods_type == '9'}}">
+              <view class="dialog-block-item border-none">
+              <text class="dialog-block-time">{{ item.add_time }}</text>
+              <text wx:if="{{ item.status == 0 }}" class="pull-right myOrder-order-status">待付款</text>
+              <text wx:if="{{ item.status == 1 }}" class="pull-right myOrder-order-status">已付款</text>
+              <text wx:if="{{ item.status == 7 }}" class="pull-right myOrder-order-status">已关闭</text>
+              </view>
+              <view class="paid-card-block" bindtap="goToOrderDetail"  data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="ExchangeCoupon">
+                <view class="img-block">
+                  <image class="order-img" src="{{item.goods_info.logo}}" alt="" />
+                </view>
+                <view class="block-right">
+                  <view class="block-right-item">
+                    <view class="paid-card-name">{{ item.goods_info.goods_name }}</view>
+                    <view class="paid-card-price">{{ item.goods_info.price }}</view>
+                  </view>
+                  <view class="block-right-item">
+                    <view class="paid-card-combo">
+                      <text wx:if="{{ item.goods_info.expire }}">{{ item.goods_info.expire }}</text>
+                    </view>
+                    <view class="paid-card-num">x1</view>
+                  </view>
+                  <view class="total-calculation">合计: 
+                    <text class="price">¥{{ item.total_price }}</text>
+                  </view>
+                </view>
+              </view>
+              <view class="myOrder-list-bottom" wx:if="{{ item.status == 0 }}">
+                <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+                <text class="btn btn-orange myOrder-pay-directly" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"  data-type="transfer">支付</text>
+              </view>
+              <view class="myOrder-list-bottom" wx:if="{{ item.status == 1 }}" >
+                <text class="btn btn-grey myOrder-pay-directly" bindtap="goToUseStamps" data-franchisee="{{ item.app_id }}" data-couponId="{{ item.user_coupon_id }}"  data-type="transfer"  wx:if="{{item.coupon_type == 6 && item.un_verify_times != 0 && item.can_verify == 1}}" data-untimes="{{item.un_verify_times}}">核销码</text>
+              </view>
+              <view class="paid-card-bottom" wx:if="{{ item.status != 1 &&  item.status != 0}}">
+                <view class="order-id">订单号: {{ item.buyer_id }}</view>
+              </view>
+            </view>
+            <view  wx:if="{{item.goods_type == '8'}}">
+              <view class="dialog-block-item border-none">
+                <text>{{ item.add_time }}</text>
+                <text wx:if="{{ item.status == 0 }}" class="pull-right myOrder-order-status">待付款</text>
+                <text wx:if="{{ item.status == 1 }}" class="pull-right myOrder-order-status">已付款</text>
+                <text wx:elif="{{ item.status == 7 }}" class="pull-right myOrder-order-status">已关闭</text>
+              </view>
+              <view class="paid-card-block">
+                <view class="img-block">
+                  <image class="order-img" src="{{item.goods_info.cover}}" alt="" />
+                </view>
+                <view class="block-right">
+                  <view class="block-right-item">
+                    <view class="paid-card-name">{{ item.goods_info.goods_name }}</view>
+                    <view class="paid-card-price">{{ item.goods_info.price }}</view>
+                  </view>
+                  <view class="block-right-item">
+                    <view class="paid-card-combo">
+                      <text wx:if="{{ item.goods_info.num > 1 }}">{{ item.goods_info.cNum }}个月组合套餐</text>
+                    </view>
+                    <view class="paid-card-num">x{{ item.goods_info.num }}</view>
+                  </view>
+                  <view class="total-calculation">合计: 
+                    <text class="price">¥{{ item.total_price }}</text>
+                  </view>
+                </view>
+              </view>
+              <view class="myOrder-list-bottom" wx:if="{{ item.status == 0 }}">
+                <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+                <text class="btn btn-orange myOrder-pay-directly" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}"  data-type="transfer">支付</text>
+              </view>
+              <view class="paid-card-bottom" wx:if="{{ item.status != 0 }}">
+                <view class="order-id">订单号: {{ item.buyer_id }}</view>
+              </view>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 0 }}">
+        <scroll-view class="myOrder-all myOrder-content-container {{ currentGoodsType == 0 ? 'myOrder-ebusiness': (currentGoodsType == 1 ? 'myOrder-appointment' : '') }}" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="">
+            <view class="dialog-block-item">
+              <text  class="cash-delivery" wx:if="{{item.is_pay_on_delivery == 1}}">货到付款</text><text class="add-time dialog-block-time">{{ item.add_time }}</text>
+              <text style="{{'color:' + storeStyle.theme}}" wx:if="{{ item.status == 0 }}" class="pull-right myOrder-order-status">待付款</text>
+              <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 1 }}" class="pull-right myOrder-order-status">{{ currentGoodsType == 0 ? '待发货' : (currentGoodsType == 1 ? '等待商家确认' : '等待商家接单') }}</text>
+              <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 2 }}" class="pull-right myOrder-order-status">{{ currentGoodsType == 0 ? '待收货' : (currentGoodsType == 1 ? '待消费' : '等待商家送餐') }}</text>
+              <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 3 }}" class="pull-right myOrder-order-status">待评价</text>
+              <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 4 }}" class="pull-right myOrder-order-status">{{item.is_pay_on_delivery == 1 ? '审核中' : '退款审核中'}}</text>
+              <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 5 }}" class="pull-right myOrder-order-status">正在退款中</text>
+              <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 6 }}" class="pull-right myOrder-order-status">{{ currentGoodsType == 0 ? '已完成' : (currentGoodsType == 1 ? '已消费' : '已完成') }}</text>
+              <text style="{{'color:' + storeStyle.theme}}" wx:elif="{{ item.status == 7 }}" class="pull-right myOrder-order-status">已关闭</text>
+            </view>
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="{{ currentGoodsType == 0 ? 'eBusiness': (currentGoodsType == 2 ? 'takeout': '') }}">
+              <view wx:for="{{ item.goods_info }}" wx:key="" wx:for-item="goods">
+                <view class="dialog-block-item">
+                  <view class="myOrder-goods-tips" wx:if="{{goods.use_integral}}">
+                    <view class="myOrder-goods-tips-top">积</view>
+                    <view class="myOrder-goods-tips-left"></view>
+                    <view class="myOrder-goods-tips-right"></view>
+                  </view>
+                  <image class="myOrder-goods-cover" src="{{ goods.cover }}"></image>
+                  <view class="myOrder-goods-title"><text wx:if="{{ goods.is_benefit_goods }}" class="goods-gift">赠品</text>{{ goods.goods_name }}</view>
+                  <view wx:if="{{ !goods.is_benefit_goods }}" class="myOrder-goods-right">
+                    <view>
+                      <block wx:if="{{goods.use_integral == 0}}">
+                        <text class="myOrder-goods-price">¥ {{ goods.price }}</text>
+                      </block>
+                      <block wx:else>
+                        <text class="myOrder-goods-price" wx:if="{{goods.price !='0.00' || !goods.use_integral || (goods.use_integral == 0)}}">¥ {{ goods.price }}</text>
+                        <text wx:if="{{goods.use_integral && goods.use_integral != 0 && goods.price !='0.00'}}">+</text>
+                        <text wx:if="{{goods.use_integral}}">{{goods.use_integral}}积分</text>
+                      </block>
+                    </view>
+                    <view>×<text class="myOrder-goods-count">{{ goods.num }}</text></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="dialog-block-item myOrder-total-item" wx:if="{{goodsTypeList[0] == '1'}}">
+              <text wx:if="{{item.is_integral != '1'}}">合计：<text class="myOrder-pay-price" style="{{'color:' + storeStyle.theme}}">¥ {{ item.original_price != '0.00' ?  item.original_price  : '免费' }}</text></text>
+              <text wx:if="{{item.is_integral == '1'}}">合计：<text class="myOrder-pay-price" style="{{'color:' + storeStyle.theme}}" wx:if="{{(item.original_price != 0 && item.original_price != '0.00') || !item.total_integral || item.total_integral == 0}}">¥ {{ item.original_price != '0.00' ?  item.original_price  : '免费' }}</text><text style="{{'color:' + storeStyle.theme}}" wx:if="{{item.total_integral && item.total_integral != 0 && item.original_price != 0 && item.original_price != '0.00'}}" class="myOrder-pay-price">+</text><text style="{{'color:' + storeStyle.theme}}" wx:if="{{item.total_integral}}" class="myOrder-pay-price">{{item.total_integral}}积分</text></text>
+            </view>
+            <view class="dialog-block-item myOrder-total-item" wx:else>
+              <text wx:if="{{item.is_integral != '1'}}">合计：<text class="myOrder-pay-price" style="{{'color:' + storeStyle.theme}}">¥ {{ item.original_price }}</text></text>
+              <text wx:if="{{item.is_integral == '1'}}">合计：<text class="myOrder-pay-price" wx:if="{{(item.original_price != 0 && item.original_price != '0.00') || !item.total_integral || item.total_integral == 0}}" style="{{'color:' + storeStyle.theme}}">¥ {{ item.original_price }}</text><text wx:if="{{item.total_integral && item.total_integral != 0 && item.original_price != 0 && item.original_price != '0.00'}}" class="myOrder-pay-price" style="{{'color:' + storeStyle.theme}}">+</text><text style="{{'color:' + storeStyle.theme}}" wx:if="{{item.total_integral}}" class="myOrder-pay-price">{{item.total_integral}}积分</text></text>
+            </view>
+            <view class="myOrder-list-bottom" wx:if="{{ item.status == 0 }}">
+              <text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+              <text class="btn btn-orange myOrder-pay-directly" style="{{'color:' + storeStyle.theme + ';border-color;' + storeStyle.theme }}" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="{{ currentGoodsType == 0 ? 'eBusiness': '' }}">支付</text>
+            </view>
+            <view class="myOrder-list-bottom" wx:elif="{{ item.status == 1 }}">
+              <text class="btn myOrder-verification-code" bindtap="getWriteOffCodeBox" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">核销码</text>
+              <text wx:if="{{ item.is_pay_on_delivery == 1 }}" class="btn myOrder-apply-drawback" data-delivery="{{item.is_pay_on_delivery}}" bindtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+            </view>
+            <view class="myOrder-list-bottom" wx:elif="{{ item.status == 2 }}">
+              <block wx:if="{{ currentGoodsType == 0 }}">
+                <text class="btn myOrder-check-logistics" bindtap="checkLogistics" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" wx:if="{{item.is_self_delivery == 0}}">查看物流</text>
+              </block>
+              <text wx:if="{{ item.is_pay_on_delivery == 1 }}" class="btn myOrder-apply-drawback" data-delivery="{{item.is_pay_on_delivery}}" bindtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+              <text wx:if="{{currentGoodsType == 1}}" class="btn btn-orange myOrder-sure-receipt" style="{{'color:' + storeStyle.theme + ';border-color;' + storeStyle.theme }}" bindtap="sureReceipt" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">确认消费</text>
+              <text wx:else class="btn btn-orange myOrder-sure-receipt" style="{{'color:' + storeStyle.theme + ';border-color;' + storeStyle.theme }}" bindtap="sureReceipt" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">确认收货</text>
+            </view>
+            <view class="myOrder-list-bottom" wx:elif="{{ item.status == 3 }}">
+              <block wx:if="{{ currentGoodsType == 0 }}">
+                <text class="btn myOrder-check-logistics" bindtap="checkLogistics" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" wx:if="{{ item.is_self_delivery == 0}}">查看物流</text>
+              </block>
+              <text class="btn btn-orange myOrder-make-comment" style="{{'color:' + storeStyle.theme + ';border-color;' + storeStyle.theme }}" bindtap="makeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">去评价</text>
+            </view>
+            <view class="myOrder-list-bottom" wx:elif="{{ item.status == 6 && currentGoodsType == 0 }}">
+              <text class="btn myOrder-check-logistics" bindtap="checkLogistics" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" wx:if="{{item.is_self_delivery == 0}}">查看物流</text>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 1 }}">
+        <scroll-view class="myOrder-toPay myOrder-content-container {{ currentGoodsType == 0 ? 'myOrder-ebusiness':(currentGoodsType == 1 ? 'myOrder-appointment':'') }}" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="">
+            <view class="dialog-block-item">
+              <text class="cash-delivery" wx:if="{{item.is_pay_on_delivery == 1}}">货到付款</text><text class="add-time">{{ item.add_time }}</text>
+              <text class="pull-right myOrder-order-status">待付款</text>
+            </view>
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="{{ currentGoodsType == 0 ? 'eBusiness': '' }}">
+              <view wx:for="{{ item.goods_info }}" wx:for-item="goods" wx:key="">
+                <view class="dialog-block-item">
+                  <view class="myOrder-goods-tips" wx:if="{{goods.use_integral}}">
+                    <view class="myOrder-goods-tips-top">积</view>
+                    <view class="myOrder-goods-tips-left"></view>
+                    <view class="myOrder-goods-tips-right"></view>
+                  </view>
+                  <image class="myOrder-goods-cover" src="{{ goods.cover }}"></image>
+                  <view class="myOrder-goods-title"><text wx:if="{{ goods.is_benefit_goods }}" class="goods-gift">赠品</text>{{ goods.goods_name }}</view>
+                  <view wx:if="{{ !goods.is_benefit_goods }}" class="myOrder-goods-right">
+                    <view>
+                      <block wx:if="{{goods.use_integral == 0}}">
+                        <text class="myOrder-goods-price">¥ {{ goods.price }}</text>
+                      </block>
+                      <block wx:else>
+                        <text class="myOrder-goods-price" wx:if="{{goods.price !='0.00' || !goods.use_integral || (goods.use_integral == 0)}}">¥ {{ goods.price }}</text>
+                        <text wx:if="{{goods.use_integral && goods.use_integral != 0 && goods.price !='0.00'}}">+</text>
+                        <text wx:if="{{goods.use_integral}}">{{goods.use_integral}}积分</text>
+                      </block>
+                    </view>
+                    <view>×<text class="myOrder-goods-count">{{ goods.num }}</text></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="dialog-block-item myOrder-total-item">
+              <!-- <text class="myOrder-list-count">共 {{ item.goods_num }} 件</text> -->
+              <text wx:if="{{item.is_integral != '1'}}">合计：<text class="myOrder-pay-price">¥ {{ item.original_price }}</text></text>
+              <text wx:if="{{item.is_integral == '1'}}">合计：<text class="myOrder-pay-price" wx:if="{{item.original_price != 0 && item.original_price != '0.00' || !item.total_integral || item.total_integral == 0}}">¥ {{ item.original_price }}</text><text class="myOrder-pay-price" wx:if="{{item.total_integral && item.total_integral != 0 && item.original_price != 0 && item.original_price != '0.00'}}">+</text><text class="myOrder-pay-price" wx:if="{{item.total_integral}}">{{item.total_integral}}积分</text></text>
+            </view>
+            <view class="myOrder-list-bottom">
+              <label><text class="btn myOrder-cancel-order" catchtap="cancelOrder" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text> <text class="btn btn-orange myOrder-pay-directly" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="{{ currentGoodsType == 0 ? 'eBusiness': '' }}">支付</text></label>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 2 }}">
+        <scroll-view class="myOrder-sending myOrder-content-container {{ currentGoodsType == 0 ? 'myOrder-ebusiness':(currentGoodsType == 1 ? 'myOrder-appointment':'') }}" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="">
+            <view class="dialog-block-item">
+              <text class="cash-delivery" wx:if="{{item.is_pay_on_delivery == 1}}">货到付款</text><text class="add-time">{{ item.add_time }}</text>
+              <text class="pull-right myOrder-order-status">{{ currentGoodsType == 0 ? '待发货' : (currentGoodsType == 1 ? '等待商家确认' : '等待商家接单') }}</text>
+            </view>
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="{{ currentGoodsType == 0 ? 'eBusiness': '' }}">
+              <view wx:for="{{ item.goods_info }}" wx:for-item="goods" wx:key="">
+                <view class="dialog-block-item">
+                  <image class="myOrder-goods-cover" src="{{ goods.cover }}"></image>
+                  <view class="myOrder-goods-title"><text wx:if="{{ goods.is_benefit_goods }}" class="goods-gift">赠品</text>{{ goods.goods_name }}</view>
+                  <view wx:if="{{ !goods.is_benefit_goods }}" class="myOrder-goods-right">
+                    <view>¥ <text class="myOrder-goods-price">{{ goods.price }}</text></view>
+                    <view>×<text class="myOrder-goods-count">{{ goods.num }}</text></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="dialog-block-item myOrder-total-item">
+              <!-- <text class="myOrder-list-count">共 {{ item.goods_num }} 件</text> -->
+              <!-- <text>合计：<text class="myOrder-pay-price">¥ {{ item.original_price }}</text></text> -->
+              <text>合计：<text class="myOrder-pay-price" wx:if="{{item.original_price != 0 && item.original_price != '0.00' || !item.total_integral || item.total_integral == 0}}">¥ {{ item.original_price }}</text><text class="myOrder-pay-price" wx:if="{{item.total_integral && item.total_integral != 0 && item.original_price != 0 && item.original_price != '0.00'}}">+</text><text class="myOrder-pay-price" wx:if="{{item.total_integral}}">{{item.total_integral}}积分</text></text>
+            </view>
+            <view class="myOrder-list-bottom">
+               <text class="btn myOrder-verification-code" bindtap="getWriteOffCodeBox" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">核销码</text>
+              <label><text wx:if="{{ item.is_pay_on_delivery == 1 }}" class="btn myOrder-apply-drawback" data-delivery="{{item.is_pay_on_delivery}}" bindtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text></label>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 3 }}">
+        <scroll-view class="myOrder-receiving myOrder-content-container {{ currentGoodsType == 0 ? 'myOrder-ebusiness':(currentGoodsType == 1 ? 'myOrder-appointment':'') }}" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="">
+            <view class="dialog-block-item">
+              <text class="cash-delivery" wx:if="{{item.is_pay_on_delivery == 1}}">货到付款</text><text class="add-time dialog-block-time">{{ item.add_time }}</text>
+              <text class="pull-right myOrder-order-status">{{ currentGoodsType == 0 ? '待收货' : (currentGoodsType == 1 ? '待消费' : '待送达' )}}</text>
+            </view>
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="{{ currentGoodsType == 0 ? 'eBusiness': '' }}">
+              <view wx:for="{{ item.goods_info }}" wx:for-item="goods" wx:key="">
+                <view class="dialog-block-item">
+                  <view class="myOrder-goods-tips" wx:if="{{goods.use_integral}}">
+                    <view class="myOrder-goods-tips-top">积</view>
+                    <view class="myOrder-goods-tips-left"></view>
+                    <view class="myOrder-goods-tips-right"></view>
+                  </view>
+                  <image class="myOrder-goods-cover" src="{{ goods.cover }}"></image>
+                  <view class="myOrder-goods-title"><text wx:if="{{ goods.is_benefit_goods }}" class="goods-gift">赠品</text>{{ goods.goods_name }}</view>
+                  <view wx:if="{{ !goods.is_benefit_goods }}" class="myOrder-goods-right">
+                    <view>
+                      <text class="myOrder-goods-price" wx:if="{{goods.price != 0 && goods.price !='0.00' || !goods.use_integral || goods.use_integral == 0}}">¥ {{ goods.price }}</text>
+                      <text wx:if="{{goods.use_integral && goods.use_integral != 0 && goods.price != 0 && goods.price !='0.00'}}">+</text>
+                      <text wx:if="{{goods.use_integral}}">{{goods.use_integral}}积分</text>
+                    </view>
+                    <view>×<text class="myOrder-goods-count">{{ goods.num }}</text></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="dialog-block-item myOrder-total-item">
+              <!-- <text class="myOrder-list-count">共 {{ item.goods_num }} 件</text> -->
+              <!-- <text>合计：<text class="myOrder-pay-price">¥ {{ item.original_price }}</text></text> -->
+              <text>合计：<text class="myOrder-pay-price" wx:if="{{(item.original_price != 0 && item.original_price != '0.00') || !item.total_integral || item.total_integral == 0}}">¥ {{ item.original_price }}</text><text class="myOrder-pay-price" wx:if="{{item.total_integral != 0 && item.original_price != 0 && item.original_price !='0.00'}}">+</text><text class="myOrder-pay-price" wx:if="{{item.total_integral}}">{{item.total_integral}}积分</text></text>
+            </view>
+            <view class="myOrder-list-bottom">
+              <label>
+                <block wx:if="{{ currentGoodsType == 0 }}">
+                  <text class="btn myOrder-check-logistics" bindtap="checkLogistics" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" wx:if="{{item.is_self_delivery == 0}}">查看物流</text>
+                </block>
+                   <text class="btn myOrder-verification-code" bindtap="getWriteOffCodeBox" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">核销码</text>
+                   <text wx:if="{{ item.is_pay_on_delivery == 1 }}" class="btn myOrder-apply-drawback" data-delivery="{{item.is_pay_on_delivery}}" bindtap="applyDrawback" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">取消订单</text>
+                <text wx:if="{{currentGoodsType == 1}}" class="btn btn-orange myOrder-sure-receipt" bindtap="sureReceipt" data-franchisee="{{ item.app_id }}"
+                  data-id="{{ item.order_id }}">确认消费</text>
+                <text  wx:else class="btn btn-orange myOrder-sure-receipt" bindtap="sureReceipt" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">确认收货</text>
+              </label>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+      <view class="scrollContainer" hidden="{{ currentTabIndex != 4 }}">
+        <scroll-view class="myOrder-comment myOrder-content-container {{ currentGoodsType == 0 ? 'myOrder-ebusiness':(currentGoodsType == 1 ? 'myOrder-appointment':'') }}" lower-threshold="10" scroll-y="true" bindscrolltolower="scrollToListBottom">
+          <view class="myOrder-list-wrap" wx:for="{{ orderLists }}" wx:key="">
+            <view class="dialog-block-item">
+              <text class="cash-delivery" wx:if="{{item.is_pay_on_delivery == 1}}">货到付款</text><text class="add-time">{{ item.add_time }}</text>
+              <text class="pull-right myOrder-order-status">待评价</text>
+            </view>
+            <view class="myOrder-franchisee-name" wx:if="{{ item.sub_shop_info.name }}">{{ item.sub_shop_info.name }}</view>
+            <view class="myOrder-goods-list" bindtap="goToOrderDetail" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" data-type="{{ currentGoodsType == 0 ? 'eBusiness': '' }}">
+              <view wx:for="{{ item.goods_info }}" wx:for-item="goods" wx:key="">
+                <view class="dialog-block-item">
+                  <image class="myOrder-goods-cover" src="{{ goods.cover }}"></image>
+                  <view class="myOrder-goods-title"><text wx:if="{{ goods.is_benefit_goods }}" class="goods-gift">赠品</text>{{ goods.goods_name }}</view>
+                  <view wx:if="{{ !goods.is_benefit_goods }}" class="myOrder-goods-right">
+                    <view>¥ <text class="myOrder-goods-price">{{ goods.price }}</text></view>
+                    <view>×<text class="myOrder-goods-count">{{ goods.num }}</text></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="dialog-block-item myOrder-total-item">
+              <!-- <text class="myOrder-list-count">共 {{ item.goods_num }} 件</text> -->
+            <text>合计：<text class="myOrder-pay-price" wx:if="{{(item.original_price != 0 && item.original_price != '0.00') || !item.total_integral || item.total_integral == 0}}">¥ {{ item.original_price }}</text><text class="myOrder-pay-price" wx:if="{{item.total_integral && item.total_integral != 0 && item.original_price != 0 && item.original_price != '0.00'}}">+</text><text class="myOrder-pay-price" wx:if="{{item.total_integral}}">{{item.total_integral}}积分</text></text>
+              <!-- <text>合计：<text class="myOrder-pay-price">¥ {{ item.original_price }}</text></text> -->
+              <!-- <text>合计：<text class="myOrder-pay-price" wx:if="{{item.original_price != 0}}">¥ {{ item.original_price }}</text><text class="myOrder-pay-price" wx:if="{{item.total_integral && item.total_integral != 0 && item.original_price != 0}}">+</text><text class="myOrder-pay-price" wx:if="{{item.total_integral}}">{{item.total_integral}}积分</text></text> -->
+            </view>
+            <view class="myOrder-list-bottom">
+              <label>
+                <block wx:if="{{ currentGoodsType == 0 }}">
+                  <text class="btn myOrder-check-logistics" bindtap="checkLogistics" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}" wx:if="{{ item.is_self_delivery == 0}}">查看物流</text>
+                </block>
+                <text class="btn btn-orange myOrder-make-comment" bindtap="makeComment" data-franchisee="{{ item.app_id }}" data-id="{{ item.order_id }}">去评价</text>
+              </label>
+            </view>
+          </view>
+          <view hidden="{{ !noMore }}" class="noMoreNewDataTip">已经没有新数据了</view>
+        </scroll-view>
+      </view>
+    </block>
+  </view>
+</view>
+<modal hidden="{{hiddenmodalput}}" title="请输入本次核销次数" confirm-text="确认" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" catchtouchmove='true'>
+​    <input type='number' placeholder="请输入本次核销次数" maxlength='6' bindinput="addLabelInput" value="{{addLabelText}}" focus="{{labelFocus}}" cursor-spacing="80" style="background:#F5F5F5;height:76rpx;border-radius:10rpx;padding: 10rpx 10rpx"/>
+</modal>
+<!-- 核销码 -->
+<view class="verification-code" catchtap="hideWriteOffCodeBox" wx:if="{{ showWriteOffCodeBox }}">
+  <view class="verification-code-tips">向商家出示二维码或核销码后即可消费</view>
+  <view class="verification-image-box">
+    <image class="verification-code-img" src="{{ codeImgUrl }}"></image>
+    <view class="verification-code-finished" wx:if="{{ codeStatus == 1 }}">
+      <view>已核销</view>
+    </view>
+  </view>
+  <view class="verification-code-text">
+    <text>核销码：</text>
+    <text>{{ codeNum }}</text>
+  </view>
+</view>
+
+

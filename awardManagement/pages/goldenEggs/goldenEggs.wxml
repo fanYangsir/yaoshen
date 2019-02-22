@@ -1,0 +1,177 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="page" id="goldenEggs">
+  <audio wx:if="{{goldenData.bgm != 0}}" id="goldenAudio" src="{{goldenData.bgm }}" bindplay="audioPlay" bindpause="audioPause" loop></audio>
+  <image class="golden_cantaniner" src="{{goldenData.background || 'http://cdn.jisuapp.cn/static/webapp/images/goldenContainer.png'}}"></image>
+  <view class="goldenMusic {{isPlay==true?'active':''}}" wx:if="{{goldenData.bgm!=0}}" bindtap='playMusics'>
+    <text wx:if="{{isPlay==true}}" class="ico-moon icon-luckyMusic"></text>
+    <text wx:if="{{isPlay==false}}" class="ico-moon icon-luckyMute"></text>
+  </view>
+  <view class="scatter">
+    <image src="http://cdn.jisuapp.cn/static/webapp/images/goldenMotive.png"></image>
+  </view>
+  <view class="goldenHouse">
+    <view class="goldenSinker" hidden='{{isSinker==true}}'><image src="http://cdn.jisuapp.cn/static/webapp/images/goldenSinker.gif"></image></view>
+    <view class="goldenEgg">
+      <view bindtap="startEgg" wx:for="{{eggsList}}" wx:key="" data-index="{{index}}" class="egg{{index}}">
+        <view class="egg-gif {{isWin ? 'egg-win' : 'egg-notwin'}}"  hidden='{{!item.hasAnimate}}' data-index="{{index}}"></view>
+        <view class="egg-png" hidden='{{item.hasAnimate}}' ></view>
+      </view>
+      <image src='http://cdn.jisuapp.cn/static/webapp/images/golden-eggs-win.png' hidden='{{true}}'></image>
+      <image src='http://cdn.jisuapp.cn/static/webapp/images/golden-eggs-notwin.png' hidden='{{true}}'></image>
+    </view>
+    <view class="activeData">
+      <view class="activepopNum" style="margin-top:{{goldenData.joined_show==-1 ? '35rpx':'11rpx'}}">你有<text>{{eggNum}}</text>次砸蛋机会</view>
+      <view class="phone-personNum" wx:if="{{goldenData.joined_show!=-1}}">已有<text>{{goldenData.joined_show}}</text>人参加活动</view>
+    </view>
+  </view>
+  <view class="structurePrize">
+    <view class="lookPrize" bindtap="recordClick">查看奖品</view>
+    <view class="exchangePrize" bindtap="exchangePrizeClick" style="display:{{goldenData.integral_exchange==0?'none':'inline-block'}}">积分兑换</view>
+  </view>
+  <view class="golden-winner">
+    <view class="winner-header"><text>中奖名单</text></view>
+    <view class="winner-content">
+      <view class="winner-list" animation='{{animationData}}'>
+        <view wx:for="{{winnerList}}" wx:key=""><text>{{item.nickname}}</text><text>{{item.prize_title}}</text></view>
+      </view>
+      <view class="winner-list" animation='{{animationData2}}'>
+        <view wx:for="{{winnerList}}" wx:key=""><text>{{item.nickname}}</text><text>{{item.prize_title}}</text></view>
+      </view>
+    </view>
+  </view>
+  <view class="golden-rule">
+    <view class="rule-header"><text>兑奖说明</text></view>
+    <view class="rule-content">
+      <view class="rule-startTime">开始时间：<text>{{goldenData.start_time}}</text></view>
+      <view class="rule-endTime">结束时间：<text>{{goldenData.end_time}}</text></view>
+      <view class="rule-prizeMes"><text>{{goldenData.description}}</text></view>
+      <view>获取砸金蛋次数：</view>
+      <view class="rule-goldenNum" wx:if="{{goldenData.user_times_initial > 0}}"><label class="goldenDisc">·</label>用户每日首次登录可获取<text>{{goldenData.user_times_initial}}</text>次砸金蛋机会。</view>
+      <view class="rule-most"><label class="goldenDisc">·</label>每日砸金蛋机会最多为<text>{{goldenData.user_times=='-1'?'无限':goldenData.user_times}}</text>次。</view>
+      <view class="rule-exchanage" wx:if="{{goldenData.integral_exchange!=0}}"><label class="goldenDisc">·</label>每<text>{{goldenData.integral_exchange}}</text>积分可兑换一次砸金蛋机会。</view>
+      <view class="rule-share" wx:if="{{goldenData.time_share!=0}}"><label class="goldenDisc">·</label>每成功分享给1个好友可增加<text>{{goldenData.time_share}}</text>次砸金蛋机会，最多可增加<text>{{goldenData.time_share_limit}}</text>次机会。</view>
+      <view wx:if="{{goldenData.consume_money==0&&goldenData.consume_times!=0}}"><label class="goldenDisc">·</label>消费即赠送<text>{{goldenData.consume_times}}</text>次砸金蛋机会。</view>
+      <view wx:if="{{goldenData.consume_money!=0}}"><label class="goldenDisc">·</label>单次消费每满<text>{{goldenData.consume_money}}</text>元，则赠送<text>{{goldenData.consume_times}}</text>次砸金蛋机会，最多增加<text>{{goldenData.consume_times_limit}}</text>次机会。</view>
+      <view style="margin-top: 5px;">此活动最终解释权归本店所有;</view>
+      <view>ps：优惠券奖品直接发放，可在小程序我的优惠券中查看。</view>
+    </view>
+  </view>
+  <!-- 积分兑换弹窗 -->
+     
+  <view class="exchange" wx:if="{{isExchange==1}}">
+    <view class="exchange-wrap">
+      <view class="exchange-con">
+        <view class="exchangeCan">可兑换次数：<label>{{exchangeMessage.exchange_times}}</label><label>次</label></view>  
+        <view class="exchangeLimit">兑换次数：<input type="text" bindinput="bindReplaceInput" value="{{inputValue}}"/><label class="exchangeAll" bindtap="exchangeAll">全部兑换</label></view>
+        <view class="exchangeRule">兑换规则：<label>{{exchangeMessage.integral_exchange}}</label>/次</view>
+        <view class="exchangeBalance">积分余额：<label>{{exchangeMessage.can_use_integral}}</label>分</view>
+      </view>
+      <view class="exchange-btns">
+        <view class="exchange-cancel" bindtap="exchangeCancel">取消</view>
+        <view class="exchange-confirm" bindtap='exchangeConfirm'>确定</view>
+      </view>
+    </view>
+  </view>
+  <!-- 查看奖品弹窗  -->
+  <view class="golden-record" bindtap="recordWrapClick" wx:if="{{isRecord==1}}">
+    <view class="record-wrap" catchtap="stopPropagation">
+      <view class="record-wrap-header">我的中奖记录</view>
+        <view class="record-wrap-edge">
+          <view class="record-wrap-con">
+            <view class="record-wrap-title">
+              <view class="record_line"></view>
+              <text>中奖时间</text>
+              <text>获得奖品</text>
+            </view>
+            <view class="record-list" hidden="{{myPrize==''}}">
+               <view wx:for="{{myPrize}}" wx:key=""><text>{{item.add_time}}</text><text>{{item.prize_title}}</text></view>
+            </view>
+            <view class="record_fail" hidden="{{myPrize!=''}}">
+              <image src="http://cdn.jisuapp.cn/static/webapp/images/golden-fail.png"></image>
+              <view>暂未获得任何奖品哦~</view>
+            </view>
+          </view>
+        </view>
+    </view>
+  </view>
+  <!--抽奖次数用完可以分享给好友弹窗-->
+  <view class="duraMaxDiv" wx:if="{{duraMax==1}}">
+      <view class="duraMaxDiv-wrap">
+        <view class="duraMaxDiv-con">
+              <view>对不起,您的砸金蛋<label class="balance">次数不足</label></view>
+            
+              
+        </view>
+        <view class="duraMaxDiv-btns">
+          <view class="duraMaxDiv-cancel" bindtap="duraClick">确定</view>
+          <button class="duraMaxDiv-confirm" open-type="share">获取更多</button>
+        </view>
+      </view>
+  </view>
+<!-- 抽奖次数用完不可分享给好友弹窗 -->
+ 
+  <view class="degreeDiv" wx:if="{{isdegree==1}}">
+      <view class="degreeDiv-wrap">
+        <view class="degreeDiv-con">
+              <view>对不起,您的砸金蛋<label class="balance">次数不足</label></view>
+        </view>
+        <view class="degreeDiv-btns">
+          <view class="degreeDiv-cancel" bindtap="degreeClick">取消</view>
+          <view class="degreeDiv-confirm" bindtap='degreeClick'>确定</view>
+        </view>
+      </view>
+  </view>
+<!-- 中奖弹窗 -->
+  <view class="Congratulations_sick" wx:if="{{congratulation==1}}" bindtap="shadeClose">
+    <view class="Congratulations_wrap">
+      <view class="Congratulations-con">
+        <image src="http://cdn.jisuapp.cn/static/webapp/images/Congratulations.png"></image>
+        <label>{{prize_title}}</label>
+      </view>
+      <view class="Congratulations-btns">
+        <button wx:if="{{ifWxCoupon}}" class="btns Congratulations-confirm" style="margin-left: 112rpx;" catchtap="toAddCard">立即领取</button>
+        <button wx:else class="btns Congratulations-confirm" style="margin-left: 112rpx;" catchtap="confirmClick">确定</button>
+        <button class="btns Congratulations-share" style="margin-left: 58rpx;" open-type="share">传达喜悦</button>
+      </view>
+    </view>
+  </view>
+<!-- 未中奖弹窗 -->
+  <view class="notwinning_sick" wx:if="{{prizeFail==1}}">
+    <view class="notwinning_wrap">
+      <view class="notwinning_title">未中奖
+          <view class="conBefore"></view>
+          <view class="conAfter"></view>
+      </view>
+      <view class="notwinning_con">
+        <image src="http://cdn.jisuapp.cn/static/webapp/images/notWinning.png"></image>
+        <view>很遗憾！</view>
+        <view>您什么都没砸中哦~</view>
+      </view>
+      <view class="notwinning_btns">
+        <button class="push notwinning_confirm" bindtap="notwinningClick">确定</button>
+      </view>
+    </view>
+  </view>
+<!-- 安慰奖弹窗 -->
+  <view class="consolation_sick" wx:if="{{comfort==1}}" bindtap="shadeClose">
+    <view class="consolation_wrap">
+      <view class="consolation_title">安慰奖
+          <view class="conBefore"></view>
+          <view class="conAfter"></view>
+      </view>
+      <view class="consolation_con">
+        <image src="http://cdn.jisuapp.cn/static/webapp/images/consolation.png"></image>
+        <view wx:if="{{ifGetComfort}}" class="comfortText">已领取，在微信卡包中查看哦~</view>
+        <view wx:else class="comfortText" class="comfortText">又没中奖，送你一个小礼品</view>
+        <view wx:if="{{!ifWxCoupon && !ifGetComfort}}" class="comfortText">>在优惠券卡包进行查收哦~</view>
+      </view>
+        <view wx:if="{{ifWxCoupon}}" class='comfortCouponBtn'>
+            <button class="push consolation_confirm" catchtap="shadeClose">确定</button>
+            <button class="push consolation_share" catchtap='toAddCard'>立即领取</button>
+        </view>
+        <view wx:else class="consolation_btns">
+            <button class="push consolation_confirm" catchtap="comfortClick">确定</button>
+        </view>
+    </view>
+  </view>
+</view>

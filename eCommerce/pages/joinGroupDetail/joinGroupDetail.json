@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "参团详情",
+  "navigationBarBackgroundColor": "#000",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "component-reward-point": "\/components\/rewardPointModal\/rewardPointModal",
+    "component-getUserInfo": "/components/getUserInfo/getUserInfo",
+    "component-share": "/components/pageQRCode/pageQRCode"
+  }
+}

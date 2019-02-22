@@ -1,0 +1,45 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="shoppingCart-wrap page" id="shoppingCart">
+<view class="shoppingCart-top-nav">
+  <text>退款商品</text>
+</view>
+<view class="shoppingCart-list-wrap">
+  <view class="shoppingCart-goods-list">
+    <block wx:for="{{ goodsList }}" wx:for-item="goods" wx:key="">
+      <view wx:if="{{ goods.preview_refund_num > 0 && goods.is_benefit_goods != 1 }}">
+        <label style="{{'color:' + storeStyle.theme }}" data-index="{{ index }}" class="shoppingCart-check-box {{ goods.selected ? 'checked ico-moon icon-success-tip' : '' }}" bindtap="clickSelectGoods"></label>
+        <view class="shoppingCart-goods-content">
+          <view class="shoppingCart-goods-cover">
+            <image src="{{ goods.cover }}"></image>
+          </view>
+          <view class="goods-content-box">
+            <view class="shoppingCart-goods-title"><text wx:if="{{ is_group_buy_order != 0 }}" class="is-seckill">拼团</text><text wx:if="{{goods.is_seckill == 1}}" class="is-seckill">秒杀</text>{{ goods.goods_name }}</view>
+            <view class="ellipsis shoppingCart-goods-model" wx:if="{{ goods.model_value_str }}">{{ goods.model_value_str }}</view>
+            <view class="shoppingCart-price-box">
+              <block wx:if="{{goods.use_integral == 0}}">
+                <text style="{{'color:' + storeStyle.theme }}" class="real-price">¥ {{ goods.price }}</text>
+                <text class="seckill-price" wx:if="{{goods.is_seckill == 1}}">¥ {{ goods.original_price }}</text>
+              </block>
+              <block wx:else>
+                <text style="{{'color:' + storeStyle.theme }}" class="real-price" wx:if="{{goods.price !='0.00' || !goods.use_integral || (goods.use_integral == 0)}}">¥ {{ goods.price }}</text>
+                <text style="{{'color:' + storeStyle.theme }}" class="real-price" wx:if="{{goods.use_integral && goods.use_integral != 0 && goods.price !='0.00'}}">+</text>
+                <text style="{{'color:' + storeStyle.theme }}" class="real-price" wx:if="{{goods.use_integral}}">{{goods.use_integral}}积分</text>
+              </block>
+              <view class="goods-number-box pull-right">
+                <view class="goods-num-mius" bindtap="clickMinusButton" data-index="{{ index }}">-</view>
+                <input type="number" class="goods-num-box" value="{{ goods.preview_refund_num }}" data-index="{{ index }}" bindinput="inputGoodsCount"/>
+                <view style="{{'color:' + storeStyle.theme }}" class="goods-num-plus" bindtap="clickPlusButton" data-index="{{ index }}">+</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+</view>
+<view class="shoppingCart-bottom-nav">
+  <label style="{{'color:' + storeStyle.theme }}" class="shoppingCart-check-box {{ selectAll ? 'checked ico-moon icon-success-tip' : '' }}" bindtap="clickSelectAll"></label>
+  <text class="select-all">全选</text>
+  <view style="{{'background:' + storeStyle.theme }}" class="pull-right sure-refund-btn" bindtap="sureRefund">确定</view>
+</view>

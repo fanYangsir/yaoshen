@@ -1,0 +1,71 @@
+<component-reward-point rewardPointObj="{{rewardPointObj}}"></component-reward-point>
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-sinkingModal></component-sinkingModal>
+
+<view class="wrap">
+  <view class="tabs">
+    <view class="content {{isLeader == 1 ? ' active-tab' : ''}}" data-status="1" catchtap="getGroupOrders">我发起的团</view>
+    <view class="content {{isLeader == 0 ? ' active-tab' : ''}}" data-status="0" catchtap="getGroupOrders">我参与的团</view>
+  </view>
+  <scroll-view class="sub-tabs" scroll-x="true">
+    <view class="status {{status == 0 ? ' active-sub-tab' : ''}}" data-status="0" catchtap="getGroupOrderByStatus">全部</view>
+    <view class="status {{status == 1 ? ' active-sub-tab' : ''}}" data-status="1" hidden="{{isLeader == 0}}" catchtap="getGroupOrderByStatus">未开团</view>
+    <view class="status {{status == 2 ? ' active-sub-tab' : ''}}" data-status="2" catchtap="getGroupOrderByStatus">拼团中</view>
+    <view class="status {{status == 3 ? ' active-sub-tab' : ''}}" data-status="3" catchtap="getGroupOrderByStatus">拼团成功</view>
+    <view class="status {{status == 4 ? ' active-sub-tab' : ''}}" data-status="4" catchtap="getGroupOrderByStatus">拼团失败</view>
+    <view class="status {{status == 5 ? ' active-sub-tab' : ''}}" data-status="5" catchtap="getGroupOrderByStatus">已关闭</view>
+  </scroll-view>
+  <scroll-view class="list" scroll-y="true" data-page="{{param.page}}" bindscrolltolower="getMore" enable-back-to-top="true">
+  
+    <view class="orders" wx:for="{{list}}" wx:key="">
+      <view class="head">
+        <view class="order-time">下单时间:{{item.add_time}}</view>
+        <view class="order-status" hidden="{{!(item.form_data.group_buy_order_info.current_status == 1)}}">未开团</view>
+        <view class="order-status" hidden="{{!(item.form_data.group_buy_order_info.current_status == 2)}}">拼团中</view>
+        <view class="order-status" hidden="{{!(item.form_data.group_buy_order_info.current_status == 3)}}">拼团成功</view>
+        <view class="order-status" hidden="{{!(item.form_data.group_buy_order_info.current_status == 4)}}">拼团失败</view>
+        <view class="order-status" hidden="{{!(item.form_data.group_buy_order_info.current_status == 5)}}">已关闭</view>
+      </view>
+      <view class="goods-detail" data-orderid="{{item.order_id}}" data-franchisee="{{item.app_id}}" catchtap="turnToDetail">
+        <view class="goods-wrap">
+          <image src="{{item.form_data.goods_info[0].cover}}"></image>
+          <view class="middle">
+            <view class="goods-name">{{item.form_data.goods_info[0].goods_name}}</view>
+            <view class="goods-spec">{{item.form_data.goods_info[0].model_value}}</view>
+          </view>
+          <view class="price">
+            <view class="pay-price">￥{{item.form_data.goods_info[0].price}}</view>
+            <view class="origin-price">￥{{item.form_data.original_price}}</view>
+            <view class="num">x{{item.form_data.goods_info[0].num}}</view>
+          </view>
+        </view>
+        <view class="group-info">
+          <view class="info">团长昵称：{{item.form_data.group_buy_order_info.leader_username}}</view>
+          <view class="info">拼团进度：{{item.form_data.group_buy_order_info.max_user_num}}人团|已拼{{item.form_data.group_buy_order_info.current_user_count}}人，还差{{item.form_data.group_buy_order_info.max_user_num - item.form_data.group_buy_order_info.current_user_count}}人成团</view>
+          <view class="info {{(item.form_data.group_buy_order_info.current_status == 1 || item.form_data.group_buy_order_info.current_status == 5 )? 'hide' : ''}}">结束时间：{{item.form_data.group_buy_order_info.expired_time}}</view>
+        </view>
+      </view>
+      <view class="order-info">共{{item.form_data.goods_info[0].num}}件商品 合计：￥<text style="font-size:30rpx;">{{item.total_price}}</text> (含运费￥{{item.express_fee}})</view>
+
+      <view class="order-btn" hidden="{{!(item.form_data.group_buy_order_info.current_status == 1)}}">
+        <view class="group-btn white" data-id="{{item.order_id}}" data-franchisee="{{item.app_id}}" bindtap="cancelOrder">取消拼团</view>
+        <view class="group-btn red" data-id="{{item.order_id}}" data-type="{{item.goods_type}}" data-franchisee="{{item.app_id}}" bindtap="pay">立即支付</view>
+      </view>
+      <view class="order-btn" hidden="{{!(item.form_data.group_buy_order_info.current_status == 2)}}">
+        <button open-type="share" class="group-btn red" data-detail="{{item.form_data.goods_info[0].goods_id}}" data-franchisee="{{item.app_id}}" data-index="{{index}}">分享</button>
+      </view>
+      <view class="order-btn" hidden="{{!(item.form_data.group_buy_order_info.current_status == 3)}}">
+        <view class="group-btn white" data-franchisee="{{item.app_id}}" bindtap="goToOrderDetail">查看订单</view>
+        <view class="group-btn yellow" data-id="{{item.form_data.goods_info[0].goods_id}}" data-franchisee="{{item.app_id}}" bindtap="onceMore">再拼一次</view>
+      </view>
+      <view class="order-btn" hidden="{{!(item.form_data.group_buy_order_info.current_status == 4)}}">
+        <view class="group-btn white" data-id="{{item.order_id}}" data-franchisee="{{item.app_id}}" bindtap="retrieveMoney">已收到退款</view>
+        <view class="group-btn yellow" data-id="{{item.form_data.goods_info[0].goods_id}}" data-franchisee="{{item.app_id}}" bindtap="onceMore">再拼一次</view>
+      </view>
+      <view class="order-btn" hidden="{{!(item.form_data.group_buy_order_info.current_status == 5)}}">
+        <view class="group-btn yellow" data-id="{{item.form_data.goods_info[0].goods_id}}" data-franchisee="{{item.app_id}}" bindtap="onceMore">再拼一次</view>
+      </view>
+    </view>
+    <view class="no-more">没有更多数据了~</view>
+  </scroll-view>
+</view>
